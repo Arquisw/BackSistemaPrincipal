@@ -22,19 +22,10 @@ public class ServicioGuardarUsuario
 
     public void guardar(Usuario usuario)
     {
-        verificarSiPerfilExiste(usuario.getPerfil());
         verificarSiUsuarioExisteConCorreo(usuario);
         verificarSiUsuarioExisteConNumeroIdentificacion(usuario);
 
         this.usuarioRepositorio.guardar(usuario);
-    }
-
-    private void verificarSiPerfilExiste(Perfil perfil)
-    {
-        if(!this.perfilRepositorio.existe(perfil))
-        {
-            throw new IllegalArgumentException(UtilMensaje.NO_EXISTE_PERFIL_CON_NOMBRE);
-        }
     }
 
     private void verificarSiUsuarioExisteConCorreo(Usuario usuario)

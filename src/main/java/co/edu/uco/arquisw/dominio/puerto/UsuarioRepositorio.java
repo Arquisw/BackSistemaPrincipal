@@ -1,14 +1,16 @@
 package co.edu.uco.arquisw.dominio.puerto;
 
+import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.modelo.Usuario;
 import java.util.List;
 
 public interface UsuarioRepositorio
 {
-    List<Usuario> consultar();
-    Usuario consultarPorCodigo(int codigo);
-    Usuario consultarPorCorreo(String correo);
-    Usuario consultarPorNumeroIdentificacion(String numeroIdentificacion);
+    List<UsuarioResumenDTO> consultar();
+    UsuarioResumenDTO consultarPorCodigo(int codigo);
+    UsuarioResumenDTO consultarPorCorreo(String correo);
+    Usuario consultarPorCorreoConClave(String correo);
+    UsuarioResumenDTO consultarPorNumeroIdentificacion(String numeroIdentificacion);
     void guardar(Usuario usuario);
     void actualizar(Usuario usuario, int codigo);
     void eliminar(int codigo);

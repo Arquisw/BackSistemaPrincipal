@@ -1,73 +1,135 @@
 package co.edu.uco.arquisw.infraestructura.adaptador.repositorio;
 
-import co.edu.uco.arquisw.dominio.modelo.Perfil;
+import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.modelo.Usuario;
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
-import co.edu.uco.arquisw.infraestructura.adaptador.entidad.PerfilEntidad;
-import co.edu.uco.arquisw.infraestructura.adaptador.entidad.UsuarioEntidad;
+import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
+import co.edu.uco.arquisw.infraestructura.adaptador.entidad.PerfilUsuarioEntidad;
 import co.edu.uco.arquisw.infraestructura.adaptador.repositorio.jpa.PerfilDAO;
+import co.edu.uco.arquisw.infraestructura.adaptador.repositorio.jpa.PerfilUsuarioDAO;
 import co.edu.uco.arquisw.infraestructura.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
 import java.util.List;
+import static co.edu.uco.arquisw.dominio.ensamblador.implementacion.UsuarioEnsambladorImplementacion.obtenerUsuarioEnsamblador;
 
 @Repository
 public class UsuarioRepositorioPostgreSQL implements UsuarioRepositorio
 {
     private final UsuarioDAO usuarioDAO;
     private final PerfilDAO perfilDAO;
+    private final PerfilUsuarioDAO perfilUsuarioDAO;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UsuarioRepositorioPostgreSQL(UsuarioDAO usuarioDAO, PerfilDAO perfilDAO)
+    public UsuarioRepositorioPostgreSQL(UsuarioDAO usuarioDAO, PerfilDAO perfilDAO, PerfilUsuarioDAO perfilUsuarioDAO)
     {
         this.usuarioDAO = usuarioDAO;
         this.perfilDAO = perfilDAO;
+        this.perfilUsuarioDAO = perfilUsuarioDAO;
     }
 
     @Override
-    public List<Usuario> consultar()
+    public List<UsuarioResumenDTO> consultar()
     {
-        List<UsuarioEntidad> entidades = this.usuarioDAO.findAll();
-        
-        return entidades.stream().map(entidad -> Usuario.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getCorreo(), entidad.getClave(), entidad.getInstitucion(), Perfil.crear(entidad.getPerfil().getCodigo(), entidad.getPerfil().getNombre()))).toList();
+        return this.usuarioDAO.findAll().stream().map(obtenerUsuarioEnsamblador()::ensamblarResumenDTODesdeEntidad).toList();
     }
 
     @Override
-    public Usuario consultarPorCodigo(int codigo)
+    public UsuarioResumenDTO consultarPorCodigo(int codigo)
     {
-        return this.usuarioDAO.findById(codigo).map(entidad -> Usuario.crear(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getCorreo(), entidad.getClave(), entidad.getInstitucion(), Perfil.crear(entidad.getPerfil().getCodigo(), entidad.getPerfil().getNombre()))).orElse(null);
+        return this.usuarioDAO.findById(codigo).map(obtenerUsuarioEnsamblador()::ensamblarResumenDTODesdeEntidad).orElse(null);
     }
 
     @Override
-    public Usuario consultarPorCorreo(String correo)
+    public UsuarioResumenDTO consultarPorCorreo(String correo)
     {
-        UsuarioEntidad usuario = this.usuarioDAO.findByCorreo(correo);
-        
-        return Usuario.crear(usuario.getCodigo(), usuario.getNombre(), usuario.getApellidos(), usuario.getNumeroIdentificacion(), usuario.getCorreo(), usuario.getClave(), usuario.getInstitucion(), Perfil.crear(usuario.getPerfil().getCodigo(), usuario.getPerfil().getNombre()));
+        var usuario = this.usuarioDAO.findByCorreo(correo);
+
+        if(UtilObjeto.esNulo(usuario))
+        {
+            return null;
+        }
+
+        return obtenerUsuarioEnsamblador().ensamblarResumenDTODesdeEntidad(usuario);
     }
 
     @Override
-    public Usuario consultarPorNumeroIdentificacion(String numeroIdentificacion)
+    public Usuario consultarPorCorreoConClave(String correo)
     {
-        UsuarioEntidad usuario = this.usuarioDAO.findByNumeroIdentificacion(numeroIdentificacion);
-        
-        return Usuario.crear(usuario.getCodigo(), usuario.getNombre(), usuario.getApellidos(), usuario.getNumeroIdentificacion(), usuario.getCorreo(), usuario.getClave(), usuario.getInstitucion(), Perfil.crear(usuario.getPerfil().getCodigo(), usuario.getPerfil().getNombre()));
+        var usuario = this.usuarioDAO.findByCorreo(correo);
+
+        if(UtilObjeto.esNulo(usuario))
+        {
+            return null;
+        }
+
+        return obtenerUsuarioEnsamblador().ensamblarDominioDesdeEntidad(usuario);
+    }
+
+    @Override
+    public UsuarioResumenDTO consultarPorNumeroIdentificacion(String numeroIdentificacion)
+    {
+        var usuario = this.usuarioDAO.findByNumeroIdentificacion(numeroIdentificacion);
+
+        if(UtilObjeto.esNulo(usuario))
+        {
+            return null;
+        }
+
+        return obtenerUsuarioEnsamblador().ensamblarResumenDTODesdeEntidad(usuario);
     }
 
     @Override
     public void guardar(Usuario usuario)
     {
-        PerfilEntidad perfil = this.perfilDAO.findById(usuario.getPerfil().getCodigo()).map(entidad -> new PerfilEntidad(entidad.getCodigo(), entidad.getNombre())).orElse(null);
-        
-        this.usuarioDAO.save(new UsuarioEntidad(usuario.getCodigo(), usuario.getNombre(), usuario.getApellidos(), usuario.getNumeroIdentificacion(), usuario.getCorreo(), passwordEncoder.encode(usuario.getClave()), usuario.getInstitucion(), perfil));
+        List<PerfilUsuarioEntidad> perfilesFiltrados = new ArrayList<>();
+        var perfiles = this.perfilUsuarioDAO.findAll().stream().toList();
+        int i = 0;
+
+        perfiles.stream().forEach(perfil ->
+        {
+            if(perfil.getPerfil().getNombre().equals(usuario.getPerfiles().get(i).getNombre()))
+            {
+                perfilesFiltrados.add(perfil);
+
+            }
+        });
+
+        var usuarioEntidad = obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(usuario);
+
+        usuarioEntidad.setPerfiles(perfilesFiltrados);
+        usuarioEntidad.setClave(passwordEncoder.encode(usuario.getClave()));
+
+        this.usuarioDAO.save(usuarioEntidad);
     }
 
     @Override
     public void actualizar(Usuario usuario, int codigo)
     {
-        this.usuarioDAO.save(new UsuarioEntidad(usuario.getCodigo(), usuario.getNombre(), usuario.getApellidos(), usuario.getNumeroIdentificacion(), usuario.getCorreo(), usuario.getClave(), usuario.getInstitucion(), new PerfilEntidad(usuario.getPerfil().getCodigo(), usuario.getPerfil().getNombre())));
+        List<PerfilUsuarioEntidad> perfilesFiltrados = new ArrayList<>();
+        var perfiles = this.perfilUsuarioDAO.findAll().stream().toList();
+        int i = 0;
+
+        perfiles.stream().forEach(perfil ->
+        {
+            if(perfil.getPerfil().getNombre().equals(usuario.getPerfiles().get(i).getNombre()))
+            {
+                perfilesFiltrados.add(perfil);
+
+            }
+        });
+
+        var usuarioEntidad = obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(usuario);
+
+        usuarioEntidad.setCodigo(codigo);
+        usuarioEntidad.setPerfiles(perfilesFiltrados);
+        usuarioEntidad.setClave(passwordEncoder.encode(usuario.getClave()));
+
+        this.usuarioDAO.save(usuarioEntidad);
     }
 
     @Override

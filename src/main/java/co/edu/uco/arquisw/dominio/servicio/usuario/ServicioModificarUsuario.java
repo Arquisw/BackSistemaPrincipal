@@ -18,6 +18,9 @@ public class ServicioModificarUsuario
 
     public void modificar(int codigo, Usuario usuario) 
     {
+        verificarSiUsuarioExisteConCorreo(codigo, usuario);
+        verificarSiUsuarioExisteConNumeroIdentificacion(codigo, usuario);
+
         this.usuarioRepositorio.actualizar(usuario, codigo);
     }
 

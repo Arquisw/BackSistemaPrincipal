@@ -1,7 +1,11 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
 import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import lombok.Getter;
 
+import java.util.List;
+
+@Getter
 public class Usuario
 {
     private int codigo;
@@ -11,9 +15,9 @@ public class Usuario
     private String correo;
     private String clave;
     private String institucion;
-    private Perfil perfil;
+    private List<Perfil> perfiles;
 
-    private Usuario(int codigo, String nombre, String apellidos, String numeroIdentificacion, String correo, String clave, String institucion, Perfil perfil)
+    private Usuario(int codigo, String nombre, String apellidos, String numeroIdentificacion, String correo, String clave, String institucion, List<Perfil> perfiles)
     {
         this.codigo = codigo;
         setNombre(nombre);
@@ -22,22 +26,12 @@ public class Usuario
         setCorreo(correo);
         setClave(clave);
         setInstitucion(institucion);
-        setPerfil(perfil);
+        setPerfiles(perfiles);
     }
 
-    public static Usuario crear(int codigo, String nombre, String apellidos, String numeroIdentificacion, String correo, String clave, String institucion, Perfil perfil)
+    public static Usuario crear(int codigo, String nombre, String apellidos, String numeroIdentificacion, String correo, String clave, String institucion, List<Perfil> perfiles)
     {
-        return new Usuario(codigo, nombre, apellidos, numeroIdentificacion, correo, clave, institucion, perfil);
-    }
-
-    public int getCodigo()
-    {
-        return codigo;
-    }
-
-    public String getNombre()
-    {
-        return nombre;
+        return new Usuario(codigo, nombre, apellidos, numeroIdentificacion, correo, clave, institucion, perfiles);
     }
 
     private void setNombre(String nombre)
@@ -60,11 +54,6 @@ public class Usuario
         this.nombre = nombre;
     }
 
-    public String getApellidos()
-    {
-        return apellidos;
-    }
-
     private void setApellidos(String apellidos)
     {
         if(UtilTexto.cadenaEstaVacia(apellidos))
@@ -83,12 +72,6 @@ public class Usuario
         }
 
         this.apellidos = apellidos;
-    }
-
-    public String getNumeroIdentificacion()
-    {
-
-        return numeroIdentificacion;
     }
 
     private void setNumeroIdentificacion(String numeroIdentificacion)
@@ -111,11 +94,6 @@ public class Usuario
         this.numeroIdentificacion = numeroIdentificacion;
     }
 
-    public String getCorreo()
-    {
-        return correo;
-    }
-
     private void setCorreo(String correo)
     {
         if(UtilTexto.cadenaEstaVacia(correo))
@@ -134,11 +112,6 @@ public class Usuario
         }
 
         this.correo = correo;
-    }
-
-    public String getClave()
-    {
-        return clave;
     }
 
     private void setClave(String clave)
@@ -161,11 +134,6 @@ public class Usuario
         this.clave = clave;
     }
 
-    public String getInstitucion()
-    {
-        return institucion;
-    }
-
     private void setInstitucion(String institucion)
     {
         if(UtilTexto.cadenaEstaVacia(institucion))
@@ -186,13 +154,8 @@ public class Usuario
         this.institucion = institucion;
     }
 
-    public Perfil getPerfil()
+    private void setPerfiles(List<Perfil> perfiles)
     {
-        return perfil;
-    }
-
-    private void setPerfil(Perfil perfil)
-    {
-        this.perfil = perfil;
+        this.perfiles = perfiles;
     }
 }

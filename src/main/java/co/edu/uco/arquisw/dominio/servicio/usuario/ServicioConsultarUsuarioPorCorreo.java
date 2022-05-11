@@ -1,7 +1,8 @@
 package co.edu.uco.arquisw.dominio.servicio.usuario;
 
-import co.edu.uco.arquisw.dominio.modelo.Usuario;
+import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
+import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,12 +17,13 @@ public class ServicioConsultarUsuarioPorCorreo
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    public Usuario consultarPorCorreo(String correo)
+    public UsuarioResumenDTO consultarPorCorreo(String correo)
     {
-        if(!this.usuarioRepositorio.existe(this.usuarioRepositorio.consultarPorCorreo(correo)))
+        if(UtilObjeto.esNulo(this.usuarioRepositorio.consultarPorCorreo(correo)))
         {
             throw new IllegalArgumentException(MENSAJE_NO_EXISTE);
         }
+
         return this.usuarioRepositorio.consultarPorCorreo(correo);
     }
 }

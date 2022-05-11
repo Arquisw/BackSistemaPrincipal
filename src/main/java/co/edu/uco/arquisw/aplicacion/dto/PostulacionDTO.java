@@ -1,40 +1,17 @@
 package co.edu.uco.arquisw.aplicacion.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostulacionDTO
 {
     private int codigo;
     private Date fechaPostulacion;
-
-    public PostulacionDTO()
-    {
-
-    }
-
-    public PostulacionDTO(int codigo, Date fechaPostulacion)
-    {
-        this.codigo = codigo;
-        this.fechaPostulacion = fechaPostulacion;
-    }
-
-    public int getCodigo()
-    {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo)
-    {
-        this.codigo = codigo;
-    }
-
-    public Date getFechaPostulacion()
-    {
-        return fechaPostulacion;
-    }
-
-    public void setFechaPostulacion(Date fechaPostulacion)
-    {
-        this.fechaPostulacion = fechaPostulacion;
-    }
 }

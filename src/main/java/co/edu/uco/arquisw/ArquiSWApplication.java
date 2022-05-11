@@ -7,10 +7,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class)
 @EnableWebSecurity(debug = true)
-public class ArquiSWApplication
+public class ArquiSwApplication
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(ArquiSWApplication.class, args);
+		SpringApplication.run(ArquiSwApplication.class, args);
 	}
 }

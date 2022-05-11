@@ -2,12 +2,12 @@ package co.edu.uco.arquisw.infraestructura.controlador;
 
 import co.edu.uco.arquisw.aplicacion.dto.UsuarioDTO;
 import co.edu.uco.arquisw.aplicacion.servicio.usuario.*;
+import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.infraestructura.controlador.respuesta.Respuesta;
 import co.edu.uco.arquisw.infraestructura.controlador.respuesta.enumerador.EstadoRespuesta;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,10 +81,10 @@ public class UsuarioControlador
     }
 
     @GetMapping
-    public ResponseEntity<Respuesta<UsuarioDTO>> consultar()
+    public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar()
     {
-        ResponseEntity<Respuesta<UsuarioDTO>> responseEntity;
-        Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+        ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;
+        Respuesta<UsuarioResumenDTO> respuesta = new Respuesta<>();
 
         respuesta.setDatos(this.servicioConsultarUsuarios.consultar());
 
@@ -97,12 +97,12 @@ public class UsuarioControlador
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable int codigo)
+    public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar(@PathVariable int codigo)
     {
-        ResponseEntity<Respuesta<UsuarioDTO>> responseEntity;
-        Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+        ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;
+        Respuesta<UsuarioResumenDTO> respuesta = new Respuesta<>();
 
-        respuesta.setDatos((List<UsuarioDTO>) this.servicioConsultarUsuario.consultarPorCodigo(codigo));
+        respuesta.setDatos((List<UsuarioResumenDTO>) this.servicioConsultarUsuario.consultarPorCodigo(codigo));
 
         respuesta.añadirMensaje("El usuario fue consultado exitosamente");
         respuesta.setEstado(EstadoRespuesta.EXITOSA);
@@ -113,12 +113,12 @@ public class UsuarioControlador
     }
 
     @GetMapping("/usuario/{correo}")
-    public ResponseEntity<Respuesta<UsuarioDTO>> consultar(@PathVariable String correo)
+    public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar(@PathVariable String correo)
     {
-        ResponseEntity<Respuesta<UsuarioDTO>> responseEntity;
-        Respuesta<UsuarioDTO> respuesta = new Respuesta<>();
+        ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;
+        Respuesta<UsuarioResumenDTO> respuesta = new Respuesta<>();
 
-        List<UsuarioDTO> usuarios = new ArrayList<>();
+        List<UsuarioResumenDTO> usuarios = new ArrayList<>();
         usuarios.add(this.servicioConsultarUsuarioPorCorreo.consultarPorCorreo(correo));
 
         respuesta.setDatos(usuarios);

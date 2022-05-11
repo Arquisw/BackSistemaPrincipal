@@ -2,17 +2,12 @@ package co.edu.uco.arquisw.infraestructura.seguridad.filtro;
 
 import co.edu.uco.arquisw.infraestructura.seguridad.constantes.Constantes;
 import co.edu.uco.arquisw.infraestructura.seguridad.entidad.UsuarioSeguridad;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

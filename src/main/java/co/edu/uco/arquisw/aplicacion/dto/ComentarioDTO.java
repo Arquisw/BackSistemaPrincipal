@@ -1,38 +1,16 @@
 package co.edu.uco.arquisw.aplicacion.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ComentarioDTO
 {
     private int codigo;
     private String descripcion;
-
-    public ComentarioDTO()
-    {
-
-    }
-
-    public int getCodigo()
-    {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo)
-    {
-        this.codigo = codigo;
-    }
-
-    public String getDescripcion()
-    {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion)
-    {
-        this.descripcion = descripcion;
-    }
-
-    public ComentarioDTO(int codigo, String descripcion)
-    {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-    }
 }

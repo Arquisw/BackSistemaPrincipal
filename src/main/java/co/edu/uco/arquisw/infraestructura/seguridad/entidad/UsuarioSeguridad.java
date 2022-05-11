@@ -25,7 +25,12 @@ public class UsuarioSeguridad implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(usuario.getPerfil().getNombre()));
+
+        usuario.getPerfiles().forEach(perfil ->
+        {
+            authorities.add(new SimpleGrantedAuthority(perfil.getNombre()));
+        });
+
         return authorities;
     }
 
