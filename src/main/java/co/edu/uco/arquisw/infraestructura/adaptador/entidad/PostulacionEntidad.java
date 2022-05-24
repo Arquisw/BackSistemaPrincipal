@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "postulacion")
@@ -17,7 +16,8 @@ import java.util.Date;
 public class PostulacionEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="postulacion_code_seq")
+    @SequenceGenerator(name="postulacion_code_seq", sequenceName="postulacion_code_seq", allocationSize=1)
     private int codigo;
-    private Date fechaPostulacion;
+    private LocalDate fechaPostulacion;
 }

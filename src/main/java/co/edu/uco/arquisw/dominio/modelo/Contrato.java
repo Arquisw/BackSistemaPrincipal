@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 public class Contrato
 {
@@ -30,17 +30,17 @@ public class Contrato
 
     private void setUrlArchivo(String urlArchivo)
     {
-        if(UtilTexto.cadenaEstaVacia(urlArchivo))
+        if(ValidarTexto.cadenaEstaVacia(urlArchivo))
         {
             new IllegalArgumentException("El urlArchivo no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaURL(urlArchivo))
+        if(!ValidarTexto.cadenaURL(urlArchivo))
         {
             new IllegalArgumentException("El urlArchivo debe cumplir el patron el url");
         }
 
-        if(!UtilTexto.longitudEsValida(urlArchivo, 1, 2000))
+        if(!ValidarTexto.longitudEsValida(urlArchivo, 1, 2000))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 2000 caracteres");
         }

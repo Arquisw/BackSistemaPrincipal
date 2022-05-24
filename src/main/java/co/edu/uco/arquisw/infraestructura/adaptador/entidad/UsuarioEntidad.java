@@ -16,7 +16,8 @@ import java.util.List;
 public class UsuarioEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="usuario_code_seq")
+    @SequenceGenerator(name="usuario_code_seq", sequenceName="usuario_code_seq", allocationSize=1)
     private int codigo;
     private String nombre;
     private String apellidos;

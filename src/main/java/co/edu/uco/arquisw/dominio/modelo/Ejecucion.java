@@ -1,16 +1,16 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Ejecucion
 {
     private int codigo;
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
     private Proyecto proyecto;
     private Postulacion postulacion;
 
-    private Ejecucion(int codigo, Date fechaInicio, Date fechaFinal, Proyecto proyecto, Postulacion postulacion)
+    private Ejecucion(int codigo, LocalDate fechaInicio, LocalDate fechaFinal, Proyecto proyecto, Postulacion postulacion)
     {
         this.codigo = codigo;
         setFechaInicio(fechaInicio);
@@ -19,7 +19,7 @@ public class Ejecucion
         setPostulacion(postulacion);
     }
 
-    public static Ejecucion crear(int codigo, Date fechaInicio, Date fechaFinal, Proyecto proyecto, Postulacion postulacion)
+    public static Ejecucion crear(int codigo, LocalDate fechaInicio, LocalDate fechaFinal, Proyecto proyecto, Postulacion postulacion)
     {
         return new Ejecucion(codigo, fechaInicio, fechaFinal, proyecto, postulacion);
     }
@@ -29,22 +29,22 @@ public class Ejecucion
         return codigo;
     }
 
-    public Date getFechaInicio()
+    public LocalDate getFechaInicio()
     {
         return fechaInicio;
     }
 
-    private void setFechaInicio(Date fechaInicio)
+    private void setFechaInicio(LocalDate fechaInicio)
     {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFinal()
+    public LocalDate getFechaFinal()
     {
         return fechaFinal;
     }
 
-    private void setFechaFinal(Date fechaFinal)
+    private void setFechaFinal(LocalDate fechaFinal)
     {
         this.fechaFinal = fechaFinal;
     }

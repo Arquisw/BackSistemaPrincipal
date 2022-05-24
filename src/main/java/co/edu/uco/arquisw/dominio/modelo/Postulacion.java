@@ -1,12 +1,11 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilFecha;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Postulacion
 {
     private int codigo;
-    private Date fechaPostulacion;
+    private LocalDate fechaPostulacion;
 
     private Postulacion(int codigo)
     {
@@ -24,13 +23,13 @@ public class Postulacion
         return codigo;
     }
 
-    public Date getFechaPostulacion()
+    public LocalDate getFechaPostulacion()
     {
         return fechaPostulacion;
     }
 
     private void setFechaPostulacion()
     {
-        this.fechaPostulacion = UtilFecha.obtenerFechaActual();
+        this.fechaPostulacion = LocalDate.now();
     }
 }

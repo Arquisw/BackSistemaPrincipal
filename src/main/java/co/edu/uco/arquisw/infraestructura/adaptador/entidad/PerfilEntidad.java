@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class PerfilEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="perfil_code_seq")
+    @SequenceGenerator(name="perfil_code_seq", sequenceName="perfil_code_seq", allocationSize=1)
     private int codigo;
     private String nombre;
 }

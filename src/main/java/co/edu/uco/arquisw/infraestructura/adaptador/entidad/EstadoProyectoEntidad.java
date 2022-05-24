@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class EstadoProyectoEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="estadoproyecto_code_seq")
+    @SequenceGenerator(name="estadoproyecto_code_seq", sequenceName="estadoproyecto_code_seq", allocationSize=1)
     private int codigo;
     private String nombre;
 }

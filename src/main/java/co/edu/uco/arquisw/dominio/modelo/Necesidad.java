@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilNumero;
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarNumero;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 public class Necesidad
 {
@@ -37,7 +37,7 @@ public class Necesidad
 
     private void setTiempo(int tiempo)
     {
-        if(UtilNumero.numeroEsMenorOIgual(tiempo, 0))
+        if(ValidarNumero.numeroEsMenorOIgual(tiempo, 0))
         {
             new IllegalArgumentException("El tiempo no puede ser menor o igual que cero");
         }
@@ -52,17 +52,17 @@ public class Necesidad
 
     private void setRutaArchivo(String rutaArchivo)
     {
-        if(UtilTexto.cadenaEstaVacia(rutaArchivo))
+        if(ValidarTexto.cadenaEstaVacia(rutaArchivo))
         {
             new IllegalArgumentException("El urlArchivo no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaURL(rutaArchivo))
+        if(!ValidarTexto.cadenaURL(rutaArchivo))
         {
             new IllegalArgumentException("El urlArchivo debe cumplir el patron el url");
         }
 
-        if(!UtilTexto.longitudEsValida(rutaArchivo, 1, 2000))
+        if(!ValidarTexto.longitudEsValida(rutaArchivo, 1, 2000))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 2000 caracteres");
         }

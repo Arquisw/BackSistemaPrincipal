@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 public class Proyecto
 {
@@ -38,17 +38,17 @@ public class Proyecto
 
     private void setNombre(String nombre)
     {
-        if(UtilTexto.cadenaEstaVacia(nombre))
+        if(ValidarTexto.cadenaEstaVacia(nombre))
         {
             new IllegalArgumentException("El nombre no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(nombre))
+        if(!ValidarTexto.cadenaAlfanumerica(nombre))
         {
             new IllegalArgumentException("El nombre solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(nombre, 1, 50))
+        if(!ValidarTexto.longitudEsValida(nombre, 1, 50))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 50 caracteres");
         }
@@ -63,17 +63,17 @@ public class Proyecto
 
     private void setDescripcion(String descripcion)
     {
-        if(UtilTexto.cadenaEstaVacia(descripcion))
+        if(ValidarTexto.cadenaEstaVacia(descripcion))
         {
             new IllegalArgumentException("La descripcion no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(descripcion))
+        if(!ValidarTexto.cadenaAlfanumerica(descripcion))
         {
             new IllegalArgumentException("La descripcion solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(descripcion, 1, 5000))
+        if(!ValidarTexto.longitudEsValida(descripcion, 1, 5000))
         {
             new IllegalArgumentException("La longitud de la descripcion debe estar entre 1 y 5000 caracteres");
         }

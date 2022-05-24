@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilNumero;
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarNumero;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 public class FaseDetallada
 {
@@ -35,17 +35,17 @@ public class FaseDetallada
 
     private void setNombre(String nombre)
     {
-        if(UtilTexto.cadenaEstaVacia(nombre))
+        if(ValidarTexto.cadenaEstaVacia(nombre))
         {
             new IllegalArgumentException("El nombre no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(nombre))
+        if(!ValidarTexto.cadenaAlfanumerica(nombre))
         {
             new IllegalArgumentException("El nombre solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(nombre, 1, 50))
+        if(!ValidarTexto.longitudEsValida(nombre, 1, 50))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 50 caracteres");
         }
@@ -60,17 +60,17 @@ public class FaseDetallada
 
     private void setDescripcion(String descripcion)
     {
-        if(UtilTexto.cadenaEstaVacia(descripcion))
+        if(ValidarTexto.cadenaEstaVacia(descripcion))
         {
             new IllegalArgumentException("La descripcion no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(descripcion))
+        if(!ValidarTexto.cadenaAlfanumerica(descripcion))
         {
             new IllegalArgumentException("La descripcion solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(descripcion, 1, 5000))
+        if(!ValidarTexto.longitudEsValida(descripcion, 1, 5000))
         {
             new IllegalArgumentException("La longitud de la descripcion debe estar entre 1 y 5000 caracteres");
         }
@@ -85,7 +85,7 @@ public class FaseDetallada
 
     private void setOrden(int orden)
     {
-        if(UtilNumero.numeroEsMenorOIgual(orden, 0))
+        if(ValidarNumero.numeroEsMenorOIgual(orden, 0))
         {
             new IllegalArgumentException("El orden no puede ser menor o igual que cero");
         }

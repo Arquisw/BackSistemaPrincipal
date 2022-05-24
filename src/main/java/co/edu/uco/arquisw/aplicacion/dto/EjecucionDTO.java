@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -13,8 +15,8 @@ import java.util.Date;
 public class EjecucionDTO
 {
     private int codigo;
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
     private ProyectoDTO proyecto;
     private PostulacionDTO postulacion;
 }

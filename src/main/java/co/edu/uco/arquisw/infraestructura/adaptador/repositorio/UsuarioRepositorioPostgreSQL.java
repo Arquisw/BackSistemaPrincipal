@@ -3,7 +3,7 @@ package co.edu.uco.arquisw.infraestructura.adaptador.repositorio;
 import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.modelo.Usuario;
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
-import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
+import co.edu.uco.arquisw.dominio.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.adaptador.entidad.PerfilUsuarioEntidad;
 import co.edu.uco.arquisw.infraestructura.adaptador.repositorio.jpa.PerfilDAO;
 import co.edu.uco.arquisw.infraestructura.adaptador.repositorio.jpa.PerfilUsuarioDAO;
@@ -49,7 +49,7 @@ public class UsuarioRepositorioPostgreSQL implements UsuarioRepositorio
     {
         var usuario = this.usuarioDAO.findByCorreo(correo);
 
-        if(UtilObjeto.esNulo(usuario))
+        if(ValidarObjeto.esNulo(usuario))
         {
             return null;
         }
@@ -62,7 +62,7 @@ public class UsuarioRepositorioPostgreSQL implements UsuarioRepositorio
     {
         var usuario = this.usuarioDAO.findByCorreo(correo);
 
-        if(UtilObjeto.esNulo(usuario))
+        if(ValidarObjeto.esNulo(usuario))
         {
             return null;
         }
@@ -75,7 +75,7 @@ public class UsuarioRepositorioPostgreSQL implements UsuarioRepositorio
     {
         var usuario = this.usuarioDAO.findByNumeroIdentificacion(numeroIdentificacion);
 
-        if(UtilObjeto.esNulo(usuario))
+        if(ValidarObjeto.esNulo(usuario))
         {
             return null;
         }
@@ -88,16 +88,9 @@ public class UsuarioRepositorioPostgreSQL implements UsuarioRepositorio
     {
         List<PerfilUsuarioEntidad> perfilesFiltrados = new ArrayList<>();
         var perfiles = this.perfilUsuarioDAO.findAll().stream().toList();
-        int i = 0;
+        var perfil = perfiles.get(perfiles.size() - 1);
 
-        perfiles.stream().forEach(perfil ->
-        {
-            if(perfil.getPerfil().getNombre().equals(usuario.getPerfiles().get(i).getNombre()))
-            {
-                perfilesFiltrados.add(perfil);
-
-            }
-        });
+        perfilesFiltrados.add(perfil);
 
         var usuarioEntidad = obtenerUsuarioEnsamblador().ensamblarEntidadDesdeDominio(usuario);
 

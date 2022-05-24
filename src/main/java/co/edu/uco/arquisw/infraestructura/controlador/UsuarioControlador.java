@@ -7,6 +7,7 @@ import co.edu.uco.arquisw.infraestructura.controlador.respuesta.Respuesta;
 import co.edu.uco.arquisw.infraestructura.controlador.respuesta.enumerador.EstadoRespuesta;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class UsuarioControlador
     }
 
     @PutMapping("/{codigo}")
+    @Secured("ROLE_USER")
     public ResponseEntity<Respuesta<UsuarioDTO>> actualizar(@RequestBody UsuarioDTO usuario, @PathVariable int codigo)
     {
         ResponseEntity<Respuesta<UsuarioDTO>> responseEntity;
@@ -65,6 +67,7 @@ public class UsuarioControlador
     }
 
     @DeleteMapping("/{codigo}")
+    @Secured("ROLE_USER")
     public ResponseEntity<Respuesta<UsuarioDTO>> eliminar(@PathVariable int codigo)
     {
         ResponseEntity<Respuesta<UsuarioDTO>> responseEntity;
@@ -81,6 +84,7 @@ public class UsuarioControlador
     }
 
     @GetMapping
+    @Secured("ROLE_USER")
     public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar()
     {
         ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;
@@ -97,6 +101,7 @@ public class UsuarioControlador
     }
 
     @GetMapping("/{codigo}")
+    @Secured("ROLE_USER")
     public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar(@PathVariable int codigo)
     {
         ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;
@@ -113,6 +118,7 @@ public class UsuarioControlador
     }
 
     @GetMapping("/usuario/{correo}")
+    @Secured("ROLE_USER")
     public ResponseEntity<Respuesta<UsuarioResumenDTO>> consultar(@PathVariable String correo)
     {
         ResponseEntity<Respuesta<UsuarioResumenDTO>> responseEntity;

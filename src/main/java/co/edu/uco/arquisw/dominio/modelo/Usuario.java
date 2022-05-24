@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 import lombok.Getter;
 
 import java.util.List;
@@ -36,17 +36,17 @@ public class Usuario
 
     private void setNombre(String nombre)
     {
-        if(UtilTexto.cadenaEstaVacia(nombre))
+        if(ValidarTexto.cadenaEstaVacia(nombre))
         {
             new IllegalArgumentException("El nombre no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(nombre))
+        if(!ValidarTexto.cadenaAlfanumerica(nombre))
         {
             new IllegalArgumentException("El nombre solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(nombre, 1, 50))
+        if(!ValidarTexto.longitudEsValida(nombre, 1, 50))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 50 caracteres");
         }
@@ -56,17 +56,17 @@ public class Usuario
 
     private void setApellidos(String apellidos)
     {
-        if(UtilTexto.cadenaEstaVacia(apellidos))
+        if(ValidarTexto.cadenaEstaVacia(apellidos))
         {
             new IllegalArgumentException("Los apellidos no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(apellidos))
+        if(!ValidarTexto.cadenaAlfanumerica(apellidos))
         {
             new IllegalArgumentException("Los apellidos solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(apellidos, 1, 70))
+        if(!ValidarTexto.longitudEsValida(apellidos, 1, 70))
         {
             new IllegalArgumentException("La longitud de los apellidos debe estar entre 1 y 70 caracteres");
         }
@@ -76,17 +76,17 @@ public class Usuario
 
     private void setNumeroIdentificacion(String numeroIdentificacion)
     {
-        if(UtilTexto.cadenaEstaVacia(numeroIdentificacion))
+        if(ValidarTexto.cadenaEstaVacia(numeroIdentificacion))
         {
             new IllegalArgumentException("El numero de identificacion no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaID(numeroIdentificacion))
+        if(!ValidarTexto.cadenaID(numeroIdentificacion))
         {
             new IllegalArgumentException("El numero de identificacion solo puede tener numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(numeroIdentificacion, 8, 11))
+        if(!ValidarTexto.longitudEsValida(numeroIdentificacion, 8, 11))
         {
             new IllegalArgumentException("La longitud del numero de identificacion debe estar entre 8 y 11 caracteres");
         }
@@ -96,17 +96,17 @@ public class Usuario
 
     private void setCorreo(String correo)
     {
-        if(UtilTexto.cadenaEstaVacia(correo))
+        if(ValidarTexto.cadenaEstaVacia(correo))
         {
             new IllegalArgumentException("El correo no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaCorreo(correo))
+        if(!ValidarTexto.cadenaCorreo(correo))
         {
             new IllegalArgumentException("el correo debe cumplir el patron de @example.com");
         }
 
-        if(!UtilTexto.longitudEsValida(correo, 10, 100))
+        if(!ValidarTexto.longitudEsValida(correo, 10, 100))
         {
             new IllegalArgumentException("La longitud del correo debe estar entre 10 y 100 caracteres");
         }
@@ -116,17 +116,17 @@ public class Usuario
 
     private void setClave(String clave)
     {
-        if(UtilTexto.cadenaEstaVacia(clave))
+        if(ValidarTexto.cadenaEstaVacia(clave))
         {
             new IllegalArgumentException("La clave no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaClave(clave))
+        if(!ValidarTexto.cadenaClave(clave))
         {
             new IllegalArgumentException("La clave debe tener minimo una mayuscula, y un numero");
         }
 
-        if(!UtilTexto.longitudEsValida(clave, 6, 100))
+        if(!ValidarTexto.longitudEsValida(clave, 6, 100))
         {
             new IllegalArgumentException("La longitud de la clave  debe estar entre 6 y 100 caracteres");
         }
@@ -136,17 +136,17 @@ public class Usuario
 
     private void setInstitucion(String institucion)
     {
-        if(UtilTexto.cadenaEstaVacia(institucion))
+        if(ValidarTexto.cadenaEstaVacia(institucion))
         {
             new IllegalArgumentException("La institucion no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaAlfanumerica(institucion))
+        if(!ValidarTexto.cadenaAlfanumerica(institucion))
         {
             new IllegalArgumentException("La institucion solo puede tener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(institucion, 1, 100))
+        if(!ValidarTexto.longitudEsValida(institucion, 1, 100))
         {
             new IllegalArgumentException("La longitud de la institucion  debe estar entre 10 y 100 caracteres");
         }

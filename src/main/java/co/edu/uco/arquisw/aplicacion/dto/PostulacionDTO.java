@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -13,5 +15,5 @@ import java.util.Date;
 public class PostulacionDTO
 {
     private int codigo;
-    private Date fechaPostulacion;
+    private LocalDate fechaPostulacion;
 }

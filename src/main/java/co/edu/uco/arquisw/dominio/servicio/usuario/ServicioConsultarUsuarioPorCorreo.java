@@ -2,7 +2,7 @@ package co.edu.uco.arquisw.dominio.servicio.usuario;
 
 import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
-import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
+import co.edu.uco.arquisw.dominio.validador.ValidarObjeto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,7 @@ public class ServicioConsultarUsuarioPorCorreo
 
     public UsuarioResumenDTO consultarPorCorreo(String correo)
     {
-        if(UtilObjeto.esNulo(this.usuarioRepositorio.consultarPorCorreo(correo)))
+        if(ValidarObjeto.esNulo(this.usuarioRepositorio.consultarPorCorreo(correo)))
         {
             throw new IllegalArgumentException(MENSAJE_NO_EXISTE);
         }

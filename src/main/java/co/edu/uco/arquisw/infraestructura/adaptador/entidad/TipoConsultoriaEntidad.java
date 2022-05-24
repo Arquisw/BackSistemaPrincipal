@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class TipoConsultoriaEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="tipoconsultoria_code_seq")
+    @SequenceGenerator(name="tipoconsultoria_code_seq", sequenceName="tipoconsultoria_code_seq", allocationSize=1)
     private int codigo;
     private String nombre;
 }

@@ -2,8 +2,8 @@ package co.edu.uco.arquisw.dominio.servicio.usuario;
 
 import co.edu.uco.arquisw.dominio.modelo.Usuario;
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
-import co.edu.uco.arquisw.dominio.utilitario.UtilMensaje;
-import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
+import co.edu.uco.arquisw.dominio.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.validador.ValidarObjeto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,9 +28,9 @@ public class ServicioModificarUsuario
     {
         var usuarioResumen = this.usuarioRepositorio.consultarPorCorreo(usuario.getCorreo());
 
-        if(!UtilObjeto.esNulo(usuarioResumen) && usuarioResumen.getCodigo() != codigo)
+        if(!ValidarObjeto.esNulo(usuarioResumen) && usuarioResumen.getCodigo() != codigo)
         {
-            throw new IllegalArgumentException(UtilMensaje.YA_EXISTE_USUARIO_CON_CORREO);
+            throw new IllegalArgumentException(Mensajes.YA_EXISTE_USUARIO_CON_CORREO);
         }
     }
 
@@ -38,9 +38,9 @@ public class ServicioModificarUsuario
     {
         var usuarioResumen = this.usuarioRepositorio.consultarPorNumeroIdentificacion(usuario.getNumeroIdentificacion());
 
-        if(!UtilObjeto.esNulo(usuarioResumen) && usuarioResumen.getCodigo() != codigo)
+        if(!ValidarObjeto.esNulo(usuarioResumen) && usuarioResumen.getCodigo() != codigo)
         {
-            throw new IllegalArgumentException(UtilMensaje.YA_EXISTE_USUARIO_CON_NUMERO_IDENTIFICACION);
+            throw new IllegalArgumentException(Mensajes.YA_EXISTE_USUARIO_CON_NUMERO_IDENTIFICACION);
         }
     }
 }

@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.dominio.servicio.usuario;
 
 import co.edu.uco.arquisw.dominio.puerto.UsuarioRepositorio;
-import co.edu.uco.arquisw.dominio.utilitario.UtilObjeto;
+import co.edu.uco.arquisw.dominio.validador.ValidarObjeto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +17,7 @@ public class ServicioEliminarUsuario
 
     public void eliminar(int codigo)
     {
-        if(UtilObjeto.esNulo(this.usuarioRepositorio.consultarPorCodigo(codigo)))
+        if(ValidarObjeto.esNulo(this.usuarioRepositorio.consultarPorCodigo(codigo)))
         {
             throw new IllegalArgumentException(MENSAJE_NO_EXISTE);
         }

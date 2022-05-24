@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.controlador.respuesta;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 import co.edu.uco.arquisw.infraestructura.controlador.respuesta.enumerador.EstadoRespuesta;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Respuesta<T>
 
     public void añadirMensaje(String message)
     {
-        if(!UtilTexto.cadenaEsNula(message))
+        if(!ValidarTexto.cadenaEsNula(message))
         {
             getMensajes().add(message);
         }

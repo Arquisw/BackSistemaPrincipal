@@ -16,7 +16,10 @@ import javax.persistence.*;
 public class EstadoNecesidadEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="estadonecesidad_code_seq")
+    @SequenceGenerator(name="estadonecesidad_code_seq", sequenceName="estadonecesidad_code_seq", allocationSize=1)
     private int codigo;
-    private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "estado")
+    private EstadoEntidad estado;
 }

@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class RolEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="rol_code_seq")
+    @SequenceGenerator(name="rol_code_seq", sequenceName="rol_code_seq", allocationSize=1)
     private int codigo;
     private String nombre;
 }

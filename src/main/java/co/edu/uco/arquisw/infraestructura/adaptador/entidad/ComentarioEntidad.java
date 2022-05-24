@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class ComentarioEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="comentario_code_seq")
+    @SequenceGenerator(name="comentario_code_seq", sequenceName="comentario_code_seq", allocationSize=1)
     private int codigo;
     private String descripcion;
 }

@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 import java.util.List;
 
@@ -46,17 +46,17 @@ public class FaseEjecucion
 
     private void setUrlDocumentacion(String urlDocumentacion)
     {
-        if(UtilTexto.cadenaEstaVacia(urlDocumentacion))
+        if(ValidarTexto.cadenaEstaVacia(urlDocumentacion))
         {
             new IllegalArgumentException("El urlDocumentacion no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaURL(urlDocumentacion))
+        if(!ValidarTexto.cadenaURL(urlDocumentacion))
         {
             new IllegalArgumentException("El urlDocumentacion debe cumplir el patron de url");
         }
 
-        if(!UtilTexto.longitudEsValida(urlDocumentacion, 1, 2000))
+        if(!ValidarTexto.longitudEsValida(urlDocumentacion, 1, 2000))
         {
             new IllegalArgumentException("La longitud del urlDocumentacion debe estar entre 1 y 2000 caracteres");
         }

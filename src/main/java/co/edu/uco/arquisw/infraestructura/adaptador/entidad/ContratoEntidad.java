@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class ContratoEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="contrato_code_seq")
+    @SequenceGenerator(name="contrato_code_seq", sequenceName="contrato_code_seq", allocationSize=1)
     private int codigo;
     private String urlArchivo;
 }

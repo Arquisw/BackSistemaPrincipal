@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.modelo;
 
-import co.edu.uco.arquisw.dominio.utilitario.UtilTexto;
+import co.edu.uco.arquisw.dominio.validador.ValidarTexto;
 
 public class EstadoProyecto
 {
@@ -30,17 +30,17 @@ public class EstadoProyecto
 
     private void setNombre(String nombre)
     {
-        if(UtilTexto.cadenaEstaVacia(nombre))
+        if(ValidarTexto.cadenaEstaVacia(nombre))
         {
             new IllegalArgumentException("El nombre no puede estar vacio");
         }
 
-        if(!UtilTexto.cadenaLetrasYEspacios(nombre))
+        if(!ValidarTexto.cadenaLetrasYEspacios(nombre))
         {
             new IllegalArgumentException("El nombre solo puede contener letras y numeros");
         }
 
-        if(!UtilTexto.longitudEsValida(nombre, 1, 50))
+        if(!ValidarTexto.longitudEsValida(nombre, 1, 50))
         {
             new IllegalArgumentException("La longitud del nombre debe estar entre 1 y 50 caracteres");
         }

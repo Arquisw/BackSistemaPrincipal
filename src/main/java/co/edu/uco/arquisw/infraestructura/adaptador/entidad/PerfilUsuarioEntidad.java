@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class PerfilUsuarioEntidad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="perfilusuario_code_seq")
+    @SequenceGenerator(name="perfilusuario_code_seq", sequenceName="perfilusuario_code_seq", allocationSize=1)
     private int codigo;
     @ManyToOne
     @JoinColumn(name = "perfil")

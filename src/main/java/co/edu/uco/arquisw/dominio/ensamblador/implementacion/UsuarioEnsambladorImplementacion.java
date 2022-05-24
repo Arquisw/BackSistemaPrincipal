@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.ensamblador.implementacion;
 import co.edu.uco.arquisw.aplicacion.dto.UsuarioDTO;
 import co.edu.uco.arquisw.dominio.dto.UsuarioResumenDTO;
 import co.edu.uco.arquisw.dominio.ensamblador.UsuarioEnsamblador;
+import co.edu.uco.arquisw.dominio.modelo.Perfil;
 import co.edu.uco.arquisw.dominio.modelo.Usuario;
 import co.edu.uco.arquisw.infraestructura.adaptador.entidad.UsuarioEntidad;
 import java.util.List;
@@ -50,6 +51,12 @@ public class UsuarioEnsambladorImplementacion implements UsuarioEnsamblador
     public UsuarioResumenDTO ensamblarResumenDTODesdeEntidad(UsuarioEntidad entidad)
     {
         return new UsuarioResumenDTO(entidad.getCodigo(), entidad.getNombre(), entidad.getApellidos(), entidad.getNumeroIdentificacion(), entidad.getCorreo(), entidad.getInstitucion(), obtenerPerfilEnsamblador().ensamblarResumenesDTODesdeEntidades(entidad.getPerfiles()));
+    }
+
+    @Override
+    public Usuario ensamblarDominioDesdeDominioParaModificar(Usuario usuario, List<Perfil> perfiles)
+    {
+        return Usuario.crear(usuario.getCodigo(), usuario.getNombre(), usuario.getApellidos(), usuario.getNumeroIdentificacion(), usuario.getCorreo(), usuario.getClave(), usuario.getInstitucion(), perfiles);
     }
 
     @Override
