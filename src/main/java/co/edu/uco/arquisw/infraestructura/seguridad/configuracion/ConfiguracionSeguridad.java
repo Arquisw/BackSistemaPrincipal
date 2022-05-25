@@ -38,7 +38,6 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter
                 .addFilterAfter(new FiltroGeneradorJWT(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/api/login").authenticated()
-                .antMatchers("/api/usuarios").authenticated()
                 .antMatchers("/api/usuarioentidad").hasAnyRole("ROLE_USER")
                 .and().httpBasic();
     }
