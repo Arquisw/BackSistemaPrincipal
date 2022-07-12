@@ -12,6 +12,11 @@ public class FechaFormateador
 
     }
 
+    public static LocalDate obtenerFechaActual()
+    {
+        return LocalDate.now();
+    }
+
     public static LocalDate obtenerFecha(String fechaTexto)
     {
         DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_YYYY_MM_DD);

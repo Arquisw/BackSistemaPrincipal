@@ -25,7 +25,7 @@ public class PersonaEntidad
     private String apellidos;
     @Column(length = 100)
     private String correo;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona")
     private List<RolPersonaEntidad> roles;
 }

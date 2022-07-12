@@ -30,10 +30,6 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var usuario = this.usuarioMapeador.construirEntidad(persona.getCorreo(), persona.getClave());
         var entidad = this.personaMapeador.construirEntidad(persona);
 
-        usuario.setId(obtenerUsuarioID());
-        entidad.setId(obtenerPersonaID());
-        entidad.getRoles().forEach(rol -> rol.setId(obtenerRolPersonaID()));
-
         entidad.getRoles().forEach(rol -> this.rolPersonaDAO.save(rol));
         this.usuarioDAO.save(usuario);
         return this.personaDAO.save(entidad).getId();
@@ -47,32 +43,6 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         if(!roles.isEmpty())
         {
             id = roles.get(roles.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerPersonaID()
-    {
-        var id = 1L;
-        var personas = this.personaDAO.findAll();
-
-        if(!personas.isEmpty())
-        {
-            id = personas.get(personas.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerUsuarioID()
-    {
-        var id = 1L;
-        var usuarios = this.usuarioDAO.findAll();
-
-        if(!usuarios.isEmpty())
-        {
-            id = usuarios.get(usuarios.size() - 1).getId() + 1L;
         }
 
         return id;

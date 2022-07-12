@@ -46,7 +46,9 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_EN_ESPERA)).toList();
 
-        return this.necesidadMapeador.construirDTOs(necesidades);
+        var necesidadesNuevas = this.necesidadMapeador.construirDTOs(necesidades);
+
+        return necesidadesNuevas;
     }
 
     @Override

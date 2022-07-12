@@ -39,6 +39,15 @@ public class RolMapeador
             case TextoConstante.ROL_ASOCIACION -> 2L;
             case TextoConstante.ROL_ADMINISTRADOR -> 3L;
             case TextoConstante.ROL_POSTULADO -> 4L;
+            case TextoConstante.ROL_SELECCIONADO -> 5L;
+            case TextoConstante.ROL_DIRECTOR_PROYECTO -> 6L;
+            case TextoConstante.ROL_PARTE_INTERESADA -> 7L;
+            case TextoConstante.ROL_TEAM_MEMBER -> 8L;
+            case TextoConstante.ROL_INGENIERIA -> 9L;
+            case TextoConstante.ROL_ARQUITECTURA -> 10L;
+            case TextoConstante.ROL_ANALISTA -> 11L;
+            case TextoConstante.ROL_TEAM_LEADER -> 12L;
+            case TextoConstante.ROL_PATROCINADOR -> 13L;
             default -> 0L;
         };
     }
