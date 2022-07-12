@@ -41,7 +41,6 @@ class ProyectoTest
         Assertions.assertEquals(Mensajes.NOMBRE_PROYECTO_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
                 Proyecto.crear("","Red Social",estadoProyecto,tipoConsultorio)).getMessage());
 
-
         Assertions.assertEquals(Mensajes.DESCRIPCION_ESTADO_PROYECTO_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
                 Proyecto.crear("Facebook","",estadoProyecto,tipoConsultorio)).getMessage());
     }
