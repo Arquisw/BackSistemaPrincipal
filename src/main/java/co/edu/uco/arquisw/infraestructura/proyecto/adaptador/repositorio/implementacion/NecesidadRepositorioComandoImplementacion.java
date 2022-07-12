@@ -28,78 +28,12 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     {
         var entidad = this.necesidadMapeador.construirEntidad(necesidad, asociacionID);
 
-        entidad.setId(obtenerNecesidadID());
-        entidad.getEstado().setId(obtenerEstadoNecesidadID());
-        entidad.getProyecto().setId(obtenerProyectoID());
-        entidad.getProyecto().getEstado().setId(obtenerEstadoProyectoID());
-        entidad.getProyecto().getTiposConsultoria().forEach(tipoConsultoria -> tipoConsultoria.setId(obtenerTipoConsultoriaID()));
+        entidad.getProyecto().getTiposConsultoria().forEach(tipoConsultoria -> tipoConsultoria.setId(this.tipoConsultoriaProyectoDAO.save(tipoConsultoria).getId()));
+        entidad.getProyecto().getEstado().setId(this.estadoProyectoDAO.save(entidad.getProyecto().getEstado()).getId());
+        entidad.getProyecto().setId(this.proyectoDAO.save(entidad.getProyecto()).getId());
+        entidad.getEstado().setId(this.estadoNecesidadDAO.save(entidad.getEstado()).getId());
 
         return this.necesidadDAO.save(entidad).getId();
-    }
-
-    private Long obtenerNecesidadID()
-    {
-        var id = 1L;
-        var necesidades = this.necesidadDAO.findAll();
-
-        if(!necesidades.isEmpty())
-        {
-            id = necesidades.get(necesidades.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerEstadoNecesidadID()
-    {
-        var id = 1L;
-        var estados = this.estadoNecesidadDAO.findAll();
-
-        if(!estados.isEmpty())
-        {
-            id = estados.get(estados.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerProyectoID()
-    {
-        var id = 1L;
-        var proyectos = this.proyectoDAO.findAll();
-
-        if(!proyectos.isEmpty())
-        {
-            id = proyectos.get(proyectos.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerEstadoProyectoID()
-    {
-        var id = 1L;
-        var estados = this.estadoProyectoDAO.findAll();
-
-        if(!estados.isEmpty())
-        {
-            id = estados.get(estados.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
-    private Long obtenerTipoConsultoriaID()
-    {
-        var id = 1L;
-        var tiposConsultoria = this.tipoConsultoriaProyectoDAO.findAll();
-
-        if(!tiposConsultoria.isEmpty())
-        {
-            id = tiposConsultoria.get(tiposConsultoria.size() - 1).getId() + 1L;
-        }
-
-        return id;
     }
 
     @Override

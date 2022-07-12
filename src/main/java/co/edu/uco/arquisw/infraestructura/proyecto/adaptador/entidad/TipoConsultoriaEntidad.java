@@ -19,6 +19,6 @@ public class TipoConsultoriaEntidad
     @GeneratedValue(strategy = GenerationType.AUTO, generator="tipoconsultoria_code_seq")
     @SequenceGenerator(name="tipoconsultoria_code_seq", sequenceName="tipoconsultoria_code_seq", allocationSize=1)
     private Long id;
-    @Column(length = 15)
+    @Column(length = 24)
     private String nombre;
 }

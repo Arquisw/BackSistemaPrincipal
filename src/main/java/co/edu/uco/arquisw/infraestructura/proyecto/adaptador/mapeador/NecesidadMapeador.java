@@ -3,7 +3,6 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.NecesidadEntidad;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,10 +10,14 @@ import java.util.List;
 @Component
 public class NecesidadMapeador
 {
-    @Autowired
-    EstadoNecesidadMapeador estadoNecesidadMapeador;
-    @Autowired
-    ProyectoMapeador proyectoMapeador;
+    private final EstadoNecesidadMapeador estadoNecesidadMapeador;
+    private final ProyectoMapeador proyectoMapeador;
+
+    public NecesidadMapeador(EstadoNecesidadMapeador estadoNecesidadMapeador, ProyectoMapeador proyectoMapeador)
+    {
+        this.estadoNecesidadMapeador = estadoNecesidadMapeador;
+        this.proyectoMapeador = proyectoMapeador;
+    }
 
     public NecesidadDTO construirDTO(NecesidadEntidad necesidad)
     {
@@ -23,7 +26,7 @@ public class NecesidadMapeador
 
     public List<NecesidadDTO> construirDTOs(List<NecesidadEntidad> necesidades)
     {
-        return necesidades.stream().map(new NecesidadMapeador()::construirDTO).toList();
+        return necesidades.stream().map(new NecesidadMapeador(estadoNecesidadMapeador, proyectoMapeador)::construirDTO).toList();
     }
 
     public NecesidadEntidad construirEntidad(Necesidad necesidad, Long asociacionID)

@@ -3,12 +3,11 @@ package co.edu.uco.arquisw.dominio.proyecto.servicio;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
-
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 
-
-public class ServicioActualizarNecesidad {
+public class ServicioActualizarNecesidad
+{
 
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioComando necesidadRepositorioComando;
@@ -28,7 +27,7 @@ public class ServicioActualizarNecesidad {
 
     private void validarSiExisteAsociacionConId(Long asociacionID)
     {
-        if(!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID)))
+        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID)))
         {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + asociacionID);
         }

@@ -27,7 +27,7 @@ public class ProyectoEntidad
     @OneToOne
     @JoinColumn(name = "estado")
     private EstadoProyectoEntidad estado;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "proyecto")
     private List<TipoConsultoriaProyectoEntidad> tiposConsultoria;
 }
