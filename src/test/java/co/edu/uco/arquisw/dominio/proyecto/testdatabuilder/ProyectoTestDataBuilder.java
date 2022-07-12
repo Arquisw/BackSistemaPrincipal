@@ -7,12 +7,13 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
 
 import java.util.List;
 
-public class ProyectoTestDataBuilder {
+public class ProyectoTestDataBuilder
+{
 
-    private String nombre;
-    private String descripcion;
-    private EstadoProyecto estado;
-    private List<TipoConsultoria> tiposConsultoria;
+    private final String nombre;
+    private final String descripcion;
+    private final EstadoProyecto estado;
+    private final List<TipoConsultoria> tiposConsultoria;
 
     public ProyectoTestDataBuilder() {
         this.nombre = "hifive";

@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.dominio.usuario.modelo;
 
-import co.edu.uco.arquisw.dominio.transversal.excepciones.LongitudExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.PatronExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
@@ -10,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonaTest {
+class PersonaTest
+{
     @Test
     void  validarCreacionPersonaExitosa()
     {

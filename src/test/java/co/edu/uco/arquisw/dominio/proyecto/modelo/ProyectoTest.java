@@ -1,15 +1,11 @@
 package co.edu.uco.arquisw.dominio.proyecto.modelo;
 
-import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.EstadoNesecidadTestDataBuilder;
 import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.EstadoProyectoTestDataBuilder;
-import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.ProyectoTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.PatronExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
-import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,11 +2,11 @@ package co.edu.uco.arquisw.dominio.asociacion.testdatabuilder;
 
 import co.edu.uco.arquisw.dominio.asociacion.modelo.Asociacion;
 
-public class AsociacionTestDataBuilder {
-
-    private String nombre;
-    private String nit;
-    private String numeroContacto;
+public class AsociacionTestDataBuilder
+{
+    private final String nombre;
+    private final String nit;
+    private final String numeroContacto;
 
     public AsociacionTestDataBuilder()
     {

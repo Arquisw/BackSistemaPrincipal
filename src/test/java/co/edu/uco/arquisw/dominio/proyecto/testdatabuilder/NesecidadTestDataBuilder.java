@@ -4,11 +4,12 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
 
-public class NesecidadTestDataBuilder {
+public class NesecidadTestDataBuilder
+{
 
-    private String rutaArchivo;
-    private  EstadoNecesidad estado;
-    private  Proyecto proyecto;
+    private final String rutaArchivo;
+    private final EstadoNecesidad estado;
+    private final Proyecto proyecto;
 
     public NesecidadTestDataBuilder()
     {

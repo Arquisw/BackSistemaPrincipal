@@ -4,7 +4,7 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 
 public class RolTestDataBuilder
 {
-    private String nombre;
+    private final String nombre;
 
     public RolTestDataBuilder() {
         this.nombre = "Administrador";

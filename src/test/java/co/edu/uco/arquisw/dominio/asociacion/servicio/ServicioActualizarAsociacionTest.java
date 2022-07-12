@@ -7,8 +7,8 @@ import co.edu.uco.arquisw.dominio.asociacion.testdatabuilder.AsociacionTestDataB
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioActualizarAsociacionTest {
-
+class ServicioActualizarAsociacionTest
+{
     @Test
     void actualizacionExitosa()
     {

@@ -1,16 +1,13 @@
 package co.edu.uco.arquisw.dominio.usuario.modelo;
 
-import co.edu.uco.arquisw.dominio.transversal.excepciones.LongitudExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.PatronExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
-import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-public class RolTest {
-
+class RolTest
+{
     @Test
     void validarCreacionExitosa()
     {

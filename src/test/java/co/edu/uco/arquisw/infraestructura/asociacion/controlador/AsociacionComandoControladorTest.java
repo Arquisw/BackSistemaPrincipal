@@ -2,9 +2,7 @@ package co.edu.uco.arquisw.infraestructura.asociacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.infraestructura.asociacion.testdatabuilder.AsociacionDtoTestDataBuilder;
-import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.PersonaDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.core.Is.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -30,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class AsociacionComandoControladorTest {
+class AsociacionComandoControladorTest
+{
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -38,7 +35,8 @@ public class AsociacionComandoControladorTest {
     @Autowired
     private MockMvc mocMvc;
 
-    public AsociacionComandoControladorTest() {
+    public AsociacionComandoControladorTest()
+    {
     }
 
     @Test
@@ -50,10 +48,7 @@ public class AsociacionComandoControladorTest {
         mocMvc.perform(MockMvcRequestBuilders.post("/asociaciones/{idUsuario}",idUsuario)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
-                .andExpect(status().is2xxSuccessful())
-                .andReturn();
-
-        Assertions.assertNotNull(1);
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test

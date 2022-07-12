@@ -103,10 +103,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var persona = this.personaDAO.findById(id).orElse(null);
 
         assert persona != null;
-        persona.getRoles().forEach(rol ->
-        {
-            this.rolPersonaDAO.deleteById(rol.getId());
-        });
+        persona.getRoles().forEach(rol -> this.rolPersonaDAO.deleteById(rol.getId()));
 
         this.usuarioDAO.deleteById(id);
 

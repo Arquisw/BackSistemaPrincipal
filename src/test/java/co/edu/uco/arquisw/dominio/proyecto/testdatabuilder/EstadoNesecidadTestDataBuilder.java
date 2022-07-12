@@ -3,9 +3,9 @@ package co.edu.uco.arquisw.dominio.proyecto.testdatabuilder;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 
 
-public class EstadoNesecidadTestDataBuilder {
-
-    private String nombre;
+public class EstadoNesecidadTestDataBuilder
+{
+    private final String nombre;
 
     public EstadoNesecidadTestDataBuilder() {
         this.nombre = "En Espera";

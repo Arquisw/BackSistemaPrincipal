@@ -5,12 +5,8 @@ import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.ProyectoTestDataBuild
 import co.edu.uco.arquisw.dominio.transversal.excepciones.PatronExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
-import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
-import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 class NecesidadTest

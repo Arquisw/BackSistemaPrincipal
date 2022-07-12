@@ -8,7 +8,8 @@ import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.NesecidadTestDataBuil
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioActualizarNecesidadTest {
+class ServicioActualizarNecesidadTest
+{
     @Test
     void actualizacionExitosa()
     {

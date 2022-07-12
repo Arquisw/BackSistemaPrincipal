@@ -7,11 +7,11 @@ import java.util.List;
 
 public class PersonaTestDataBuilder
 {
-    private String nombre;
-    private String apellidos;
-    private String correo;
-    private String clave;
-    private List<Rol> roles;
+    private final String nombre;
+    private final String apellidos;
+    private final String correo;
+    private final String clave;
+    private final List<Rol> roles;
 
     public PersonaTestDataBuilder() {
         this.nombre = "juan";
