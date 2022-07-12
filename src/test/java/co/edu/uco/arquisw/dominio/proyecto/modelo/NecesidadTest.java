@@ -37,13 +37,19 @@ class NecesidadTest
     @Test
     void validarCamposFaltantes()
     {
+        var estadoNesecidad = new EstadoNesecidadTestDataBuilder().build();
+        var proyecto = new ProyectoTestDataBuilder().build();
+
         Assertions.assertEquals(Mensajes.RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
-                Necesidad.crear("",new EstadoNesecidadTestDataBuilder().build(),new ProyectoTestDataBuilder().build())).getMessage());
+                Necesidad.crear("",estadoNesecidad,proyecto)).getMessage());
     }
     @Test
     void validarPatronIncorrecto()
     {
+        var estadoNesecidad = new EstadoNesecidadTestDataBuilder().build();
+        var proyecto = new ProyectoTestDataBuilder().build();
+
         Assertions.assertEquals(Mensajes.PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO,Assertions.assertThrows(PatronExcepcion.class,() ->
-                Necesidad.crear("www.direccion.org/ejemplo/item.html",new EstadoNesecidadTestDataBuilder().build(),new ProyectoTestDataBuilder().build())).getMessage());
+                Necesidad.crear("www.direccion.org/ejemplo/item.html",estadoNesecidad,proyecto)).getMessage());
     }
 }
