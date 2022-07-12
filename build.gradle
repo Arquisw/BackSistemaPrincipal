@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'co.edu.uco'
@@ -10,6 +11,14 @@ sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "ARQUISW_BACKEND"
+    property "sonar.organization", "arquisw"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 dependencies {
