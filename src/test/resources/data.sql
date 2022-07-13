@@ -17,7 +17,7 @@ insert into estado (id, nombre) values (2, 'Aprobado');
 insert into estado (id, nombre) values (3, 'En Desarrollo');
 insert into estado (id, nombre) values (4, 'Finalizado');
 
-insert into tipoconsultoria (id, nombre) values (1, 'Ingeniería de Requisitos');
+insert into tipoconsultoria (id, nombre) values (1, 'Ingenieria de Requisitos');
 insert into tipoconsultoria (id, nombre) values (2, 'SQA');
 insert into tipoconsultoria (id, nombre) values (3, 'SQC');
 
@@ -27,11 +27,8 @@ insert into asociacion(id,nit,nombre,numero_contacto,usuario) values (2,'1234567
 
 insert into estadonecesidad (id, estado) values (1, 1);
 insert into estadoproyecto (id, estado) values (1, 1);
-insert into tipoconsultoria (id, nombre) values (1, 'SQA');
 insert into proyecto (id, descripcion, nombre, estado) values (1, 'Red Social', 'Facebook', 1);
+insert into tipoconsultoriaproyecto (id, tipoconsultoria, proyecto) values (1, 2, 1);
 insert into necesidad (id, asociacion, ruta_archivo, estado, proyecto) values (1, 1, 'http://www.direccion.org/ejemplo/item.html', 1, 1);
-
-
-
 
 
