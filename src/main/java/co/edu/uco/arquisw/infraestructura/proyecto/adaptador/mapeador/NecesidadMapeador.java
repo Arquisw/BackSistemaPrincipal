@@ -21,7 +21,7 @@ public class NecesidadMapeador
 
     public NecesidadDTO construirDTO(NecesidadEntidad necesidad)
     {
-        return new NecesidadDTO(necesidad.getId(), necesidad.getRutaArchivo(), this.estadoNecesidadMapeador.construirDTO(necesidad.getEstado()), this.proyectoMapeador.construirDTO(necesidad.getProyecto()));
+        return new NecesidadDTO(necesidad.getId(), "", this.estadoNecesidadMapeador.construirDTO(necesidad.getEstado()), this.proyectoMapeador.construirDTO(necesidad.getProyecto()));
     }
 
     public List<NecesidadDTO> construirDTOs(List<NecesidadEntidad> necesidades)
@@ -31,6 +31,6 @@ public class NecesidadMapeador
 
     public NecesidadEntidad construirEntidad(Necesidad necesidad, Long asociacionID)
     {
-        return new NecesidadEntidad(0L, necesidad.getRutaArchivo(), this.estadoNecesidadMapeador.construirEntidad(necesidad.getEstado()), this.proyectoMapeador.construirEntidad(necesidad.getProyecto()), asociacionID);
+        return new NecesidadEntidad(0L, this.estadoNecesidadMapeador.construirEntidad(necesidad.getEstado()), this.proyectoMapeador.construirEntidad(necesidad.getProyecto()), asociacionID);
     }
 }

@@ -25,6 +25,8 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     ProyectoDAO proyectoDAO;
     @Autowired
     NecesidadDAO necesidadDAO;
+    @Autowired
+    HojaDeVidaDAO hojaDeVidaDAO;
 
     @Override
     public NecesidadDTO consultarPorId(Long id)
@@ -36,7 +38,13 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
             return null;
         }
 
-        return this.necesidadMapeador.construirDTO(entidad);
+        var requerimiento = this.hojaDeVidaDAO.findByNecesidad(entidad.getId());
+
+        var necesidad = this.necesidadMapeador.construirDTO(entidad);
+
+        necesidad.setRutaArchivo(requerimiento.getRuta());
+
+        return necesidad;
     }
 
     @Override
@@ -46,7 +54,11 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_EN_ESPERA)).toList();
 
-        return this.necesidadMapeador.construirDTOs(necesidades);
+        var necesidadesDTO = this.necesidadMapeador.construirDTOs(necesidades);
+
+        necesidadesDTO.forEach(dto -> dto.setRutaArchivo(this.hojaDeVidaDAO.findByNecesidad(dto.getId()).getRuta()));
+
+        return necesidadesDTO;
     }
 
     @Override
