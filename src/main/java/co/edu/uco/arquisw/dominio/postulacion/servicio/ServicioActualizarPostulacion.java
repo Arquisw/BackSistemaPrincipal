@@ -25,7 +25,7 @@ public class ServicioActualizarPostulacion {
     }
     private void validarSiExistePostulacionConId(Long id)
     {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorId(id)))
+        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id)))
         {
             throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
         }

@@ -28,7 +28,7 @@ public class ServicioGuardarPostulacion {
     {
         if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(proyectoID)))
         {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + proyectoID);
+            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + proyectoID);
         }
     }
     private void validarSiExistePersonaConId(Long usuarioID)
