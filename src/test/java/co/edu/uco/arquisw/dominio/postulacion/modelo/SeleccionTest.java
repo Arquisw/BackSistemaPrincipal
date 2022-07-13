@@ -2,7 +2,6 @@ package co.edu.uco.arquisw.dominio.postulacion.modelo;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
 class SeleccionTest

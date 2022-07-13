@@ -2,10 +2,9 @@ package co.edu.uco.arquisw.dominio.postulacion.modelo;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
-public class PostulacionTest
+class PostulacionTest
 {
     @Test
     void validarCreacionExitosa()

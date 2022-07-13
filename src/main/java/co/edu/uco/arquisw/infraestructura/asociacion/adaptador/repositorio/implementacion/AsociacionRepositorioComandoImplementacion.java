@@ -9,7 +9,6 @@ import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.A
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.RolMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.RolPersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -35,19 +35,6 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         return this.personaDAO.save(entidad).getId();
     }
 
-    private Long obtenerRolPersonaID()
-    {
-        var id = 1L;
-        var roles = this.rolPersonaDAO.findAll();
-
-        if(!roles.isEmpty())
-        {
-            id = roles.get(roles.size() - 1).getId() + 1L;
-        }
-
-        return id;
-    }
-
     @Override
     public Long actualizar(Persona persona, Long id)
     {
