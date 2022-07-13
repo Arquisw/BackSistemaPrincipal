@@ -8,6 +8,6 @@ public interface PostulacionRepositorioConsulta
 {
     PostulacionDTO consultarPostulacionPorId(Long id);
     List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID);
-    SeleccionDTO consultarSeleccionPorId(Long proyectoID);
+    SeleccionDTO consultarSeleccionPorId(Long id);
     List<SeleccionDTO> consultarSeleccionadosPorProyecto(Long proyectoID);
 }
