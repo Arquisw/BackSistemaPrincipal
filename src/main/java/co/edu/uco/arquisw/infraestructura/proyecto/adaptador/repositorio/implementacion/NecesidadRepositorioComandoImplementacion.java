@@ -2,7 +2,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implem
 
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.HojaDeVidaEntidad;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.RequerimientoArchivoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     @Autowired
     NecesidadDAO necesidadDAO;
     @Autowired
-    HojaDeVidaDAO hojaDeVidaDAO;
+    RequerimientoArchivoDAO requerimientoArchivoDAO;
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID)
@@ -38,20 +38,20 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
         var id = this.necesidadDAO.save(entidad).getId();
 
-        return this.hojaDeVidaDAO.save(new HojaDeVidaEntidad(id, necesidad.getRutaArchivo(), id)).getId();
+        return this.requerimientoArchivoDAO.save(new RequerimientoArchivoEntidad(id, necesidad.getRutaArchivo(), id)).getId();
     }
 
     @Override
     public Long actualizar(Necesidad necesidad, Long asociacionID)
     {
         var entidad = this.necesidadDAO.findByAsociacion(asociacionID);
-        var requerimientos = this.hojaDeVidaDAO.findByNecesidad(entidad.getId());
+        var requerimientos = this.requerimientoArchivoDAO.findByNecesidad(entidad.getId());
 
         requerimientos.setRuta(necesidad.getRutaArchivo());
         entidad.getProyecto().setNombre(necesidad.getProyecto().getNombre());
         entidad.getProyecto().setDescripcion(necesidad.getProyecto().getDescripcion());
 
-        this.hojaDeVidaDAO.save(requerimientos);
+        this.requerimientoArchivoDAO.save(requerimientos);
 
         return this.necesidadDAO.save(entidad).getId();
     }
