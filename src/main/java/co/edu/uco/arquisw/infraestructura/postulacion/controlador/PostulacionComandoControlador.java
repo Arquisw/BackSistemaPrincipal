@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/postulacion")
+@RequestMapping("/postulaciones")
 @Tag(name = "Comando de la Postulacion Controlador")
 public class PostulacionComandoControlador
 {
