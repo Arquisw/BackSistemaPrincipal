@@ -8,8 +8,10 @@ import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.Selecci
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.PostulacionDAO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.SeleccionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public class PostulacionRepositorioConsultaImplementacion implements PostulacionRepositorioConsulta
 {
     @Autowired
