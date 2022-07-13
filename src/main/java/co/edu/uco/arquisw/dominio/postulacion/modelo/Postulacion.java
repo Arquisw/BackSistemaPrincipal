@@ -30,4 +30,9 @@ public class Postulacion
     {
         this.seleccionado = seleccionado;
     }
+
+    public void seleccionarPostulante()
+    {
+        this.seleccionado = true;
+    }
 }
