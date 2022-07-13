@@ -26,14 +26,69 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class NecesidadConsultaControladorTest {
+ class NecesidadConsultaControladorTest {
+
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    void obtenerNecesidadExitosa() throws Exception
-    {
+    void obtenerNecesidadExitosa() throws Exception {
 
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
     }
 
+    @Test
+    void obtenerProyectoExitosa() throws Exception {
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/proyectos")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void obtenerNecesidadPorIdExitosa() throws Exception
+    {
+        var  id = 1;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
+    }
+    @Test
+    void obtenerProyectoPorIdExitosa() throws Exception
+    {
+        var  id = 1;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/proyectos/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombre", is("Facebook")))
+                .andExpect(jsonPath("$.descripcion", is("Red Social")));
+    }
+    @Test
+    void obtenerNecesidarPorIdFalla() throws Exception
+    {
+        var id = 3;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is("No existe un necesidad con el ID " + id)));;
+    }
+    @Test
+    void obtenerProyectoPorIdFalla() throws Exception
+    {
+        var id = 3;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/proyectos/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is("No existe un proyecto con el ID " + id)));;
+    }
 }

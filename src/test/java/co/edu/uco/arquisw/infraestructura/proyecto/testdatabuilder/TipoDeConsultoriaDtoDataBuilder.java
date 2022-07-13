@@ -7,7 +7,7 @@ public class TipoDeConsultoriaDtoDataBuilder {
 
     public TipoDeConsultoriaDtoDataBuilder()
     {
-        this.nombre = "Ingeniria de Requisitos";
+        this.nombre = "SQA";
     }
 
     public TipoConsultoriaComando build()

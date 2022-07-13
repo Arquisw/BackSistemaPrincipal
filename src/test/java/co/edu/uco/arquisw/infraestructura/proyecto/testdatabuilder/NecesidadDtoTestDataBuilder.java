@@ -9,7 +9,7 @@ public class NecesidadDtoTestDataBuilder {
 
     public NecesidadDtoTestDataBuilder()
     {
-        this.rutaArchivo = "http://www.direccion.org/ejemplo/item.html";
+        this.rutaArchivo = "http://www.direccion.org/ejemplo2/item.html";
         this.proyecto = new ProyectoDtoTestDataBuilder().build();
     }
 

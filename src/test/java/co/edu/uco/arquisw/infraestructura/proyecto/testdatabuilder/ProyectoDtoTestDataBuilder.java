@@ -14,8 +14,8 @@ public class ProyectoDtoTestDataBuilder {
 
     public ProyectoDtoTestDataBuilder()
     {
-        this.nombre= "Facebook";
-        this.descripcion = "Red Social";
+        this.nombre= "NETFLIX";
+        this.descripcion = "STREAMING";
         this.tiposConsultoria = List.of(new TipoDeConsultoriaDtoDataBuilder().build());
     }
 

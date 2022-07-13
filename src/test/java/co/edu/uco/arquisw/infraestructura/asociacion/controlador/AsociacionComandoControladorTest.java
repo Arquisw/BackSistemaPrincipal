@@ -28,16 +28,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class AsociacionComandoControladorTest
 {
-
     @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
     private MockMvc mocMvc;
-
-    public AsociacionComandoControladorTest()
-    {
-    }
 
     @Test
     void guardarAsociacion() throws Exception {
