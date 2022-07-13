@@ -19,8 +19,6 @@ public class NecesidadEntidad
     @GeneratedValue(strategy = GenerationType.AUTO, generator="necesidad_code_seq")
     @SequenceGenerator(name="necesidad_code_seq", sequenceName="necesidad_code_seq", allocationSize=1)
     private Long id;
-    @Column(length = 1000)
-    private String rutaArchivo;
     @OneToOne
     @JoinColumn(name = "estado")
     private EstadoNecesidadEntidad estado;

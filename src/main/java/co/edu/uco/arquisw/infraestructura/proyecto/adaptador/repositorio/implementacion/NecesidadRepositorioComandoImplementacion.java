@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implem
 
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.HojaDeVidaEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     ProyectoDAO proyectoDAO;
     @Autowired
     NecesidadDAO necesidadDAO;
+    @Autowired
+    HojaDeVidaDAO hojaDeVidaDAO;
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID)
@@ -33,17 +36,22 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         entidad.getProyecto().setId(this.proyectoDAO.save(entidad.getProyecto()).getId());
         entidad.getEstado().setId(this.estadoNecesidadDAO.save(entidad.getEstado()).getId());
 
-        return this.necesidadDAO.save(entidad).getId();
+        var id = this.necesidadDAO.save(entidad).getId();
+
+        return this.hojaDeVidaDAO.save(new HojaDeVidaEntidad(id, necesidad.getRutaArchivo(), id)).getId();
     }
 
     @Override
     public Long actualizar(Necesidad necesidad, Long asociacionID)
     {
         var entidad = this.necesidadDAO.findByAsociacion(asociacionID);
+        var requerimientos = this.hojaDeVidaDAO.findByNecesidad(entidad.getId());
 
-        entidad.setRutaArchivo(necesidad.getRutaArchivo());
+        requerimientos.setRuta(necesidad.getRutaArchivo());
         entidad.getProyecto().setNombre(necesidad.getProyecto().getNombre());
         entidad.getProyecto().setDescripcion(necesidad.getProyecto().getDescripcion());
+
+        this.hojaDeVidaDAO.save(requerimientos);
 
         return this.necesidadDAO.save(entidad).getId();
     }
