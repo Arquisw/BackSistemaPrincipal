@@ -147,4 +147,6 @@ public class ValidarTexto
     {
         return cadenaAceptaElPatron(string, URL_ID);
     }
+
+
 }

@@ -10,18 +10,23 @@ public class Postulacion
     private LocalDate fecha;
     private boolean seleccionado;
 
-    public Postulacion(boolean seleccionado)
+    private Postulacion(boolean seleccionado)
     {
         setFecha();
         setSeleccionado(seleccionado);
     }
 
-    public void setFecha()
+    public static Postulacion crear(boolean seleccionado)
+    {
+        return new Postulacion(seleccionado);
+    }
+
+    private void setFecha()
     {
         this.fecha = FechaFormateador.obtenerFechaActual();
     }
 
-    public void setSeleccionado(boolean seleccionado)
+    private void setSeleccionado(boolean seleccionado)
     {
         this.seleccionado = seleccionado;
     }
