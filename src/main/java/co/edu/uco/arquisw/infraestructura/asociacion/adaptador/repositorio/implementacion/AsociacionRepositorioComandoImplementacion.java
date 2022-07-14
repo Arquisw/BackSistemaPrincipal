@@ -57,4 +57,16 @@ public class AsociacionRepositorioComandoImplementacion implements AsociacionRep
 
         return this.asociacionDAO.save(entidad).getId();
     }
+
+    @Override
+    public void eliminar(Long id)
+    {
+
+    }
+
+    @Override
+    public void crearNotificacionEliminacion(Long id)
+    {
+
+    }
 }
