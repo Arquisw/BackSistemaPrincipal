@@ -32,7 +32,7 @@ class ServicioGuardarPersonaTest
         Assertions.assertEquals("juan",persona.getNombre());
     }
     @Test
-    void deberiaSiExisteOtroUsuario() {
+    void validarSiExisteOtroUsuario() {
 
         var persona= new PersonaTestDataBuilder().build();
         var personaDto =new PersonaDTO();

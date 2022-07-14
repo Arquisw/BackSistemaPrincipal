@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
+import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
@@ -10,7 +11,6 @@ public class ServicioGuardarHojaDeVida {
 
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
-
 
     public ServicioGuardarHojaDeVida(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.personaRepositorioComando = personaRepositorioComando;
@@ -27,7 +27,7 @@ public class ServicioGuardarHojaDeVida {
     {
         if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId)))
         {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
+            throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
         }
     }
 }

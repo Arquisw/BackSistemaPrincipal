@@ -20,6 +20,6 @@ public class ActualizarHojaDeVidaManejador implements ManejadorComandoActualizac
      @Override
      public ComandoRespuesta<Long> ejecutar(HojaVidaComando comando, Long id)
      {
-        return new ComandoRespuesta<>(this.servicioActualizarHojaDeVida.ejecutar(this.hojaDeVidaFabrica.construirActualizar(comando, id), id));
+        return new ComandoRespuesta<>(this.servicioActualizarHojaDeVida.ejecutar(this.hojaDeVidaFabrica.construir(comando), id));
      }
 }

@@ -29,7 +29,6 @@ class ServicioActualizarPersonaTest
     @Test
     void personaActualizarExistosamente()
     {
-
         var persona = new PersonaTestDataBuilder().build();
         var personaDTO= new PersonaDTO();
 
