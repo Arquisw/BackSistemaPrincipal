@@ -38,6 +38,7 @@ public class Mensajes
     public static final String PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO = "La descripcion del proyecto debe ser alfanúmerico";
     public static final String RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de una necesidad no puede estar vacio";
     public static final String PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO = "La ruta del archivo de una necesidad es incorrecto";
+    public static final String RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de hoja de vida no puede estar vacio";
 
     private Mensajes()
     {
