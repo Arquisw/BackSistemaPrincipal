@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HojaDeVidaPersonaDTO
+public class PeticionEliminacionDTO
 {
     private Long id;
-    private String ruta;
+    private Long usuario;
 }
