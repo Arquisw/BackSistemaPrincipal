@@ -3,23 +3,38 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.HojaDeVidaPersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PeticionEliminacionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 import java.util.Objects;
 
 @Repository
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta
 {
     @Autowired
+    PeticionEliminacionMapeador peticionEliminacionMapeador;
+    @Autowired
+    HojaDeVidaPersonaMapeador hojaDeVidaPersonaMapeador;
+    @Autowired
     PersonaMapeador personaMapeador;
     @Autowired
     PersonaDAO personaDAO;
     @Autowired
     UsuarioDAO usuarioDAO;
+    @Autowired
+    HojaDeVidaPersonaDAO hojaDeVidaPersonaDAO;
+    @Autowired
+    PeticionEliminacionDAO peticionEliminacionDAO;
 
     @Override
     public PersonaDTO consultarPorId(Long id)
@@ -60,6 +75,21 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Override
     public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)
     {
-        return null;
+        var entidad = this.hojaDeVidaPersonaDAO.findByUsuario(usuarioID);
+
+        if(ValidarObjeto.esNulo(entidad))
+        {
+            return null;
+        }
+
+        return this.hojaDeVidaPersonaMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public List<PeticionEliminacionDTO> consultarPeticionesDeEliminacionDeUsuarios()
+    {
+        var entidades = this.peticionEliminacionDAO.findAll();
+
+        return this.peticionEliminacionMapeador.construirDTOs(entidades);
     }
 }

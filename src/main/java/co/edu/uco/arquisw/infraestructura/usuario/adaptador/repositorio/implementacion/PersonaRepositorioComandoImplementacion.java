@@ -5,17 +5,17 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.UsuarioMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.HojaDeVidaPersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.RolPersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando
 {
+    @Autowired
+    PeticionEliminacionMapeador peticionEliminacionMapeador;
     @Autowired
     HojaDeVidaPersonaMapeador hojaDeVidaPersonaMapeador;
     @Autowired
@@ -30,6 +30,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     UsuarioDAO usuarioDAO;
     @Autowired
     HojaDeVidaPersonaDAO hojaDeVidaPersonaDAO;
+    @Autowired
+    PeticionEliminacionDAO peticionEliminacionDAO;
 
     @Override
     public Long guardar(Persona persona)
@@ -93,6 +95,6 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     @Override
     public void crearNotificacionEliminacion(Long id)
     {
-
+        this.peticionEliminacionDAO.save(this.peticionEliminacionMapeador.construirEntidad(id));
     }
 }
