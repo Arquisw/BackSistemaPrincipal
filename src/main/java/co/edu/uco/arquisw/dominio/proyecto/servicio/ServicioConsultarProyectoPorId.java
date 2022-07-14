@@ -9,7 +9,6 @@ public class ServicioConsultarProyectoPorId
 {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
 
-
     public ServicioConsultarProyectoPorId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
     }
