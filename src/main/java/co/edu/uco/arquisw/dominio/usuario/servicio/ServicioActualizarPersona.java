@@ -30,7 +30,7 @@ public class ServicioActualizarPersona
     {
         if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id)))
         {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID);
+            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }
 
@@ -38,7 +38,7 @@ public class ServicioActualizarPersona
     {
         if(this.personaRepositorioConsulta.existeConCorreo(persona.getCorreo()))
         {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO);
+            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO + persona.getCorreo());
         }
     }
 }

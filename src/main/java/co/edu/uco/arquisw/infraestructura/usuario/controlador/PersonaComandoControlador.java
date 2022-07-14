@@ -1,11 +1,9 @@
 package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.HojaVidaComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.ActualizarPersonaManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.EliminarPersonaManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.EliminarPersonaPorAdministradorManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.GuardarPersonaManejador;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +17,17 @@ public class PersonaComandoControlador
     private final ActualizarPersonaManejador actualizarPersonaManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;
     private final EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador;
+    private final GuardarHojaDeVidaManejador guardarHojaDeVidaManejador;
+    private final ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador)
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador)
     {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
         this.eliminarPersonaPorAdministradorManejador = eliminarPersonaPorAdministradorManejador;
+        this.guardarHojaDeVidaManejador = guardarHojaDeVidaManejador;
+        this.actualizarHojaDeVidaManejador = actualizarHojaDeVidaManejador;
     }
 
     @PostMapping
@@ -35,11 +37,25 @@ public class PersonaComandoControlador
         return this.guardarPersonaManejador.ejecutar(persona);
     }
 
+    @PostMapping("/usuario/hojadevida/{id}")
+    @Operation(summary = "Guardar Hoja de Vida", description = "Este es usado para guardar una hoja en la aplicación por medio de un usuario")
+    public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
+    {
+        return this.guardarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
+    }
+
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> actualizar(@RequestBody PersonaComando persona, @PathVariable Long id)
     {
         return this.actualizarPersonaManejador.ejecutar(persona, id);
+    }
+
+    @PutMapping("/usuario/hojadevida/{id}")
+    @Operation(summary = "Actualizar Hoja de Vida", description = "Este es usado para actualizar los datos de una hoja de vida por medio del ID de un usuario")
+    public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
+    {
+        return this.actualizarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
 
     @DeleteMapping("/{id}")
@@ -49,7 +65,7 @@ public class PersonaComandoControlador
         return this.eliminarPersonaManejador.ejecutar(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)
     {

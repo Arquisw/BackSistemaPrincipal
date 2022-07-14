@@ -41,4 +41,22 @@ public class BeanServicioUsuario
     {
         return new ServicioConsultarPersonaPorId(personaRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioActualizarHojaDeVida servicioActualizarHojaDeVida(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioConsultarHojaDeVidaPorIdUsuario servicioConsultarHojaDeVidaPorIdUsuario(PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioConsultarHojaDeVidaPorIdUsuario(personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioGuardarHojaDeVida servicioGuardarHojaDeVida(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioGuardarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
+    }
 }

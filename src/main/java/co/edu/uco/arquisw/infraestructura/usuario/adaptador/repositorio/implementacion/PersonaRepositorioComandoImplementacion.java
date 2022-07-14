@@ -3,8 +3,10 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.UsuarioMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.HojaDeVidaPersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.RolPersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Repository;
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando
 {
     @Autowired
+    HojaDeVidaPersonaMapeador hojaDeVidaPersonaMapeador;
+    @Autowired
     PersonaMapeador personaMapeador;
     @Autowired
     UsuarioMapeador usuarioMapeador;
@@ -24,6 +28,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     RolPersonaDAO rolPersonaDAO;
     @Autowired
     UsuarioDAO usuarioDAO;
+    @Autowired
+    HojaDeVidaPersonaDAO hojaDeVidaPersonaDAO;
 
     @Override
     public Long guardar(Persona persona)
@@ -71,13 +77,17 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     @Override
     public Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida, Long usuarioId)
     {
-        return null;
+        return this.hojaDeVidaPersonaDAO.save(this.hojaDeVidaPersonaMapeador.construirEntidad(hojaDeVida, usuarioId)).getId();
     }
 
     @Override
     public Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida, Long usuarioId)
     {
-        return null;
+        var entidad = this.hojaDeVidaPersonaDAO.findByUsuario(usuarioId);
+
+        entidad.setRuta(hojaDeVida.getRutaArchivo());
+
+        return this.hojaDeVidaPersonaDAO.save(entidad).getId();
     }
 
     @Override

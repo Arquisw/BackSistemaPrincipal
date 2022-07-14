@@ -5,7 +5,9 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActua
 import co.edu.uco.arquisw.aplicacion.usuario.comando.HojaVidaComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.fabrica.HojaDeVidaFabrica;
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioGuardarHojaDeVida;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GuardarHojaDeVidaManejador implements ManejadorComandoActualizacionRespuesta<HojaVidaComando,Long, ComandoRespuesta<Long>> {
 
     private final ServicioGuardarHojaDeVida servicioGuardarHojaDeVida;

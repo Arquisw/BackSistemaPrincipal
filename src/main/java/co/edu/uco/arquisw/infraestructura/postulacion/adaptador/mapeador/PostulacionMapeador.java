@@ -12,7 +12,7 @@ public class PostulacionMapeador
 {
     public PostulacionDTO construirDTO(PostulacionEntidad postulacion)
     {
-        return new PostulacionDTO(postulacion.getId(), postulacion.getFecha(), postulacion.getProyectoID(), postulacion.getUsuarioID());
+        return new PostulacionDTO(postulacion.getId(), postulacion.getFecha(), postulacion.getProyecto(), postulacion.getUsuario());
     }
 
     public List<PostulacionDTO> construirDTOs(List<PostulacionEntidad> postulaciones)

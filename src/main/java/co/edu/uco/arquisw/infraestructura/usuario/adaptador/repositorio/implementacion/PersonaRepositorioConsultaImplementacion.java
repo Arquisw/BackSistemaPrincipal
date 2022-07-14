@@ -56,17 +56,6 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         return !ValidarObjeto.esNulo(this.usuarioDAO.findByCorreo(correo)) && !Objects.equals(persona.getId(), usuario.getId());
     }
 
-    @Override
-    public PersonaDTO consultarPostulados(Long proyectoID)
-    {
-        return null;
-    }
-
-    @Override
-    public PersonaDTO consultarSeleccionados(Long proyectoID)
-    {
-        return null;
-    }
 
     @Override
     public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)

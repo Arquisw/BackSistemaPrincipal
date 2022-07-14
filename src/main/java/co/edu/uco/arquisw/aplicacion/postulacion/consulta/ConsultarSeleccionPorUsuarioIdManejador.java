@@ -3,7 +3,9 @@ package co.edu.uco.arquisw.aplicacion.postulacion.consulta;
 import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoRespuesta;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioConsultarSeleccionPorUsuarioId;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ConsultarSeleccionPorUsuarioIdManejador implements ManejadorComandoRespuesta<Long, SeleccionDTO>
 {
     private final ServicioConsultarSeleccionPorUsuarioId servicioConsultarSeleccionPorUsuarioId;

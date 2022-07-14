@@ -42,4 +42,16 @@ public class BeanServicioPostulacion {
     {
         return new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioConsultarPostulacionPorUsuarioId servicioConsultarPostulacionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioConsultarSeleccionPorUsuarioId servicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioConsultarSeleccionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+    }
 }

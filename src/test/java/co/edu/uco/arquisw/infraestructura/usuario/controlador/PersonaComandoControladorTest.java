@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.PersonaDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -61,25 +62,25 @@ class PersonaComandoControladorTest
     {
         var  id = 3;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
-                .andExpect(jsonPath("$.mensaje", is("No existe un usuario con el id " + id)));
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
     }
     @Test
     void eliminacionExitosa() throws Exception
     {
         var  id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }

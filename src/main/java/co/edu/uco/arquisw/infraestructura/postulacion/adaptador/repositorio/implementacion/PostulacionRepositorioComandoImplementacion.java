@@ -37,7 +37,7 @@ public class PostulacionRepositorioComandoImplementacion implements PostulacionR
 
         entidad.setSeleccionado(postulacion.isSeleccionado());
 
-        var seleccionEntidad = this.seleccionMapeador.construirEntidad(seleccion, entidad.getProyectoID(), entidad.getUsuarioID());
+        var seleccionEntidad = this.seleccionMapeador.construirEntidad(seleccion, entidad.getProyecto(), entidad.getUsuario());
 
         this.seleccionDAO.save(seleccionEntidad);
 

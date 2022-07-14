@@ -12,7 +12,7 @@ public class SeleccionMapeador
 {
     public SeleccionDTO construirDTO(SeleccionEntidad seleccion)
     {
-        return new SeleccionDTO(seleccion.getId(), seleccion.getFecha(), seleccion.getProyectoID(), seleccion.getUsuarioID());
+        return new SeleccionDTO(seleccion.getId(), seleccion.getFecha(), seleccion.getProyecto(), seleccion.getUsuario());
     }
 
     public List<SeleccionDTO> construirDTOs(List<SeleccionEntidad> selecciones)

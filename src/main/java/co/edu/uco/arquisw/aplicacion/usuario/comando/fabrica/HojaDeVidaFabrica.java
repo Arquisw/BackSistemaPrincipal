@@ -3,11 +3,15 @@ package co.edu.uco.arquisw.aplicacion.usuario.comando.fabrica;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.HojaVidaComando;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import org.springframework.stereotype.Component;
 
-public class HojaDeVidaFabrica {
+@Component
+public class HojaDeVidaFabrica
+{
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public HojaDeVidaFabrica(PersonaRepositorioConsulta personaRepositorioConsulta) {
+    public HojaDeVidaFabrica(PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 

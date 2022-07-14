@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -23,7 +24,7 @@ class ServicioActualizarPersonaTest
         Mockito.when(personaRepositorioConsulta.existeConCorreo(Mockito.any())).thenReturn(true);
 
 
-        Assertions.assertEquals("No existe un usuario con el id ",Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(persona,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(persona,1L)).getMessage());
     }
     @Test
     void personaActualizarExistosamente()

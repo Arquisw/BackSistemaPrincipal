@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -9,9 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class ServicioEliminarPersonaTest
+class ServicioEliminarPersonaPorAdministradorTest
 {
-
     @Test
     void ValidarEliminacionExitosa()
     {
@@ -21,7 +21,7 @@ class ServicioEliminarPersonaTest
 
        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-       var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta);
+       var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
 
        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
@@ -40,11 +40,11 @@ class ServicioEliminarPersonaTest
         var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals("No existe un usuario con el id " + 1,
+        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(ValorInvalidoExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());
 
     }
