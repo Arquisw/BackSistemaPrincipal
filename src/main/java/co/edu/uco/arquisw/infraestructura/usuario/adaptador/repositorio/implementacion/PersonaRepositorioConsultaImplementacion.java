@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
@@ -8,7 +9,6 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.Pers
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.Objects;
 
 @Repository
@@ -64,6 +64,12 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
     @Override
     public PersonaDTO consultarSeleccionados(Long proyectoID)
+    {
+        return null;
+    }
+
+    @Override
+    public HojaDeVidaPersonDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)
     {
         return null;
     }

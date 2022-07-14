@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
@@ -65,5 +66,23 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         this.usuarioDAO.deleteById(id);
 
         this.personaDAO.deleteById(id);
+    }
+
+    @Override
+    public Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida)
+    {
+        return null;
+    }
+
+    @Override
+    public Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida)
+    {
+        return null;
+    }
+
+    @Override
+    public void crearNotificacionEliminacion(Long id)
+    {
+
     }
 }
