@@ -6,12 +6,11 @@ import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.HojaDeVidaTestDataBuilder;
-import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.PersonaTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioActualizarHojaDeVidaTest {
+ class ServicioActualizarHojaDeVidaTest {
     @Test
     void noExistePersonaParaActualizar()
     {

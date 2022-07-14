@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class ServicioConsultarNecesidarPorIdTest {
+ class ServicioConsultarProyectoPorIdTest {
     @Test
-    void validarConsultaNecesidadPorIdExitosa()
+    void validarConsultaProyectoPorIdExitosa()
     {
         var necesidadDTO = new NecesidadDTO();
 
-        var necesidadRepositorioConsulta =Mockito.mock(NecesidadRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarNecesidadPorId(necesidadRepositorioConsulta);
 

@@ -3,16 +3,14 @@ package co.edu.uco.arquisw.dominio.usuario.servicio;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.HojaDeVidaTestDataBuilder;
-import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.PersonaTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioGuardarHojaDeVidaTest {
+ class ServicioGuardarHojaDeVidaTest {
     @Test
     void guardarExitoso()
     {

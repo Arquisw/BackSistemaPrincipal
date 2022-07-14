@@ -6,7 +6,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class HojaDeVidaTest {
+class HojaDeVidaTest {
 
     @Test
     void  validarCreacionHojaDeVidaExitosa()

@@ -15,12 +15,6 @@ import org.mockito.Captor;
 import org.mockito.Mockito;
 
  class ServicioActualizarPostulacionTest {
-
-
-
-     @Captor
-     ArgumentCaptor<Seleccion> selccionCaptor;
-
     @Test
     void actualizacionExitosa()
     {
