@@ -14,7 +14,9 @@ public class Mensajes
     public static final String PATRON_CLAVE_PERSONA_NO_ES_VALIDO = "La clave debe tener minimo una minuscula, una mayuscula y un numero";
     public static final String OCURRIO_UN_ERROR_FAVOR_CONTACTAR_AL_ADMINISTRADOR = "Ocurrió un error favor contactar al administrador.";
     public static final String EXISTE_USUARIO_CON_CORREO = "Ya existe un usuario con ese correo";
-    public static final String NO_EXISTE_USUARIO_CON_EL_ID = "No existe un usuario con el id ";
+
+    public static final String NO_EXISTE_USUARIO_CON_EL_ID = "No existe un usuario con el ID ";
+    public static final String NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID = "No existe una hoja de vida para ese usuario con el ID ";
     public static final String NOMBRE_ASOCIACION_NO_PUEDE_ESTAR_VACIO = "El nombre de una compañia no puede estar vacio.";
     public static final String PATRON_NOMBRE_ASOCIACION_NO_ES_VALIDO = "El nombre de una compañia debe ser alfanumerico";
     public static final String NIT_ASOCIACION_NO_PUEDE_ESTAR_VACIO = "El NIT de una compañia no puede estar vacio";
@@ -38,7 +40,8 @@ public class Mensajes
     public static final String PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO = "La descripcion del proyecto debe ser alfanúmerico";
     public static final String RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de una necesidad no puede estar vacio";
     public static final String PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO = "La ruta del archivo de una necesidad es incorrecto";
-    public static final String RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de hoja de vida no puede estar vacio";
+    public static final String RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de la hoja de vida no puede estar vacio";
+    public static final String PATRON_RUTA_ARCHIVO_HOJA_DE_VIDA_NO_NO_ES_VALIDO = "La ruta del archivo de la hoja de vida  es incorrecto";
 
     private Mensajes()
     {

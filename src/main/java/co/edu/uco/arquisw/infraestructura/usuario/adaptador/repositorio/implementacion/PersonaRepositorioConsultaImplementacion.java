@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
@@ -69,7 +69,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public HojaDeVidaPersonDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)
+    public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)
     {
         return null;
     }

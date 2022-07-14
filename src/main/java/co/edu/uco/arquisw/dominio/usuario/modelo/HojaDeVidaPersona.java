@@ -22,6 +22,7 @@ public class HojaDeVidaPersona
     private void setRutaArchivo(String rutaArchivo)
     {
         ValidarTexto.validarObligatorio(rutaArchivo, Mensajes.RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO);
+        ValidarTexto.validarPatronURLEsValido(rutaArchivo, Mensajes.PATRON_RUTA_ARCHIVO_HOJA_DE_VIDA_NO_NO_ES_VALIDO);
 
         this.rutaArchivo = rutaArchivo;
     }

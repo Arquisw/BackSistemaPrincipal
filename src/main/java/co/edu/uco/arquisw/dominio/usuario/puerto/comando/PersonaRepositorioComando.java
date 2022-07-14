@@ -8,7 +8,7 @@ public interface PersonaRepositorioComando
     Long guardar(Persona persona);
     Long actualizar(Persona persona, Long id);
     void eliminar(Long id);
-    Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida);
-    Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida);
+    Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
+    Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
     void crearNotificacionEliminacion(Long id);
 }

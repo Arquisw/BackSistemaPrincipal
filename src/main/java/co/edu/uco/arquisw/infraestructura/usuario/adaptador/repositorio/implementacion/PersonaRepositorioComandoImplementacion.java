@@ -69,13 +69,13 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     }
 
     @Override
-    public Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida)
+    public Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida, Long usuarioId)
     {
         return null;
     }
 
     @Override
-    public Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida)
+    public Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida, Long usuarioId)
     {
         return null;
     }
