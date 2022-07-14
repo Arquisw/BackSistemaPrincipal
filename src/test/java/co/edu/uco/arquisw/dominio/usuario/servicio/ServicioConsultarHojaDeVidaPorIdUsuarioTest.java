@@ -20,11 +20,9 @@ class ServicioConsultarHojaDeVidaPorIdUsuarioTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
-        var personaConsultada = servicio.ejecutar(1L);
+         servicio.ejecutar(1L);
 
         Mockito.verify(personaRepositorioConsulta, Mockito.times(1)).consultarHojaDeVidaPorIdUsuario(1L);
-
-        Assertions.assertEquals(personaConsultada, personaConsultada);
     }
     @Test
     void consultaPorIdHojaDeVidaFallida()
