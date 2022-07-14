@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostulacionDAO extends JpaRepository<PostulacionEntidad, Long>
 {
+    PostulacionEntidad findByUsuario(Long usuario);
 }

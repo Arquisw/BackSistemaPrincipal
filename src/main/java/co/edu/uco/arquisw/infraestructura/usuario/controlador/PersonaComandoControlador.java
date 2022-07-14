@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.ActualizarPersonaManejador;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.EliminarPersonaManejador;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.EliminarPersonaPorAdministradorManejador;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.GuardarPersonaManejador;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,12 +18,14 @@ public class PersonaComandoControlador
     private final GuardarPersonaManejador guardarPersonaManejador;
     private final ActualizarPersonaManejador actualizarPersonaManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;
+    private final EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador)
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador)
     {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
+        this.eliminarPersonaPorAdministradorManejador = eliminarPersonaPorAdministradorManejador;
     }
 
     @PostMapping
@@ -41,8 +44,15 @@ public class PersonaComandoControlador
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> delete(@PathVariable Long id)
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
     {
         return this.eliminarPersonaManejador.ejecutar(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)
+    {
+        return this.eliminarPersonaPorAdministradorManejador.ejecutar(id);
     }
 }
