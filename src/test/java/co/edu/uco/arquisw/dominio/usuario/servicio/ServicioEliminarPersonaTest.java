@@ -21,7 +21,7 @@ class ServicioEliminarPersonaTest
 
        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-       var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta);
+       var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta, asociacionRepositorioConsulta);
 
        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
@@ -40,7 +40,7 @@ class ServicioEliminarPersonaTest
         var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando,personaRepositorioConsulta, asociacionRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 
