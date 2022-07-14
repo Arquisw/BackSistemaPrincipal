@@ -51,7 +51,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerNecesidadPorIdExitosa() throws Exception
     {
-        var  id = 1;
+        var  id = 2;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))

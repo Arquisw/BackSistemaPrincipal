@@ -29,7 +29,7 @@ insert into estadonecesidad (id, estado) values (1, 1);
 insert into estadoproyecto (id, estado) values (1, 1);
 insert into proyecto (id, descripcion, nombre, estado) values (1, 'Red Social', 'Facebook', 1);
 insert into tipoconsultoriaproyecto (id, tipoconsultoria, proyecto) values (1, 2, 1);
-insert into necesidad (id, asociacion, estado, proyecto) values (1, 1, 1, 1);
-insert into requerimientoarchivo (id, necesidad, ruta_archivo) values (1, 1, 'http://www.direccion.org/ejemplo/item.html');
+insert into necesidad (id, asociacion, estado, proyecto) values (1, 2, 1, 1);
+insert into requerimientoarchivo (id, necesidad, ruta) values (1, 1, 'http://www.direccion.org/ejemplo/item.html');
 
 
