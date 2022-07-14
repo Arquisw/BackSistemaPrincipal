@@ -29,7 +29,6 @@ class ServicioEliminarPersonaPorAdministradorTest
        Mockito.verify(personaRepositorioComando,Mockito.times(1)).eliminar(1L);
 
        Assertions.assertEquals(1L,id);
-
     }
 
     @Test
@@ -46,7 +45,5 @@ class ServicioEliminarPersonaPorAdministradorTest
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(ValorInvalidoExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());
-
     }
-
 }
