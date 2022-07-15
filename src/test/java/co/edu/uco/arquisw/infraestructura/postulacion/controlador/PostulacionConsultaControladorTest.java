@@ -35,7 +35,7 @@ class PostulacionConsultaControladorTest {
     @Test
     void obtenerPostulacionPorIdProyectoExitosa() throws Exception {
 
-        var id = 1;
+        var id = 2;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -140,7 +140,7 @@ class PostulacionConsultaControladorTest {
     @Test
     void obtenerSeleccionPorIdExitosa() throws Exception {
 
-        var id = 1;
+        var id = 2;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))

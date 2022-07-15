@@ -29,18 +29,18 @@ insert into usuario (id, clave, correo) values (3, '123456789Aa1', 'juan@gmail.c
 insert into usuario (id, clave, correo) values (8, '12356789Aa1', 'juanDiego@gmail.com');
 insert into asociacion(id,nit,nombre,numero_contacto,usuario) values (2,'12345678-2','Uco','3124536578',2);
 
-insert into estadonecesidad (id, estado) values (1, 1);
-insert into estadoproyecto (id, estado) values (1, 1);
-insert into proyecto (id, descripcion, nombre, estado) values (1, 'Red Social', 'Facebook', 1);
-insert into tipoconsultoriaproyecto (id, tipoconsultoria, proyecto) values (1, 2, 1);
-insert into necesidad (id, asociacion, estado, proyecto) values (1, 2, 1, 1);
-insert into requerimientoarchivo (id, necesidad, ruta) values (1, 1, 'http://www.direccion.org/ejemplo/item.html');
+insert into estadonecesidad (id, estado) values (9, 1);
+insert into estadoproyecto (id, estado) values (9, 1);
+insert into proyecto (id, descripcion, nombre, estado) values (2, 'Red Social', 'Facebook', 9);
+insert into tipoconsultoriaproyecto (id, tipoconsultoria, proyecto) values (9, 1, 2);
+insert into necesidad (id, asociacion, estado, proyecto) values (2, 2, 9, 2);
+insert into requerimientoarchivo (id, necesidad, ruta) values (1, 2, 'http://www.direccion.org/ejemplo/item.html');
 
 insert into hojadevida(id,ruta,usuario) values(2,'http://www.direccion.org/ejemploCV/item.html',2);
 
 
 insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(3,'12/07/2022',1,false,2);
 insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(2,'13/07/2022',1,true,3);
-insert into seleccion(id,fecha,proyecto,usuario)values (2,'14/07/2022',1,3);
+insert into seleccion(id,fecha,proyecto,usuario)values (2,'14/07/2022',2,3);
 
 

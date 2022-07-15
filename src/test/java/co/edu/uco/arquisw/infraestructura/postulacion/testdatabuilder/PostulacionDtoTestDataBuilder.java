@@ -8,7 +8,7 @@ public class PostulacionDtoTestDataBuilder {
 
     public PostulacionDtoTestDataBuilder()
     {
-        this.proyectoID = 1L;
+        this.proyectoID = 2L;
         this.usuarioID = 8L;
     }
     public PostulacionComando build()
