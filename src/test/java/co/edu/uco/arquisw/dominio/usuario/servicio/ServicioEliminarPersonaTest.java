@@ -20,7 +20,6 @@ class ServicioEliminarPersonaTest {
     void ValidarEliminacionExitosa()
     {
         var persona= new PersonaDTO();
-        var asociacion = new AsociacionDTO();
 
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
@@ -30,7 +29,6 @@ class ServicioEliminarPersonaTest {
         var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        //Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
 
         var id =servicio.ejecutar(1L);
         Mockito.verify(personaRepositorioComando,Mockito.times(1)).eliminar(1L);

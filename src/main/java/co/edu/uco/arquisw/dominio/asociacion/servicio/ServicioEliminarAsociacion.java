@@ -35,11 +35,11 @@ public class ServicioEliminarAsociacion
 
     private void validarSiPuedeEliminarLaCuenta(Long id)
     {
-        var asociacionId = this.asociacionRepositorioConsulta.consultarPorID(id).getId();
+        var asociacion = this.asociacionRepositorioConsulta.consultarPorID(id);
 
-        if(!ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(asociacionId)))
+        if(!ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(asociacion.getId())))
         {
-            this.asociacionRepositorioComando.crearNotificacionEliminacion(asociacionId);
+            this.asociacionRepositorioComando.crearNotificacionEliminacion(asociacion.getId());
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA);
         }
     }
