@@ -1,10 +1,8 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
-import co.edu.uco.arquisw.aplicacion.proyecto.consulta.ConsultarNecesidadPorIdManejador;
-import co.edu.uco.arquisw.aplicacion.proyecto.consulta.ConsultarNecesidadesManejador;
-import co.edu.uco.arquisw.aplicacion.proyecto.consulta.ConsultarProyectoPorIdManejador;
-import co.edu.uco.arquisw.aplicacion.proyecto.consulta.ConsultarProyectosManejador;
+import co.edu.uco.arquisw.aplicacion.proyecto.consulta.*;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,13 +21,15 @@ public class NecesidadConsultaControlador
     private final ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador;
     private final ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador;
     private final ConsultarProyectosManejador consultarProyectosManejador;
+    private final ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador;
 
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador)
+    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador)
     {
         this.consultarNecesidadesManejador = consultarNecesidadesManejador;
         this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
         this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
         this.consultarProyectosManejador = consultarProyectosManejador;
+        this.consultarPeticionesDeEliminacionNecesidadManejador = consultarPeticionesDeEliminacionNecesidadManejador;
     }
 
     @GetMapping("/{id}")
@@ -58,5 +58,12 @@ public class NecesidadConsultaControlador
     public List<ProyectoDTO> consultarProyectos()
     {
         return this.consultarProyectosManejador.ejecutar();
+    }
+
+    @GetMapping("/administrador")
+    @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una necesidad")
+    public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacion()
+    {
+        return this.consultarPeticionesDeEliminacionNecesidadManejador.ejecutar();
     }
 }

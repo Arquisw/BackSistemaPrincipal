@@ -5,7 +5,7 @@ import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorIdManej
 import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPeticionesDeEliminacionPersonaManejador;
 import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +46,7 @@ public class PersonaConsultaControlador
 
     @GetMapping("/administrador")
     @Operation(summary = "Consultar todos", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
-    public List<PeticionEliminacionDTO> consultarPeticionesDeEliminacion()
+    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacion()
     {
         return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar();
     }

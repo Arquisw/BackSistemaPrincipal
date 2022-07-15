@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.aplicacion.usuario.consulta;
 
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
@@ -17,7 +17,7 @@ public class ConsultarPeticionesDeEliminacionPersonaManejador
     }
 
     @Transactional
-    public List<PeticionEliminacionDTO> ejecutar()
+    public List<PeticionEliminacionPersonaDTO> ejecutar()
     {
         return personaRepositorioConsulta.consultarPeticionesDeEliminacionDeUsuarios();
     }

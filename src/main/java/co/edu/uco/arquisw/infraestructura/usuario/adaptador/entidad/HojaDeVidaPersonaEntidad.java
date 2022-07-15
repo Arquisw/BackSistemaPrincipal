@@ -19,6 +19,7 @@ public class HojaDeVidaPersonaEntidad
     @GeneratedValue(strategy = GenerationType.AUTO, generator="hojadevida_code_seq")
     @SequenceGenerator(name="hojadevida_code_seq", sequenceName="hojadevida_code_seq", allocationSize=1)
     private Long id;
+    @Column(length = 3000)
     private String ruta;
     private Long usuario;
 }

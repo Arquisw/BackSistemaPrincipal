@@ -1,10 +1,10 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa;
 
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.HojaDeVidaPersonaEntidad;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.PeticionEliminacionEntidad;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.PeticionEliminacionPersonaEntidad;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PeticionEliminacionDAO extends JpaRepository<PeticionEliminacionEntidad, Long>
+public interface PeticionEliminacionPersonaDAO extends JpaRepository<PeticionEliminacionPersonaEntidad, Long>
 {
     HojaDeVidaPersonaEntidad findByUsuario(Long usuario);
 }
