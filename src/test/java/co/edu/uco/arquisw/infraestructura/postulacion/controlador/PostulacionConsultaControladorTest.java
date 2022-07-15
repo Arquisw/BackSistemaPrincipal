@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class PostulacionConsultaControladorTest {
+class PostulacionConsultaControladorTest {
 
     @Autowired
     private MockMvc mocMvc;
@@ -39,8 +39,7 @@ public class PostulacionConsultaControladorTest {
 
         mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].fecha", is("12/07/2022")));
+                .andExpect(status().isOk());
     }
     @Test
     void obtenerPostulacionPorIdProyectoFalla() throws Exception {
@@ -51,7 +50,7 @@ public class PostulacionConsultaControladorTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id)));;
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id)));
     }
 
     @Test
@@ -75,4 +74,88 @@ public class PostulacionConsultaControladorTest {
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id)));;
     }
+    @Test
+    void obtenerPostulacionPorIdUsuarioExitosa() throws Exception {
+
+        var id = 2;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/usuario/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fecha", is("12/07/2022")));
+    }
+    @Test
+    void obtenerPostulacionPorIdUsuarioFalla() throws Exception {
+
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/usuario/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));;
+    }
+    @Test
+    void obtenerPostulacionPorSelecionExitosa() throws Exception {
+
+        var id = 2;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fecha", is("14/07/2022")));
+    }
+    @Test
+    void obtenerPostulacionPorSeleccionFalla() throws Exception {
+
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id)));;
+    }
+    @Test
+    void obtenerSelccionPorUsuarioExitosa() throws Exception {
+
+        var id = 3;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fecha", is("14/07/2022")));
+    }
+    @Test
+    void obtenerSelccionPorUsuarioFalla() throws Exception {
+
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));;
+    }
+    @Test
+    void obtenerSeleccionPorIdExitosa() throws Exception {
+
+        var id = 1;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void obtenerSeleccionPorIdFalla() throws Exception {
+
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id)));;
+    }
+
 }

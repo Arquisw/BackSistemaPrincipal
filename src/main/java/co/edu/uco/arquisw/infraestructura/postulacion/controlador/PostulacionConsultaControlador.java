@@ -48,7 +48,7 @@ public class PostulacionConsultaControlador
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las postulaciones que esten en espera de ser aprobadas.")
+    @Operation(summary = "Consultar Todos por ID del proyecto", description = "Este es usado para consultar todas las postulaciones que esten en espera de ser aprobadas.")
     public List<PostulacionDTO> consultarPostulaciones(@PathVariable Long id)
     {
         return this.consultarPostulacionesPorProyectoManejador.ejecutar(id);
@@ -69,7 +69,7 @@ public class PostulacionConsultaControlador
     }
 
     @GetMapping("/selecciones/{id}")
-    @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas los postulados que están aprobados")
+    @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas los postulados que están aprobados en un proyecto")
     public List<SeleccionDTO> consultarSelecciones(@PathVariable Long id)
     {
         return this.consultarSeleccionesPorProyectoManejador.ejecutar(id);

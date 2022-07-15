@@ -38,8 +38,9 @@ insert into requerimientoarchivo (id, necesidad, ruta) values (1, 1, 'http://www
 
 insert into hojadevida(id,ruta,usuario) values(2,'http://www.direccion.org/ejemploCV/item.html',2);
 
-insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(1,'12/07/2022',1,false,2);
+
+insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(3,'12/07/2022',1,false,2);
 insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(2,'13/07/2022',1,true,3);
-insert into seleccion(id,fecha,proyecto,usuario)values (1,'14/07/2022/',1,3);
+insert into seleccion(id,fecha,proyecto,usuario)values (2,'14/07/2022',1,3);
 
 
