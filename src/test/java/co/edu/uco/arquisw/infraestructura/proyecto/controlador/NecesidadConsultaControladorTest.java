@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
-                .andExpect(jsonPath("$.mensaje", is("No existe un necesidad con el ID " + id)));;
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id)));
     }
     @Test
     void obtenerProyectoPorIdFalla() throws Exception

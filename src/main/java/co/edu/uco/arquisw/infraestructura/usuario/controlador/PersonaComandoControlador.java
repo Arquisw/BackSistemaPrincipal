@@ -37,7 +37,7 @@ public class PersonaComandoControlador
         return this.guardarPersonaManejador.ejecutar(persona);
     }
 
-    @PostMapping("/usuario/hojadevida/{id}")
+    @PostMapping("/hojadevida/{id}")
     @Operation(summary = "Guardar Hoja de Vida", description = "Este es usado para guardar una hoja en la aplicación por medio de un usuario")
     public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
     {
@@ -51,7 +51,7 @@ public class PersonaComandoControlador
         return this.actualizarPersonaManejador.ejecutar(persona, id);
     }
 
-    @PutMapping("/usuario/hojadevida/{id}")
+    @PutMapping("/hojadevida/{id}")
     @Operation(summary = "Actualizar Hoja de Vida", description = "Este es usado para actualizar los datos de una hoja de vida por medio del ID de un usuario")
     public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
     {

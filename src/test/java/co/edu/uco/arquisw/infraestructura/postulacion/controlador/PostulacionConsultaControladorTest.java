@@ -1,4 +1,4 @@
-package co.edu.uco.arquisw.infraestructura.usuario.controlador;
+package co.edu.uco.arquisw.infraestructura.postulacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
@@ -27,56 +27,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class PersonaConsultaControladorTest
-{
+public class PostulacionConsultaControladorTest {
+
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    void obtenerPersonasExitosa() throws Exception
-    {
-        var  id = 2;
+    void obtenerPostulacionPorIdProyectoExitosa() throws Exception {
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
+        var id = 1;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre", is("eduardo")))
-                .andExpect(jsonPath("$.apellidos", is("Marulete")))
-                .andExpect(jsonPath("$.correo", is("marulete@gmail.com")));
+                .andExpect(jsonPath("$[0].fecha", is("12/07/2022")));
     }
-
     @Test
-    void obtenerPorIdFalla() throws Exception
-    {
-        var id = 10;
+    void obtenerPostulacionPorIdProyectoFalla() throws Exception {
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id)));;
     }
 
     @Test
-    void obtenerHojaDeVidaPorIdFallido() throws Exception
-    {
-        var  id = 10;
+    void obtenerPostulacionPorIdExitosa() throws Exception {
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/hojadevida/{id}",id)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
-    }
+        var id = 2;
 
-    @Test
-    void obtenerHojaDeVidaExitosa() throws Exception
-    {
-        var  id = 2;
-
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/hojadevida/{id}",id)
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.ruta", is("http://www.direccion.org/ejemploCV/item.html")));
+                .andExpect(jsonPath("$.fecha", is("13/07/2022")));
+    }
+    @Test
+    void obtenerPostulacionPorIdFalla() throws Exception {
+
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id)));;
     }
 }

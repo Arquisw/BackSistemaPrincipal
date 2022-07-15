@@ -32,7 +32,7 @@ class AsociacionConsultaControladorTest
     private MockMvc mocMvc;
 
     @Test
-    void obtenerAsociacionExitosa() throws Exception
+    void obtenerAsociacionPorIdExitosa() throws Exception
     {
         var  id = 2;
 

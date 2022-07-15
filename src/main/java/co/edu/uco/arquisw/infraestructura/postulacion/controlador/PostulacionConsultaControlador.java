@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/postulaciones/")
+@RequestMapping("/postulaciones")
 @Tag(name = "Consulta del Usuario Controlador")
 public class PostulacionConsultaControlador
 {

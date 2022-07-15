@@ -2,10 +2,13 @@ package co.edu.uco.arquisw.aplicacion.usuario.comando.fabrica;
 
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,9 +35,14 @@ public class PersonaFabrica
 
     private List<Rol> obtenerRolesPorDefectoActualizar(Long id)
     {
-        var personas = personaRepositorioConsulta.consultarPorId(id);
+        var persona = personaRepositorioConsulta.consultarPorId(id);
 
-        return this.rolFabrica.construirTodos(personas.getRoles());
+        if(ValidarObjeto.esNulo(persona))
+        {
+            return new ArrayList<>();
+        }
+
+        return this.rolFabrica.construirTodos(persona.getRoles());
     }
 
     private List<Rol> obtenerRolesPorDefecto()

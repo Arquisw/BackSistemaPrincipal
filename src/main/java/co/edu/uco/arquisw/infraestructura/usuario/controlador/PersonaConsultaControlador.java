@@ -45,7 +45,7 @@ public class PersonaConsultaControlador
     }
 
     @GetMapping("/administrador")
-    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una hoja de vida de un usuario por medio del ID del usuario")
+    @Operation(summary = "Consultar todos", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
     public List<PeticionEliminacionDTO> consultarPeticionesDeEliminacion()
     {
         return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar();

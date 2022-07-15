@@ -22,7 +22,11 @@ insert into tipoconsultoria (id, nombre) values (2, 'SQA');
 insert into tipoconsultoria (id, nombre) values (3, 'SQC');
 
 insert into persona (id, apellidos, correo, nombre) values (2, 'Marulete', 'marulete@gmail.com', 'eduardo');
+insert into persona (id, apellidos, correo, nombre) values (3, 'valencia', 'juan@gmail.com', 'juan');
+insert into persona (id, apellidos, correo, nombre) values (8, 'valencia', 'juanDiego@gmail.com', 'juanD');
 insert into usuario (id, clave, correo) values (2, '123456789Aa', 'marulete@gmail.com');
+insert into usuario (id, clave, correo) values (3, '123456789Aa1', 'juan@gmail.com');
+insert into usuario (id, clave, correo) values (8, '12356789Aa1', 'juanDiego@gmail.com');
 insert into asociacion(id,nit,nombre,numero_contacto,usuario) values (2,'12345678-2','Uco','3124536578',2);
 
 insert into estadonecesidad (id, estado) values (1, 1);
@@ -31,5 +35,11 @@ insert into proyecto (id, descripcion, nombre, estado) values (1, 'Red Social', 
 insert into tipoconsultoriaproyecto (id, tipoconsultoria, proyecto) values (1, 2, 1);
 insert into necesidad (id, asociacion, estado, proyecto) values (1, 2, 1, 1);
 insert into requerimientoarchivo (id, necesidad, ruta) values (1, 1, 'http://www.direccion.org/ejemplo/item.html');
+
+insert into hojadevida(id,ruta,usuario) values(2,'http://www.direccion.org/ejemploCV/item.html',2);
+
+insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(1,'12/07/2022',1,false,2);
+insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(2,'13/07/2022',1,true,3);
+insert into seleccion(id,fecha,proyecto,usuario)values (1,'14/07/2022/',1,3);
 
 

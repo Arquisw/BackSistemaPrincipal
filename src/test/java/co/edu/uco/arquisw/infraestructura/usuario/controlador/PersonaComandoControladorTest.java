@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.HojaDeVidaDtoTestDataBuilder;
 import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.PersonaDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -29,28 +30,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class PersonaComandoControladorTest
-{
+class PersonaComandoControladorTest {
     @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
     private MockMvc mocMvc;
 
-
     @Test
     void guardarPersona() throws Exception {
         var persona = new PersonaDtoTestDataBuilder().build();
 
-         mocMvc.perform(MockMvcRequestBuilders.post("/usuarios")
+        mocMvc.perform(MockMvcRequestBuilders.post("/usuarios")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(persona)))
                 .andExpect(status().is2xxSuccessful());
 
     }
+
     @Test
-    void guardarUsuarioFallida() throws Exception
-    {
+    void guardarPersonaFallida() throws Exception {
         mocMvc.perform(MockMvcRequestBuilders.post("/usuarios")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -58,9 +57,8 @@ class PersonaComandoControladorTest
     }
 
     @Test
-    void eliminacionUsuarioFallida() throws Exception
-    {
-        var  id = 3;
+    void eliminacionPersonaPorAdministradorFallida() throws Exception {
+        var id = 9;
 
         mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,10 +67,10 @@ class PersonaComandoControladorTest
                 .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
     }
+
     @Test
-    void eliminacionExitosa() throws Exception
-    {
-        var  id = 2;
+    void eliminacionPersonaPorAdministradorExitosa() throws Exception {
+        var id = 2;
 
         mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -84,16 +82,113 @@ class PersonaComandoControladorTest
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
+    @Test
+    void eliminacionPersonaExitosa() throws Exception {
+        var id = 8;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    void eliminacionPersonaFallidaPorTenerUnaAsociacion() throws Exception {
+        var id = 2;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")));
+    }
 
     @Test
-    void deberiaActualizarUsuario() throws Exception{
+    void eliminacionPersonaFallida() throws Exception {
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
+    }
+    @Test
+    void deberiaActualizarPersona() throws Exception {
 
         Long id = 2L;
         var persona = new PersonaDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/usuarios/{id}",id)
+        mocMvc.perform(MockMvcRequestBuilders.put("/usuarios/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(persona)))
                 .andExpect(status().isOk());
+    }
+    @Test
+    void deberiaFallarAlActualizarPersona() throws Exception {
+
+        Long id = 9L;
+        var persona = new PersonaDtoTestDataBuilder().build();
+
+        mocMvc.perform(MockMvcRequestBuilders.put("/usuarios/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(persona)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
+    }
+
+    @Test
+    void guardarHojaDeVida() throws Exception
+    {
+        var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
+
+        var id = 3;
+        mocMvc.perform(MockMvcRequestBuilders.post("/usuarios/hojadevida/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(hojaDeVida)))
+                .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    void guardarHojaDeVidaPersonaFallida() throws Exception {
+
+        var id = 10;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/hojadevida/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
+    }
+    @Test
+    void deberiaActualizarHojaDeVida() throws Exception {
+
+        Long id = 2L;
+        var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
+
+        mocMvc.perform(MockMvcRequestBuilders.put("/usuarios/hojadevida/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(hojaDeVida)))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void deberiaFallarAlActualizarHojaDeVIDA() throws Exception {
+
+        Long id = 9L;
+        var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
+
+        mocMvc.perform(MockMvcRequestBuilders.put("/usuarios/hojadevida/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(hojaDeVida)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
     }
 }
