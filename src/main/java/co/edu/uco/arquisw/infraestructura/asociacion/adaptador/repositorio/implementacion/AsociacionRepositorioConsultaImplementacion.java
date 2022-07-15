@@ -1,14 +1,18 @@
 package co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
+import co.edu.uco.arquisw.dominio.asociacion.dto.PeticionEliminacionAsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.mapeador.AsociacionMapeador;
+import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.mapeador.PeticionEliminacionAsociacionMapeador;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.AsociacionDAO;
+import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.PeticionEliminacionAsociacionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 public class AsociacionRepositorioConsultaImplementacion implements AsociacionRepositorioConsulta
@@ -19,6 +23,10 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     AsociacionDAO asociacionDAO;
     @Autowired
     PersonaDAO personaDAO;
+    @Autowired
+    PeticionEliminacionAsociacionDAO peticionEliminacionAsociacionDAO;
+    @Autowired
+    PeticionEliminacionAsociacionMapeador peticionEliminacionAsociacionMapeador;
 
     @Override
     public AsociacionDTO consultarPorID(Long id)
@@ -47,5 +55,13 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
         }
 
         return this.asociacionMapeador.construirDTO(entidad, TextoConstante.VACIO);
+    }
+
+    @Override
+    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones()
+    {
+        var entidades = this.peticionEliminacionAsociacionDAO.findAll();
+
+        return this.peticionEliminacionAsociacionMapeador.construirDTOs(entidades);
     }
 }

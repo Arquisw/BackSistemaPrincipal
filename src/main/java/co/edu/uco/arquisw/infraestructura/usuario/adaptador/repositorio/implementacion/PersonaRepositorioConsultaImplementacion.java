@@ -3,14 +3,14 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.HojaDeVidaPersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PeticionEliminacionDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PeticionEliminacionPersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ import java.util.Objects;
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta
 {
     @Autowired
-    PeticionEliminacionMapeador peticionEliminacionMapeador;
+    PeticionEliminacionPersonaMapeador peticionEliminacionPersonaMapeador;
     @Autowired
     HojaDeVidaPersonaMapeador hojaDeVidaPersonaMapeador;
     @Autowired
@@ -34,7 +34,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Autowired
     HojaDeVidaPersonaDAO hojaDeVidaPersonaDAO;
     @Autowired
-    PeticionEliminacionDAO peticionEliminacionDAO;
+    PeticionEliminacionPersonaDAO peticionEliminacionPersonaDAO;
 
     @Override
     public PersonaDTO consultarPorId(Long id)
@@ -86,10 +86,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public List<PeticionEliminacionDTO> consultarPeticionesDeEliminacionDeUsuarios()
+    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios()
     {
-        var entidades = this.peticionEliminacionDAO.findAll();
+        var entidades = this.peticionEliminacionPersonaDAO.findAll();
 
-        return this.peticionEliminacionMapeador.construirDTOs(entidades);
+        return this.peticionEliminacionPersonaMapeador.construirDTOs(entidades);
     }
 }

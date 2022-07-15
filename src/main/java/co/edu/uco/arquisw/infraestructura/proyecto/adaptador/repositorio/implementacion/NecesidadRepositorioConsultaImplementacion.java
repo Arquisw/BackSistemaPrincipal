@@ -1,12 +1,14 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     NecesidadDAO necesidadDAO;
     @Autowired
     RequerimientoArchivoDAO requerimientoArchivoDAO;
+    @Autowired
+    PeticionEliminacionNecesidadDAO peticionEliminacionNecesidadDAO;
+    @Autowired
+    PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
 
     @Override
     public NecesidadDTO consultarPorId(Long id)
@@ -86,5 +92,13 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
         necesidades.forEach(necesidad -> proyectos.add(necesidad.getProyecto()));
 
         return this.proyectoMapeador.construirDTOs(proyectos);
+    }
+
+    @Override
+    public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidades()
+    {
+        var entidades = this.peticionEliminacionNecesidadDAO.findAll();
+
+        return this.peticionEliminacionNecesidadMapeador.construirDTOs(entidades);
     }
 }

@@ -2,6 +2,8 @@ package co.edu.uco.arquisw.infraestructura.asociacion.controlador;
 
 import co.edu.uco.arquisw.aplicacion.asociacion.comando.AsociacionComando;
 import co.edu.uco.arquisw.aplicacion.asociacion.comando.manejador.ActualizarAsociacionManejador;
+import co.edu.uco.arquisw.aplicacion.asociacion.comando.manejador.EliminarAsociacionManejador;
+import co.edu.uco.arquisw.aplicacion.asociacion.comando.manejador.EliminarAsociacionPorAdministradorManejador;
 import co.edu.uco.arquisw.aplicacion.asociacion.comando.manejador.GuardarAsociacionManejador;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,11 +17,15 @@ public class AsociacionComandoControlador
 {
     private final GuardarAsociacionManejador guardarAsociacionManejador;
     private final ActualizarAsociacionManejador actualizarAsociacionManejador;
+    private final EliminarAsociacionManejador eliminarAsociacionManejador;
+    private final EliminarAsociacionPorAdministradorManejador eliminarAsociacionPorAdministradorManejador;
 
-    public AsociacionComandoControlador(GuardarAsociacionManejador guardarAsociacionManejador, ActualizarAsociacionManejador actualizarAsociacionManejador)
+    public AsociacionComandoControlador(GuardarAsociacionManejador guardarAsociacionManejador, ActualizarAsociacionManejador actualizarAsociacionManejador, EliminarAsociacionManejador eliminarAsociacionManejador, EliminarAsociacionPorAdministradorManejador eliminarAsociacionPorAdministradorManejador)
     {
         this.guardarAsociacionManejador = guardarAsociacionManejador;
         this.actualizarAsociacionManejador = actualizarAsociacionManejador;
+        this.eliminarAsociacionManejador = eliminarAsociacionManejador;
+        this.eliminarAsociacionPorAdministradorManejador = eliminarAsociacionPorAdministradorManejador;
     }
 
     @PostMapping("/{id}")
@@ -30,9 +36,23 @@ public class AsociacionComandoControlador
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
+    @Operation(summary = "Actualizar Asociacion", description = "Este es usado para actualizar los datos de una asociacion por medio del ID del usuario")
     public ComandoRespuesta<Long> actualizar(@RequestBody AsociacionComando asociacion, @PathVariable Long id)
     {
         return this.actualizarAsociacionManejador.ejecutar(asociacion, id);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar Asociacion", description = "Este es usado para eliminar los datos de una asociacion por medio del ID del usuario")
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
+    {
+        return this.eliminarAsociacionManejador.ejecutar(id);
+    }
+
+    @DeleteMapping("/administrador/{id}")
+    @Operation(summary = "Eliminar Asociacion por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una asociacion por medio del ID del usuario")
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)
+    {
+        return this.eliminarAsociacionPorAdministradorManejador.ejecutar(id);
     }
 }

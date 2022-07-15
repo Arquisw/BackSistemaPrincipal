@@ -2,6 +2,8 @@ package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.NecesidadComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.ActualizarNecesidadManejador;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.EliminarNecesidadManejador;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.EliminarNecesidadPorAdministradorManejador;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.GuardarNecesidadManejador;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,11 +17,15 @@ public class NecesidadComandoControlador
 {
     private final GuardarNecesidadManejador guardarNecesidadManejador;
     private final ActualizarNecesidadManejador actualizarNecesidadManejador;
+    private final EliminarNecesidadManejador eliminarNecesidadManejador;
+    private final EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador;
 
-    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador)
+    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador)
     {
         this.guardarNecesidadManejador = guardarNecesidadManejador;
         this.actualizarNecesidadManejador = actualizarNecesidadManejador;
+        this.eliminarNecesidadManejador = eliminarNecesidadManejador;
+        this.eliminarNecesidadPorAdministradorManejador = eliminarNecesidadPorAdministradorManejador;
     }
 
     @PostMapping("/{id}")
@@ -34,5 +40,19 @@ public class NecesidadComandoControlador
     public ComandoRespuesta<Long> actualizar(@RequestBody NecesidadComando necesidad, @PathVariable Long id)
     {
         return this.actualizarNecesidadManejador.ejecutar(necesidad, id);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar Necesidad", description = "Este es usado para eliminar los datos de una necesidad por medio del ID de una asociacion")
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
+    {
+        return this.eliminarNecesidadManejador.ejecutar(id);
+    }
+
+    @DeleteMapping("/administrador/{id}")
+    @Operation(summary = "Eliminar Necesidad por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una necesidad por medio del ID de la asociacion")
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)
+    {
+        return this.eliminarNecesidadPorAdministradorManejador.ejecutar(id);
     }
 }

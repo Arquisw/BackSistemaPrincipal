@@ -5,7 +5,9 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositori
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.mapeador.AsociacionMapeador;
+import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.mapeador.PeticionEliminacionAsociacionMapeador;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.AsociacionDAO;
+import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.PeticionEliminacionAsociacionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.RolMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.RolPersonaDAO;
@@ -25,6 +27,10 @@ public class AsociacionRepositorioComandoImplementacion implements AsociacionRep
     PersonaDAO personaDAO;
     @Autowired
     RolMapeador rolMapeador;
+    @Autowired
+    PeticionEliminacionAsociacionDAO peticionEliminacionAsociacionDAO;
+    @Autowired
+    PeticionEliminacionAsociacionMapeador peticionEliminacionAsociacionMapeador;
 
     @Override
     public Long guardar(Asociacion asociacion, Long usuarioID)
@@ -61,12 +67,12 @@ public class AsociacionRepositorioComandoImplementacion implements AsociacionRep
     @Override
     public void eliminar(Long id)
     {
-
+        this.asociacionDAO.deleteById(id);
     }
 
     @Override
     public void crearNotificacionEliminacion(Long id)
     {
-
+        this.peticionEliminacionAsociacionDAO.save(this.peticionEliminacionAsociacionMapeador.construirEntidad(id));
     }
 }

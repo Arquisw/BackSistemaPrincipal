@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.RequerimientoArchivoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,10 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     NecesidadDAO necesidadDAO;
     @Autowired
     RequerimientoArchivoDAO requerimientoArchivoDAO;
+    @Autowired
+    PeticionEliminacionNecesidadDAO peticionEliminacionNecesidadDAO;
+    @Autowired
+    PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID)
@@ -54,5 +59,20 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         this.requerimientoArchivoDAO.save(requerimientos);
 
         return this.necesidadDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void eliminar(Long id)
+    {
+        var entidad = this.necesidadDAO.findByAsociacion(id);
+
+        this.proyectoDAO.deleteById(entidad.getProyecto().getId());
+        this.necesidadDAO.deleteById(entidad.getId());
+    }
+
+    @Override
+    public void crearNotificacionEliminacion(Long id)
+    {
+        this.peticionEliminacionNecesidadDAO.save(this.peticionEliminacionNecesidadMapeador.construirEntidad(id));
     }
 }
