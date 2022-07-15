@@ -103,8 +103,9 @@ class PersonaComandoControladorTest {
         mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")));
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_ASOCIACION_A_CARGO)));
     }
 
     @Test
