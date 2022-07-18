@@ -53,4 +53,4 @@ insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(3,'12/07/2
 insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(2,'13/07/2022',1,true,3);
 insert into seleccion(id,fecha,proyecto,usuario)values (2,'14/07/2022',2,3);
 
-
+insert into contrato (id, asociacion, ruta) values (2, 4, 'http://www.direccion.org/ejemplo/item.html');
