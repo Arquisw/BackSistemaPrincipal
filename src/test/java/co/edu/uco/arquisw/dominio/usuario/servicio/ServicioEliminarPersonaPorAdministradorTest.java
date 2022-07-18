@@ -34,8 +34,6 @@ class ServicioEliminarPersonaPorAdministradorTest
     @Test
     void ValidarEliminacionNoExitosa()
     {
-        var persona= new PersonaTestDataBuilder().build();
-
         var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
