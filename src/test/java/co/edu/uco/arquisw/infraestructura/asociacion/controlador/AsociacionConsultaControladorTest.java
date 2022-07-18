@@ -46,7 +46,7 @@ class AsociacionConsultaControladorTest
    @Test
     void obtenerAsociacionPorIdFalla() throws Exception
     {
-        var id = 4;
+        var id = 10;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))

@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     }
 
     @Test
-    void obtenerProyectoExitosa() throws Exception {
+    void obtenerProyectoAprobadosExitosa() throws Exception {
 
         mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/proyectos")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -52,7 +52,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerNecesidadPorIdExitosa() throws Exception
     {
-        var  id = 2;
+        var  id = 3;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -73,7 +73,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerNecesidarPorIdFalla() throws Exception
     {
-        var id = 3;
+        var id = 9;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -84,7 +84,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerProyectoPorIdFalla() throws Exception
     {
-        var id = 3;
+        var id = 9;
 
         mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/proyectos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))

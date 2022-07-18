@@ -34,6 +34,9 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     @Autowired
     PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
 
+    @Autowired
+    TipoConsultoriaProyectoDAO tipoConsultoriaProyectoDAO;
+
     @Override
     public NecesidadDTO consultarPorId(Long id)
     {
@@ -84,6 +87,8 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public List<ProyectoDTO> consultarProyectos()
     {
         var entidades = this.necesidadDAO.findAll();
+
+        var bola= this.tipoConsultoriaProyectoDAO.findAll();
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO)).toList();
 

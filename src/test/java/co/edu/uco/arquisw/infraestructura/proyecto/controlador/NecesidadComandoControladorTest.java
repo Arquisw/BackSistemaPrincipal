@@ -43,13 +43,18 @@ class NecesidadComandoControladorTest {
         var necesidad = new NecesidadDtoTestDataBuilder().build();
         var id = 2;
 
+
         mocMvc.perform(MockMvcRequestBuilders.post("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().isOk());
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
     @Test
-    void guardarPostulacionFallida() throws Exception {
+    void guardarNecesidadFallida() throws Exception {
 
         var necesidad = new NecesidadDtoTestDataBuilder().build();
         var id = 1;
@@ -63,9 +68,9 @@ class NecesidadComandoControladorTest {
     }
 
     @Test
-    void deberiaActualizarPostulacion() throws Exception {
+    void deberiaActualizarNecesidad() throws Exception {
 
-        var id = 2;
+        var id = 3;
         var necesidad = new NecesidadDtoTestDataBuilder().build();
 
         mocMvc.perform(MockMvcRequestBuilders.put("/necesidades/{id}", id)
@@ -79,11 +84,69 @@ class NecesidadComandoControladorTest {
         Long id = 9L;
         var necesidad = new NecesidadDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/postulaciones/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.put("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id)));
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id)));
     }
+    @Test
+    void eliminacionNecesidadExitosa() throws Exception {
+
+        var id = 3;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void eliminacionNecesidadFallida() throws Exception {
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id)));
+    }
+    @Test
+    void eliminacionNecesidadFallidaPorEstadoAprobado() throws Exception {
+
+        var id = 4;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO )));;
+    }
+    @Test
+    void eliminacionNecesidadAdministradorExitosa() throws Exception {
+        var id = 3;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/administrador/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    void eliminacionNecesidadAdministradorFallida() throws Exception {
+        var id = 9;
+
+        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/administrador/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id)));
+    }
+
 }

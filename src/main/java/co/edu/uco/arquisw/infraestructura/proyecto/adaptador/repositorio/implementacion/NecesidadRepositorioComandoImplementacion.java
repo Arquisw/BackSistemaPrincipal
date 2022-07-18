@@ -66,6 +66,8 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     {
         var entidad = this.necesidadDAO.findByAsociacion(id);
 
+        this.estadoNecesidadDAO.deleteById(entidad.getEstado().getId());
+        this.estadoProyectoDAO.deleteById(entidad.getProyecto().getEstado().getId());
         this.proyectoDAO.deleteById(entidad.getProyecto().getId());
         this.necesidadDAO.deleteById(entidad.getId());
     }

@@ -3,17 +3,21 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
 public class ProyectoMapeador
 {
-    @Autowired
-    EstadoProyectoMapeador estadoProyectoMapeador;
-    @Autowired
-    TipoConsultoriaMapeador tipoConsultoriaMapeador;
+
+    private final EstadoProyectoMapeador estadoProyectoMapeador;
+
+    private final TipoConsultoriaMapeador tipoConsultoriaMapeador;
+
+    public ProyectoMapeador(EstadoProyectoMapeador estadoProyectoMapeador, TipoConsultoriaMapeador tipoConsultoriaMapeador) {
+        this.estadoProyectoMapeador = estadoProyectoMapeador;
+        this.tipoConsultoriaMapeador = tipoConsultoriaMapeador;
+    }
 
     public ProyectoDTO construirDTO(ProyectoEntidad proyecto)
     {
@@ -22,7 +26,7 @@ public class ProyectoMapeador
 
     public List<ProyectoDTO> construirDTOs(List<ProyectoEntidad> proyectos)
     {
-        return proyectos.stream().map(new ProyectoMapeador()::construirDTO).toList();
+        return proyectos.stream().map(new ProyectoMapeador(estadoProyectoMapeador, tipoConsultoriaMapeador)::construirDTO).toList();
     }
 
 

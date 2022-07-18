@@ -75,8 +75,7 @@ class PersonaComandoControladorTest {
         mocMvc.perform(MockMvcRequestBuilders.delete("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
+                .andExpect(status().isOk());
 
         mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
