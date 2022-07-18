@@ -39,13 +39,15 @@ public class Mensajes
     public static final String PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO = "La descripcion del proyecto debe ser alfanúmerico";
     public static final String RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de una necesidad no puede estar vacio";
     public static final String PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO = "La ruta del archivo de una necesidad es incorrecto";
-    public static final String RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de la hoja de vida no puede estar vacio";
+    public static final String RUTA_ARCHIVO_HOJA_DE_VIDA_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo de la hoja de vida no puede estar vacia";
     public static final String PATRON_RUTA_ARCHIVO_HOJA_DE_VIDA_NO_ES_VALIDO = "La ruta del archivo de la hoja de vida es incorrecto";
     public static final String NO_PUEDE_ELIMINAR_POR_TENER_ASOCIACION_A_CARGO = "No puedes eliminar la cuenta porque tienes una Asociacion registrada a tu cargo, sin embargo la solicitud fue enviada al administrador.";
     public static final String NO_PUEDE_ELIMINAR_POR_ESTAR_SELECCIONADO_EN_UN_PROYECTO = "No puedes eliminar la cuenta porque estas seleccionado dentro de un proyecto, sin embargo la solicitud fue enviada al administrador.";
     public static final String NO_PUEDE_ELIMINAR_POR_ESTAR_EN_UN_PROCESO_DE_POSTULACION = "No puedes eliminar la cuenta porque estas postulado a un proyecto, sin embargo la solicitud fue enviada al administrador.";
     public static final String NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA = "No puedes eliminar la asociacion porque tienes una necesidad registrada, sin embargo la solicitud fue enviada al administrador.";
     public static final String NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO = "No puedes eliminar la necesidad porque esta ya fue aprobada para ser ejecutada, sin embargo la solicitud fue enviada al administrador.";
+    public static final String RUTA_ARCHIVO_CONTRATO_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo del contrato no puede estar vacia";
+    public static final String PATRON_RUTA_ARCHIVO_CONTRATO_NO_ES_VALIDO = "La ruta del archivo del contrato es incorrecto";
 
     private Mensajes()
     {
