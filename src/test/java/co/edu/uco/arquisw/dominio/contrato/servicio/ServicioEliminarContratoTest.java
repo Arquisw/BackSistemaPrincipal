@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioEliminarContratoTest {
+class ServicioEliminarContratoTest {
     @Test
     void ValidarEliminacionExitosa()
     {
