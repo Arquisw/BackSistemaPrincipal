@@ -4,6 +4,9 @@ import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,9 +47,8 @@ class PersonaConsultaControladorTest
                 .andExpect(jsonPath("$.apellidos", is("Marulete")))
                 .andExpect(jsonPath("$.correo", is("marulete@gmail.com")));
     }
-
     @Test
-    void obtenerPorIdFalla() throws Exception
+    void consultarPorIdFalla() throws Exception
     {
         var id = 10;
 
