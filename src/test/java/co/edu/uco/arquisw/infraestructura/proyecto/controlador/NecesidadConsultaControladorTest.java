@@ -92,4 +92,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is("No existe un proyecto con el ID " + id)));;
     }
+    @Test
+    void obtenerPeticionesPorAdministradorExitosa() throws Exception
+    {
+        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/administrador")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

@@ -58,6 +58,26 @@ class PersonaConsultaControladorTest
     }
 
     @Test
+    void obtenerPeticionesPorAdministradorExitosa() throws Exception
+    {
+        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/administrador")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void obtenerPorAdministadorFalla() throws Exception
+    {
+        var id = 10;
+
+        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
+    }
+
+    @Test
     void obtenerHojaDeVidaPorIdFallido() throws Exception
     {
         var  id = 10;

@@ -54,4 +54,11 @@ class AsociacionConsultaControladorTest
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is("No existe un asociacion con el ID " + id)));;
     }
+    @Test
+    void obtenerPeticionesPorAdministradorExitosa() throws Exception
+    {
+        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/administrador")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

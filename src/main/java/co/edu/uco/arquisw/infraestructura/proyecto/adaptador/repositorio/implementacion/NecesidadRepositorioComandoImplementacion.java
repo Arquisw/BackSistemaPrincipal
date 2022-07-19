@@ -21,15 +21,16 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     @Autowired
     TipoConsultoriaProyectoDAO tipoConsultoriaProyectoDAO;
     @Autowired
+    RequerimientoArchivoDAO requerimientoArchivoDAO;
+    @Autowired
     ProyectoDAO proyectoDAO;
     @Autowired
     NecesidadDAO necesidadDAO;
     @Autowired
-    RequerimientoArchivoDAO requerimientoArchivoDAO;
+    PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
     @Autowired
     PeticionEliminacionNecesidadDAO peticionEliminacionNecesidadDAO;
-    @Autowired
-    PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
+
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID)
