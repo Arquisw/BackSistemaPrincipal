@@ -47,17 +47,6 @@ class PersonaConsultaControladorTest
                 .andExpect(jsonPath("$.apellidos", is("Marulete")))
                 .andExpect(jsonPath("$.correo", is("marulete@gmail.com")));
     }
-    @Test
-    void consultarPorIdFalla() throws Exception
-    {
-        var id = 10;
-
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id)));
-    }
 
     @Test
     void obtenerPeticionesPorAdministradorExitosa() throws Exception
