@@ -22,6 +22,6 @@ public class GuardarPostulacionManejador implements ManejadorComandoRespuesta<Po
     @Override
     public ComandoRespuesta<Long> ejecutar(PostulacionComando comando)
     {
-        return new ComandoRespuesta<>(this.servicioGuardarPostulacion.ejecutar(this.postulacionFabrica.construir(), comando.getProyectoID(), comando.getUsuarioID()));
+        return new ComandoRespuesta<>(this.servicioGuardarPostulacion.ejecutar(this.postulacionFabrica.construir(comando), comando.getProyectoID(), comando.getUsuarioID()));
     }
 }

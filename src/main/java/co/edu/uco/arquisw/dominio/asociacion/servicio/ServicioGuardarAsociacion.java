@@ -5,7 +5,10 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositori
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
 public class ServicioGuardarAsociacion
@@ -13,18 +16,24 @@ public class ServicioGuardarAsociacion
     private final AsociacionRepositorioComando asociacionRepositorioComando;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
+    private final PersonaRepositorioComando personaRepositorioComando;
 
-    public ServicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
+    public ServicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando)
     {
         this.asociacionRepositorioComando = asociacionRepositorioComando;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
+        this.personaRepositorioComando = personaRepositorioComando;
     }
 
     public Long ejecutar(Asociacion asociacion, Long usuarioID)
     {
         validarSiExisteAsociacionConNIT(asociacion.getNit());
         validarSiExisteUsuarioConID(usuarioID);
+
+        var rol = Rol.crear(TextoConstante.ROL_ASOCIACION);
+
+        this.personaRepositorioComando.actualizarRol(rol, usuarioID);
 
         return this.asociacionRepositorioComando.guardar(asociacion, usuarioID);
     }

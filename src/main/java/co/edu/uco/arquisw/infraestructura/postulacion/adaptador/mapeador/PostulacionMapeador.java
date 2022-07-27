@@ -12,7 +12,7 @@ public class PostulacionMapeador
 {
     public PostulacionDTO construirDTO(PostulacionEntidad postulacion)
     {
-        return new PostulacionDTO(postulacion.getId(), postulacion.getFecha(), postulacion.getProyecto(), postulacion.getUsuario());
+        return new PostulacionDTO(postulacion.getId(), postulacion.getFecha(), postulacion.getRol(), postulacion.getProyecto(), postulacion.getUsuario());
     }
 
     public List<PostulacionDTO> construirDTOs(List<PostulacionEntidad> postulaciones)
@@ -22,6 +22,6 @@ public class PostulacionMapeador
 
     public PostulacionEntidad construirEntidad(Postulacion postulacion, Long proyectoID, Long usuarioID)
     {
-        return new PostulacionEntidad(0L, postulacion.isSeleccionado(), FechaFormateador.obtenerFechaTexto(postulacion.getFecha()), proyectoID, usuarioID);
+        return new PostulacionEntidad(0L, postulacion.isSeleccionado(), FechaFormateador.obtenerFechaTexto(postulacion.getFecha()), postulacion.getRol(), proyectoID, usuarioID);
     }
 }

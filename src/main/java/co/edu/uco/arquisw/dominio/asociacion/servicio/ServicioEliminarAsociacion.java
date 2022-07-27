@@ -5,7 +5,10 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositor
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
 public class ServicioEliminarAsociacion
@@ -14,13 +17,15 @@ public class ServicioEliminarAsociacion
     private final AsociacionRepositorioComando asociacionRepositorioComando;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
+    private final PersonaRepositorioComando personaRepositorioComando;
 
-    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta)
+    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando)
     {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.asociacionRepositorioComando = asociacionRepositorioComando;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
+        this.personaRepositorioComando = personaRepositorioComando;
     }
 
     public Long ejecutar(Long id)
@@ -29,6 +34,10 @@ public class ServicioEliminarAsociacion
         validarSiPuedeEliminarLaCuenta(id);
 
         this.asociacionRepositorioComando.eliminar(id);
+
+        var rol = Rol.crear(TextoConstante.ROL_ASOCIACION);
+
+        this.personaRepositorioComando.eliminarRol(rol, id);
 
         return id;
     }

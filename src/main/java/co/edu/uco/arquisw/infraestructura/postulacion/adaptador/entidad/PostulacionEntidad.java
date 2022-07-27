@@ -20,6 +20,7 @@ public class PostulacionEntidad
     private Long id;
     private boolean seleccionado;
     private String fecha;
+    private String rol;
     private Long proyecto;
     private Long usuario;
 }

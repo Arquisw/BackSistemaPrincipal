@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositori
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.asociacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 public class BeanServicioAsociacion
 {
     @Bean
-    public ServicioGuardarAsociacion servicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
+    public ServicioGuardarAsociacion servicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando)
     {
-        return new ServicioGuardarAsociacion(asociacionRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta);
+        return new ServicioGuardarAsociacion(asociacionRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta, personaRepositorioComando);
     }
 
     @Bean
@@ -30,14 +31,14 @@ public class BeanServicioAsociacion
     }
 
     @Bean
-    public ServicioEliminarAsociacion servicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta)
+    public ServicioEliminarAsociacion servicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando)
     {
-        return new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta);
+        return new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando);
     }
 
     @Bean
-    public ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando)
+    public ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando)
     {
-        return new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta, asociacionRepositorioComando);
+        return new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando);
     }
 }

@@ -13,6 +13,7 @@ public class SeleccionDTO
 {
     private Long id;
     private String fecha;
+    private String rol;
     private Long proyectoID;
     private Long usuarioID;
 }

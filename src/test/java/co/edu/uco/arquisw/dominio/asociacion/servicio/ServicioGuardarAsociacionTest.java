@@ -24,7 +24,7 @@ class ServicioGuardarAsociacionTest
         var repositorioAsociacionComando = Mockito.mock(AsociacionRepositorioComando.class);
         var repositorioAsociacionConsulta= Mockito.mock(AsociacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var servicio = new ServicioGuardarAsociacion(repositorioAsociacionComando,repositorioAsociacionConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioGuardarAsociacion(repositorioAsociacionComando,repositorioAsociacionConsulta,personaRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(repositorioAsociacionComando.guardar(Mockito.any(Asociacion.class),Mockito.anyLong())).thenReturn(1L);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);

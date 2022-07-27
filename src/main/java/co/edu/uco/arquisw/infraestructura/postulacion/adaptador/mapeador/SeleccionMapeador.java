@@ -12,7 +12,7 @@ public class SeleccionMapeador
 {
     public SeleccionDTO construirDTO(SeleccionEntidad seleccion)
     {
-        return new SeleccionDTO(seleccion.getId(), seleccion.getFecha(), seleccion.getProyecto(), seleccion.getUsuario());
+        return new SeleccionDTO(seleccion.getId(), seleccion.getFecha(), seleccion.getRol(), seleccion.getProyecto(), seleccion.getUsuario());
     }
 
     public List<SeleccionDTO> construirDTOs(List<SeleccionEntidad> selecciones)
@@ -20,8 +20,8 @@ public class SeleccionMapeador
         return selecciones.stream().map(new SeleccionMapeador()::construirDTO).toList();
     }
 
-    public SeleccionEntidad construirEntidad(Seleccion postulacion, Long proyectoID, Long usuarioID)
+    public SeleccionEntidad construirEntidad(Seleccion seleccion, Long proyectoID, Long usuarioID)
     {
-        return new SeleccionEntidad(0L, FechaFormateador.obtenerFechaTexto(postulacion.getFecha()), proyectoID, usuarioID);
+        return new SeleccionEntidad(0L, FechaFormateador.obtenerFechaTexto(seleccion.getFecha()), seleccion.getRol(), proyectoID, usuarioID);
     }
 }

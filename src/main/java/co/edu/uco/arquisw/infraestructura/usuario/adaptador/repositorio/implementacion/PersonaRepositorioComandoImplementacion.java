@@ -1,12 +1,11 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionPersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.UsuarioMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando
 {
+    @Autowired
+    RolMapeador rolMapeador;
     @Autowired
     PeticionEliminacionPersonaMapeador peticionEliminacionPersonaMapeador;
     @Autowired
@@ -61,6 +62,32 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
         this.usuarioDAO.save(usuario);
         return this.personaDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void actualizarRol(Rol rol, Long id)
+    {
+        var entidad = this.personaDAO.findById(id).orElse(null);
+
+        var rolEntidad = this.rolMapeador.construirEntidad(rol);
+
+        assert entidad != null;
+        entidad.getRoles().add(rolEntidad);
+
+        this.personaDAO.save(entidad);
+    }
+
+    @Override
+    public void eliminarRol(Rol rol, Long id)
+    {
+        var entidad = this.personaDAO.findById(id).orElse(null);
+
+        assert entidad != null;
+        var roles = entidad.getRoles().stream().filter(rolPersona -> rolPersona.getRol().getNombre().equals(TextoConstante.ROL_POSTULADO)).toList();
+        var rolEntidad = this.rolPersonaDAO.findById(roles.get(0).getId()).orElse(null);
+
+        assert rolEntidad != null;
+        this.rolPersonaDAO.deleteById(rolEntidad.getId());
     }
 
     @Override

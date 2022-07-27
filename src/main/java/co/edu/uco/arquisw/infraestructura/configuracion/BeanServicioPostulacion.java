@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionReposito
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 public class BeanServicioPostulacion {
 
     @Bean
-    public ServicioGuardarPostulacion servicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta)
+    public ServicioGuardarPostulacion servicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando)
     {
-        return new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta);
+        return new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando);
     }
     @Bean
-    public ServicioActualizarPostulacion servicioActualizarPostulacion(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando)
+    public ServicioActualizarPostulacion servicioActualizarPostulacion(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando)
     {
-        return new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando);
+        return new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
     }
     @Bean
     public ServicioConsultarPostulacionPorId servicioConsultarPostulacionPorId(PostulacionRepositorioConsulta postulacionRepositorioConsulta)

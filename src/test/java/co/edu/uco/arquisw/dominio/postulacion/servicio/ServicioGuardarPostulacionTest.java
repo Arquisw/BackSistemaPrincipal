@@ -24,7 +24,7 @@ class ServicioGuardarPostulacionTest {
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -46,7 +46,7 @@ class ServicioGuardarPostulacionTest {
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -66,7 +66,7 @@ class ServicioGuardarPostulacionTest {
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);

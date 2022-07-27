@@ -20,6 +20,7 @@ public class SeleccionEntidad
     @SequenceGenerator(name="seleccion_code_seq", sequenceName="seleccion_code_seq", allocationSize=1)
     private Long id;
     private String fecha;
+    private String rol;
     private Long proyecto;
     private Long usuario;
 }

@@ -18,7 +18,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
 
-        var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando);
+        var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando, personaRepositorioComando);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
@@ -34,7 +34,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
 
-        var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando);
+        var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando, personaRepositorioComando);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());

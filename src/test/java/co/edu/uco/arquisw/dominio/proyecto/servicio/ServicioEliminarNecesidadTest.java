@@ -26,7 +26,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
@@ -48,7 +48,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
@@ -67,7 +67,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);

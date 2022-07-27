@@ -21,6 +21,6 @@ public class ActualizarPostulacionManejador implements ManejadorComandoActualiza
     @Override
     public ComandoRespuesta<Long> ejecutar(PostulacionComando comando, Long id)
     {
-        return new ComandoRespuesta<>(this.servicioActualizarPostulacion.ejecutar(this.postulacionFabrica.construir(), id));
+        return new ComandoRespuesta<>(this.servicioActualizarPostulacion.ejecutar(this.postulacionFabrica.construir(comando), id));
     }
 }

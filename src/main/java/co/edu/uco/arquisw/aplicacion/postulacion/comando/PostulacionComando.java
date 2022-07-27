@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PostulacionComando
 {
+    private String rol;
     private Long proyectoID;
     private Long usuarioID;
 }

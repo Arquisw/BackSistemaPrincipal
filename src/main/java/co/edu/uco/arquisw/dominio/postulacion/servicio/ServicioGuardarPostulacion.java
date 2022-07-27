@@ -4,7 +4,10 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
 public class ServicioGuardarPostulacion {
@@ -12,16 +15,23 @@ public class ServicioGuardarPostulacion {
     private  final PostulacionRepositorioComando postulacionRepositorioComando;
     private  final PersonaRepositorioConsulta personaRepositorioConsulta;
     private  final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
+    private final PersonaRepositorioComando personaRepositorioComando;
 
-    public ServicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+    public ServicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando) {
         this.postulacionRepositorioComando = postulacionRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
+        this.personaRepositorioComando = personaRepositorioComando;
     }
     public Long ejecutar(Postulacion postulacion, Long proyectoID, Long usuarioID)
     {
         validarSiExisteProyectoConId(proyectoID);
         validarSiExistePersonaConId(usuarioID);
+
+        var rol = Rol.crear(TextoConstante.ROL_POSTULADO);
+
+        this.personaRepositorioComando.actualizarRol(rol, usuarioID);
+
         return this.postulacionRepositorioComando.guardar(postulacion, proyectoID,usuarioID);
     }
     private void validarSiExisteProyectoConId(Long proyectoID)
