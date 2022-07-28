@@ -33,12 +33,10 @@ public class ServicioEliminarAsociacion
         validarSiExisteUsuarioConID(id);
         validarSiPuedeEliminarLaCuenta(id);
 
-        this.asociacionRepositorioComando.eliminar(id);
-
         var rol = Rol.crear(TextoConstante.ROL_ASOCIACION);
 
         this.personaRepositorioComando.eliminarRol(rol, id);
-
+        this.asociacionRepositorioComando.eliminar(id);
         return id;
     }
 

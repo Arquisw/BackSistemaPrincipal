@@ -26,6 +26,9 @@ insert into persona (id, apellidos, correo, nombre) values (3, 'valencia', 'juan
 insert into persona (id, apellidos, correo, nombre) values (4, 'valencia', 'juandiego@gmail.com', 'juand');
 insert into persona (id, apellidos, correo, nombre) values (8, 'valencia', 'juanDiego@gmail.com', 'juand');
 insert into usuario (id, clave, correo) values (2, '123456789Aa', 'marulete@gmail.com');
+insert into rolpersona (id, rol, persona) values (2, 1, 8);
+insert into rolpersona (id, rol, persona) values (1, 2, 2);
+
 insert into usuario (id, clave, correo) values (3, '123456789Aa1', 'juan@gmail.com');
 insert into usuario (id, clave, correo) values (4, '12356789Aa1', 'juandiego@gmail.com');
 insert into usuario (id, clave, correo) values (8, '12356789Aa1', 'juanDiego@gmail.com');
@@ -49,8 +52,8 @@ insert into requerimientoarchivo (id, necesidad, ruta) values (2, 3, 'http://www
 
 insert into hojadevida(id,ruta,usuario) values(2,'http://www.direccion.org/ejemploCV/item.html',2);
 
-insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(3,'12/07/2022',1,false,2);
-insert into postulacion(id,fecha,proyecto,seleccionado,usuario)values(2,'13/07/2022',1,true,3);
-insert into seleccion(id,fecha,proyecto,usuario)values (2,'14/07/2022',2,3);
+insert into postulacion(id,fecha,proyecto,rol,seleccionado,usuario)values(3,'12/07/2022',1,'ROLE_ANALISTA',false,2);
+insert into postulacion(id,fecha,proyecto,rol,seleccionado,usuario)values(2,'13/07/2022',1,'ROLE_ANALISTA',true,3);
+insert into seleccion(id,fecha,proyecto,rol,usuario)values (2,'14/07/2022',2,'ROLE_ANALISTA',3);
 
 insert into contrato (id, asociacion, ruta) values (2, 4, 'http://www.direccion.org/ejemplo/item.html');

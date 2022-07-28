@@ -10,8 +10,9 @@ class SeleccionTest
     void validarCreacionExitosa()
     {
         var fecha = LocalDate.now();
+        var rol = "Analista";
 
-        var seleccion = Seleccion.crear();
+        var seleccion = Seleccion.crear(rol);
 
         Assertions.assertEquals(fecha, seleccion.getFecha());
     }

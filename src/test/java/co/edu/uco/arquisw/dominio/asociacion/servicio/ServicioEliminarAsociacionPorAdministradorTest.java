@@ -4,6 +4,7 @@ package co.edu.uco.arquisw.dominio.asociacion.servicio;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
 
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
+        var personaRepositorioComando=Mockito.mock(PersonaRepositorioComando.class);
 
         var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando, personaRepositorioComando);
 
@@ -33,6 +35,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
     {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
+        var personaRepositorioComando=Mockito.mock(PersonaRepositorioComando.class);
 
         var servicio = new ServicioEliminarAsociacionPorAdministrador(personaRepositorioConsulta,asociacionRepositorioComando, personaRepositorioComando);
 

@@ -9,6 +9,7 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
 
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
@@ -47,6 +49,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
 
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
@@ -66,6 +69,7 @@ class ServicioEliminarNecesidadTest {
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
 
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 

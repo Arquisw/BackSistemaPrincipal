@@ -42,7 +42,7 @@ class AsociacionComandoControladorTest
     void guardarAsociacion() throws Exception {
 
         var asociacion = new AsociacionDtoTestDataBuilder().build();
-        var idUsuario = 2;
+        var idUsuario = 8;
 
         mocMvc.perform(MockMvcRequestBuilders.post("/asociaciones/{idUsuario}",idUsuario)
                         .contentType(MediaType.APPLICATION_JSON)

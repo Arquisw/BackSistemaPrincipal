@@ -8,6 +8,7 @@ import co.edu.uco.arquisw.dominio.asociacion.testdatabuilder.AsociacionTestDataB
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ class ServicioGuardarAsociacionTest
         var repositorioAsociacionComando = Mockito.mock(AsociacionRepositorioComando.class);
         var repositorioAsociacionConsulta= Mockito.mock(AsociacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
+
         var servicio = new ServicioGuardarAsociacion(repositorioAsociacionComando,repositorioAsociacionConsulta,personaRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(repositorioAsociacionComando.guardar(Mockito.any(Asociacion.class),Mockito.anyLong())).thenReturn(1L);

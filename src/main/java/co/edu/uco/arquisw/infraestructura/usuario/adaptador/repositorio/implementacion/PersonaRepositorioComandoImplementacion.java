@@ -10,6 +10,9 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Collections;
+
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando
 {
@@ -69,11 +72,19 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     {
         var entidad = this.personaDAO.findById(id).orElse(null);
 
+
+        var roles = this.rolPersonaDAO.findAll();
+        Collections.sort(roles, (rol1, rol2) -> rol1.getId().compareTo(rol2.getId()));
+        var ultimoIndice = roles.size()-1;
+        var ultimoElemento = roles.get(ultimoIndice);
+        var rolId = ultimoElemento.getId()+1;
         var rolEntidad = this.rolMapeador.construirEntidad(rol);
+
+        rolEntidad.setId(rolId);
 
         assert entidad != null;
         entidad.getRoles().add(rolEntidad);
-
+        entidad.getRoles().forEach(rolPersona -> this.rolPersonaDAO.save(rolPersona));
         this.personaDAO.save(entidad);
     }
 
@@ -83,7 +94,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var entidad = this.personaDAO.findById(id).orElse(null);
 
         assert entidad != null;
-        var roles = entidad.getRoles().stream().filter(rolPersona -> rolPersona.getRol().getNombre().equals(TextoConstante.ROL_POSTULADO)).toList();
+        var roles = entidad.getRoles().stream().filter(rolPersona -> rolPersona.getRol().getNombre().equals(rol.getNombre())).toList();
         var rolEntidad = this.rolPersonaDAO.findById(roles.get(0).getId()).orElse(null);
 
         assert rolEntidad != null;

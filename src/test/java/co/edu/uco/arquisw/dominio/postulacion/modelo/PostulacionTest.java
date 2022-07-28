@@ -11,8 +11,9 @@ class PostulacionTest
     {
         var seleccionado = false;
         var fecha = LocalDate.now();
+        var rol = "Analista";
 
-        var postulacion = Postulacion.crear(seleccionado);
+        var postulacion = Postulacion.crear(rol,seleccionado);
 
         Assertions.assertEquals(seleccionado, postulacion.isSeleccionado());
         Assertions.assertEquals(fecha, postulacion.getFecha());

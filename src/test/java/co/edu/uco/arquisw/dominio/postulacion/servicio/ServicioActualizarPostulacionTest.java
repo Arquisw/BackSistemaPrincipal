@@ -7,6 +7,7 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionReposito
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.postulacion.testdatabuilder.PostulacionTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,8 @@ import org.mockito.Mockito;
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
+        var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
+
         var servicio = new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
 
         Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
@@ -37,6 +40,7 @@ import org.mockito.Mockito;
 
          var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
          var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
+         var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
          var servicio = new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
 
          Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);

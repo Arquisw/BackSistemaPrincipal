@@ -9,14 +9,16 @@ public class PostulacionTestDataBuilder {
 
     private LocalDate fecha;
     private boolean seleccionado;
+    private String rol;
 
     public PostulacionTestDataBuilder()
     {
         this.seleccionado = false;
+        this.rol = "anilista";
     }
 
   public Postulacion build()
   {
-      return Postulacion.crear(seleccionado);
+      return Postulacion.crear(rol,seleccionado);
   }
 }

@@ -53,7 +53,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void guardarPostulacionFallida() throws Exception {
 
-        var postulacion = new PostulacionComando(2L,1L);
+        var postulacion = new PostulacionComando("Analista",2L,1L);
 
         mocMvc.perform(MockMvcRequestBuilders.post("/postulaciones")
                         .contentType(MediaType.APPLICATION_JSON)
