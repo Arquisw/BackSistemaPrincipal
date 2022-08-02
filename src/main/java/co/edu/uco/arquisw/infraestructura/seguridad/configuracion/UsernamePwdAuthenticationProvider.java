@@ -1,0 +1,63 @@
+package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
+import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.UsuarioEntidad;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+
+
+@Component
+public class UsernamePwdAuthenticationProvider implements AuthenticationProvider {
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+
+	@Autowired
+	private PersonaRepositorioConsulta personaRepositorioConsulta;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Override
+	public Authentication authenticate(Authentication authentication) {
+		String username = authentication.getName();
+		String pwd = authentication.getCredentials().toString();
+		UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
+		if (usuario!=null) {
+
+			if (passwordEncoder.matches(pwd, usuario.getClave())) {
+				return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(personaRepositorioConsulta.consultarPorCorreo(username).getRoles()));
+			} else {
+				throw new BadCredentialsException("Invalid password!");
+			}
+		}else {
+			throw new BadCredentialsException("No user registered with this details!");
+		}
+	}
+	
+	private List<GrantedAuthority> getGrantedAuthorities(List<RolDTO> authorities) {
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (RolDTO authority : authorities) {
+        	grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
+        }
+        return grantedAuthorities;
+    }
+
+	@Override
+	public boolean supports(Class<?> authenticationType) {
+		return authenticationType.equals(UsernamePasswordAuthenticationToken.class);
+	}
+}
