@@ -40,17 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     private MockMvc mocMvc;
 
     @Test
-    void guardarPostulacion() throws Exception {
-
-        var postulacion = new PostulacionDtoTestDataBuilder().build();
-
-        mocMvc.perform(MockMvcRequestBuilders.post("/postulaciones")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(postulacion)))
-                .andExpect(status().isOk());
-
-    }
-    @Test
     void guardarPostulacionFallida() throws Exception {
 
         var postulacion = new PostulacionComando("Analista",2L,1L);
@@ -61,17 +50,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + postulacion.getUsuarioID())));
-    }
-    @Test
-    void deberiaActualizarPostulacion() throws Exception {
-
-        Long id = 3L;
-        var postulacion = new PostulacionDtoTestDataBuilder().build();
-
-        mocMvc.perform(MockMvcRequestBuilders.put("/postulaciones/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(postulacion)))
-                        .andExpect(status().isOk());
     }
     @Test
     void deberiaFallarAlActualizarPorPersona() throws Exception {

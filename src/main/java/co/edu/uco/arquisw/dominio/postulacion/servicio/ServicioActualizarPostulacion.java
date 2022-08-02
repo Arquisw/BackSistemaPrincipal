@@ -30,17 +30,9 @@ public class ServicioActualizarPostulacion {
 
         Seleccion seleccion = Seleccion.crear(postulacion.getRol());
 
-        var rol = Rol.crear(postulacion.getRol());
-        var rolSeleccionado = Rol.crear(TextoConstante.ROL_SELECCIONADO);
-        var rolPostulado = Rol.crear(TextoConstante.ROL_POSTULADO);
-
         var postulacionDTO = this.postulacionRepositorioConsulta.consultarPostulacionPorId(id);
 
-        this.personaRepositorioComando.eliminarRol(rolPostulado, postulacionDTO.getUsuarioID());
-        this.personaRepositorioComando.actualizarRol(rolSeleccionado, postulacionDTO.getUsuarioID());
-        this.personaRepositorioComando.actualizarRol(rol, postulacionDTO.getUsuarioID());
-
-        return this.postulacionRepositorioComando.actualizar(postulacion, seleccion, id);
+        return this.postulacionRepositorioComando.actualizar(postulacion, seleccion, id, postulacionDTO.getUsuarioID());
     }
     private void validarSiExistePostulacionConId(Long id)
     {

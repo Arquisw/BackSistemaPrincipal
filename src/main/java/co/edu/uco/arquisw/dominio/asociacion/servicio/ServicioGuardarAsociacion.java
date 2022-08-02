@@ -31,10 +31,6 @@ public class ServicioGuardarAsociacion
         validarSiExisteAsociacionConNIT(asociacion.getNit());
         validarSiExisteUsuarioConID(usuarioID);
 
-        var rol = Rol.crear(TextoConstante.ROL_ASOCIACION);
-
-        this.personaRepositorioComando.actualizarRol(rol, usuarioID);
-
         return this.asociacionRepositorioComando.guardar(asociacion, usuarioID);
     }
 

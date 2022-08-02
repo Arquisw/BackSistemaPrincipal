@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
-import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
@@ -9,9 +8,6 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.Collection;
-import java.util.Collections;
 
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando
@@ -65,27 +61,6 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
         this.usuarioDAO.save(usuario);
         return this.personaDAO.save(entidad).getId();
-    }
-
-    @Override
-    public void actualizarRol(Rol rol, Long id)
-    {
-        var entidad = this.personaDAO.findById(id).orElse(null);
-
-
-        var roles = this.rolPersonaDAO.findAll();
-        Collections.sort(roles, (rol1, rol2) -> rol1.getId().compareTo(rol2.getId()));
-        var ultimoIndice = roles.size()-1;
-        var ultimoElemento = roles.get(ultimoIndice);
-        var rolId = ultimoElemento.getId()+1;
-        var rolEntidad = this.rolMapeador.construirEntidad(rol);
-
-        rolEntidad.setId(rolId);
-
-        assert entidad != null;
-        entidad.getRoles().add(rolEntidad);
-        entidad.getRoles().forEach(rolPersona -> this.rolPersonaDAO.save(rolPersona));
-        this.personaDAO.save(entidad);
     }
 
     @Override

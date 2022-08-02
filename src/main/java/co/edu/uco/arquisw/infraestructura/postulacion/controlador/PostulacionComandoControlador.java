@@ -23,14 +23,14 @@ public class PostulacionComandoControlador
     }
 
     @PostMapping
-    @Operation(summary = "Guardar Usuario", description = "Este es usado para guardar una postulacion en la aplicación")
+    @Operation(summary = "Guardar Postulación", description = "Este es usado para guardar una postulacion en la aplicación")
     public ComandoRespuesta<Long> guardar(@RequestBody PostulacionComando postulacion)
     {
         return this.guardarPostulacionManejador.ejecutar(postulacion);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una postulacion por medio de su ID")
+    @Operation(summary = "Actualizar Postulación", description = "Este es usado para actualizar los datos de una postulacion por medio de su ID")
     public ComandoRespuesta<Long> actualizar(@RequestBody PostulacionComando postulacion, @PathVariable Long id)
     {
         return this.actualizarPostulacionManejador.ejecutar(postulacion, id);

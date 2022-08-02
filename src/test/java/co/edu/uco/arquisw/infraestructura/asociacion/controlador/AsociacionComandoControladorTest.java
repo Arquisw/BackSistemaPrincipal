@@ -85,21 +85,6 @@ class AsociacionComandoControladorTest
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id)));
     }
     @Test
-    void eliminacionAsociacionExitosa() throws Exception {
-
-        var id = 2;
-
-        mocMvc.perform(MockMvcRequestBuilders.delete("/asociaciones/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-    }
-    @Test
     void eliminacionAsociacionFallida() throws Exception {
         var id = 9;
 
@@ -120,19 +105,6 @@ class AsociacionComandoControladorTest
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA)));
-    }
-    @Test
-    void eliminacionNecesidadAdministradorExitosa() throws Exception {
-        var id = 4;
-
-        mocMvc.perform(MockMvcRequestBuilders.delete("/asociaciones/administrador/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
     }
     @Test
     void eliminacionNecesidadAdministradorFallida() throws Exception {

@@ -8,7 +8,6 @@ public interface PersonaRepositorioComando
 {
     Long guardar(Persona persona);
     Long actualizar(Persona persona, Long id);
-    void actualizarRol(Rol rol, Long id);
     void eliminarRol(Rol rol, Long id);
     void eliminar(Long id);
     Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
