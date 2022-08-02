@@ -19,9 +19,9 @@ public class BeanServicioPostulacion {
         return new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta);
     }
     @Bean
-    public ServicioActualizarPostulacion servicioActualizarPostulacion(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando)
+    public ServicioActualizarPostulacion servicioActualizarPostulacion(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando)
     {
-        return new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
+        return new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando);
     }
     @Bean
     public ServicioConsultarPostulacionPorId servicioConsultarPostulacionPorId(PostulacionRepositorioConsulta postulacionRepositorioConsulta)
