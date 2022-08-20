@@ -32,7 +32,6 @@ public class LoginComandoControlador {
     @Operation(summary = "login", description = "Este es usado para confirmar el logeo exitoso de la cuenta")
     public PersonaDTO obtenerUsuarioTrasLogin(Principal usuario)
     {
-        System.out.println("hola");
         PersonaDTO personaDTO=consultarPersonaPorCorreo.ejecutar(usuario.getName());
         if (personaDTO!=null){
             return personaDTO;

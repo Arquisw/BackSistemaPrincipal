@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import co.edu.uco.arquisw.infraestructura.seguridad.filtro.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -47,7 +48,10 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
 				.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers("/login").authenticated().and().httpBasic();
+				.antMatchers("/login").authenticated()
+				.antMatchers(HttpMethod.POST, "/usuarios").permitAll()
+				.antMatchers("/**").authenticated()
+				.and().httpBasic();
 	}
 
 	@Bean

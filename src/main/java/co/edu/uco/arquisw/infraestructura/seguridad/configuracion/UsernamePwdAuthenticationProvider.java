@@ -3,6 +3,8 @@ package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorCorreo;
+import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.UsuarioEntidad;
@@ -26,7 +28,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 	private UsuarioDAO usuarioDAO;
 
 	@Autowired
-	private PersonaRepositorioConsulta personaRepositorioConsulta;
+	private ConsultarPersonaPorCorreo consultarPersonaPorCorreo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -36,10 +38,11 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 		String username = authentication.getName();
 		String pwd = authentication.getCredentials().toString();
 		UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
+		PersonaDTO persona= this.consultarPersonaPorCorreo.ejecutar(username);
 		if (usuario!=null) {
 
 			if (passwordEncoder.matches(pwd, usuario.getClave())) {
-				return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(personaRepositorioConsulta.consultarPorCorreo(username).getRoles()));
+				return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(persona.getRoles()));
 			} else {
 				throw new BadCredentialsException("Invalid password!");
 			}
