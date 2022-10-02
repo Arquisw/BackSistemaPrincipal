@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,7 +41,7 @@ class PersonaConsultaControladorTest
     {
         var  id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre", is("eduardo")))
@@ -51,7 +52,7 @@ class PersonaConsultaControladorTest
     @Test
     void obtenerPeticionesPorAdministradorExitosa() throws Exception
     {
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/administrador")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/usuarios/administrador")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -61,7 +62,7 @@ class PersonaConsultaControladorTest
     {
         var id = 10;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
@@ -73,7 +74,7 @@ class PersonaConsultaControladorTest
     {
         var  id = 10;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/hojadevida/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/hojadevida/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("ValorInvalidoExcepcion")))
@@ -85,7 +86,7 @@ class PersonaConsultaControladorTest
     {
         var  id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/usuarios/hojadevida/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/hojadevida/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.ruta", is("http://www.direccion.org/ejemploCV/item.html")));

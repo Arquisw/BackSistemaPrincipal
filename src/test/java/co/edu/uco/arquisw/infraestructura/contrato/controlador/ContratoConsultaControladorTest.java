@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.contrato.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +41,7 @@ class ContratoConsultaControladorTest
     {
         var id = 4L;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/contratos/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
@@ -51,7 +52,7 @@ class ContratoConsultaControladorTest
     {
         var id = 8L;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/contratos/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }

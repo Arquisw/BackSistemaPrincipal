@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.asociacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ class AsociacionConsultaControladorTest
     {
         var  id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre", is("Uco")))
@@ -48,7 +49,7 @@ class AsociacionConsultaControladorTest
     {
         var id = 10;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -57,7 +58,7 @@ class AsociacionConsultaControladorTest
     @Test
     void obtenerPeticionesPorAdministradorExitosa() throws Exception
     {
-        mocMvc.perform(MockMvcRequestBuilders.get("/asociaciones/administrador")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/asociaciones/administrador")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
