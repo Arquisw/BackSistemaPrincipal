@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepc
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,14 @@ class PersonaTest
     @Test
     void  validarCreacionPersonaExitosa()
     {
+
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
          String nombre = "juan";
          String apellidos = "Valencia";
          String correo = "jjuandiego23@gmail.com";
          String clave = "ASDasd1234";
+         clave= passwordEncoder.encode(clave);
          List<Rol> roles = new ArrayList<>();
          Rol rol =  Rol.crear("administrador");
          roles.add(rol);
@@ -27,7 +32,7 @@ class PersonaTest
         Assertions.assertEquals(nombre,persona.getNombre());
         Assertions.assertEquals(apellidos,persona.getApellidos());
         Assertions.assertEquals(correo,persona.getCorreo());
-        Assertions.assertEquals(clave,persona.getClave());
+        Assertions.assertTrue(passwordEncoder.matches(clave,persona.getClave()));
         Assertions.assertEquals(rol,roles.get(0));
 
     }

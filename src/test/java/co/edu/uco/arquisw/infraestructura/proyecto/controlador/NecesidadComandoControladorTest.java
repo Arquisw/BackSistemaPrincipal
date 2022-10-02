@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import co.edu.uco.arquisw.infraestructura.postulacion.testdatabuilder.PostulacionDtoTestDataBuilder;
 import co.edu.uco.arquisw.infraestructura.proyecto.testdatabuilder.NecesidadDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,12 +45,12 @@ class NecesidadComandoControladorTest {
         var id = 2;
 
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/necesidades/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -59,7 +60,7 @@ class NecesidadComandoControladorTest {
         var necesidad = new NecesidadDtoTestDataBuilder().build();
         var id = 1;
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/necesidades/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().is4xxClientError())
@@ -73,7 +74,7 @@ class NecesidadComandoControladorTest {
         var id = 3;
         var necesidad = new NecesidadDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().isOk());
@@ -84,7 +85,7 @@ class NecesidadComandoControladorTest {
         Long id = 9L;
         var necesidad = new NecesidadDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(necesidad)))
                 .andExpect(status().is4xxClientError())
@@ -96,7 +97,7 @@ class NecesidadComandoControladorTest {
 
         var id = 3;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -105,7 +106,7 @@ class NecesidadComandoControladorTest {
     void eliminacionNecesidadFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -117,7 +118,7 @@ class NecesidadComandoControladorTest {
 
         var id = 4;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -128,12 +129,12 @@ class NecesidadComandoControladorTest {
     void eliminacionNecesidadAdministradorExitosa() throws Exception {
         var id = 3;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/administrador/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/necesidades/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
@@ -141,7 +142,7 @@ class NecesidadComandoControladorTest {
     void eliminacionNecesidadAdministradorFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/administrador/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())

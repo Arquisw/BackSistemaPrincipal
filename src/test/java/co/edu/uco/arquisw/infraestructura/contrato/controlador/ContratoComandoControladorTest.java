@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.contrato.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
-import co.edu.uco.arquisw.infraestructura.asociacion.testdatabuilder.AsociacionDtoTestDataBuilder;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import co.edu.uco.arquisw.infraestructura.contrato.testdatabuilder.ContratoDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,7 +41,7 @@ class ContratoComandoControladorTest
         var contrato = new ContratoDtoTestDataBuilder().build();
         var idAsociacion = 4;
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/contratos/{id}",idAsociacion)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is2xxSuccessful());
@@ -53,7 +52,7 @@ class ContratoComandoControladorTest
     {
         var idAsociacion = 5;
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/contratos/{id}",idAsociacion)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}",idAsociacion)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
@@ -66,7 +65,7 @@ class ContratoComandoControladorTest
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/contratos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().isOk());
@@ -79,7 +78,7 @@ class ContratoComandoControladorTest
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/contratos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is4xxClientError());
@@ -90,7 +89,7 @@ class ContratoComandoControladorTest
     {
         var id = 4L;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/contratos/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -101,7 +100,7 @@ class ContratoComandoControladorTest
     {
         var id = 6L;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/contratos/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
