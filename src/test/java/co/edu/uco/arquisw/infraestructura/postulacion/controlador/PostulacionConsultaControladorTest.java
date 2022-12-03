@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.postulacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -46,7 +47,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -58,7 +59,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("13/07/2022")));
@@ -68,7 +69,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -79,7 +80,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("12/07/2022")));
@@ -89,7 +90,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/postulacion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -100,7 +101,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("14/07/2022")));
@@ -110,7 +111,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -121,7 +122,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 3;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("14/07/2022")));
@@ -131,7 +132,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -142,7 +143,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -151,7 +152,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/postulaciones/selecciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))

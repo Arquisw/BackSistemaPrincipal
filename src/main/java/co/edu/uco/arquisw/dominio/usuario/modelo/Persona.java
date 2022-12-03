@@ -3,6 +3,10 @@ package co.edu.uco.arquisw.dominio.usuario.modelo;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.List;
 
 @Getter
@@ -56,8 +60,8 @@ public class Persona
     {
         ValidarTexto.validarObligatorio(clave, Mensajes.CLAVE_PERSONA_NO_PUEDE_ESTAR_VACIO);
         ValidarTexto.validarClaveEsValida(clave, Mensajes.PATRON_CLAVE_PERSONA_NO_ES_VALIDO);
-
-        this.clave = clave;
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+        this.clave = passwordEncoder.encode(clave);
     }
 
     private void setRoles(List<Rol> roles)

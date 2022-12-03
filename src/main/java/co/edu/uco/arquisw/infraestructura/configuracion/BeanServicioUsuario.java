@@ -55,6 +55,12 @@ public class BeanServicioUsuario
     }
 
     @Bean
+    public ServicioConsultarPersonaPorCorreo servicioConsultarPersonaPorCorreo(PersonaRepositorioConsulta personaRepositorioConsulta)
+    {
+        return new ServicioConsultarPersonaPorCorreo(personaRepositorioConsulta);
+    }
+
+    @Bean
     public ServicioGuardarHojaDeVida servicioGuardarHojaDeVida(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta)
     {
         return new ServicioGuardarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);

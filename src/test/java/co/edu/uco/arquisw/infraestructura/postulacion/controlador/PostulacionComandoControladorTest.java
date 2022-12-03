@@ -2,10 +2,9 @@ package co.edu.uco.arquisw.infraestructura.postulacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import co.edu.uco.arquisw.infraestructura.postulacion.testdatabuilder.PostulacionDtoTestDataBuilder;
-import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.PersonaDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         var postulacion = new PostulacionComando("Analista",2L,1L);
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/postulaciones")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())
@@ -57,7 +56,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Long id = 9L;
         var postulacion = new PostulacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/postulaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/postulaciones/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())

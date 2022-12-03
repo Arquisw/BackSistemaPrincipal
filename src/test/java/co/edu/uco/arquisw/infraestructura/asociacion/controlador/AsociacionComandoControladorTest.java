@@ -2,8 +2,8 @@ package co.edu.uco.arquisw.infraestructura.asociacion.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
 import co.edu.uco.arquisw.infraestructura.asociacion.testdatabuilder.AsociacionDtoTestDataBuilder;
-import co.edu.uco.arquisw.infraestructura.usuario.testdatabuilder.PersonaDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -44,7 +43,7 @@ class AsociacionComandoControladorTest
         var asociacion = new AsociacionDtoTestDataBuilder().build();
         var idUsuario = 8;
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/asociaciones/{idUsuario}",idUsuario)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}", idUsuario)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().is2xxSuccessful());
@@ -54,7 +53,7 @@ class AsociacionComandoControladorTest
     void guardarAsociacionFallida() throws Exception
     {
         var idUsuario = 2;
-        mocMvc.perform(MockMvcRequestBuilders.post("/asociaciones/{idUsuario}",idUsuario)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}",idUsuario)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
@@ -66,7 +65,7 @@ class AsociacionComandoControladorTest
         Long id = 2L;
         var asociacion = new AsociacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/asociaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().isOk());
@@ -77,7 +76,7 @@ class AsociacionComandoControladorTest
         Long id = 9L;
         var asociacion = new AsociacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.put("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().is4xxClientError())
@@ -88,7 +87,7 @@ class AsociacionComandoControladorTest
     void eliminacionAsociacionFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -99,7 +98,7 @@ class AsociacionComandoControladorTest
     void eliminacionAsociacionFallidaPorTenerNecesidarRegistrada() throws Exception {
         var id = 4;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -110,7 +109,7 @@ class AsociacionComandoControladorTest
     void eliminacionNecesidadAdministradorFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/necesidades/administrador/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
