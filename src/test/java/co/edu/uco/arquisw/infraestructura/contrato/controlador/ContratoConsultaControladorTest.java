@@ -41,7 +41,7 @@ class ContratoConsultaControladorTest
     {
         var id = 4L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
@@ -52,7 +52,7 @@ class ContratoConsultaControladorTest
     {
         var id = 8L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }

@@ -11,41 +11,41 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 public class MyTestRequestFactory {
-    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedGetOne(String url, int id) {
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedGetOne(String url, int id, String role) {
         return MockMvcRequestBuilders.get(url,id)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
-    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedGet(String url) {
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedGet(String url, String role) {
         return MockMvcRequestBuilders.get(url)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
 
 
-    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedDelete(String url, int id) {
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedDelete(String url, int id, String role) {
         return MockMvcRequestBuilders.delete(url,id)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
 
-    public static  MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPut(String url, long id) {
+    public static  MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPut(String url, long id, String role) {
         return MockMvcRequestBuilders.put(url,id)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
 
-    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPostId(String url, long id) {
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPostId(String url, long id, String role) {
         return MockMvcRequestBuilders.post(url,id)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
 
-    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPost(String url) {
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPost(String url, String role) {
         return MockMvcRequestBuilders.post(url)
-                .header("Authorization", getJwt());
+                .header("Authorization", getJwt(role));
     }
 
-    public static String getJwt() {
+    public static String getJwt(String role) {
         SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
         String jwt = Jwts.builder().setIssuer("UCO").setSubject("JWT Token")
                 .claim("username", "juan@gmail.com")
-                .claim("authorities", "ROLE_USUARIO")
+                .claim("authorities", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + 30000000))
                 .signWith(key).compact();
