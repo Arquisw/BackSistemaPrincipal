@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerNecesidadExitosa() throws Exception {
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades","ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
@@ -45,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerProyectoAprobadosExitosa() throws Exception {
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades/proyectos")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades/proyectos","ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -55,7 +55,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     {
         var  id = 3;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}",id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
@@ -65,7 +65,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     {
         var  id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/proyectos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/proyectos/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre", is("Facebook")))
@@ -76,7 +76,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}",id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -87,7 +87,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/proyectos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/proyectos/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -96,7 +96,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void obtenerPeticionesPorAdministradorExitosa() throws Exception
     {
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades/administrador")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/necesidades/administrador","ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

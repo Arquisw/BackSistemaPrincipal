@@ -41,7 +41,7 @@ class ContratoComandoControladorTest
         var contrato = new ContratoDtoTestDataBuilder().build();
         var idAsociacion = 4;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is2xxSuccessful());
@@ -52,7 +52,7 @@ class ContratoComandoControladorTest
     {
         var idAsociacion = 5;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}",idAsociacion)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}",idAsociacion,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
@@ -65,7 +65,7 @@ class ContratoComandoControladorTest
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().isOk());
@@ -78,7 +78,7 @@ class ContratoComandoControladorTest
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is4xxClientError());
@@ -89,7 +89,7 @@ class ContratoComandoControladorTest
     {
         var id = 4L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -100,7 +100,7 @@ class ContratoComandoControladorTest
     {
         var id = 6L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());

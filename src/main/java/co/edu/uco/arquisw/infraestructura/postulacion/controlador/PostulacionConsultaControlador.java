@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,42 +33,42 @@ public class PostulacionConsultaControlador
         this.consultarPostulacionPorUsuarioIdManejador = consultarPostulacionPorUsuarioIdManejador;
         this.consultarSeleccionPorUsuarioIdManejador = consultarSeleccionPorUsuarioIdManejador;
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMINSITRADOR')")
     @GetMapping("/postulacion/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una postulacion por medio de su ID")
     public PostulacionDTO consultarPostulacionPorId(@PathVariable Long id)
     {
         return this.consultarPostulacionPorIdManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/postulacion/usuario/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una postulacion por medio del ID del usuario")
     public PostulacionDTO consultarPostulacionPorUsuarioId(@PathVariable Long id)
     {
         return this.consultarPostulacionPorUsuarioIdManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMINSITRADOR')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar Todos por ID del proyecto", description = "Este es usado para consultar todas las postulaciones que esten en espera de ser aprobadas.")
     public List<PostulacionDTO> consultarPostulaciones(@PathVariable Long id)
     {
         return this.consultarPostulacionesPorProyectoManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/selecciones/seleccion/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una seleccion por medio de su ID")
     public SeleccionDTO consultarSeleccionPorId(@PathVariable Long id)
     {
         return this.consultarSeleccionPorIdManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/selecciones/seleccion/usuario/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una seleccion por medio del ID de un Usuario")
     public SeleccionDTO consultarSeleccionPorUsuarioId(@PathVariable Long id)
     {
         return this.consultarSeleccionPorUsuarioIdManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/selecciones/{id}")
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas los postulados que están aprobados en un proyecto")
     public List<SeleccionDTO> consultarSelecciones(@PathVariable Long id)

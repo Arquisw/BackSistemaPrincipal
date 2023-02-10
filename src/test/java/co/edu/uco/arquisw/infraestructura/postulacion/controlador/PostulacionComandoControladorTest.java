@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         var postulacion = new PostulacionComando("Analista",2L,1L);
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones","ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())
@@ -56,7 +56,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         Long id = 9L;
         var postulacion = new PostulacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/postulaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/postulaciones/{id}", id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())

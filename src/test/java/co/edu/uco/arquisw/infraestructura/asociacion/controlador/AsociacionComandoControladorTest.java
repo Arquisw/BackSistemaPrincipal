@@ -43,7 +43,7 @@ class AsociacionComandoControladorTest
         var asociacion = new AsociacionDtoTestDataBuilder().build();
         var idUsuario = 8;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}", idUsuario)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}", idUsuario,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().is2xxSuccessful());
@@ -53,7 +53,7 @@ class AsociacionComandoControladorTest
     void guardarAsociacionFallida() throws Exception
     {
         var idUsuario = 2;
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}",idUsuario)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/asociaciones/{idUsuario}",idUsuario,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
@@ -65,7 +65,7 @@ class AsociacionComandoControladorTest
         Long id = 2L;
         var asociacion = new AsociacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}",id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().isOk());
@@ -76,7 +76,7 @@ class AsociacionComandoControladorTest
         Long id = 9L;
         var asociacion = new AsociacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/asociaciones/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(asociacion)))
                 .andExpect(status().is4xxClientError())
@@ -87,7 +87,7 @@ class AsociacionComandoControladorTest
     void eliminacionAsociacionFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -98,7 +98,7 @@ class AsociacionComandoControladorTest
     void eliminacionAsociacionFallidaPorTenerNecesidarRegistrada() throws Exception {
         var id = 4;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/asociaciones/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -109,7 +109,7 @@ class AsociacionComandoControladorTest
     void eliminacionNecesidadAdministradorFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
