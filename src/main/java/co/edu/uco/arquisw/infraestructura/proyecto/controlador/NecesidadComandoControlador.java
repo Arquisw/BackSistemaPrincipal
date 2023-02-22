@@ -8,6 +8,7 @@ import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.GuardarNecesidad
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,28 +28,28 @@ public class NecesidadComandoControlador
         this.eliminarNecesidadManejador = eliminarNecesidadManejador;
         this.eliminarNecesidadPorAdministradorManejador = eliminarNecesidadPorAdministradorManejador;
     }
-
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @PostMapping("/{id}")
     @Operation(summary = "Guardar Necesidad", description = "Este es usado para guardar una Necesidad en la aplicación por medio del ID de una asociacion")
     public ComandoRespuesta<Long> guardar(@RequestBody NecesidadComando necesidad, @PathVariable Long id)
     {
         return this.guardarNecesidadManejador.ejecutar(necesidad, id);
     }
-
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una Necesidad por medio del ID de una asociacion")
     public ComandoRespuesta<Long> actualizar(@RequestBody NecesidadComando necesidad, @PathVariable Long id)
     {
         return this.actualizarNecesidadManejador.ejecutar(necesidad, id);
     }
-
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Necesidad", description = "Este es usado para eliminar los datos de una necesidad por medio del ID de una asociacion")
     public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
     {
         return this.eliminarNecesidadManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Necesidad por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una necesidad por medio del ID de la asociacion")
     public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)

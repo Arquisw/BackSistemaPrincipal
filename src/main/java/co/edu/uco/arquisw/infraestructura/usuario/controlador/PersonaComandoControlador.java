@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,35 +37,35 @@ public class PersonaComandoControlador
     {
         return this.guardarPersonaManejador.ejecutar(persona);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/hojadevida/{id}")
     @Operation(summary = "Guardar Hoja de Vida", description = "Este es usado para guardar una hoja en la aplicación por medio de un usuario")
     public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
     {
         return this.guardarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> actualizar(@RequestBody PersonaComando persona, @PathVariable Long id)
     {
         return this.actualizarPersonaManejador.ejecutar(persona, id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PutMapping("/hojadevida/{id}")
     @Operation(summary = "Actualizar Hoja de Vida", description = "Este es usado para actualizar los datos de una hoja de vida por medio del ID de un usuario")
     public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
     {
         return this.actualizarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
     {
         return this.eliminarPersonaManejador.ejecutar(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)

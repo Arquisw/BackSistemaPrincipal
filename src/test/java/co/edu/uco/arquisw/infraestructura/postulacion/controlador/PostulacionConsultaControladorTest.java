@@ -38,7 +38,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id,"ROLE_ADMINSITRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -47,7 +47,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id,"ROLE_ADMINSITRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -59,7 +59,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINSITRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("13/07/2022")));
@@ -69,7 +69,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINSITRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -80,7 +80,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("12/07/2022")));
@@ -90,7 +90,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/usuario/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -101,7 +101,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("14/07/2022")));
@@ -111,7 +111,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -122,7 +122,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 3;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("14/07/2022")));
@@ -132,7 +132,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/seleccion/usuario/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -143,7 +143,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -152,7 +152,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/selecciones/{id}",id,"ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))

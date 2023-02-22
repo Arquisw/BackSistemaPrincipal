@@ -37,7 +37,7 @@ class AsociacionConsultaControladorTest
     {
         var  id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre", is("Uco")))
@@ -49,7 +49,7 @@ class AsociacionConsultaControladorTest
     {
         var id = 10;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}",id)
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}",id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
@@ -58,7 +58,7 @@ class AsociacionConsultaControladorTest
     @Test
     void obtenerPeticionesPorAdministradorExitosa() throws Exception
     {
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/asociaciones/administrador")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/asociaciones/administrador","ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
