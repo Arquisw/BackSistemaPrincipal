@@ -6,28 +6,32 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-public class ServicioConsultarPostulacionPorUsuarioId
-{
+public class ServicioConsultarPostulacionPorUsuarioId {
     private final PostulacionRepositorioConsulta postulacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioConsultarPostulacionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
-    {
+    public ServicioConsultarPostulacionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public PostulacionDTO ejecutar(Long id)
-    {
+    public PostulacionDTO ejecutar(Long id) {
+        validarSiExisteUsuarioConID(id);
         validarSiExistePostulacionConUsuarioID(id);
+
 
         return this.postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(id);
     }
-    private void validarSiExistePostulacionConUsuarioID(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id)))
-        {
+
+    private void validarSiExisteUsuarioConID(Long id) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+        }
+    }
+
+    private void validarSiExistePostulacionConUsuarioID(Long id) {
+        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(id))) {
+            throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID_DE_USUARIO + id);
         }
     }
 }

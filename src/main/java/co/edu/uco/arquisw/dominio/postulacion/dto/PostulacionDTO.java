@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostulacionDTO
-{
+public class PostulacionDTO {
     private Long id;
     private String fecha;
     private String rol;

@@ -8,20 +8,17 @@ import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioGuardarContrato;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GuardarContratoManejador implements ManejadorComandoActualizacionRespuesta<ContratoComando, Long, ComandoRespuesta<Long>>
-{
+public class GuardarContratoManejador implements ManejadorComandoActualizacionRespuesta<ContratoComando, Long, ComandoRespuesta<Long>> {
     private final ServicioGuardarContrato servicioGuardarContrato;
     private final ContratoFabrica contratoFabrica;
 
-    public GuardarContratoManejador(ServicioGuardarContrato servicioGuardarContrato, ContratoFabrica contratoFabrica)
-    {
+    public GuardarContratoManejador(ServicioGuardarContrato servicioGuardarContrato, ContratoFabrica contratoFabrica) {
         this.servicioGuardarContrato = servicioGuardarContrato;
         this.contratoFabrica = contratoFabrica;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id)
-    {
+    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioGuardarContrato.ejecutar(this.contratoFabrica.construir(comando), id));
     }
 }

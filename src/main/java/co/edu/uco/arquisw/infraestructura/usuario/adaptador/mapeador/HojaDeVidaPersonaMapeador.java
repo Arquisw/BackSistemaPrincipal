@@ -6,15 +6,16 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.HojaDeVidaPe
 import org.springframework.stereotype.Component;
 
 @Component
-public class HojaDeVidaPersonaMapeador
-{
-    public HojaDeVidaPersonaDTO construirDTO(HojaDeVidaPersonaEntidad hojaDeVida)
-    {
+public class HojaDeVidaPersonaMapeador {
+    public HojaDeVidaPersonaDTO construirDTO(HojaDeVidaPersonaEntidad hojaDeVida) {
         return new HojaDeVidaPersonaDTO(hojaDeVida.getId(), hojaDeVida.getRuta());
     }
 
-    public HojaDeVidaPersonaEntidad construirEntidad(HojaDeVidaPersona hojaDeVidaPersona, Long id)
-    {
+    public HojaDeVidaPersonaEntidad construirEntidad(HojaDeVidaPersona hojaDeVidaPersona, Long id) {
         return new HojaDeVidaPersonaEntidad(0L, hojaDeVidaPersona.getRutaArchivo(), id);
+    }
+
+    public void actualizarEntidad(HojaDeVidaPersonaEntidad hojaDeVidaPersonaEntidad, HojaDeVidaPersona hojaDeVidaPersona) {
+        hojaDeVidaPersonaEntidad.setRuta(hojaDeVidaPersona.getRutaArchivo());
     }
 }

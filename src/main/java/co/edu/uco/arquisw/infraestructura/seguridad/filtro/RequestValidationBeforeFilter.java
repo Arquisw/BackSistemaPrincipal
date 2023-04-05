@@ -1,12 +1,10 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.filtro;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -14,21 +12,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.util.StringUtils;
 
 public class RequestValidationBeforeFilter implements Filter {
-
 	public static final String AUTHENTICATION_SCHEME_BASIC = "Basic";
 	private Charset credentialsCharset = StandardCharsets.UTF_8;
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		String header = req.getHeader(AUTHORIZATION);
+
 		if (header != null) {
 			header = header.trim();
 			if (StringUtils.startsWithIgnoreCase(header, AUTHENTICATION_SCHEME_BASIC)) {
@@ -62,5 +58,4 @@ public class RequestValidationBeforeFilter implements Filter {
 	public Charset getCredentialsCharset() {
 		return this.credentialsCharset;
 	}
-
 }

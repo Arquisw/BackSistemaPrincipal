@@ -8,20 +8,17 @@ import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioActualizarContrato;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActualizarContratoManejador implements ManejadorComandoActualizacionRespuesta<ContratoComando, Long, ComandoRespuesta<Long>>
-{
+public class ActualizarContratoManejador implements ManejadorComandoActualizacionRespuesta<ContratoComando, Long, ComandoRespuesta<Long>> {
     private final ServicioActualizarContrato servicioActualizarContrato;
     private final ContratoFabrica contratoFabrica;
 
-    public ActualizarContratoManejador(ServicioActualizarContrato servicioActualizarContrato, ContratoFabrica contratoFabrica)
-    {
+    public ActualizarContratoManejador(ServicioActualizarContrato servicioActualizarContrato, ContratoFabrica contratoFabrica) {
         this.servicioActualizarContrato = servicioActualizarContrato;
         this.contratoFabrica = contratoFabrica;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id)
-    {
+    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioActualizarContrato.ejecutar(this.contratoFabrica.construir(comando), id));
     }
 }

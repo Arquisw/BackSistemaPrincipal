@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsociacionComando
-{
+public class AsociacionComando {
     private String nombre;
     private String nit;
     private String numeroContacto;

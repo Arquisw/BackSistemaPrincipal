@@ -6,18 +6,15 @@ import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioConsultarContratoPor
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsultarContratoPorIdManejador implements ManejadorComandoRespuesta<Long, ContratoDTO>
-{
+public class ConsultarContratoPorIdManejador implements ManejadorComandoRespuesta<Long, ContratoDTO> {
     private final ServicioConsultarContratoPorId servicioConsultarContratoPorId;
 
-    public ConsultarContratoPorIdManejador(ServicioConsultarContratoPorId servicioConsultarContratoPorId)
-    {
+    public ConsultarContratoPorIdManejador(ServicioConsultarContratoPorId servicioConsultarContratoPorId) {
         this.servicioConsultarContratoPorId = servicioConsultarContratoPorId;
     }
 
     @Override
-    public ContratoDTO ejecutar(Long comando)
-    {
+    public ContratoDTO ejecutar(Long comando) {
         return this.servicioConsultarContratoPorId.ejecutar(comando);
     }
 }

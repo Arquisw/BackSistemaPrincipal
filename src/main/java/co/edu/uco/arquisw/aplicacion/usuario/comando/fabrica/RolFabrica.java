@@ -6,15 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class RolFabrica
-{
-    public Rol construir(RolDTO rol)
-    {
+public class RolFabrica {
+    public Rol construir(RolDTO rol) {
         return Rol.crear(rol.getNombre());
     }
 
-    public List<Rol> construirTodos(List<RolDTO> roles)
-    {
+    public List<Rol> construirTodos(List<RolDTO> roles) {
         return roles.stream().map(new RolFabrica()::construir).toList();
     }
 }

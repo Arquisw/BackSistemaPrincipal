@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HojaDeVidaPersonaDTO
-{
+public class HojaDeVidaPersonaDTO {
     private Long id;
     private String ruta;
 }

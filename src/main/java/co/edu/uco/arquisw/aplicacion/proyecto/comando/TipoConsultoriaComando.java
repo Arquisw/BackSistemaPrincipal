@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoConsultoriaComando
-{
+public class TipoConsultoriaComando {
     private String nombre;
 }

@@ -6,18 +6,15 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioConsultarNecesidadPo
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsultarNecesidadPorIdManejador implements ManejadorComandoRespuesta<Long, NecesidadDTO>
-{
+public class ConsultarNecesidadPorIdManejador implements ManejadorComandoRespuesta<Long, NecesidadDTO> {
     private final ServicioConsultarNecesidadPorId servicioConsultarNecesidadPorId;
 
-    public ConsultarNecesidadPorIdManejador(ServicioConsultarNecesidadPorId servicioConsultarNecesidadPorId)
-    {
+    public ConsultarNecesidadPorIdManejador(ServicioConsultarNecesidadPorId servicioConsultarNecesidadPorId) {
         this.servicioConsultarNecesidadPorId = servicioConsultarNecesidadPorId;
     }
 
     @Override
-    public NecesidadDTO ejecutar(Long comando)
-    {
+    public NecesidadDTO ejecutar(Long comando) {
         return this.servicioConsultarNecesidadPorId.ejecutar(comando);
     }
 }

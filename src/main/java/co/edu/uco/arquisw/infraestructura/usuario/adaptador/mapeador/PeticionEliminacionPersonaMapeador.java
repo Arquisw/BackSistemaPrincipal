@@ -6,20 +6,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class PeticionEliminacionPersonaMapeador
-{
-    public PeticionEliminacionPersonaDTO construirDTO(PeticionEliminacionPersonaEntidad peticionEliminacion)
-    {
+public class PeticionEliminacionPersonaMapeador {
+    public PeticionEliminacionPersonaDTO construirDTO(PeticionEliminacionPersonaEntidad peticionEliminacion) {
         return new PeticionEliminacionPersonaDTO(peticionEliminacion.getId(), peticionEliminacion.getUsuario());
     }
 
-    public List<PeticionEliminacionPersonaDTO> construirDTOs(List<PeticionEliminacionPersonaEntidad> peticionesEliminacion)
-    {
+    public List<PeticionEliminacionPersonaDTO> construirDTOs(List<PeticionEliminacionPersonaEntidad> peticionesEliminacion) {
         return peticionesEliminacion.stream().map(new PeticionEliminacionPersonaMapeador()::construirDTO).toList();
     }
 
-    public PeticionEliminacionPersonaEntidad construirEntidad(Long usuarioID)
-    {
+    public PeticionEliminacionPersonaEntidad construirEntidad(Long usuarioID) {
         return new PeticionEliminacionPersonaEntidad(0L, usuarioID);
     }
 }

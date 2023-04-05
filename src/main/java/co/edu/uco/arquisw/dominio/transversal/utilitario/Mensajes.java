@@ -1,7 +1,6 @@
 package co.edu.uco.arquisw.dominio.transversal.utilitario;
 
-public class Mensajes
-{
+public class Mensajes {
     public static final String NOMBRE_ROL_VACIO = "El nombre no puede estar vacio";
     public static final String NOMBRE_PERSONA_NO_PUEDE_ESTAR_VACIO = "El nombre no puede estar vacio";
     public static final String PATRON_NOMBRE_ROL_INVALIDO = "El nombre solo puede contener letras y numeros";
@@ -48,9 +47,9 @@ public class Mensajes
     public static final String NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO = "No puedes eliminar la necesidad porque esta ya fue aprobada para ser ejecutada, sin embargo la solicitud fue enviada al administrador.";
     public static final String RUTA_ARCHIVO_CONTRATO_NO_PUEDE_ESTAR_VACIO = "La ruta del archivo del contrato no puede estar vacia";
     public static final String PATRON_RUTA_ARCHIVO_CONTRATO_NO_ES_VALIDO = "La ruta del archivo del contrato es incorrecto";
+    public static final String USUARIO_O_CLAVE_INCORRECTAS = "El usuario o la contraseña son incorrectos";
+    public static final String NO_EXISTE_POSTULACION_CON_EL_ID_DE_USUARIO = "No existe postulación realizada por el usuario con el ID ";
+    public static final String NO_EXISTE_SELECCION_CON_EL_ID_DE_USUARIO_CON_EL_ID = "No existe seleccion a un proyecto de un usuario con el ID ";
 
-    private Mensajes()
-    {
-
-    }
+    private Mensajes() { }
 }

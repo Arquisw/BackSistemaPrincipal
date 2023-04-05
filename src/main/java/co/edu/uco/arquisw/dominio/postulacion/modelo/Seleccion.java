@@ -7,32 +7,27 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class Seleccion
-{
+public class Seleccion {
     private LocalDate fecha;
     private String rol;
 
-    private Seleccion(String rol)
-    {
+    private Seleccion(String rol) {
         setFecha();
         setRol(rol);
     }
 
-    public static Seleccion crear(String rol)
-    {
+    public static Seleccion crear(String rol) {
         return new Seleccion(rol);
     }
 
-    private void setRol(String rol)
-    {
+    private void setRol(String rol) {
         ValidarTexto.validarObligatorio(rol, Mensajes.NOMBRE_ROL_VACIO);
         ValidarTexto.validarPatronAlfanumericoEsValido(rol, Mensajes.PATRON_NOMBRE_ROL_INVALIDO);
 
         this.rol = rol;
     }
 
-    public void setFecha()
-    {
+    public void setFecha() {
         this.fecha = FechaFormateador.obtenerFechaActual();
     }
 }

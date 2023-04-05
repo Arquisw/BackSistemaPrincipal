@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GuardarHojaDeVidaManejador implements ManejadorComandoActualizacionRespuesta<HojaVidaComando,Long, ComandoRespuesta<Long>> {
-
     private final ServicioGuardarHojaDeVida servicioGuardarHojaDeVida;
     private final HojaDeVidaFabrica hojaDeVidaFabrica;
 

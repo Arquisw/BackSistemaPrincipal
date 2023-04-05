@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepositorioConsulta
-{
+public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepositorioConsulta {
     @Autowired
     NecesidadMapeador necesidadMapeador;
     @Autowired
@@ -35,12 +34,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
 
     @Override
-    public NecesidadDTO consultarPorId(Long id)
-    {
+    public NecesidadDTO consultarPorId(Long id) {
         var entidad = this.necesidadDAO.findByAsociacion(id);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -54,8 +51,18 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public List<NecesidadDTO> consultarNecesidades()
-    {
+    public NecesidadDTO consultarPorNecesidad(Long id) {
+        var entidad = this.necesidadDAO.findById(id).orElse(null);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.necesidadMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public List<NecesidadDTO> consultarNecesidades() {
         var entidades = this.necesidadDAO.findAll();
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_EN_ESPERA)).toList();
@@ -68,12 +75,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public ProyectoDTO consultarProyectoPorId(Long proyectoID)
-    {
+    public ProyectoDTO consultarProyectoPorId(Long proyectoID) {
         var entidad = this.proyectoDAO.findById(proyectoID).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -81,11 +86,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public List<ProyectoDTO> consultarProyectos()
-    {
+    public List<ProyectoDTO> consultarProyectos() {
         var entidades = this.necesidadDAO.findAll();
 
-        var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO)).toList();
+        var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)).toList();
 
         List<ProyectoEntidad> proyectos = new ArrayList<>();
 
@@ -95,8 +99,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidades()
-    {
+    public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidades() {
         var entidades = this.peticionEliminacionNecesidadDAO.findAll();
 
         return this.peticionEliminacionNecesidadMapeador.construirDTOs(entidades);

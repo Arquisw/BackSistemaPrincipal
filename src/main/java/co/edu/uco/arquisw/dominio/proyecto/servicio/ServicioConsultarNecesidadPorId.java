@@ -5,26 +5,21 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 
-public class ServicioConsultarNecesidadPorId
-{
+public class ServicioConsultarNecesidadPorId {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
 
-    public ServicioConsultarNecesidadPorId(NecesidadRepositorioConsulta necesidadRepositorioConsulta)
-    {
+    public ServicioConsultarNecesidadPorId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
     }
 
-    public NecesidadDTO ejecutar(Long id)
-    {
-        validarSiExisteProyectoConID(id);
+    public NecesidadDTO ejecutar(Long id) {
+        validarSiExisteNecesidadConID(id);
 
         return this.necesidadRepositorioConsulta.consultarPorId(id);
     }
 
-    private void validarSiExisteProyectoConID(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(id)))
-        {
+    private void validarSiExisteNecesidadConID(Long id) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }

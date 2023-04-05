@@ -9,30 +9,24 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class TipoConsultoriaMapeador
-{
-    public TipoConsultoriaDTO construirDTO(TipoConsultoriaProyectoEntidad tipoConsultoria)
-    {
+public class TipoConsultoriaMapeador {
+    public TipoConsultoriaDTO construirDTO(TipoConsultoriaProyectoEntidad tipoConsultoria) {
         return new TipoConsultoriaDTO(tipoConsultoria.getTipoConsultoria().getNombre());
     }
 
-    public List<TipoConsultoriaDTO> construirDTOs(List<TipoConsultoriaProyectoEntidad> roles)
-    {
+    public List<TipoConsultoriaDTO> construirDTOs(List<TipoConsultoriaProyectoEntidad> roles) {
         return roles.stream().map(new TipoConsultoriaMapeador()::construirDTO).toList();
     }
 
-    public TipoConsultoriaProyectoEntidad construirEntidad(TipoConsultoria tipoConsultoria)
-    {
+    public TipoConsultoriaProyectoEntidad construirEntidad(TipoConsultoria tipoConsultoria) {
         return new TipoConsultoriaProyectoEntidad(0L, new TipoConsultoriaEntidad(obtenerRolID(tipoConsultoria.getNombre()), tipoConsultoria.getNombre()));
     }
 
-    public List<TipoConsultoriaProyectoEntidad> construirEntidades(List<TipoConsultoria> tiposConsultoria)
-    {
+    public List<TipoConsultoriaProyectoEntidad> construirEntidades(List<TipoConsultoria> tiposConsultoria) {
         return tiposConsultoria.stream().map(new TipoConsultoriaMapeador()::construirEntidad).toList();
     }
 
-    private Long obtenerRolID(String nombre)
-    {
+    private Long obtenerRolID(String nombre) {
         return switch (nombre) {
             case TextoConstante.INGENIERIA_DE_REQUISITOS -> 1L;
             case TextoConstante.SQA -> 2L;

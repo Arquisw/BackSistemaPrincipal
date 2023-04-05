@@ -6,19 +6,16 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-public class ServicioEliminarPersonaPorAdministrador
-{
+public class ServicioEliminarPersonaPorAdministrador {
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioEliminarPersonaPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta)
-    {
+    public ServicioEliminarPersonaPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public Long ejecutar(Long id)
-    {
+    public Long ejecutar(Long id) {
         validarSiNoExisteUsuarioConId(id);
 
         this.personaRepositorioComando.eliminar(id);
@@ -26,10 +23,8 @@ public class ServicioEliminarPersonaPorAdministrador
         return id;
     }
 
-    private void validarSiNoExisteUsuarioConId(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id)))
-        {
+    private void validarSiNoExisteUsuarioConId(Long id) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }

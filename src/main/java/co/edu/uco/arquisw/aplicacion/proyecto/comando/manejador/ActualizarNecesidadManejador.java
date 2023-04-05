@@ -8,20 +8,17 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioActualizarNecesidad;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActualizarNecesidadManejador implements ManejadorComandoActualizacionRespuesta<NecesidadComando, Long, ComandoRespuesta<Long>>
-{
+public class ActualizarNecesidadManejador implements ManejadorComandoActualizacionRespuesta<NecesidadComando, Long, ComandoRespuesta<Long>> {
     private final NecesidadFabrica necesidadFabrica;
     private final ServicioActualizarNecesidad servicioActualizarNecesidad;
 
-    public ActualizarNecesidadManejador(NecesidadFabrica necesidadFabrica, ServicioActualizarNecesidad servicioActualizarNecesidad)
-    {
+    public ActualizarNecesidadManejador(NecesidadFabrica necesidadFabrica, ServicioActualizarNecesidad servicioActualizarNecesidad) {
         this.necesidadFabrica = necesidadFabrica;
         this.servicioActualizarNecesidad = servicioActualizarNecesidad;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(NecesidadComando comando, Long id)
-    {
+    public ComandoRespuesta<Long> ejecutar(NecesidadComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioActualizarNecesidad.ejecutar(this.necesidadFabrica.construirActualizar(comando, id), id));
     }
 }

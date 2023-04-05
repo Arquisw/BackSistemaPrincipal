@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContratoDTO
-{
+public class ContratoDTO {
     private Long id;
     private String rutaArchivo;
     private Long asociacionId;

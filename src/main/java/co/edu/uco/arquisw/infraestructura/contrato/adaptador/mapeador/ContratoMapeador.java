@@ -6,15 +6,12 @@ import co.edu.uco.arquisw.infraestructura.contrato.adaptador.entidad.ContratoEnt
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContratoMapeador
-{
-    public ContratoDTO construirDTO(ContratoEntidad contrato)
-    {
-        return new ContratoDTO(contrato.getId(), contrato.getRuta(), contrato.getAsociacion());
+public class ContratoMapeador {
+    public ContratoDTO construirDTO(ContratoEntidad contrato) {
+        return new ContratoDTO(contrato.getId(), contrato.getRuta(), contrato.getNecesidad());
     }
 
-    public ContratoEntidad construirEntidad(Contrato contrato, Long asociacionId)
-    {
-        return new ContratoEntidad(0L, contrato.getRutaArchivo(), asociacionId);
+    public ContratoEntidad construirEntidad(Contrato contrato, Long proyectoID) {
+        return new ContratoEntidad(0L, contrato.getRutaArchivo(), proyectoID);
     }
 }

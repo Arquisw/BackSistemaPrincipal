@@ -7,18 +7,15 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
-public class ConsultarPeticionesDeEliminacionPersonaManejador
-{
+public class ConsultarPeticionesDeEliminacionPersonaManejador {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ConsultarPeticionesDeEliminacionPersonaManejador(PersonaRepositorioConsulta personaRepositorioConsulta)
-    {
+    public ConsultarPeticionesDeEliminacionPersonaManejador(PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
     @Transactional
-    public List<PeticionEliminacionPersonaDTO> ejecutar()
-    {
+    public List<PeticionEliminacionPersonaDTO> ejecutar() {
         return personaRepositorioConsulta.consultarPeticionesDeEliminacionDeUsuarios();
     }
 }

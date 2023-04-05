@@ -6,11 +6,12 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionReposito
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.postulacion.testdatabuilder.PostulacionTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
- class ServicioActualizarPostulacionTest {
+ class ServicioSeleccionarUsuarioTest {
     @Test
     void actualizacionExitosa()
     {
@@ -19,13 +20,14 @@ import org.mockito.Mockito;
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
 
-        var servicio = new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando);
+        var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
 
         Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
         Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(1L)).thenReturn(postulacionDto);
 
-        var id =servicio.ejecutar(postulacion,1L);
+        var id =servicio.ejecutar(1L);
         Assertions.assertEquals(0,id);
 
     }
@@ -33,16 +35,16 @@ import org.mockito.Mockito;
      @Test
      void deberiaValidarLaExistenciaPreviaDeLaAsociacion()
      {
-         var postulacion = new PostulacionTestDataBuilder().build();
-
          var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
          var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
-         var servicio = new ServicioActualizarPostulacion(postulacionRepositorioConsulta,postulacionRepositorioComando);
+         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
+
+         var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
 
          Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
          Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(1L)).thenReturn(null);
 
-         Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(postulacion,1L)).getMessage());
+         Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
 
      }
 }

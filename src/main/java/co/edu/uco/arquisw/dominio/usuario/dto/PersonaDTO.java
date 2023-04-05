@@ -10,8 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonaDTO
-{
+public class PersonaDTO {
     private Long id;
     private String nombre;
     private String apellidos;

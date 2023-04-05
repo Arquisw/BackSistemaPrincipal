@@ -3,6 +3,8 @@ package co.edu.uco.arquisw.dominio.contrato.servicio;
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.puerto.consulta.ContratoRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,14 +14,14 @@ class ServicioConsultarContratoPorIdTest {
     @Test
     void validarConsultaPorIdExitosa()
     {
-        var asociacion = new AsociacionDTO();
+        var necesidad = new NecesidadDTO();
 
         var  contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
-        var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, asociacionRepositorioConsulta);
+        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidad(Mockito.anyLong())).thenReturn(necesidad);
 
          servicio.ejecutar(1L);
 
@@ -31,13 +33,13 @@ class ServicioConsultarContratoPorIdTest {
     void consultaPorIdFallida()
     {
         var  contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
-        var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, asociacionRepositorioConsulta);
+        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(null);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidad(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,
+        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,
                 Assertions.assertThrows(NullPointerException.class, () ->
                         servicio.ejecutar(1L)
                 ).getMessage());

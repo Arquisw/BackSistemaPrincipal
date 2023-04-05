@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostulacionComando
-{
+public class PostulacionComando {
     private String rol;
     private Long proyectoID;
     private Long usuarioID;

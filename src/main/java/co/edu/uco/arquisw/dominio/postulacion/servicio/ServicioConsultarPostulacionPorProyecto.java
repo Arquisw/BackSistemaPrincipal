@@ -5,7 +5,6 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionReposit
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-
 import java.util.List;
 
 public class ServicioConsultarPostulacionPorProyecto {
@@ -16,16 +15,15 @@ public class ServicioConsultarPostulacionPorProyecto {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
     }
-    public List<PostulacionDTO> ejecutar(Long id)
-    {
+
+    public List<PostulacionDTO> ejecutar(Long id) {
         validarSiExisteProyectoConID(id);
 
         return this.postulacionRepositorioConsulta.consultarPostulacionesPorProyecto(id);
     }
-    private void validarSiExisteProyectoConID(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id)))
-        {
+
+    private void validarSiExisteProyectoConID(Long id) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
         }
     }

@@ -1,9 +1,10 @@
 package co.edu.uco.arquisw.dominio.contrato.servicio;
 
-import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
-import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioComando;
 import co.edu.uco.arquisw.dominio.contrato.testDataBuilder.ContratoTestDataBuilder;
+import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,26 +17,28 @@ class ServicioGuardarContratoTest {
         var contrato = new ContratoTestDataBuilder().build();
 
         var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
-        var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var  necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio= new ServicioGuardarContrato(contratoRepositorioComando, asociacionRepositorioConsulta);
+        var servicio= new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.any())).thenReturn(null);
+        Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.any())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L)).getMessage());
     }
     @Test
     void contratoActualizarExistosamente()
     {
         var contrato = new ContratoTestDataBuilder().build();
-        var asociacion = new AsociacionDTO();
+        var proyecto = new ProyectoDTO();
 
         var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
-        var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var  necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio= new ServicioGuardarContrato(contratoRepositorioComando, asociacionRepositorioConsulta);
+        var servicio= new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.any())).thenReturn(asociacion);
+        Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.any())).thenReturn(proyecto);
 
         servicio.ejecutar(contrato,1L);
 

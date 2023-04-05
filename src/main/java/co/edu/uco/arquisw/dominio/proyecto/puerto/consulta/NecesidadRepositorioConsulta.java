@@ -5,9 +5,9 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import java.util.List;
 
-public interface NecesidadRepositorioConsulta
-{
+public interface NecesidadRepositorioConsulta {
     NecesidadDTO consultarPorId(Long id);
+    NecesidadDTO consultarPorNecesidad(Long id);
     List<NecesidadDTO> consultarNecesidades();
     ProyectoDTO consultarProyectoPorId(Long proyectoID);
     List<ProyectoDTO> consultarProyectos();

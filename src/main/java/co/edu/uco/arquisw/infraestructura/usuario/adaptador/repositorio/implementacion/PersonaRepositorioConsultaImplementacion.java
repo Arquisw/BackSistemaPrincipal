@@ -14,13 +14,11 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.Peti
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta
-{
+public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta {
     @Autowired
     PeticionEliminacionPersonaMapeador peticionEliminacionPersonaMapeador;
     @Autowired
@@ -37,12 +35,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     PeticionEliminacionPersonaDAO peticionEliminacionPersonaDAO;
 
     @Override
-    public PersonaDTO consultarPorId(Long id)
-    {
+    public PersonaDTO consultarPorId(Long id) {
         var entidad = this.personaDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -50,12 +46,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public PersonaDTO consultarPorCorreo(String correo)
-    {
+    public PersonaDTO consultarPorCorreo(String correo) {
         var entidad = this.personaDAO.findByCorreo(correo);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -63,8 +57,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public boolean existeConCorreo(String correo)
-    {
+    public boolean existeConCorreo(String correo) {
         var usuario = this.usuarioDAO.findByCorreo(correo);
         var persona = this.personaDAO.findByCorreo(correo);
 
@@ -73,12 +66,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
 
     @Override
-    public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID)
-    {
+    public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID) {
         var entidad = this.hojaDeVidaPersonaDAO.findByUsuario(usuarioID);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -86,8 +77,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios()
-    {
+    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios() {
         var entidades = this.peticionEliminacionPersonaDAO.findAll();
 
         return this.peticionEliminacionPersonaMapeador.construirDTOs(entidades);

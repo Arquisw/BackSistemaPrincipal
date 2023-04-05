@@ -6,9 +6,7 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioCo
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 
-public class ServicioActualizarNecesidad
-{
-
+public class ServicioActualizarNecesidad {
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioComando necesidadRepositorioComando;
 
@@ -17,17 +15,14 @@ public class ServicioActualizarNecesidad
         this.necesidadRepositorioComando = necesidadRepositorioComando;
     }
 
-    public Long ejecutar(Necesidad necesidad, Long asociacionID)
-    {
+    public Long ejecutar(Necesidad necesidad, Long asociacionID) {
         validarSiExisteAsociacionConId(asociacionID);
 
         return this.necesidadRepositorioComando.actualizar(necesidad, asociacionID);
     }
 
-    private void validarSiExisteAsociacionConId(Long asociacionID)
-    {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID)))
-        {
+    private void validarSiExisteAsociacionConId(Long asociacionID) {
+        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + asociacionID);
         }
     }

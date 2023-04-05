@@ -10,8 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProyectoComando
-{
+public class ProyectoComando {
     private String nombre;
     private String descripcion;
     private List<TipoConsultoriaComando> tiposConsultoria;

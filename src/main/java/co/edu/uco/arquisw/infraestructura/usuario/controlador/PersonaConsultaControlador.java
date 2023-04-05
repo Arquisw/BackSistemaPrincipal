@@ -18,37 +18,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 @Tag(name = "Consulta del Usuario Controlador")
-public class PersonaConsultaControlador
-{
+public class PersonaConsultaControlador {
     private final ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador;
     private final ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador;
     private final ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador;
 
-    public PersonaConsultaControlador(ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador, ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador, ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador)
-    {
+    public PersonaConsultaControlador(ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador, ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador, ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador) {
         this.consultarPersonaPorIdManejador = consultarPersonaPorIdManejador;
         this.consultarHojaDeVidaPorIdUsuarioManejador = consultarHojaDeVidaPorIdUsuarioManejador;
         this.consultarPeticionesDeEliminacionPersonaManejador = consultarPeticionesDeEliminacionPersonaManejador;
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar un usuario por medio de un ID")
-    public PersonaDTO consultarPorId(@PathVariable Long id)
-    {
+    public PersonaDTO consultarPorId(@PathVariable Long id) {
         return this.consultarPersonaPorIdManejador.ejecutar(id);
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/hojadevida/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una hoja de vida de un usuario por medio del ID del usuario")
-    public HojaDeVidaPersonaDTO consultarHojaDeVidaPorId(@PathVariable Long id)
-    {
+    public HojaDeVidaPersonaDTO consultarHojaDeVidaPorId(@PathVariable Long id) {
         return this.consultarHojaDeVidaPorIdUsuarioManejador.ejecutar(id);
     }
+
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/administrador")
     @Operation(summary = "Consultar todos", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
-    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacion()
-    {
+    public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacion() {
         return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar();
     }
 }

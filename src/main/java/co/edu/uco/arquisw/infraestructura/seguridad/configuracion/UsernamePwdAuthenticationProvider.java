@@ -1,12 +1,8 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorCorreo;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
-import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.UsuarioEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +14,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UsernamePwdAuthenticationProvider implements AuthenticationProvider {
-
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-
 	@Autowired
 	private ConsultarPersonaPorCorreo consultarPersonaPorCorreo;
-	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -39,8 +32,8 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 		String pwd = authentication.getCredentials().toString();
 		UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
 		PersonaDTO persona= this.consultarPersonaPorCorreo.ejecutar(username);
-		if (usuario!=null) {
 
+		if (usuario!=null) {
 			if (passwordEncoder.matches(pwd, usuario.getClave())) {
 				return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(persona.getRoles()));
 			} else {
@@ -56,6 +49,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
         for (RolDTO authority : authorities) {
         	grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
         }
+
         return grantedAuthorities;
     }
 

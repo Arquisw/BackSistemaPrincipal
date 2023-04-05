@@ -6,29 +6,22 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import co.edu.uco.arquisw.infraestructura.seguridad.constante.SecurityConstants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
-
-	
 	@Override
-	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (null != authentication) {
 			SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
@@ -38,6 +31,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 					  .setIssuedAt(new Date())
 					.setExpiration(new Date((new Date()).getTime() + 30000000))
 					.signWith(key).compact();
+
 			response.setHeader(SecurityConstants.JWT_HEADER, jwt);
 		}
 

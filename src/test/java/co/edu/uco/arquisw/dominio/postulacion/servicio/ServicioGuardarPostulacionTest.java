@@ -7,12 +7,14 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 class ServicioGuardarPostulacionTest {
+
     @Test
     void guardarExitoso()
     {
@@ -23,8 +25,9 @@ class ServicioGuardarPostulacionTest {
         var  postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando =Mockito.mock(PersonaRepositorioComando.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -45,8 +48,9 @@ class ServicioGuardarPostulacionTest {
         var  postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando =Mockito.mock(PersonaRepositorioComando.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -61,11 +65,12 @@ class ServicioGuardarPostulacionTest {
         var postulado= new PostulacionTestDataBuilder().build();
         var proyecto = new ProyectoDTO();
 
-        var  postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
-        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
 
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);

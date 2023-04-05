@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RolDTO
-{
+public class RolDTO {
     private String nombre;
 }

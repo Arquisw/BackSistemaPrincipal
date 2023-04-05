@@ -5,22 +5,18 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
 
 @Getter
-public class EstadoProyecto
-{
+public class EstadoProyecto {
     private String nombre;
 
-    private EstadoProyecto(String nombre)
-    {
+    private EstadoProyecto(String nombre) {
         setNombre(nombre);
     }
 
-    public static EstadoProyecto crear(String nombre)
-    {
+    public static EstadoProyecto crear(String nombre) {
         return new EstadoProyecto(nombre);
     }
 
-    public void setNombre(String nombre)
-    {
+    public void setNombre(String nombre) {
         ValidarTexto.validarObligatorio(nombre, Mensajes.NOMBRE_ESTADO_PROYECTO_NO_PUEDE_ESTAR_VACIO);
         ValidarTexto.validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_ESTADO_PROYECTO_NO_ES_VALIDO);
 

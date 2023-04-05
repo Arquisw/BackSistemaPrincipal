@@ -8,23 +8,19 @@ import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.EstadoProye
 import org.springframework.stereotype.Component;
 
 @Component
-public class EstadoProyectoMapeador
-{
-    public EstadoProyectoDTO construirDTO(EstadoProyectoEntidad estado)
-    {
+public class EstadoProyectoMapeador {
+    public EstadoProyectoDTO construirDTO(EstadoProyectoEntidad estado) {
         return new EstadoProyectoDTO(estado.getEstado().getNombre());
     }
 
-    public EstadoProyectoEntidad construirEntidad(EstadoProyecto estado)
-    {
+    public EstadoProyectoEntidad construirEntidad(EstadoProyecto estado) {
         return new EstadoProyectoEntidad(0L, new EstadoEntidad(obtenerRolID(estado.getNombre()), estado.getNombre()));
     }
 
-    private Long obtenerRolID(String nombre)
-    {
+    private Long obtenerRolID(String nombre) {
         return switch (nombre) {
-            case TextoConstante.ESTADO_EN_DESARROLLO -> 3L;
-            case TextoConstante.ESTADO_FINALIZADO -> 4L;
+            case TextoConstante.ESTADO_EN_DESARROLLO -> 4L;
+            case TextoConstante.ESTADO_FINALIZADO -> 5L;
             default -> 0L;
         };
     }

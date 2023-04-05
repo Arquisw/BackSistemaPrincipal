@@ -9,20 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ContratoRepositorioConsultaImplementacion implements ContratoRepositorioConsulta
-{
+public class ContratoRepositorioConsultaImplementacion implements ContratoRepositorioConsulta {
     @Autowired
     ContratoMapeador contratoMapeador;
     @Autowired
     ContratoDAO contratoDAO;
 
     @Override
-    public ContratoDTO consultarPorId(Long id)
-    {
-        var entidad = this.contratoDAO.findByAsociacion(id);
+    public ContratoDTO consultarPorId(Long id) {
+        var entidad = this.contratoDAO.findByNecesidad(id);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 

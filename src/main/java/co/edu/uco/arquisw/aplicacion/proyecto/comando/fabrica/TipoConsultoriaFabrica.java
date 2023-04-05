@@ -6,15 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class TipoConsultoriaFabrica
-{
-    public TipoConsultoria construir(TipoConsultoriaComando tipoConsultoria)
-    {
+public class TipoConsultoriaFabrica {
+    public TipoConsultoria construir(TipoConsultoriaComando tipoConsultoria) {
         return TipoConsultoria.crear(tipoConsultoria.getNombre());
     }
 
-    public List<TipoConsultoria> construirTodos(List<TipoConsultoriaComando> tiposConsultoria)
-    {
+    public List<TipoConsultoria> construirTodos(List<TipoConsultoriaComando> tiposConsultoria) {
         return tiposConsultoria.stream().map(new TipoConsultoriaFabrica()::construir).toList();
     }
 }

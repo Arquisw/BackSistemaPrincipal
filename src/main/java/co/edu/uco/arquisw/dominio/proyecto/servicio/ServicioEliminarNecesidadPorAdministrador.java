@@ -5,20 +5,17 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioCo
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 
-public class ServicioEliminarNecesidadPorAdministrador
-{
+public class ServicioEliminarNecesidadPorAdministrador {
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioComando necesidadRepositorioComando;
 
-    public ServicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando)
-    {
+    public ServicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.necesidadRepositorioComando = necesidadRepositorioComando;
     }
 
 
-    public Long ejecutar(Long id)
-    {
+    public Long ejecutar(Long id) {
         validarSiExisteAsociacionConID(id);
 
         this.necesidadRepositorioComando.eliminar(id);
@@ -26,10 +23,8 @@ public class ServicioEliminarNecesidadPorAdministrador
         return id;
     }
 
-    private void validarSiExisteAsociacionConID(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id)))
-        {
+    private void validarSiExisteAsociacionConID(Long id) {
+        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
         }
     }

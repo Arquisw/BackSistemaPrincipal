@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstadoNecesidadDTO
-{
+public class EstadoNecesidadDTO {
     private String nombre;
 }

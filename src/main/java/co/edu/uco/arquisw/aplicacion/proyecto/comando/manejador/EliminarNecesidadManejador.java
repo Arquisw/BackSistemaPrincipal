@@ -6,19 +6,15 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioEliminarNecesidad;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EliminarNecesidadManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>>
-{
+public class EliminarNecesidadManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
     private final ServicioEliminarNecesidad servicioEliminarNecesidad;
 
-    public EliminarNecesidadManejador(ServicioEliminarNecesidad servicioEliminarNecesidad)
-    {
+    public EliminarNecesidadManejador(ServicioEliminarNecesidad servicioEliminarNecesidad) {
         this.servicioEliminarNecesidad = servicioEliminarNecesidad;
     }
 
-
     @Override
-    public ComandoRespuesta<Long> ejecutar(Long comando)
-    {
+    public ComandoRespuesta<Long> ejecutar(Long comando) {
         return new ComandoRespuesta<>(this.servicioEliminarNecesidad.ejecutar(comando));
     }
 }

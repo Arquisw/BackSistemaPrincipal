@@ -13,8 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "necesidad")
-public class NecesidadEntidad
-{
+public class NecesidadEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="necesidad_code_seq")
     @SequenceGenerator(name="necesidad_code_seq", sequenceName="necesidad_code_seq", allocationSize=1)

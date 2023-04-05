@@ -8,20 +8,17 @@ import co.edu.uco.arquisw.dominio.asociacion.servicio.ServicioGuardarAsociacion;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GuardarAsociacionManejador implements ManejadorComandoActualizacionRespuesta<AsociacionComando, Long, ComandoRespuesta<Long>>
-{
+public class GuardarAsociacionManejador implements ManejadorComandoActualizacionRespuesta<AsociacionComando, Long, ComandoRespuesta<Long>> {
     private final AsociacionFabrica asociacionFabrica;
     private final ServicioGuardarAsociacion servicioGuardarAsociacion;
 
-    public GuardarAsociacionManejador(AsociacionFabrica asociacionFabrica, ServicioGuardarAsociacion servicioGuardarAsociacion)
-    {
+    public GuardarAsociacionManejador(AsociacionFabrica asociacionFabrica, ServicioGuardarAsociacion servicioGuardarAsociacion) {
         this.asociacionFabrica = asociacionFabrica;
         this.servicioGuardarAsociacion = servicioGuardarAsociacion;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(AsociacionComando comando, Long id)
-    {
+    public ComandoRespuesta<Long> ejecutar(AsociacionComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioGuardarAsociacion.ejecutar(this.asociacionFabrica.construir(comando), id));
     }
 }

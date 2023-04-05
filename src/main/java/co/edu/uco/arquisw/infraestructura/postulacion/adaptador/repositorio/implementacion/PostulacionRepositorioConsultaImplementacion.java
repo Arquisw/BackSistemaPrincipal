@@ -13,8 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PostulacionRepositorioConsultaImplementacion implements PostulacionRepositorioConsulta
-{
+public class PostulacionRepositorioConsultaImplementacion implements PostulacionRepositorioConsulta {
     @Autowired
     PostulacionMapeador postulacionMapeador;
     @Autowired
@@ -23,13 +22,12 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     PostulacionDAO postulacionDAO;
     @Autowired
     SeleccionDAO seleccionDAO;
+
     @Override
-    public PostulacionDTO consultarPostulacionPorId(Long id)
-    {
+    public PostulacionDTO consultarPostulacionPorId(Long id) {
         var entidad = this.postulacionDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -37,12 +35,10 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public PostulacionDTO consultarPostulacionPorUsuarioId(Long id)
-    {
+    public PostulacionDTO consultarPostulacionPorUsuarioId(Long id) {
         var entidad = this.postulacionDAO.findByUsuario(id);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -50,8 +46,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID)
-    {
+    public List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID) {
         var entidades = this.postulacionDAO.findAll();
 
         var postulaciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID)).toList();
@@ -60,12 +55,10 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public SeleccionDTO consultarSeleccionPorId(Long id)
-    {
+    public SeleccionDTO consultarSeleccionPorId(Long id) {
         var entidad = this.seleccionDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -73,12 +66,10 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public SeleccionDTO consultarSeleccionPorUsuarioId(Long id)
-    {
+    public SeleccionDTO consultarSeleccionPorUsuarioId(Long id) {
         var entidad = this.seleccionDAO.findByUsuario(id);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -86,8 +77,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public List<SeleccionDTO> consultarSeleccionadosPorProyecto(Long proyectoID)
-    {
+    public List<SeleccionDTO> consultarSeleccionadosPorProyecto(Long proyectoID) {
         var entidades = this.seleccionDAO.findAll();
 
         var selecciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID)).toList();

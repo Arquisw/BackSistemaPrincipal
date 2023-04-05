@@ -16,28 +16,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/asociaciones")
 @Tag(name = "Consulta de la Asociacion Controlador")
-public class AsociacionConsultaControlador
-{
+public class AsociacionConsultaControlador {
     private final ConsultarAsociacionPorIdManejador consultarAsociacionPorIdManejador;
     private final ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador;
 
-    public AsociacionConsultaControlador(ConsultarAsociacionPorIdManejador consultarAsociacionPorIdManejador, ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador)
-    {
+    public AsociacionConsultaControlador(ConsultarAsociacionPorIdManejador consultarAsociacionPorIdManejador, ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador) {
         this.consultarAsociacionPorIdManejador = consultarAsociacionPorIdManejador;
         this.consultarPeticionesDeEliminacionAsociacionManejador = consultarPeticionesDeEliminacionAsociacionManejador;
     }
+
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una asociacion por medio del ID de un Usuario")
-    public AsociacionDTO consultarPorId(@PathVariable Long id)
-    {
+    public AsociacionDTO consultarPorId(@PathVariable Long id) {
         return this.consultarAsociacionPorIdManejador.ejecutar(id);
     }
+
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/administrador")
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una asociacion")
-    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacion()
-    {
+    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacion() {
         return this.consultarPeticionesDeEliminacionAsociacionManejador.ejecutar();
     }
 }

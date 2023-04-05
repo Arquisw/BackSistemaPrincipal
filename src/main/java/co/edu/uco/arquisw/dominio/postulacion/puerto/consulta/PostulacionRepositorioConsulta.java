@@ -4,8 +4,7 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import java.util.List;
 
-public interface PostulacionRepositorioConsulta
-{
+public interface PostulacionRepositorioConsulta {
     PostulacionDTO consultarPostulacionPorId(Long id);
     PostulacionDTO consultarPostulacionPorUsuarioId(Long id);
     List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID);

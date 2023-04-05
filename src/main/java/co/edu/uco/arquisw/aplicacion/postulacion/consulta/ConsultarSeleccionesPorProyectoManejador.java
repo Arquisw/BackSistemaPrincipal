@@ -7,18 +7,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ConsultarSeleccionesPorProyectoManejador implements ManejadorComandoRespuesta<Long, List<SeleccionDTO>>
-{
+public class ConsultarSeleccionesPorProyectoManejador implements ManejadorComandoRespuesta<Long, List<SeleccionDTO>> {
     private final ServicioConsultarSeleccionadoPorProyecto servicioConsultarSeleccionadoPorProyecto;
 
-    public ConsultarSeleccionesPorProyectoManejador(ServicioConsultarSeleccionadoPorProyecto servicioConsultarSeleccionadoPorProyecto)
-    {
+    public ConsultarSeleccionesPorProyectoManejador(ServicioConsultarSeleccionadoPorProyecto servicioConsultarSeleccionadoPorProyecto) {
         this.servicioConsultarSeleccionadoPorProyecto = servicioConsultarSeleccionadoPorProyecto;
     }
 
     @Override
-    public List<SeleccionDTO> ejecutar(Long comando)
-    {
+    public List<SeleccionDTO> ejecutar(Long comando) {
         return this.servicioConsultarSeleccionadoPorProyecto.ejecutar(comando);
     }
 }

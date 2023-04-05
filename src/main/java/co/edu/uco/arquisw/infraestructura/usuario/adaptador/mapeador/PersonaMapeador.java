@@ -6,22 +6,24 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.PersonaEntid
 import org.springframework.stereotype.Component;
 
 @Component
-public class PersonaMapeador
-{
+public class PersonaMapeador {
     private final RolMapeador rolMapeador;
 
-    public PersonaMapeador(RolMapeador rolMapeador)
-    {
+    public PersonaMapeador(RolMapeador rolMapeador) {
         this.rolMapeador = rolMapeador;
     }
 
-    public PersonaDTO construirDTO(PersonaEntidad persona)
-    {
+    public PersonaDTO construirDTO(PersonaEntidad persona) {
         return new PersonaDTO(persona.getId(), persona.getNombre(), persona.getApellidos(), persona.getCorreo(), this.rolMapeador.construirDTOs(persona.getRoles()));
     }
 
-    public PersonaEntidad construirEntidad(Persona persona)
-    {
+    public PersonaEntidad construirEntidad(Persona persona) {
         return new PersonaEntidad(0L, persona.getNombre(), persona.getApellidos(), persona.getCorreo(), this.rolMapeador.construirEntidades(persona.getRoles()));
+    }
+
+    public void actualizarEntidad(PersonaEntidad entidad, Persona persona) {
+        entidad.setNombre(persona.getNombre());
+        entidad.setCorreo(persona.getCorreo());
+        entidad.setApellidos(persona.getApellidos());
     }
 }

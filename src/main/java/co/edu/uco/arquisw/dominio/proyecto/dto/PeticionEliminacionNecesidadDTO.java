@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeticionEliminacionNecesidadDTO
-{
+public class PeticionEliminacionNecesidadDTO {
     private Long id;
     private Long necesidad;
 }

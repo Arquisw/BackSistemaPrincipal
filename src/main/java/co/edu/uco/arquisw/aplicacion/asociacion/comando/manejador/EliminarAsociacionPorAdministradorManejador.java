@@ -6,18 +6,15 @@ import co.edu.uco.arquisw.dominio.asociacion.servicio.ServicioEliminarAsociacion
 import org.springframework.stereotype.Component;
 
 @Component
-public class EliminarAsociacionPorAdministradorManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>>
-{
+public class EliminarAsociacionPorAdministradorManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
     private final ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador;
 
-    public EliminarAsociacionPorAdministradorManejador(ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador)
-    {
+    public EliminarAsociacionPorAdministradorManejador(ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador) {
         this.servicioEliminarAsociacionPorAdministrador = servicioEliminarAsociacionPorAdministrador;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(Long comando)
-    {
+    public ComandoRespuesta<Long> ejecutar(Long comando) {
         return new ComandoRespuesta<>(this.servicioEliminarAsociacionPorAdministrador.ejecutar(comando));
     }
 }

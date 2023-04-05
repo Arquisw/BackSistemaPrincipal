@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/usuarios")
 @Tag(name = "Comando del Usuario Controlador")
-public class PersonaComandoControlador
-{
+public class PersonaComandoControlador {
     private final GuardarPersonaManejador guardarPersonaManejador;
     private final ActualizarPersonaManejador actualizarPersonaManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;
@@ -21,8 +20,7 @@ public class PersonaComandoControlador
     private final GuardarHojaDeVidaManejador guardarHojaDeVidaManejador;
     private final ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador)
-    {
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador) {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
@@ -33,43 +31,42 @@ public class PersonaComandoControlador
 
     @PostMapping
     @Operation(summary = "Guardar Usuario", description = "Este es usado para guardar un usuario en la aplicación")
-    public ComandoRespuesta<Long> guardar(@RequestBody PersonaComando persona)
-    {
+    public ComandoRespuesta<Long> guardar(@RequestBody PersonaComando persona) {
         return this.guardarPersonaManejador.ejecutar(persona);
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/hojadevida/{id}")
     @Operation(summary = "Guardar Hoja de Vida", description = "Este es usado para guardar una hoja en la aplicación por medio de un usuario")
-    public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
-    {
+    public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id) {
         return this.guardarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> actualizar(@RequestBody PersonaComando persona, @PathVariable Long id)
-    {
+    public ComandoRespuesta<Long> actualizar(@RequestBody PersonaComando persona, @PathVariable Long id) {
         return this.actualizarPersonaManejador.ejecutar(persona, id);
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PutMapping("/hojadevida/{id}")
     @Operation(summary = "Actualizar Hoja de Vida", description = "Este es usado para actualizar los datos de una hoja de vida por medio del ID de un usuario")
-    public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id)
-    {
+    public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id) {
         return this.actualizarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminar(@PathVariable Long id)
-    {
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
         return this.eliminarPersonaManejador.ejecutar(id);
     }
+
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id)
-    {
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
         return this.eliminarPersonaPorAdministradorManejador.ejecutar(id);
     }
 }

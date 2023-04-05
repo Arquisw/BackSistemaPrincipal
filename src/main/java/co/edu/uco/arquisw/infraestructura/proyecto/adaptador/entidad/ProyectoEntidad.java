@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "proyecto")
-public class ProyectoEntidad
-{
+public class ProyectoEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="proyecto_code_seq")
     @SequenceGenerator(name="proyecto_code_seq", sequenceName="proyecto_code_seq", allocationSize=1)

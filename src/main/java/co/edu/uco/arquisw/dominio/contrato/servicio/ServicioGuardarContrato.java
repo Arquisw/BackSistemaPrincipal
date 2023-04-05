@@ -1,34 +1,36 @@
 package co.edu.uco.arquisw.dominio.contrato.servicio;
 
-import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.modelo.Contrato;
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 
-public class ServicioGuardarContrato
-{
+public class ServicioGuardarContrato {
     private final ContratoRepositorioComando contratoRepositorioComando;
-    private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
+    private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
+    private final NecesidadRepositorioComando necesidadRepositorioComando;
 
-    public ServicioGuardarContrato(ContratoRepositorioComando contratoRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta)
-    {
+    public ServicioGuardarContrato(ContratoRepositorioComando contratoRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
         this.contratoRepositorioComando = contratoRepositorioComando;
-        this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
+        this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
+        this.necesidadRepositorioComando = necesidadRepositorioComando;
     }
 
-    public Long ejecutar(Contrato contrato, Long asociacionID)
-    {
-        validarSiExisteAsociacionConId(asociacionID);
+    public Long ejecutar(Contrato contrato, Long necesidadID) {
+        validarSiExisteProyectoConId(necesidadID);
 
-        return this.contratoRepositorioComando.guardar(contrato, asociacionID);
+        this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_NEGOCIADO), necesidadID);
+
+        return this.contratoRepositorioComando.guardar(contrato, necesidadID);
     }
 
-    private void validarSiExisteAsociacionConId(Long asociacionID)
-    {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID)))
-        {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + asociacionID);
+    private void validarSiExisteProyectoConId(Long necesidadID) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(necesidadID))) {
+            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadID);
         }
     }
 }

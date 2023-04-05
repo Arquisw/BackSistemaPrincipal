@@ -25,19 +25,18 @@ class ServicioEliminarAsociacionTest {
         necesidad.setEstado(estado);
         var asociacion =new AsociacionDTO();
 
-        var   asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
         var id =servicio.ejecutar(1L);
 
-        Mockito.verify(asociacionRepositorioComando,Mockito.times(1)).eliminar(1L);
+        Mockito.verify(necesidadRepositorioComando,Mockito.times(1)).eliminar(1L);
 
         Assertions.assertEquals(1L,id);
     }
@@ -49,12 +48,11 @@ class ServicioEliminarAsociacionTest {
         var necesidad = new NecesidadDTO();
         necesidad.setEstado(estado);
 
-        var   asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
@@ -70,12 +68,11 @@ class ServicioEliminarAsociacionTest {
         necesidad.setEstado(estado);
         var asociacion =new AsociacionDTO();
 
-        var   asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
         var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);

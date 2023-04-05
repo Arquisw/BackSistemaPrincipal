@@ -6,18 +6,15 @@ import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioEliminarPersonaPorAdm
 import org.springframework.stereotype.Component;
 
 @Component
-public class EliminarPersonaPorAdministradorManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>>
-{
+public class EliminarPersonaPorAdministradorManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
     private final ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador;
 
-    public EliminarPersonaPorAdministradorManejador(ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador)
-    {
+    public EliminarPersonaPorAdministradorManejador(ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador) {
         this.servicioEliminarPersonaPorAdministrador = servicioEliminarPersonaPorAdministrador;
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(Long comando)
-    {
+    public ComandoRespuesta<Long> ejecutar(Long comando) {
         return new ComandoRespuesta<>(this.servicioEliminarPersonaPorAdministrador.ejecutar(comando));
     }
 }

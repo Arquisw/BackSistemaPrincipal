@@ -8,8 +8,7 @@ import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioActualizarPostula
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActualizarPostulacionManejador implements ManejadorComandoActualizacionRespuesta<PostulacionComando, Long, ComandoRespuesta<Long>>
-{
+public class ActualizarPostulacionManejador implements ManejadorComandoActualizacionRespuesta<PostulacionComando, Long, ComandoRespuesta<Long>> {
     private final PostulacionFabrica postulacionFabrica;
     private final ServicioActualizarPostulacion servicioActualizarPostulacion;
 
@@ -19,8 +18,7 @@ public class ActualizarPostulacionManejador implements ManejadorComandoActualiza
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(PostulacionComando comando, Long id)
-    {
-        return new ComandoRespuesta<>(this.servicioActualizarPostulacion.ejecutar(this.postulacionFabrica.construir(comando), id));
+    public ComandoRespuesta<Long> ejecutar(PostulacionComando comando, Long id) {
+        return new ComandoRespuesta<>(this.servicioActualizarPostulacion.ejecutar(this.postulacionFabrica.construir(comando), comando.getProyectoID(), comando.getUsuarioID(), id));
     }
 }

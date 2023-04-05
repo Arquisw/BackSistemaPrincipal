@@ -14,24 +14,22 @@ public class ServicioActualizarHojaDeVida {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
-    public Long ejecutar(HojaDeVidaPersona hojaDeVida, Long usuarioId)
-    {
+
+    public Long ejecutar(HojaDeVidaPersona hojaDeVida, Long usuarioId) {
         validarSiExisteUsuarioConID(usuarioId);
         validarSiExisteHojaDeVida(usuarioId);
 
         return this.personaRepositorioComando.actualizarHojaDeVida(hojaDeVida, usuarioId);
     }
-    private void validarSiExisteUsuarioConID(Long usuarioId)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId)))
-        {
+
+    private void validarSiExisteUsuarioConID(Long usuarioId) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
         }
     }
-    private void validarSiExisteHojaDeVida(Long usuarioId)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(usuarioId)))
-        {
+
+    private void validarSiExisteHojaDeVida(Long usuarioId) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(usuarioId))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID + usuarioId);
         }
     }

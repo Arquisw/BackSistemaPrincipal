@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonaComando
-{
+public class PersonaComando {
     private String nombre;
     private String apellidos;
     private String correo;

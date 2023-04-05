@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NecesidadDTO
-{
+public class NecesidadDTO {
     private Long id;
     private String rutaArchivo;
     private EstadoNecesidadDTO estado;

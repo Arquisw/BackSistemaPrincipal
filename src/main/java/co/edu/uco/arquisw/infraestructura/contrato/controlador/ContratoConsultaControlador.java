@@ -13,19 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/contratos")
 @Tag(name = "Consulta del Contrato Controlador")
-public class ContratoConsultaControlador
-{
+public class ContratoConsultaControlador {
     private final ConsultarContratoPorIdManejador consultarContratoPorIdManejador;
 
-    public ContratoConsultaControlador(ConsultarContratoPorIdManejador consultarContratoPorIdManejador)
-    {
+    public ContratoConsultaControlador(ConsultarContratoPorIdManejador consultarContratoPorIdManejador) {
         this.consultarContratoPorIdManejador = consultarContratoPorIdManejador;
     }
-    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR','ROLE_ASOCIACION')")
     @GetMapping("/{id}")
-    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar un contrato por medio del ID de una asociacion")
-    public ContratoDTO consultarPorId(@PathVariable Long id)
-    {
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar un contrato por medio del ID de una necesidad")
+    public ContratoDTO consultarPorId(@PathVariable Long id) {
         return this.consultarContratoPorIdManejador.ejecutar(id);
     }
 }

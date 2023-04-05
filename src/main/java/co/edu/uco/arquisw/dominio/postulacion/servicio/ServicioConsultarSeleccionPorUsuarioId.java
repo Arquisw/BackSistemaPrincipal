@@ -6,28 +6,31 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-public class ServicioConsultarSeleccionPorUsuarioId
-{
+public class ServicioConsultarSeleccionPorUsuarioId {
     private final PostulacionRepositorioConsulta postulacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta)
-    {
+    public ServicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public SeleccionDTO ejecutar(Long id)
-    {
+    public SeleccionDTO ejecutar(Long id) {
         validarSiExistePostulacionConUsuarioID(id);
+        validarSiExistePostulacionConID(id);
 
         return this.postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(id);
     }
-    private void validarSiExistePostulacionConUsuarioID(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id)))
-        {
+
+    private void validarSiExistePostulacionConUsuarioID(Long id) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+        }
+    }
+
+    private void validarSiExistePostulacionConID(Long id) {
+        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(id))) {
+            throw new NullPointerException(Mensajes.NO_EXISTE_SELECCION_CON_EL_ID_DE_USUARIO_CON_EL_ID + id);
         }
     }
 }

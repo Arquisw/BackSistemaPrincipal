@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsociacionDTO
-{
+public class AsociacionDTO {
     private Long id;
     private String nombre;
     private String nit;

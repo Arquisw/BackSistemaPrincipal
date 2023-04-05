@@ -8,25 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ContratoRepositorioComandoImplementacion implements ContratoRepositorioComando
-{
+public class ContratoRepositorioComandoImplementacion implements ContratoRepositorioComando {
     @Autowired
     ContratoMapeador contratoMapeador;
     @Autowired
     ContratoDAO contratoDAO;
 
     @Override
-    public Long guardar(Contrato contrato, Long id)
-    {
+    public Long guardar(Contrato contrato, Long id) {
         var entidad = this.contratoMapeador.construirEntidad(contrato, id);
 
         return this.contratoDAO.save(entidad).getId();
     }
 
     @Override
-    public Long actualizar(Contrato contrato, Long id)
-    {
-        var entidad = this.contratoDAO.findByAsociacion(id);
+    public Long actualizar(Contrato contrato, Long id) {
+        var entidad = this.contratoDAO.findByNecesidad(id);
 
         entidad.setRuta(contrato.getRutaArchivo());
 
@@ -34,9 +31,8 @@ public class ContratoRepositorioComandoImplementacion implements ContratoReposit
     }
 
     @Override
-    public void eliminar(Long id)
-    {
-        var entidad = this.contratoDAO.findByAsociacion(id);
+    public void eliminar(Long id) {
+        var entidad = this.contratoDAO.findByNecesidad(id);
 
         this.contratoDAO.deleteById(entidad.getId());
     }

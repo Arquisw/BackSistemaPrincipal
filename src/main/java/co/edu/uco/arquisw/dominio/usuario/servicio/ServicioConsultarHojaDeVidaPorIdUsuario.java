@@ -9,22 +9,18 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioCons
 public class ServicioConsultarHojaDeVidaPorIdUsuario {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioConsultarHojaDeVidaPorIdUsuario(PersonaRepositorioConsulta personaRepositorioConsulta)
-    {
+    public ServicioConsultarHojaDeVidaPorIdUsuario(PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public HojaDeVidaPersonaDTO ejecutar(Long id)
-    {
+    public HojaDeVidaPersonaDTO ejecutar(Long id) {
         validarSiNoExisteUsuarioConId(id);
 
         return personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(id);
     }
 
-    private void validarSiNoExisteUsuarioConId(Long id)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id)))
-        {
+    private void validarSiNoExisteUsuarioConId(Long id) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }

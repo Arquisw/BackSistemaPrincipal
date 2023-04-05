@@ -8,20 +8,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class SeleccionMapeador
-{
-    public SeleccionDTO construirDTO(SeleccionEntidad seleccion)
-    {
+public class SeleccionMapeador {
+    public SeleccionDTO construirDTO(SeleccionEntidad seleccion) {
         return new SeleccionDTO(seleccion.getId(), seleccion.getFecha(), seleccion.getRol(), seleccion.getProyecto(), seleccion.getUsuario());
     }
 
-    public List<SeleccionDTO> construirDTOs(List<SeleccionEntidad> selecciones)
-    {
+    public List<SeleccionDTO> construirDTOs(List<SeleccionEntidad> selecciones) {
         return selecciones.stream().map(new SeleccionMapeador()::construirDTO).toList();
     }
 
-    public SeleccionEntidad construirEntidad(Seleccion seleccion, Long proyectoID, Long usuarioID)
-    {
+    public SeleccionEntidad construirEntidad(Seleccion seleccion, Long proyectoID, Long usuarioID) {
         return new SeleccionEntidad(0L, FechaFormateador.obtenerFechaTexto(seleccion.getFecha()), seleccion.getRol(), proyectoID, usuarioID);
     }
 }

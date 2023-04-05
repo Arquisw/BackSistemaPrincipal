@@ -15,8 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AsociacionRepositorioConsultaImplementacion implements AsociacionRepositorioConsulta
-{
+public class AsociacionRepositorioConsultaImplementacion implements AsociacionRepositorioConsulta {
     @Autowired
     AsociacionMapeador asociacionMapeador;
     @Autowired
@@ -29,12 +28,10 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     PeticionEliminacionAsociacionMapeador peticionEliminacionAsociacionMapeador;
 
     @Override
-    public AsociacionDTO consultarPorID(Long id)
-    {
+    public AsociacionDTO consultarPorID(Long id) {
         var entidad = this.asociacionDAO.findByUsuario(id);
 
-        if(ValidarObjeto.esNulo(entidad) )
-        {
+        if(ValidarObjeto.esNulo(entidad) ) {
             return null;
         }
 
@@ -45,12 +42,10 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     }
 
     @Override
-    public AsociacionDTO consultarPorNIT(String nit)
-    {
+    public AsociacionDTO consultarPorNIT(String nit) {
         var entidad = this.asociacionDAO.findByNit(nit);
 
-        if(ValidarObjeto.esNulo(entidad))
-        {
+        if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -58,8 +53,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     }
 
     @Override
-    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones()
-    {
+    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones() {
         var entidades = this.peticionEliminacionAsociacionDAO.findAll();
 
         return this.peticionEliminacionAsociacionMapeador.construirDTOs(entidades);

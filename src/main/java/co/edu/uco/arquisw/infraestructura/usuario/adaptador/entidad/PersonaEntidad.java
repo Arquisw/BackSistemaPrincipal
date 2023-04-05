@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "persona")
-public class PersonaEntidad
-{
+public class PersonaEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="persona_code_seq")
     @SequenceGenerator(name="persona_code_seq", sequenceName="persona_code_seq", allocationSize=1)

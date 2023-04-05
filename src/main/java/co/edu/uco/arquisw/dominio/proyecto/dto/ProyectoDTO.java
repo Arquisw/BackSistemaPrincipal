@@ -10,8 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProyectoDTO
-{
+public class ProyectoDTO {
     private Long id;
     private String nombre;
     private String descripcion;

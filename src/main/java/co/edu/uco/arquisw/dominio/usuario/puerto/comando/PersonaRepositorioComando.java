@@ -4,10 +4,11 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 
-public interface PersonaRepositorioComando
-{
+public interface PersonaRepositorioComando {
     Long guardar(Persona persona);
     Long actualizar(Persona persona, Long id);
+    void crearRol(Rol rol, Long id);
+    void eliminarRolAsociacion(Rol rol, Long id);
     void eliminarRol(Rol rol, Long id);
     void eliminar(Long id);
     Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);

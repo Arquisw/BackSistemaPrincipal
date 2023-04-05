@@ -17,16 +17,14 @@ public class ServicioGuardarHojaDeVida {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public Long ejecutar(HojaDeVidaPersona hojaDeVida, Long usuarioId)
-    {
+    public Long ejecutar(HojaDeVidaPersona hojaDeVida, Long usuarioId) {
         validarSiExisteUsuarioConID(usuarioId);
 
         return this.personaRepositorioComando.guardarHojaDeVida(hojaDeVida, usuarioId);
     }
-    private void validarSiExisteUsuarioConID(Long usuarioId)
-    {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId)))
-        {
+
+    private void validarSiExisteUsuarioConID(Long usuarioId) {
+        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
             throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
         }
     }
