@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.dominio.contrato.servicio;
 
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioComando;
 import co.edu.uco.arquisw.dominio.contrato.testDataBuilder.ContratoTestDataBuilder;
+import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
@@ -30,7 +31,7 @@ class ServicioGuardarContratoTest {
     void contratoActualizarExistosamente()
     {
         var contrato = new ContratoTestDataBuilder().build();
-        var proyecto = new ProyectoDTO();
+        var necesidad = new NecesidadDTO();
 
         var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
@@ -38,7 +39,7 @@ class ServicioGuardarContratoTest {
 
         var servicio= new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.any())).thenReturn(proyecto);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorId(1L)).thenReturn(necesidad);
 
         servicio.ejecutar(contrato,1L);
 

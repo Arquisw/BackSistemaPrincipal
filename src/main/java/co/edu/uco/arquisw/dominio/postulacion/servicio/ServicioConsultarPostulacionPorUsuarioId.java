@@ -19,7 +19,6 @@ public class ServicioConsultarPostulacionPorUsuarioId {
         validarSiExisteUsuarioConID(id);
         validarSiExistePostulacionConUsuarioID(id);
 
-
         return this.postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(id);
     }
 
