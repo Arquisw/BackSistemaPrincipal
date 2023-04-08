@@ -13,19 +13,24 @@ class ServicioConsultarPostulacionPorUsuarioIdTest {
     @Test
     void validarConsultaPostulacionPorUsuarioPorIdExitosa()
     {
-        var personaDto = new PersonaDTO();
+        var personaDTO = new PersonaDTO();
+        var postulacionDTO = new PostulacionDTO();
+        var personaID = 1L;
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
 
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDto);
+        Mockito.when(personaRepositorioConsulta.consultarPorId(personaID)).thenReturn(personaDTO);
+        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(personaID)).thenReturn(postulacionDTO);
 
-        servicio.ejecutar(1L);
+        var resultado = servicio.ejecutar(personaID);
 
-        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarPostulacionPorUsuarioId(1L);
+        Assertions.assertEquals(postulacionDTO, resultado);
 
+        Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
+        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarPostulacionPorUsuarioId(personaID);
     }
     @Test
     void consultaPorIdFallida()

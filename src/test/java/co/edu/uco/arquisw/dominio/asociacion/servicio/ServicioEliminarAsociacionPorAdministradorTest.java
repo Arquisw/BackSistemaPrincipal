@@ -42,7 +42,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
 
         var servicio = new ServicioEliminarAsociacionPorAdministrador(asociacionRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
+        Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,
                 Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.postulacion.servicio;
 
+import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
@@ -13,17 +14,21 @@ class ServicioSeleccionadoPorUsuarioIdTest {
     void validarConsultaSeleccionadoPorProyectoExitosa()
     {
         var personaDto = new PersonaDTO();
+        var seleccionDTO = new SeleccionDTO();
+        var personaID = 1L;
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarSeleccionPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
 
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDto);
+        Mockito.when(personaRepositorioConsulta.consultarPorId(personaID)).thenReturn(personaDto);
+        Mockito.when(postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(personaID)).thenReturn(seleccionDTO);
 
-        servicio.ejecutar(1L);
+        servicio.ejecutar(personaID);
 
-        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarSeleccionPorUsuarioId(1L);
+        Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
+        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarSeleccionPorUsuarioId(personaID);
     }
     @Test
     void consultaSeleccionadoPorIdFallida()
