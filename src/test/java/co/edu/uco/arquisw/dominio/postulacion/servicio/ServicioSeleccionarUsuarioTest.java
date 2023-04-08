@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionReposito
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.postulacion.testdatabuilder.PostulacionTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,14 @@ import org.mockito.Mockito;
 
  class ServicioSeleccionarUsuarioTest {
     @Test
-    void actualizacionExitosa()
-    {
+    void seleccionarUsuarioExitosamente() {
         var postulacion = new PostulacionTestDataBuilder().build();
         var postulacionDto = new PostulacionDTO();
+        var postulacionID = 1L;
+        var personaID = 1L;
+
+        postulacionDto.setRol(postulacion.getRol());
+        postulacionDto.setUsuarioID(personaID);
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
@@ -24,12 +29,14 @@ import org.mockito.Mockito;
 
         var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
 
-        Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
-        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(1L)).thenReturn(postulacionDto);
+        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(postulacionID)).thenReturn(postulacionDto);
+        Mockito.doNothing().when(personaRepositorioComando).eliminarRol(Mockito.any(Rol.class), Mockito.anyLong());
+        Mockito.doNothing().when(personaRepositorioComando).crearRol(Mockito.any(Rol.class), Mockito.anyLong());
+        Mockito.doNothing().when(personaRepositorioComando).crearRol(Mockito.any(Rol.class), Mockito.anyLong());
 
-        var id =servicio.ejecutar(1L);
-        Assertions.assertEquals(0,id);
+        var id = servicio.ejecutar(1L);
 
+        Assertions.assertEquals(0L,id);
     }
 
      @Test

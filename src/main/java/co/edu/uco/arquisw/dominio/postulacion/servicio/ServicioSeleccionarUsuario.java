@@ -24,8 +24,7 @@ public class ServicioSeleccionarUsuario {
         validarSiExistePostulacionConId(id);
 
         var postulacionDTO = postulacionRepositorioConsulta.consultarPostulacionPorId(id);
-
-        Seleccion seleccion = Seleccion.crear(postulacionDTO.getRol());
+        var seleccion = Seleccion.crear(postulacionDTO.getRol());
 
         this.personaRepositorioComando.eliminarRol(Rol.crear(TextoConstante.ROL_POSTULADO), postulacionDTO.getUsuarioID());
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_SELECCIONADO), postulacionDTO.getUsuarioID());
