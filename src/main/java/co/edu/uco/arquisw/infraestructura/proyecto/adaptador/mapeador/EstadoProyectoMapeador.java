@@ -19,6 +19,7 @@ public class EstadoProyectoMapeador {
 
     private Long obtenerRolID(String nombre) {
         return switch (nombre) {
+            case TextoConstante.ESTADO_EN_ESPERA -> 1L;
             case TextoConstante.ESTADO_EN_DESARROLLO -> 4L;
             case TextoConstante.ESTADO_FINALIZADO -> 5L;
             default -> 0L;

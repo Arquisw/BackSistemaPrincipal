@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.configuracion;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioComando;
+import co.edu.uco.arquisw.dominio.contrato.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.contrato.puerto.consulta.ContratoRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioActualizarContrato;
 import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioConsultarContratoPorId;
@@ -14,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanServicioContrato {
     @Bean
-    public ServicioGuardarContrato servicioGuardarContrato(ContratoRepositorioComando contratoRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
-        return new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando);
+    public ServicioGuardarContrato servicioGuardarContrato(ContratoRepositorioComando contratoRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, FaseRepositorioComando faseRepositorioComando) {
+        return new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando, faseRepositorioComando);
     }
 
     @Bean
