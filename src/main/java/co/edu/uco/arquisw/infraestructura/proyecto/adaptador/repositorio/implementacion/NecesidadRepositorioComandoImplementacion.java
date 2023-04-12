@@ -1,16 +1,14 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
+import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.infraestructura.contrato.adaptador.repositorio.jpa.ContratoDAO;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.RequerimientoArchivoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaProyectoEntidad;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.EstadoNecesidadMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.TipoConsultoriaMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,6 +39,8 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     TipoConsultoriaMapeador tipoConsultoriaMapeador;
     @Autowired
     EstadoNecesidadMapeador estadoNecesidadMapeador;
+    @Autowired
+    EstadoProyectoMapeador estadoProyectoMapeador;
     @Autowired
     ContratoDAO contratoDAO;
 
@@ -88,6 +88,18 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         entidad.getEstado().setEstado(estado.getEstado());
 
         return this.necesidadDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void actualizarEstadoProyecto(EstadoProyecto estadoProyecto, Long proyectoID) {
+        var entidad = this.proyectoDAO.findById(proyectoID).orElse(null);
+
+        var estado = this.estadoProyectoMapeador.construirEntidad(estadoProyecto);
+
+        assert entidad != null;
+        entidad.getEstado().setEstado(estado.getEstado());
+
+        this.proyectoDAO.save(entidad);
     }
 
     private void actualizarTipoConsultoria(List<TipoConsultoria> tiposConsultoria, List<TipoConsultoriaProyectoEntidad> tiposConsultoriaEntidad) {
