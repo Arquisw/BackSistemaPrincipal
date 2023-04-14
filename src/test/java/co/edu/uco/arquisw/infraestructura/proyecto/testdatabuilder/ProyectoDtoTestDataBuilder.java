@@ -2,7 +2,6 @@ package co.edu.uco.arquisw.infraestructura.proyecto.testdatabuilder;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.TipoConsultoriaComando;
-import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.RolTestDataBuilder;
 
 import java.util.List;
 

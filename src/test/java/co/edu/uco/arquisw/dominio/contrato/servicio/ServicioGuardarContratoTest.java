@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioCom
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.contrato.testDataBuilder.ContratoTestDataBuilder;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
@@ -30,11 +31,13 @@ class ServicioGuardarContratoTest {
         Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L, token)).getMessage());
     }
     @Test
-    void contratoActualizarExistosamente()
+    void contratoGuardarExistosamente()
     {
         var contrato = new ContratoTestDataBuilder().build();
         var necesidad = new NecesidadDTO();
         var token = "token";
+        necesidad.setProyecto(new ProyectoDTO());
+        necesidad.getProyecto().setId(1L);
 
         var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
