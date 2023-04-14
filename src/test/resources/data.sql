@@ -56,4 +56,6 @@ insert into postulacion(id,fecha,proyecto,rol,seleccionado,usuario)values(3,'12/
 insert into postulacion(id,fecha,proyecto,rol,seleccionado,usuario)values(2,'13/07/2022',1,'ROLE_ANALISTA', true,3);
 insert into seleccion(id,fecha,proyecto,rol,usuario)values (2,'14/07/2022',2,'ROLE_ANALISTA',3);
 
+insert into contrato(id,ruta,necesidad)values (2,'http://www.direccion.org/ejemploCV/item.html',3);
+
 

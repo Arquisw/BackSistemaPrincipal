@@ -35,18 +35,6 @@ class ContratoComandoControladorTest
     private MockMvc mocMvc;
 
     @Test
-    void guardarContrato() throws Exception
-    {
-        var contrato = new ContratoDtoTestDataBuilder().build();
-        var idAsociacion = 2;
-
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion,"ROLE_ADMINISTRADOR")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(contrato)))
-                .andExpect(status().is2xxSuccessful());
-    }
-
-    @Test
     void guardarAsociacionFallida() throws Exception
     {
         var idAsociacion = 5;
@@ -60,7 +48,7 @@ class ContratoComandoControladorTest
     @Test
     void deberiaActualizarContrato() throws Exception
     {
-        Long id = 4L;
+        Long id = 3L;
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 

@@ -1,10 +1,8 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
-import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
-import co.edu.uco.arquisw.infraestructura.postulacion.testdatabuilder.PostulacionDtoTestDataBuilder;
 import co.edu.uco.arquisw.infraestructura.proyecto.testdatabuilder.NecesidadDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -19,8 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -92,11 +88,12 @@ class NecesidadComandoControladorTest {
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id)));
     }
+
+
     @Test
     void eliminacionNecesidadExitosa() throws Exception {
 
         var id = 3;
-
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
