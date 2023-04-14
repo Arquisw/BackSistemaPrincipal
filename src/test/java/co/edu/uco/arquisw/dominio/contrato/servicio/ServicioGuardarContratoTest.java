@@ -16,6 +16,7 @@ class ServicioGuardarContratoTest {
     void noExisteAsociacionParaGuardarContrato()
     {
         var contrato = new ContratoTestDataBuilder().build();
+        var token = "token";
 
         var contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
@@ -26,13 +27,14 @@ class ServicioGuardarContratoTest {
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.any())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L, token)).getMessage());
     }
     @Test
     void contratoActualizarExistosamente()
     {
         var contrato = new ContratoTestDataBuilder().build();
         var necesidad = new NecesidadDTO();
+        var token = "token";
 
         var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
@@ -43,7 +45,7 @@ class ServicioGuardarContratoTest {
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(1L)).thenReturn(necesidad);
 
-        servicio.ejecutar(contrato,1L);
+        servicio.ejecutar(contrato,1L, token);
 
         Mockito.verify(contratoRepositorioComando,Mockito.times(1)).guardar(contrato,1L);
     }
