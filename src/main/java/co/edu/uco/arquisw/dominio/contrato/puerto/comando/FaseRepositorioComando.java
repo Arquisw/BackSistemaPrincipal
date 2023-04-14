@@ -1,5 +1,5 @@
 package co.edu.uco.arquisw.dominio.contrato.puerto.comando;
 
 public interface FaseRepositorioComando {
-    Long guardar(Long proyectoID);
+    Long guardar(Long proyectoID, String token);
 }

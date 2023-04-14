@@ -24,14 +24,14 @@ public class ServicioGuardarContrato {
         this.faseRepositorioComando = faseRepositorioComando;
     }
 
-    public Long ejecutar(Contrato contrato, Long necesidadID) {
+    public Long ejecutar(Contrato contrato, Long necesidadID, String token) {
         validarSiExisteNecesidadConId(necesidadID);
 
         var proyectoID = obtenerProyectoID(necesidadID);
 
         this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_NEGOCIADO), necesidadID);
 
-        this.faseRepositorioComando.guardar(proyectoID);
+        this.faseRepositorioComando.guardar(proyectoID, token);
 
         this.necesidadRepositorioComando.actualizarEstadoProyecto(EstadoProyecto.crear(TextoConstante.ESTADO_EN_DESARROLLO), proyectoID);
 

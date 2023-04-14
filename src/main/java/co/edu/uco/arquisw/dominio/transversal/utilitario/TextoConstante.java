@@ -26,6 +26,7 @@ public class TextoConstante {
     public static final String ESTADO_FINALIZADO = "Finalizado"; // ID = 5
 
     public static final String INGENIERIA_DE_REQUISITOS_URL = "http://localhost:8081/api/fases/";
+    public static final String HEADER_VALUE = "Authorization";
 
     private TextoConstante() { }
 }
