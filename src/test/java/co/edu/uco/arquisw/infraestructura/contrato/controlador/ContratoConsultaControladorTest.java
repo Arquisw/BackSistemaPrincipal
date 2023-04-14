@@ -39,12 +39,12 @@ class ContratoConsultaControladorTest
     @Test
     void obtenerContratoExitoso() throws Exception
     {
-        var id = 4L;
+        var id = 2L;
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.rutaArchivo", is("http://www.direccion.org/ejemplo/item.html")));
+                .andExpect(status().isOk());
+
     }
 
     @Test

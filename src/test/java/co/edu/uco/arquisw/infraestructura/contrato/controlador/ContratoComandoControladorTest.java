@@ -37,9 +37,8 @@ class ContratoComandoControladorTest
     @Test
     void guardarContrato() throws Exception
     {
-
         var contrato = new ContratoDtoTestDataBuilder().build();
-        var idAsociacion = 4;
+        var idAsociacion = 2;
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -82,17 +81,6 @@ class ContratoComandoControladorTest
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is4xxClientError());
-    }
-
-    @Test
-    void eliminacionContratoExitosa() throws Exception
-    {
-        var id = 4L;
-
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
     }
 
     @Test

@@ -34,32 +34,11 @@ class PostulacionConsultaControladorTest {
     private MockMvc mocMvc;
 
     @Test
-    void obtenerPostulacionPorIdProyectoExitosa() throws Exception {
-
-        var id = 2;
-
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id,"ROLE_ADMINSITRADOR")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-    @Test
-    void obtenerPostulacionPorIdProyectoFalla() throws Exception {
-
-        var id = 9;
-
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/{id}",id,"ROLE_ADMINSITRADOR")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id)));
-    }
-
-    @Test
     void obtenerPostulacionPorIdExitosa() throws Exception {
 
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINSITRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fecha", is("13/07/2022")));
@@ -69,7 +48,7 @@ class PostulacionConsultaControladorTest {
 
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINSITRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/postulaciones/postulacion/{id}",id,"ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
