@@ -22,14 +22,21 @@ insert into tipoconsultoria (id, nombre) values (nextval('tipoconsultoria_code_s
 insert into tipoconsultoria (id, nombre) values (nextval('tipoconsultoria_code_seq'), 'SQC');
 
 insert into persona (id, apellidos, correo, nombre) values (2, 'Marulete', 'marulete@gmail.com', 'eduardo');
-insert into persona (id, apellidos, correo, nombre) values (3, 'valencia', 'juan@gmail.com', 'juan');
+insert into persona (id, apellidos, correo, nombre) values (30, 'valencia', 'juan@gmail.com', 'juan');
+insert into persona (id, apellidos, correo, nombre) values (3, 'valencia', 'juan1@gmail.com', 'juan');
 insert into persona (id, apellidos, correo, nombre) values (4, 'valencia', 'juandiego@gmail.com', 'juand');
 insert into persona (id, apellidos, correo, nombre) values (8, 'valencia', 'juanDiego@gmail.com', 'juand');
 
 insert into usuario (id, clave, correo) values (2, '123456789Aa', 'marulete@gmail.com');
-insert into usuario (id, clave, correo) values (3, '123456789Aa1', 'juan@gmail.com');
+insert into usuario (id, clave, correo) values (30, '123456789Aa1', 'juan@gmail.com');
 insert into usuario (id, clave, correo) values (4, '12356789Aa1', 'juandiego@gmail.com');
 insert into usuario (id, clave, correo) values (8, '12356789Aa1', 'juanDiego@gmail.com');
+
+INSERT INTO public.rolpersona (id, rol, persona) VALUES(10, 1, 30);
+INSERT INTO public.rolpersona (id, rol, persona) VALUES(11, 2, 30);
+INSERT INTO public.rolpersona (id, rol, persona) VALUES(12, 3, 30);
+INSERT INTO public.rolpersona (id, rol, persona) VALUES(13, 4, 30);
+
 
 insert into asociacion(id,nit,nombre,numero_contacto,usuario) values (2,'12345678-2','Uco','3124536578',2);
 insert into asociacion(id,nit,nombre,numero_contacto,usuario) values (3,'12345678-3','Universidad','31245365798',3);
