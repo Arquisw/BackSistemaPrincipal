@@ -10,17 +10,23 @@ public class Proyecto {
     private String nombre;
     private String descripcion;
     private final EstadoProyecto estado;
+    private final AprobacionProyecto aprobacionProyecto;
     private final List<TipoConsultoria> tiposConsultoria;
 
-    private Proyecto(String nombre, String descripcion, EstadoProyecto estado, List<TipoConsultoria> tiposConsultoria) {
+    private Proyecto(String nombre, String descripcion, EstadoProyecto estado, AprobacionProyecto aprobacionProyecto, List<TipoConsultoria> tiposConsultoria) {
         setNombre(nombre);
         setDescripcion(descripcion);
         this.estado = estado;
+        this.aprobacionProyecto = aprobacionProyecto;
         this.tiposConsultoria = tiposConsultoria;
     }
 
     public static Proyecto crear(String nombre, String descripcion, EstadoProyecto estado, List<TipoConsultoria> tiposConsultoria) {
-        return new Proyecto(nombre, descripcion, estado, tiposConsultoria);
+        return new Proyecto(nombre, descripcion, estado, AprobacionProyecto.crear(), tiposConsultoria);
+    }
+
+    public static Proyecto modificar(String nombre, String descripcion, EstadoProyecto estado, AprobacionProyecto aprobacionProyecto, List<TipoConsultoria> tiposConsultoria) {
+        return new Proyecto(nombre, descripcion, estado, aprobacionProyecto, tiposConsultoria);
     }
 
     public void setNombre(String nombre) {

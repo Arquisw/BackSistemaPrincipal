@@ -25,6 +25,9 @@ public class ProyectoEntidad {
     @OneToOne
     @JoinColumn(name = "estado")
     private EstadoProyectoEntidad estado;
+    @OneToOne
+    @JoinColumn(name = "aprobacionproyecto")
+    private AprobacionProyectoEntidad aprobacionProyecto;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "proyecto")
     private List<TipoConsultoriaProyectoEntidad> tiposConsultoria;

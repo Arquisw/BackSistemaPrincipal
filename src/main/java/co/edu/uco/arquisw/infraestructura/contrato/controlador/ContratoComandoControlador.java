@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.contrato.controlador;
 import co.edu.uco.arquisw.aplicacion.contrato.comando.ContratoComando;
 import co.edu.uco.arquisw.aplicacion.contrato.comando.manejador.ActualizarContratoManejador;
 import co.edu.uco.arquisw.aplicacion.contrato.comando.manejador.GuardarContratoManejador;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.AprobarProyectoPorRolIngenieriaManejador;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,12 +31,12 @@ public class ContratoComandoControlador {
     public ComandoRespuesta<Long> guardar(HttpServletRequest peticion, @RequestBody ContratoComando contrato, @PathVariable Long id) {
         String token = peticion.getHeader(TextoConstante.HEADER_VALUE);
 
-        return this.guardarContratoManejador.ejecutar(contrato, id, token);
+        return this.guardarContratoManejador.ejecutar(contrato, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar Asociacion", description = "Este es usado para actualizar los datos de un contrato por medio del ID de una necesidad")
+    @Operation(summary = "Actualizar Contrato", description = "Este es usado para actualizar los datos de un contrato por medio del ID de una necesidad")
     public ComandoRespuesta<Long> actualizar(@RequestBody ContratoComando contrato, @PathVariable Long id) {
         return this.actualizarContratoManejador.ejecutar(contrato, id);
     }

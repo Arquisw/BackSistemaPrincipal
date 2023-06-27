@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostulacionFabrica {
     public Postulacion construir(PostulacionComando postulacionComando) {
-        return Postulacion.crear(postulacionComando.getRol(), false);
+        return Postulacion.crear(postulacionComando.getRoles(), false);
     }
 }

@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.consulta.*;
+import co.edu.uco.arquisw.dominio.proyecto.dto.AprobacionProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
@@ -22,13 +23,15 @@ public class NecesidadConsultaControlador {
     private final ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador;
     private final ConsultarProyectosManejador consultarProyectosManejador;
     private final ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador;
+    private final ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador;
 
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador) {
+    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador) {
         this.consultarNecesidadesManejador = consultarNecesidadesManejador;
         this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
         this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
         this.consultarProyectosManejador = consultarProyectosManejador;
         this.consultarPeticionesDeEliminacionNecesidadManejador = consultarPeticionesDeEliminacionNecesidadManejador;
+        this.consultarAprobacionProyectoPorIdManejador = consultarAprobacionProyectoPorIdManejador;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR','ROLE_ASOCIACION')")
@@ -64,5 +67,12 @@ public class NecesidadConsultaControlador {
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una necesidad")
     public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacion() {
         return this.consultarPeticionesDeEliminacionNecesidadManejador.ejecutar();
+    }
+
+    @PreAuthorize("hasRole('ROLE_SELECCIONADO')")
+    @GetMapping("/aprobacion/{id}")
+    @Operation(summary = "Consultar Aprobación Proyecto por ID", description = "Este es usado para consultar la aprobación de un proyecto por medio de su id")
+    public AprobacionProyectoDTO consultarAprobacionProyectoPorId(@PathVariable Long id) {
+        return this.consultarAprobacionProyectoPorIdManejador.ejecutar(id);
     }
 }

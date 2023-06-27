@@ -5,26 +5,29 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 public class Seleccion {
     private LocalDate fecha;
-    private String rol;
+    private List<String> roles;
 
-    private Seleccion(String rol) {
+    private Seleccion(List<String> roles) {
         setFecha();
-        setRol(rol);
+        setRoles(roles);
     }
 
-    public static Seleccion crear(String rol) {
-        return new Seleccion(rol);
+    public static Seleccion crear(List<String> roles) {
+        return new Seleccion(roles);
     }
 
-    private void setRol(String rol) {
-        ValidarTexto.validarObligatorio(rol, Mensajes.NOMBRE_ROL_VACIO);
-        ValidarTexto.validarPatronAlfanumericoEsValido(rol, Mensajes.PATRON_NOMBRE_ROL_INVALIDO);
+    private void setRoles(List<String> roles) {
+        roles.forEach(rol -> {
+            ValidarTexto.validarObligatorio(rol, Mensajes.NOMBRE_ROL_VACIO);
+            ValidarTexto.validarPatronAlfanumericoEsValido(rol, Mensajes.PATRON_NOMBRE_ROL_INVALIDO);
+        });
 
-        this.rol = rol;
+        this.roles = roles;
     }
 
     public void setFecha() {

@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.proyecto.puerto.consulta;
 
+import co.edu.uco.arquisw.dominio.proyecto.dto.AprobacionProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
@@ -12,4 +13,5 @@ public interface NecesidadRepositorioConsulta {
     ProyectoDTO consultarProyectoPorId(Long proyectoID);
     List<ProyectoDTO> consultarProyectos();
     List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidades();
+    AprobacionProyectoDTO consultarAprobacionProyectoPorId(Long proyectoID);
 }

@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PostulacionTestDataBuilder {
 
@@ -11,14 +12,12 @@ public class PostulacionTestDataBuilder {
     private boolean seleccionado;
     private String rol;
 
-    public PostulacionTestDataBuilder()
-    {
+    public PostulacionTestDataBuilder() {
         this.seleccionado = false;
         this.rol = "anilista";
     }
 
-  public Postulacion build()
-  {
-      return Postulacion.crear(rol,seleccionado);
-  }
+    public Postulacion build() {
+        return Postulacion.crear(List.of(rol), seleccionado);
+    }
 }

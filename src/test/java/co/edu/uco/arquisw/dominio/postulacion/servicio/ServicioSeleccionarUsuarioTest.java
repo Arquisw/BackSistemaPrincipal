@@ -20,7 +20,7 @@ import org.mockito.Mockito;
         var postulacionID = 1L;
         var personaID = 1L;
 
-        postulacionDto.setRol(postulacion.getRol());
+        postulacionDto.setRoles(postulacion.getRoles());
         postulacionDto.setUsuarioID(personaID);
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);

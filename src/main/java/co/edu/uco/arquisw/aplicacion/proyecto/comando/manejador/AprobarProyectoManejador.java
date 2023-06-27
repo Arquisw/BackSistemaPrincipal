@@ -6,7 +6,7 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioAprobarProyecto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AprobarProyectoManejador  implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
+public class AprobarProyectoManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
     private final ServicioAprobarProyecto servicioAprobarProyecto;
 
     public AprobarProyectoManejador(ServicioAprobarProyecto servicioAprobarProyecto) {
