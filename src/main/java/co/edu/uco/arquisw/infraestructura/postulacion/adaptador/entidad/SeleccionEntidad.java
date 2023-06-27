@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +19,9 @@ public class SeleccionEntidad {
     @SequenceGenerator(name="seleccion_code_seq", sequenceName="seleccion_code_seq", allocationSize=1)
     private Long id;
     private String fecha;
-    private String rol;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seleccion")
+    private List<RolProyectoSeleccionEntidad> roles;
     private Long proyecto;
     private Long usuario;
 }

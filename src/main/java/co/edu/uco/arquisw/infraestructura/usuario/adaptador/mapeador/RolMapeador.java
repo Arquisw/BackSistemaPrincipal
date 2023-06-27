@@ -10,8 +10,7 @@ import java.util.List;
 
 @Component
 public class RolMapeador {
-    public RolDTO construirDTO(RolPersonaEntidad rol)
-    {
+    public RolDTO construirDTO(RolPersonaEntidad rol) {
         return new RolDTO(rol.getRol().getNombre());
     }
 
@@ -20,7 +19,7 @@ public class RolMapeador {
     }
 
     public RolPersonaEntidad construirEntidad(Rol rol) {
-        return new RolPersonaEntidad(null, new RolEntidad(obtenerRolID(rol.getNombre()), rol.getNombre()));
+        return new RolPersonaEntidad(null, new RolEntidad(obtenerRolID(rol.getNombre()), rol.getNombre(), obtenerPermisoLeer(rol.getNombre()), obtenerPermisoEscribir(rol.getNombre()), obtenerPermisoActualizar(rol.getNombre()), obtenerPermisoEliminar(rol.getNombre())));
     }
 
     public List<RolPersonaEntidad> construirEntidades(List<Rol> roles) {
@@ -36,13 +35,60 @@ public class RolMapeador {
             case TextoConstante.ROL_SELECCIONADO -> 5L;
             case TextoConstante.ROL_DIRECTOR_PROYECTO -> 6L;
             case TextoConstante.ROL_PARTE_INTERESADA -> 7L;
-            case TextoConstante.ROL_TEAM_MEMBER -> 8L;
+            case TextoConstante.ROL_EQUIPO_DESARROLLO -> 8L;
             case TextoConstante.ROL_INGENIERIA -> 9L;
             case TextoConstante.ROL_ARQUITECTURA -> 10L;
             case TextoConstante.ROL_ANALISTA -> 11L;
-            case TextoConstante.ROL_TEAM_LEADER -> 12L;
+            case TextoConstante.ROL_LIDER_DEL_EQUIPO -> 12L;
             case TextoConstante.ROL_PATROCINADOR -> 13L;
             default -> 0L;
+        };
+    }
+
+    private boolean obtenerPermisoLeer(String nombre) {
+        return switch (nombre) {
+            case TextoConstante.ROL_DIRECTOR_PROYECTO,
+                    TextoConstante.ROL_PARTE_INTERESADA,
+                    TextoConstante.ROL_EQUIPO_DESARROLLO,
+                    TextoConstante.ROL_INGENIERIA,
+                    TextoConstante.ROL_ARQUITECTURA,
+                    TextoConstante.ROL_ANALISTA,
+                    TextoConstante.ROL_LIDER_DEL_EQUIPO,
+                    TextoConstante.ROL_PATROCINADOR -> true;
+            default -> false;
+        };
+    }
+
+    private boolean obtenerPermisoEscribir(String nombre) {
+        return switch (nombre) {
+            case TextoConstante.ROL_SELECCIONADO,
+                    TextoConstante.ROL_EQUIPO_DESARROLLO,
+                    TextoConstante.ROL_INGENIERIA,
+                    TextoConstante.ROL_ARQUITECTURA,
+                    TextoConstante.ROL_LIDER_DEL_EQUIPO -> true;
+            default -> false;
+        };
+    }
+
+    private boolean obtenerPermisoActualizar(String nombre) {
+        return switch (nombre) {
+            case TextoConstante.ROL_SELECCIONADO,
+                    TextoConstante.ROL_EQUIPO_DESARROLLO,
+                    TextoConstante.ROL_INGENIERIA,
+                    TextoConstante.ROL_ARQUITECTURA,
+                    TextoConstante.ROL_LIDER_DEL_EQUIPO -> true;
+            default -> false;
+        };
+    }
+
+    private boolean obtenerPermisoEliminar(String nombre) {
+        return switch (nombre) {
+            case TextoConstante.ROL_SELECCIONADO,
+                    TextoConstante.ROL_EQUIPO_DESARROLLO,
+                    TextoConstante.ROL_INGENIERIA,
+                    TextoConstante.ROL_ARQUITECTURA,
+                    TextoConstante.ROL_LIDER_DEL_EQUIPO -> true;
+            default -> false;
         };
     }
 }

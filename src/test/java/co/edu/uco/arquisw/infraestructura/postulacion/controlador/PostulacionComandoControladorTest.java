@@ -20,6 +20,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,8 +42,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     void guardarPostulacionFallida() throws Exception {
+        var rol = "Analista";
 
-        var postulacion = new PostulacionComando("Analista",2L,1L);
+        var postulacion = new PostulacionComando(List.of(rol),2L,1L);
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones","ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)

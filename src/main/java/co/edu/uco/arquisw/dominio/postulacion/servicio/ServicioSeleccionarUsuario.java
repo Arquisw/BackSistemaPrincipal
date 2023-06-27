@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.postulacion.servicio;
 
+import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Seleccion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
@@ -24,11 +25,13 @@ public class ServicioSeleccionarUsuario {
         validarSiExistePostulacionConId(id);
 
         var postulacionDTO = postulacionRepositorioConsulta.consultarPostulacionPorId(id);
-        var seleccion = Seleccion.crear(postulacionDTO.getRol());
+        var seleccion = Seleccion.crear(postulacionDTO.getRoles());
+        var postulacion = Postulacion.crear(postulacionDTO.getRoles(), true);
 
         this.personaRepositorioComando.eliminarRol(Rol.crear(TextoConstante.ROL_POSTULADO), postulacionDTO.getUsuarioID());
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_SELECCIONADO), postulacionDTO.getUsuarioID());
-        this.personaRepositorioComando.crearRol(Rol.crear(postulacionDTO.getRol()), postulacionDTO.getUsuarioID());
+        postulacionDTO.getRoles().forEach(rol -> this.personaRepositorioComando.crearRol(Rol.crear(rol), postulacionDTO.getUsuarioID()));
+        this.postulacionRepositorioComando.actualizar(postulacion, postulacionDTO.getProyectoID(), postulacionDTO.getUsuarioID(), id);
 
         return this.postulacionRepositorioComando.seleccionarUsuario(seleccion, id);
     }

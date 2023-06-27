@@ -18,4 +18,8 @@ public class RolEntidad {
     @SequenceGenerator(name="rol_code_seq", sequenceName="rol_code_seq", allocationSize=1)
     private Long id;
     private String nombre;
+    private boolean leer;
+    private boolean escribir;
+    private boolean actualizar;
+    private boolean eliminar;
 }

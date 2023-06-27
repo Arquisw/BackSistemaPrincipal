@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +14,7 @@ import lombok.Setter;
 public class PostulacionDTO {
     private Long id;
     private String fecha;
-    private String rol;
+    private List<String> roles;
     private Long proyectoID;
     private Long usuarioID;
 }

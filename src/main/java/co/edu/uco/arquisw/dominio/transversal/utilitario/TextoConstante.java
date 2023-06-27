@@ -9,11 +9,11 @@ public class TextoConstante {
     public static final String ROL_SELECCIONADO = "ROLE_SELECCIONADO"; // ID = 5
     public static final String ROL_DIRECTOR_PROYECTO = "ROLE_DIRECTOR_PROYECTO"; // ID = 6
     public static final String ROL_PARTE_INTERESADA = "ROLE_PARTE_INTERESADA"; // ID = 7
-    public static final String ROL_TEAM_MEMBER = "ROLE_TEAM_MEMBER"; // ID = 8
+    public static final String ROL_EQUIPO_DESARROLLO = "ROLE_EQUIPO_DESARROLLO"; // ID = 8
     public static final String ROL_INGENIERIA = "ROLE_INGENIERIA"; // ID = 9
     public static final String ROL_ARQUITECTURA = "ROLE_ARQUITECTURA"; // ID = 10
     public static final String ROL_ANALISTA = "ROLE_ANALISTA"; // ID = 11
-    public static final String ROL_TEAM_LEADER = "ROLE_TEAM_LEADER"; // ID = 12
+    public static final String ROL_LIDER_DEL_EQUIPO = "ROLE_LIDER_DEL_EQUIPO"; // ID = 12
     public static final String ROL_PATROCINADOR = "ROLE_PATROCINADOR"; // ID = 13
     public static final String INGENIERIA_DE_REQUISITOS = "Ingenieria de Requisitos"; // ID = 1
     public static final String SQA = "SQA"; // ID = 2

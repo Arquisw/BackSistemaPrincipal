@@ -1,10 +1,12 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad;
 
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolPersonaEntidad;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +21,9 @@ public class PostulacionEntidad {
     private Long id;
     private boolean seleccionado;
     private String fecha;
-    private String rol;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "postulacion")
+    private List<RolProyectoPostulacionEntidad> roles;
     private Long proyecto;
     private Long usuario;
 }

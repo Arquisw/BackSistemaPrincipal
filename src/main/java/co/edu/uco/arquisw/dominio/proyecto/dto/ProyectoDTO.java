@@ -15,5 +15,6 @@ public class ProyectoDTO {
     private String nombre;
     private String descripcion;
     private EstadoProyectoDTO estado;
+    private AprobacionProyectoDTO aprobacionProyecto;
     private List<TipoConsultoriaDTO> tiposConsultoria;
 }

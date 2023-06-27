@@ -50,6 +50,11 @@ public class Mensajes {
     public static final String USUARIO_O_CLAVE_INCORRECTAS = "El usuario o la contraseña son incorrectos";
     public static final String NO_EXISTE_POSTULACION_CON_EL_ID_DE_USUARIO = "No existe postulación realizada por el usuario con el ID ";
     public static final String NO_EXISTE_SELECCION_CON_EL_ID_DE_USUARIO_CON_EL_ID = "No existe seleccion a un proyecto de un usuario con el ID ";
+    public static final String EL_ROL = "El rol ";
+    public static final String NO_TIENE_PERMISOS_PARA_APROBAR_UN_PROYECTO = " no tiene los permisos para aprobar un proyecto.";
+    public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_HABER_EFECTUADO_EL_CONTRATO = "No puede aprobar el proyecto sin haberse efectuado el contrato para el proyecto con ID ";
+    public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_INGENIERIA = "No puede aprobar el proyecto sin la aprobación previa del rol de Ingenieria en el proyecto con ID ";
+    public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_LIDER_DE_EQUIPO = "No puede aprobar el proyecto sin la aprobación previa del rol de Lider de Equipo en el proyecto con ID ";
 
     private Mensajes() { }
 }

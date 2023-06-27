@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.contrato.adaptador.repositorio.jpa.ContratoDAO;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.RequerimientoArchivoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaProyectoEntidad;
@@ -43,6 +44,10 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     EstadoProyectoMapeador estadoProyectoMapeador;
     @Autowired
     ContratoDAO contratoDAO;
+    @Autowired
+    AprobacionProyectoDAO aprobacionProyectoDAO;
+    @Autowired
+    AprobacionProyectoMapeador aprobacionProyectoMapeador;
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID) {
@@ -166,5 +171,15 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     @Override
     public void crearNotificacionEliminacion(Long id) {
         this.peticionEliminacionNecesidadDAO.save(this.peticionEliminacionNecesidadMapeador.construirEntidad(id));
+    }
+
+    @Override
+    public Long actualizarAprobacionProyecto(Long proyectoID, String rol) {
+        var entidad = this.aprobacionProyectoDAO.findById(proyectoID).orElse(null);
+
+        assert entidad != null;
+        aprobacionProyectoMapeador.construirEntidadActualizar(entidad, rol);
+
+        return this.aprobacionProyectoDAO.save(entidad).getId();
     }
 }

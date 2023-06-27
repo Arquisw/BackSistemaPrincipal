@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.proyecto.dto.AprobacionProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
@@ -7,6 +8,7 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.AprobacionProyectoMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMapeador;
@@ -32,6 +34,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     PeticionEliminacionNecesidadDAO peticionEliminacionNecesidadDAO;
     @Autowired
     PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
+    @Autowired
+    AprobacionProyectoDAO aprobacionProyectoDAO;
+    @Autowired
+    AprobacionProyectoMapeador aprobacionProyectoMapeador;
 
     @Override
     public NecesidadDTO consultarPorId(Long id) {
@@ -103,5 +109,16 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
         var entidades = this.peticionEliminacionNecesidadDAO.findAll();
 
         return this.peticionEliminacionNecesidadMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public AprobacionProyectoDTO consultarAprobacionProyectoPorId(Long proyectoID) {
+        var entidad = this.aprobacionProyectoDAO.findById(proyectoID).orElse(null);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.aprobacionProyectoMapeador.construirDTO(entidad);
     }
 }
