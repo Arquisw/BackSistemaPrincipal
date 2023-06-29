@@ -13,12 +13,12 @@ public class  ServicioLogin {
     }
 
     public Long ejecutar(String correo) {
-        validarSiNoExisteUsuarioConId(correo);
+        validarSiNoExisteUsuarioConCorreo(correo);
 
         return personaRepositorioConsulta.consultarPorCorreo(correo).getId();
     }
 
-    private void validarSiNoExisteUsuarioConId(String correo) {
+    private void validarSiNoExisteUsuarioConCorreo(String correo) {
         if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(correo))) {
             throw new AutorizacionExcepcion(Mensajes.USUARIO_O_CLAVE_INCORRECTAS);
         }
