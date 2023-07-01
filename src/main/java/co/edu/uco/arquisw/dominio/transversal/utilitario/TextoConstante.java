@@ -28,5 +28,10 @@ public class TextoConstante {
     public static final String INGENIERIA_DE_REQUISITOS_URL = "http://localhost:8081/api/fases/";
     public static final String HEADER_VALUE = "Authorization";
 
+    public static final String LECTURA = "LECTURA";
+    public static final String ESCRITURA = "ESCRITURA";
+    public static final String ACTUALIZACION = "ACTUALIZACION";
+    public static final String ELIMINACION = "ELIMINACION";
+
     private TextoConstante() { }
 }
