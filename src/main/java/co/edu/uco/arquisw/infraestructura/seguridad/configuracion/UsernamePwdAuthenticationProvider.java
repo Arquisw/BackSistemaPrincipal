@@ -72,19 +72,19 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 	private void addCrudPrivilage(List<GrantedAuthority> grantedAuthorities,RolDTO authority){
 		if(authority.isLeer()&&!haveReadPrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(TextoConstante.LECTURA));
+			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.LECTURA));
 		}
 		if(authority.isEscribir()&&!haveWritePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(TextoConstante.ESCRITURA));
+			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ESCRITURA));
 		}
 		if(authority.isActualizar()&&!haveUpdatePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(TextoConstante.ACTUALIZACION));
+			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ACTUALIZACION));
 		}
 		if(authority.isActualizar()&&!haveDeletePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(TextoConstante.ELIMINACION));
+			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ELIMINACION));
 		}
 	}
 
