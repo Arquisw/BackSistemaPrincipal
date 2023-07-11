@@ -36,8 +36,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     RolMapeador rolMapeador;
 
     @Override
-    public Long guardar(Persona persona) {
-        var usuario = this.usuarioMapeador.construirEntidad(persona.getCorreo(), persona.getClave());
+    public Long guardar(Persona persona, String clave) {
+        var usuario = this.usuarioMapeador.construirEntidad(persona.getCorreo(), clave);
         var personaEntidad = this.personaMapeador.construirEntidad(persona);
 
         this.usuarioDAO.save(usuario);
@@ -51,13 +51,23 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var entidad = this.personaDAO.findById(id).orElse(null);
 
         assert usuario != null;
-        this.usuarioMapeador.actualizarEntidad(usuario, persona.getCorreo(), persona.getClave());
+        this.usuarioMapeador.actualizarEntidad(usuario, persona.getCorreo(), usuario.getClave());
         assert entidad != null;
         this.personaMapeador.actualizarEntidad(entidad, persona);
 
         this.usuarioDAO.save(usuario);
 
         return this.personaDAO.save(entidad).getId();
+    }
+
+    @Override
+    public Long actualizarClave(String claveNueva, Long id) {
+        var usuario = this.usuarioDAO.findById(id).orElse(null);
+
+        assert usuario != null;
+        this.usuarioMapeador.actualizarEntidad(usuario, usuario.getCorreo(), claveNueva);
+
+        return this.usuarioDAO.save(usuario).getId();
     }
 
     @Override

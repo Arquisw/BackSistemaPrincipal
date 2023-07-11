@@ -55,6 +55,8 @@ public class Mensajes {
     public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_HABER_EFECTUADO_EL_CONTRATO = "No puede aprobar el proyecto sin haberse efectuado el contrato para el proyecto con ID ";
     public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_INGENIERIA = "No puede aprobar el proyecto sin la aprobación previa del rol de Ingenieria en el proyecto con ID ";
     public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_LIDER_DE_EQUIPO = "No puede aprobar el proyecto sin la aprobación previa del rol de Lider de Equipo en el proyecto con ID ";
+    public static final String LA_CLAVE_NUEVA_NO_PUEDE_SER_IGUAL_A_LA_ANTIGUA = "La nueva clave, no puede ser igual a la antigua.";
+    public static final String LA_CLAVE_ANTIGUA_ES_INCORRECTA = "La clave antigua es incorrecta.";
 
     private Mensajes() { }
 }

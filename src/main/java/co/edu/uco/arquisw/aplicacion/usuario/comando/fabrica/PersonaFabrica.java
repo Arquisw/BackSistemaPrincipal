@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.aplicacion.usuario.comando.fabrica;
 
+import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaActualizacionComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
@@ -21,11 +22,11 @@ public class PersonaFabrica {
     }
 
     public Persona construir(PersonaComando persona) {
-        return Persona.crear(persona.getNombre(), persona.getApellidos(), persona.getCorreo(), persona.getClave(), obtenerRolesPorDefecto());
+        return Persona.crear(persona.getNombre(), persona.getApellidos(), persona.getCorreo(), obtenerRolesPorDefecto());
     }
 
-    public Persona construirActualizar(PersonaComando persona, Long id) {
-        return Persona.crear(persona.getNombre(), persona.getApellidos(), persona.getCorreo(), persona.getClave(), obtenerRolesPorDefectoActualizar(id));
+    public Persona construirActualizar(PersonaActualizacionComando persona, Long id) {
+        return Persona.crear(persona.getNombre(), persona.getApellidos(), persona.getCorreo(), obtenerRolesPorDefectoActualizar(id));
     }
 
     private List<Rol> obtenerRolesPorDefectoActualizar(Long id) {

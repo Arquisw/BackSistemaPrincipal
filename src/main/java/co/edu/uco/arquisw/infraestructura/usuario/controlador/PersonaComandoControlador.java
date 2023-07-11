@@ -1,7 +1,9 @@
 package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.ClaveActualizacionComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.HojaVidaComando;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaActualizacionComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,14 +21,16 @@ public class PersonaComandoControlador {
     private final EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador;
     private final GuardarHojaDeVidaManejador guardarHojaDeVidaManejador;
     private final ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador;
+    private final ActualizarClaveManejador actualizarClaveManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador) {
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador) {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
         this.eliminarPersonaPorAdministradorManejador = eliminarPersonaPorAdministradorManejador;
         this.guardarHojaDeVidaManejador = guardarHojaDeVidaManejador;
         this.actualizarHojaDeVidaManejador = actualizarHojaDeVidaManejador;
+        this.actualizarClaveManejador = actualizarClaveManejador;
     }
 
     @PostMapping
@@ -45,8 +49,15 @@ public class PersonaComandoControlador {
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> actualizar(@RequestBody PersonaComando persona, @PathVariable Long id) {
+    public ComandoRespuesta<Long> actualizar(@RequestBody PersonaActualizacionComando persona, @PathVariable Long id) {
         return this.actualizarPersonaManejador.ejecutar(persona, id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PutMapping("/clave/{id}")
+    @Operation(summary = "Actualizar Clave", description = "Este es usado para actualizar la contraseña de un usuario por medio de su ID")
+    public ComandoRespuesta<Long> actualizarClave(@RequestBody ClaveActualizacionComando claveActualizacion, @PathVariable Long id) {
+        return this.actualizarClaveManejador.ejecutar(claveActualizacion, id);
     }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")

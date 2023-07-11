@@ -10,16 +10,20 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioCons
 public class ServicioGuardarPersona {
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
+    private final ServicioCifrarTexto servicioCifrarTexto;
 
-    public ServicioGuardarPersona(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
+    public ServicioGuardarPersona(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
+        this.servicioCifrarTexto = servicioCifrarTexto;
     }
 
-    public Long ejecutar(Persona persona) {
+    public Long ejecutar(Persona persona, String clave) {
         validarSiExistePersonaConCorreo(persona);
 
-        return this.personaRepositorioComando.guardar(persona);
+        var claveCifrada = this.servicioCifrarTexto.ejecutar(clave);
+
+        return this.personaRepositorioComando.guardar(persona, claveCifrada);
     }
 
     private void validarSiExistePersonaConCorreo(Persona persona) {

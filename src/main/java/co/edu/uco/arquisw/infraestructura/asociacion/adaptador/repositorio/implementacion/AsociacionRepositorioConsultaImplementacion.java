@@ -38,7 +38,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
         var usuario = this.personaDAO.findById(entidad.getUsuario()).orElse(null);
 
         assert usuario != null;
-        return this.asociacionMapeador.construirDTO(entidad, usuario.getNombre());
+        return this.asociacionMapeador.construirDTO(entidad, usuario.getNombre() + TextoConstante.ESPACIO + usuario.getApellidos());
     }
 
     @Override

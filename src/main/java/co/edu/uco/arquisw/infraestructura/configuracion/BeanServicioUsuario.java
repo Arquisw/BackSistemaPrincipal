@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanServicioUsuario {
     @Bean
-    public ServicioGuardarPersona servicioGuardarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        return new ServicioGuardarPersona(personaRepositorioComando, personaRepositorioConsulta);
+    public ServicioGuardarPersona servicioGuardarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioGuardarPersona(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
     }
 
     @Bean
@@ -59,5 +59,10 @@ public class BeanServicioUsuario {
     @Bean
     public ServicioLogin servicioLogin(PersonaRepositorioConsulta personaRepositorioConsulta) {
         return new ServicioLogin(personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioActualizarClave servicioActualizarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioActualizarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
     }
 }

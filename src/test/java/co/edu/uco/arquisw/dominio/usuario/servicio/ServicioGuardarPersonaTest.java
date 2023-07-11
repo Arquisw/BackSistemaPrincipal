@@ -20,13 +20,15 @@ class ServicioGuardarPersonaTest
 
         var repositorioPersonaComando = Mockito.mock(PersonaRepositorioComando.class);
         var repositorioPersonaConsulta= Mockito.mock(PersonaRepositorioConsulta.class);
-        var servicio = new ServicioGuardarPersona(repositorioPersonaComando,repositorioPersonaConsulta);
+        var servicioCifrarTexto= Mockito.mock(ServicioCifrarTexto.class);
+        var servicio = new ServicioGuardarPersona(repositorioPersonaComando,repositorioPersonaConsulta, servicioCifrarTexto);
+        var clave = "ASDSFGh";
 
-        Mockito.when(repositorioPersonaComando.guardar(Mockito.any(Persona.class))).thenReturn(1l);
+        Mockito.when(repositorioPersonaComando.guardar(Mockito.any(Persona.class), Mockito.any(String.class))).thenReturn(1l);
 
-        var id = servicio.ejecutar(persona);
+        var id = servicio.ejecutar(persona, clave);
 
-        Mockito.verify(repositorioPersonaComando,Mockito.times(1)).guardar(persona);
+        Mockito.verify(repositorioPersonaComando,Mockito.times(1)).guardar(persona, clave);
 
         Assertions.assertEquals(1L,id);
         Assertions.assertEquals("juan",persona.getNombre());
@@ -36,14 +38,16 @@ class ServicioGuardarPersonaTest
 
         var persona= new PersonaTestDataBuilder().build();
         var personaDto =new PersonaDTO();
+        var clave = "ASDSFGh";
 
         var repositorioPersonaComando = Mockito.mock(PersonaRepositorioComando.class);
         var repositorioPersonaConsulta= Mockito.mock(PersonaRepositorioConsulta.class);
-        var servicio = new ServicioGuardarPersona(repositorioPersonaComando,repositorioPersonaConsulta);
+        var servicioCifrarTexto= Mockito.mock(ServicioCifrarTexto.class);
+        var servicio = new ServicioGuardarPersona(repositorioPersonaComando,repositorioPersonaConsulta, servicioCifrarTexto);
 
         Mockito.when(repositorioPersonaConsulta.consultarPorCorreo((Mockito.anyString()))).thenReturn(personaDto);
 
-        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO , Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(persona)).getMessage());
+        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO , Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(persona, clave)).getMessage());
     }
 }
 

@@ -21,6 +21,6 @@ public class GuardarPersonaManejador implements ManejadorComandoRespuesta<Person
     @Override
     public ComandoRespuesta<Long> ejecutar(PersonaComando comando) {
         Persona persona = this.personaFabrica.construir(comando);
-        return new ComandoRespuesta<>(this.servicioGuardarPersona.ejecutar(persona));
+        return new ComandoRespuesta<>(this.servicioGuardarPersona.ejecutar(persona, comando.getClave()));
     }
 }

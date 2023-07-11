@@ -8,6 +8,7 @@ import java.util.List;
 public interface PersonaRepositorioConsulta {
     PersonaDTO consultarPorId(Long id);
     PersonaDTO consultarPorCorreo(String correo);
+    boolean usuarioExisteConClave(String clave);
     boolean existeConCorreo(String correo);
     HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID);
     List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios();

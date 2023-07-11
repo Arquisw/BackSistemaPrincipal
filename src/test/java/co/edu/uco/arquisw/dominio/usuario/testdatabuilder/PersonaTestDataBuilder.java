@@ -22,7 +22,7 @@ public class PersonaTestDataBuilder
     }
      public Persona build()
      {
-         return Persona.crear(nombre,apellidos,correo,clave,List.of(roles.get(0)));
+         return Persona.crear(nombre,apellidos,correo,List.of(roles.get(0)));
      }
 
 }
