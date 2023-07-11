@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class RolMapeador {
     public RolDTO construirDTO(RolPersonaEntidad rol) {
-        return new RolDTO(rol.getRol().getNombre());
+        return new RolDTO(rol.getRol().getNombre(),rol.getRol().isLeer(),rol.getRol().isEscribir(),rol.getRol().isActualizar(),rol.getRol().isEliminar());
     }
 
     public List<RolDTO> construirDTOs(List<RolPersonaEntidad> roles) {

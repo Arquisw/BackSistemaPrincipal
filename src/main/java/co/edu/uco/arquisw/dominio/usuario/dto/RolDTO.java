@@ -11,4 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RolDTO {
     private String nombre;
+    private boolean leer;
+    private boolean escribir;
+    private boolean actualizar;
+    private boolean eliminar;
 }
