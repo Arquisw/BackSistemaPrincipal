@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorCorreo;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
 import co.edu.uco.arquisw.infraestructura.seguridad.constante.SecurityConstants;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -79,8 +81,28 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 	private String populateAuthorities(List<RolDTO> authorities) {
 		Set<String> authoritiesSet = new HashSet<>();
 		for (RolDTO authority : authorities) {
+			addCrudPrivilage(authoritiesSet,authority);
 			authoritiesSet.add(authority.getNombre());
 		}
 		return String.join(",", authoritiesSet);
+	}
+
+	private void addCrudPrivilage(Set<String> grantedAuthorities, RolDTO authority){
+		if(authority.isLeer())
+		{
+			grantedAuthorities.add(authority.getNombre()+"_"+ TextoConstante.LECTURA);
+		}
+		if(authority.isEscribir())
+		{
+			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ESCRITURA);
+		}
+		if(authority.isActualizar())
+		{
+			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ACTUALIZACION);
+		}
+		if(authority.isActualizar())
+		{
+			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ELIMINACION);
+		}
 	}
 }
