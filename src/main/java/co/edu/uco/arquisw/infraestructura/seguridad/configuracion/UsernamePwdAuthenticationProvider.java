@@ -36,7 +36,9 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 
 		if (usuario!=null) {
 			if (passwordEncoder.matches(pwd, usuario.getClave())) {
-				return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(persona.getRoles()));
+				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(persona.getRoles()));
+				authenticationToken.setDetails(persona.getId());
+				return authenticationToken;
 			} else {
 				throw new BadCredentialsException("Invalid password!");
 			}
