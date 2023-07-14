@@ -53,6 +53,7 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
 				String jwt1 = Jwts.builder().setIssuer("UCO").setSubject("JWT Token")
 						.claim("username", persona.getCorreo())
+						.claim("id", persona.getId())
 						.claim("authorities", populateAuthorities(persona.getRoles()))
 						.setIssuedAt(new Date())
 						.setExpiration(new Date((new Date()).getTime() + 30000000))
