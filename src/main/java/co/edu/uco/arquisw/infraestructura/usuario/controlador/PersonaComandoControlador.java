@@ -39,42 +39,42 @@ public class PersonaComandoControlador {
         return this.guardarPersonaManejador.ejecutar(persona);
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO_ESCRITURA')")
     @PostMapping("/hojadevida/{id}")
     @Operation(summary = "Guardar Hoja de Vida", description = "Este es usado para guardar una hoja en la aplicación por medio de un usuario")
     public ComandoRespuesta<Long> guardarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id) {
         return this.guardarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO_ACTUALIZACION')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Usuario", description = "Este es usado para actualizar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> actualizar(@RequestBody PersonaActualizacionComando persona, @PathVariable Long id) {
         return this.actualizarPersonaManejador.ejecutar(persona, id);
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO_ACTUALIZACION')")
     @PutMapping("/clave/{id}")
     @Operation(summary = "Actualizar Clave", description = "Este es usado para actualizar la contraseña de un usuario por medio de su ID")
     public ComandoRespuesta<Long> actualizarClave(@RequestBody ClaveActualizacionComando claveActualizacion, @PathVariable Long id) {
         return this.actualizarClaveManejador.ejecutar(claveActualizacion, id);
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO_ACTUALIZACION')")
     @PutMapping("/hojadevida/{id}")
     @Operation(summary = "Actualizar Hoja de Vida", description = "Este es usado para actualizar los datos de una hoja de vida por medio del ID de un usuario")
     public ComandoRespuesta<Long> actualizarHojaDeVida(@RequestBody HojaVidaComando hojaVidaComando, @PathVariable Long id) {
         return this.actualizarHojaDeVidaManejador.ejecutar(hojaVidaComando, id);
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO_ELIMINACION')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
         return this.eliminarPersonaManejador.ejecutar(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR_ELIMINACION')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
