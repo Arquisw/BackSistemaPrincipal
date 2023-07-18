@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 
 import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorCorreo;
+import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
@@ -40,10 +41,10 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 				authenticationToken.setDetails(persona.getId());
 				return authenticationToken;
 			} else {
-				throw new BadCredentialsException("Invalid password!");
+				throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
 			}
 		}else {
-			throw new BadCredentialsException("No user registered with this details!");
+			throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
 		}
 	}
 	
