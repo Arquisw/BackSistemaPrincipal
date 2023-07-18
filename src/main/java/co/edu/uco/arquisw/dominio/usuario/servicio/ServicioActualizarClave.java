@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.usuario.servicio;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Usuario;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.Getter;
@@ -24,7 +25,9 @@ public class ServicioActualizarClave {
         validarSiClaveNuevaNoEsLaAntigua(claveAntigua, claveNueva);
         validarSiClaveAntiguaExiste(claveAntigua);
 
-        var claveCifrada = this.servicioCifrarTexto.ejecutar(claveNueva);
+        var usuario = this.personaRepositorioConsulta.consultarPorId(id);
+        var usuarioActualizado = Usuario.crear(usuario.getCorreo(), claveNueva);
+        var claveCifrada = this.servicioCifrarTexto.ejecutar(usuarioActualizado.getClave());
 
         return this.personaRepositorioComando.actualizarClave(claveCifrada, id);
     }
@@ -44,7 +47,7 @@ public class ServicioActualizarClave {
     private void validarSiClaveAntiguaExiste(String claveAntigua) {
         var claveCifrada = this.servicioCifrarTexto.ejecutar(claveAntigua);
 
-        if(this.personaRepositorioConsulta.usuarioExisteConClave(claveCifrada)) {
+        if(!this.personaRepositorioConsulta.usuarioExisteConClave(claveCifrada)) {
             throw new ValorInvalidoExcepcion(Mensajes.LA_CLAVE_ANTIGUA_ES_INCORRECTA);
         }
     }
