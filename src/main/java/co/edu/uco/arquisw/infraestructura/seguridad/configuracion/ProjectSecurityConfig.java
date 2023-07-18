@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 
 import co.edu.uco.arquisw.infraestructura.seguridad.filtro.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -31,6 +32,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 			config.setMaxAge(3600L);
 			return config;
 		}).and().csrf().disable()
+				.addFilterBefore(new ExceptionFilter(), BasicAuthenticationFilter.class)
 				.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
 				.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
 				.addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
