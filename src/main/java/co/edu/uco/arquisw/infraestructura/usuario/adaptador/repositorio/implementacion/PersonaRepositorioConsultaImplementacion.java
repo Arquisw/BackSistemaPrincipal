@@ -55,14 +55,6 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
         return this.personaMapeador.construirDTO(entidad);
     }
-
-    @Override
-    public boolean usuarioExisteConClave(String clave) {
-        var entidad = this.usuarioDAO.findByClave(clave);
-
-        return !ValidarObjeto.esNulo(entidad);
-    }
-
     @Override
     public boolean existeConCorreo(String correo) {
         var usuario = this.usuarioDAO.findByCorreo(correo);
