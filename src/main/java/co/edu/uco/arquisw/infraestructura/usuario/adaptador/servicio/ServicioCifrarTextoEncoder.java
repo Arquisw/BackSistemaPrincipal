@@ -10,7 +10,12 @@ public class ServicioCifrarTextoEncoder implements ServicioCifrarTexto {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
-    public String ejecutar(String texto) {
-        return passwordEncoder.encode(texto);
+    public String ejecutar(String clave) {
+        return passwordEncoder.encode(clave);
+    }
+
+    @Override
+    public boolean existe(String clave, String claveCifrada) {
+        return passwordEncoder.matches(clave, claveCifrada);
     }
 }

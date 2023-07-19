@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioDAO extends JpaRepository<UsuarioEntidad, Long> {
     UsuarioEntidad findByCorreo(String correo);
-    UsuarioEntidad findByClave(String clave);
 }

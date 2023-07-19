@@ -47,7 +47,7 @@ public class ServicioActualizarClave {
     private void validarSiClaveAntiguaExiste(String claveAntigua) {
         var claveCifrada = this.servicioCifrarTexto.ejecutar(claveAntigua);
 
-        if(!this.personaRepositorioConsulta.usuarioExisteConClave(claveCifrada)) {
+        if(!this.servicioCifrarTexto.existe(claveAntigua, claveCifrada)) {
             throw new ValorInvalidoExcepcion(Mensajes.LA_CLAVE_ANTIGUA_ES_INCORRECTA);
         }
     }
