@@ -10,26 +10,28 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServicioGuardarAsociacion {
     private final AsociacionRepositorioComando asociacionRepositorioComando;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final PersonaRepositorioComando personaRepositorioComando;
-
-    public ServicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando) {
+    private final ServicioActualizarToken servicioActualizarToken;
+    public ServicioGuardarAsociacion(AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
         this.asociacionRepositorioComando = asociacionRepositorioComando;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.personaRepositorioComando = personaRepositorioComando;
+        this.servicioActualizarToken = servicioActualizarToken;
     }
 
     public Long ejecutar(Asociacion asociacion, Long usuarioID) {
         validarSiExisteAsociacionConNIT(asociacion.getNit());
         validarSiExisteUsuarioConID(usuarioID);
-
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_ASOCIACION), usuarioID);
-
+        servicioActualizarToken.ejecutar();
         return this.asociacionRepositorioComando.guardar(asociacion, usuarioID);
     }
 
