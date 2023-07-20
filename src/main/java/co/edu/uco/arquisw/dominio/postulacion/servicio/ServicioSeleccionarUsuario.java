@@ -9,16 +9,21 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServicioSeleccionarUsuario {
     private final PostulacionRepositorioConsulta postulacionRepositorioConsulta;
     private final PostulacionRepositorioComando postulacionRepositorioComando;
     private final PersonaRepositorioComando personaRepositorioComando;
 
-    public ServicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando) {
+    private final ServicioActualizarToken servicioActualizarToken;
+
+    public ServicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.postulacionRepositorioComando = postulacionRepositorioComando;
         this.personaRepositorioComando = personaRepositorioComando;
+        this.servicioActualizarToken = servicioActualizarToken;
     }
 
     public Long ejecutar(Long id) {
@@ -32,7 +37,7 @@ public class ServicioSeleccionarUsuario {
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_SELECCIONADO), postulacionDTO.getUsuarioID());
         postulacionDTO.getRoles().forEach(rol -> this.personaRepositorioComando.crearRol(Rol.crear(rol), postulacionDTO.getUsuarioID()));
         this.postulacionRepositorioComando.actualizar(postulacion, postulacionDTO.getProyectoID(), postulacionDTO.getUsuarioID(), id);
-
+        servicioActualizarToken.ejecutar();
         return this.postulacionRepositorioComando.seleccionarUsuario(seleccion, id);
     }
 

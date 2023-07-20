@@ -65,4 +65,9 @@ public class BeanServicioUsuario {
     public ServicioActualizarClave servicioActualizarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
         return new ServicioActualizarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
     }
+
+    @Bean
+    public ServicioActualizarToken servicioActualizarToken(PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioActualizarToken(personaRepositorioConsulta);
+    }
 }

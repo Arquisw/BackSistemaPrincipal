@@ -30,13 +30,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 @Component
 public class JWTTokenValidatorFilter extends OncePerRequestFilter {
-	@Autowired
-	private ConsultarPersonaPorCorreo consultarPersonaPorCorreo;
 	@Override
 	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		consultarPersonaPorCorreo = WebApplicationContextUtils.
-				getRequiredWebApplicationContext(request.getServletContext()).
-				getBean(ConsultarPersonaPorCorreo.class);
 		String jwt = request.getHeader(SecurityConstants.JWT_HEADER);
 
 		if (jwt != null) {
@@ -48,24 +43,8 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 						.build()
 						.parseClaimsJws(jwt)
 						.getBody();
-				SecretKey key1 = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
-				PersonaDTO persona= this.consultarPersonaPorCorreo.ejecutar(String.valueOf(claims.get("username")));
-
-				String jwt1 = Jwts.builder().setIssuer("UCO").setSubject("JWT Token")
-						.claim("username", persona.getCorreo())
-						.claim("id", persona.getId())
-						.claim("authorities", populateAuthorities(persona.getRoles()))
-						.setIssuedAt(new Date())
-						.setExpiration(new Date((new Date()).getTime() + 30000000))
-						.signWith(key1).compact();
-				Claims claims2 = Jwts.parserBuilder()
-						.setSigningKey(key1)
-						.build()
-						.parseClaimsJws(jwt1)
-						.getBody();
-				response.setHeader(SecurityConstants.JWT_HEADER, jwt1);
 				String username = String.valueOf(claims.get("username"));
-				String authorities = (String) claims2.get("authorities");
+				String authorities = (String) claims.get("authorities");
 				Authentication auth = new UsernamePasswordAuthenticationToken(username,null,
 						AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
 				SecurityContextHolder.getContext().setAuthentication(auth);
@@ -79,31 +58,5 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 	@Override protected boolean shouldNotFilter(HttpServletRequest request) {
 	  return request.getServletPath().equals("/login");
 	}
-	private String populateAuthorities(List<RolDTO> authorities) {
-		Set<String> authoritiesSet = new HashSet<>();
-		for (RolDTO authority : authorities) {
-			addCrudPrivilage(authoritiesSet,authority);
-			authoritiesSet.add(authority.getNombre());
-		}
-		return String.join(",", authoritiesSet);
-	}
 
-	private void addCrudPrivilage(Set<String> grantedAuthorities, RolDTO authority){
-		if(authority.isLeer())
-		{
-			grantedAuthorities.add(authority.getNombre()+"_"+ TextoConstante.LECTURA);
-		}
-		if(authority.isEscribir())
-		{
-			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ESCRITURA);
-		}
-		if(authority.isActualizar())
-		{
-			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ACTUALIZACION);
-		}
-		if(authority.isActualizar())
-		{
-			grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ELIMINACION);
-		}
-	}
 }

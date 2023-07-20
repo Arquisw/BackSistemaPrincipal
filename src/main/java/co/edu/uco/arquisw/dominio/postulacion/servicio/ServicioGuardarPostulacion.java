@@ -9,18 +9,22 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServicioGuardarPostulacion {
     private final PostulacionRepositorioComando postulacionRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
     private final PersonaRepositorioComando personaRepositorioComando;
+    private final ServicioActualizarToken servicioActualizarToken;
 
-    public ServicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando) {
+    public ServicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
         this.postulacionRepositorioComando = postulacionRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
         this.personaRepositorioComando = personaRepositorioComando;
+        this.servicioActualizarToken = servicioActualizarToken;
     }
 
     public Long ejecutar(Postulacion postulacion, Long proyectoID, Long usuarioID) {
@@ -28,7 +32,7 @@ public class ServicioGuardarPostulacion {
         validarSiExistePersonaConId(usuarioID);
 
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_POSTULADO), usuarioID);
-
+        servicioActualizarToken.ejecutar();
         return this.postulacionRepositorioComando.guardar(postulacion, proyectoID, usuarioID);
     }
 

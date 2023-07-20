@@ -8,6 +8,7 @@ import co.edu.uco.arquisw.dominio.postulacion.testdatabuilder.PostulacionTestDat
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,8 +27,8 @@ import org.mockito.Mockito;
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-
-        var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
+        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
+        var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(postulacionID)).thenReturn(postulacionDto);
         Mockito.doNothing().when(personaRepositorioComando).eliminarRol(Mockito.any(Rol.class), Mockito.anyLong());
@@ -45,8 +46,8 @@ import org.mockito.Mockito;
          var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
          var postulacionRepositorioComando = Mockito.mock(PostulacionRepositorioComando.class);
          var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-
-         var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
+         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
+         var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
 
          Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
          Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(1L)).thenReturn(null);
