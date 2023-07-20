@@ -10,6 +10,8 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServicioEliminarAsociacion {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -17,13 +19,15 @@ public class ServicioEliminarAsociacion {
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
     private final PersonaRepositorioComando personaRepositorioComando;
+    private final ServicioActualizarToken servicioActualizarToken;
 
-    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando) {
+    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.asociacionRepositorioComando = asociacionRepositorioComando;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
         this.personaRepositorioComando = personaRepositorioComando;
+        this.servicioActualizarToken = servicioActualizarToken;
     }
 
     public Long ejecutar(Long id) {
@@ -34,7 +38,7 @@ public class ServicioEliminarAsociacion {
 
         this.personaRepositorioComando.eliminarRolAsociacion(rol, id);
         this.asociacionRepositorioComando.eliminar(id);
-
+        servicioActualizarToken.ejecutar();
         return id;
     }
 

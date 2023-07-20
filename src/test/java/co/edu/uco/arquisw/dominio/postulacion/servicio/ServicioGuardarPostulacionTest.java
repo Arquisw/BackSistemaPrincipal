@@ -9,6 +9,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,8 +27,8 @@ class ServicioGuardarPostulacionTest {
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando =Mockito.mock(PersonaRepositorioComando.class);
-
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando);
+        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -49,8 +50,8 @@ class ServicioGuardarPostulacionTest {
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando =Mockito.mock(PersonaRepositorioComando.class);
-
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
+        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
@@ -69,8 +70,8 @@ class ServicioGuardarPostulacionTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-
-        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando);
+        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
+        var servicio = new ServicioGuardarPostulacion(postulacionRepositorioComando,personaRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyecto);
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);

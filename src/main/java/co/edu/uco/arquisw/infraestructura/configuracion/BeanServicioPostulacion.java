@@ -6,14 +6,15 @@ import co.edu.uco.arquisw.dominio.postulacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanServicioPostulacion {
     @Bean
-    public ServicioGuardarPostulacion servicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando) {
-        return new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando);
+    public ServicioGuardarPostulacion servicioGuardarPostulacion(PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
+        return new ServicioGuardarPostulacion(postulacionRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
     }
 
     @Bean
@@ -22,8 +23,8 @@ public class BeanServicioPostulacion {
     }
 
     @Bean
-    public ServicioSeleccionarUsuario servicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando) {
-        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando);
+    public ServicioSeleccionarUsuario servicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
+        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
     }
 
     @Bean
