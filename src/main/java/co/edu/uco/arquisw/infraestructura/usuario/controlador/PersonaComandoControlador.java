@@ -1,15 +1,14 @@
 package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.ClaveActualizacionComando;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.HojaVidaComando;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaActualizacionComando;
-import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaComando;
+import co.edu.uco.arquisw.aplicacion.usuario.comando.*;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,8 +21,11 @@ public class PersonaComandoControlador {
     private final GuardarHojaDeVidaManejador guardarHojaDeVidaManejador;
     private final ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador;
     private final ActualizarClaveManejador actualizarClaveManejador;
+    private final IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador;
+    private final RecuperarClaveManejador recuperarClaveManejador;
+    private final ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador) {
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador) {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
@@ -31,6 +33,9 @@ public class PersonaComandoControlador {
         this.guardarHojaDeVidaManejador = guardarHojaDeVidaManejador;
         this.actualizarHojaDeVidaManejador = actualizarHojaDeVidaManejador;
         this.actualizarClaveManejador = actualizarClaveManejador;
+        this.iniciarRecuperacionClaveManejador = iniciarRecuperacionClaveManejador;
+        this.recuperarClaveManejador = recuperarClaveManejador;
+        this.validarCodigoRecuperacionClaveManejador = validarCodigoRecuperacionClaveManejador;
     }
 
     @PostMapping
@@ -79,5 +84,23 @@ public class PersonaComandoControlador {
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
     public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
         return this.eliminarPersonaPorAdministradorManejador.ejecutar(id);
+    }
+
+    @PostMapping("/recuperacion/{correo}")
+    @Operation(summary = "Iniciar Recuperación de la Clave", description = "Este es usado para generar el codigo unico que te permitira recuperar la cuenta")
+    public ComandoRespuesta<Long> iniciarRecuperacionDeLaClave(@PathVariable String correo) throws MessagingException {
+        return this.iniciarRecuperacionClaveManejador.ejecutar(correo);
+    }
+
+    @PostMapping("/recuperacion/validarCodigo/{correo}")
+    @Operation(summary = "Validar Codigo para Recuperar Clave", description = "Este es usado para validar que el codigo para recuperar la clave sea valido")
+    public ComandoRespuesta<Boolean> validarCodigoParaRecuperarClave(@RequestBody ValidarCodigoRecuperacionClaveComando comando, @PathVariable String correo) {
+        return this.validarCodigoRecuperacionClaveManejador.ejecutar(comando, correo);
+    }
+
+    @PostMapping("/recuperacion/recuperarClave/{correo}")
+    @Operation(summary = "Recuperar Clave", description = "Este es usado para recuperar la clave, asignando una nueva clave.")
+    public ComandoRespuesta<Long> recuperarClave(@RequestBody RecuperarClaveComando comando, @PathVariable String correo) {
+        return this.recuperarClaveManejador.ejecutar(comando, correo);
     }
 }
