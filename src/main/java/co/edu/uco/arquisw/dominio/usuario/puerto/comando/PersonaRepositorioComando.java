@@ -15,4 +15,6 @@ public interface PersonaRepositorioComando {
     Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
     Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
     void crearNotificacionEliminacion(Long id);
+    Long crearPeticionRecuperacionClave(String codigo, String correo, String fecha);
+    void eliminarPeticionRecuperacionClave(Long id);
 }

@@ -70,4 +70,19 @@ public class BeanServicioUsuario {
     public ServicioActualizarToken servicioActualizarToken(PersonaRepositorioConsulta personaRepositorioConsulta) {
         return new ServicioActualizarToken(personaRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioIniciarRecuperacionClave servicioIniciarRecuperacionClave(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+       return new ServicioIniciarRecuperacionClave(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    }
+
+    @Bean
+    public ServicioRecuperarClave servicioRecuperarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioRecuperarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
+    }
+
+    @Bean
+    public ServicioValidarCodigoRecuperacionClave servicioValidarCodigoRecuperacionClave(PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioValidarCodigoRecuperacionClave(personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    }
 }

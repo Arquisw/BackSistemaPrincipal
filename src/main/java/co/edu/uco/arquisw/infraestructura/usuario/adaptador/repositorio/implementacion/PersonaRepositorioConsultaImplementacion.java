@@ -4,14 +4,13 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.PeticionRecuperacionClaveDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionPersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.HojaDeVidaPersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PeticionEliminacionPersonaDAO;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -33,6 +32,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     HojaDeVidaPersonaDAO hojaDeVidaPersonaDAO;
     @Autowired
     PeticionEliminacionPersonaDAO peticionEliminacionPersonaDAO;
+    @Autowired
+    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+    @Autowired
+    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public PersonaDTO consultarPorId(Long id) {
@@ -80,5 +83,26 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var entidades = this.peticionEliminacionPersonaDAO.findAll();
 
         return this.peticionEliminacionPersonaMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public String consultarClaveConCorreo(String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
+
+        return entidad.getClave();
+    }
+
+    @Override
+    public String consultarCodigoConCorreo(String correo) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        return entidad.getCodigo();
+    }
+
+    @Override
+    public PeticionRecuperacionClaveDTO consultarPeticionRecuperacionClaveDTOConCorreo(String correo) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        return this.peticionRecuperacionClaveMapeador.construirDTO(entidad);
     }
 }

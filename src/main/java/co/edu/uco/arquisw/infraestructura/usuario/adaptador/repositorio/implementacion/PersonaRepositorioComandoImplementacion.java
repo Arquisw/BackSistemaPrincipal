@@ -34,6 +34,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     AsociacionDAO asociacionDAO;
     @Autowired
     RolMapeador rolMapeador;
+    @Autowired
+    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+    @Autowired
+    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public Long guardar(Persona persona, String clave) {
@@ -134,5 +138,17 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     @Override
     public void crearNotificacionEliminacion(Long id) {
         this.peticionEliminacionPersonaDAO.save(this.peticionEliminacionPersonaMapeador.construirEntidad(id));
+    }
+
+    @Override
+    public Long crearPeticionRecuperacionClave(String codigo, String correo, String fecha) {
+        var entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigo, correo, fecha);
+
+        return this.peticionRecuperacionClaveDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void eliminarPeticionRecuperacionClave(Long id) {
+        this.peticionRecuperacionClaveDAO.deleteById(id);
     }
 }

@@ -14,6 +14,7 @@ public class Mensajes {
     public static final String OCURRIO_UN_ERROR_FAVOR_CONTACTAR_AL_ADMINISTRADOR = "Ocurrió un error favor contactar al administrador.";
     public static final String EXISTE_USUARIO_CON_CORREO = "Ya existe un usuario con ese correo ";
     public static final String NO_EXISTE_USUARIO_CON_EL_ID = "No existe un usuario con el ID ";
+    public static final String NO_EXISTE_USUARIO_CON_EL_CORREO = "No existe un usuario con el correo ";
     public static final String NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID = "No existe una hoja de vida para ese usuario con el ID ";
     public static final String NOMBRE_ASOCIACION_NO_PUEDE_ESTAR_VACIO = "El nombre de una compañia no puede estar vacio.";
     public static final String PATRON_NOMBRE_ASOCIACION_NO_ES_VALIDO = "El nombre de una compañia debe ser alfanumerico";
@@ -57,6 +58,10 @@ public class Mensajes {
     public static final String NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_LIDER_DE_EQUIPO = "No puede aprobar el proyecto sin la aprobación previa del rol de Lider de Equipo en el proyecto con ID ";
     public static final String LA_CLAVE_NUEVA_NO_PUEDE_SER_IGUAL_A_LA_ANTIGUA = "La nueva clave, no puede ser igual a la antigua.";
     public static final String LA_CLAVE_ANTIGUA_ES_INCORRECTA = "La clave antigua es incorrecta.";
+    public static final String RECUPERACION_DE_LA_CUENTA = "Recuperación de la Cuenta";
+    public static final String CODIGO = "Codigo: ";
+    public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO = "El codigo para recuperar la contraseña es incorrecto";
+    public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO = "El codigo para recuperar la contraseña ya no es valido";
 
     private Mensajes() { }
 }
