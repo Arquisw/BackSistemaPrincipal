@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 @Component
 public class ServicioEnviarCorreoElectronicoJakarta implements ServicioEnviarCorreoElectronico {
+    private static final String CORREO = "arquisoftwareuco@outlook.com";
     @Autowired
     JavaMailSender mailSender;
 
@@ -20,6 +21,7 @@ public class ServicioEnviarCorreoElectronicoJakarta implements ServicioEnviarCor
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+        helper.setFrom(CORREO);
         helper.setTo(para);
         helper.setSubject(asunto);
         helper.setText(cuerpo, true);
