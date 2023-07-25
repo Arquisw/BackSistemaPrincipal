@@ -42,6 +42,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/login").authenticated()
 				.antMatchers(HttpMethod.POST, "/usuarios").permitAll()
 				.antMatchers(HttpMethod.POST, "/usuarios/recuperacion/{correo}").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuarios/recuperacion/validarCodigo/{correo}").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuarios/recuperacion/recuperarClave/{correo}").permitAll()
 				.antMatchers("/**").authenticated()
 				.and().httpBasic();
 	}

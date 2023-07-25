@@ -29,7 +29,7 @@ public class Usuario {
     public void setClave(String clave) {
         ValidarTexto.validarObligatorio(clave, Mensajes.CLAVE_PERSONA_NO_PUEDE_ESTAR_VACIO);
         ValidarTexto.validarClaveEsValida(clave, Mensajes.PATRON_CLAVE_PERSONA_NO_ES_VALIDO);
-        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-        this.clave = passwordEncoder.encode(clave);
+
+        this.clave = clave;
     }
 }
