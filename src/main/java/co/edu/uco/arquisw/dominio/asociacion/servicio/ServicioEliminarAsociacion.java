@@ -11,7 +11,6 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServicioEliminarAsociacion {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
