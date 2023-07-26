@@ -11,6 +11,11 @@ public class PeticionRecuperacionClaveMapeador {
         return new PeticionRecuperacionClaveEntidad(0L, codigo, correo, fecha);
     }
 
+    public void actualizarEntidad(PeticionRecuperacionClaveEntidad entidad, String codigo, String fecha) {
+        entidad.setCodigo(codigo);
+        entidad.setFecha(fecha);
+    }
+
     public PeticionRecuperacionClaveDTO construirDTO(PeticionRecuperacionClaveEntidad entidad) {
         return new PeticionRecuperacionClaveDTO(entidad.getId(), entidad.getCorreo(), entidad.getCodigo(), FechaFormateador.obtenerFechaTiempo(entidad.getFecha()));
     }
