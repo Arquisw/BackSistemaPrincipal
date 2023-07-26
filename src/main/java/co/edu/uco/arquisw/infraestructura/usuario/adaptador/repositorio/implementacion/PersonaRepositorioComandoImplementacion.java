@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
@@ -142,7 +143,13 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public Long crearPeticionRecuperacionClave(String codigo, String correo, String fecha) {
-        var entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigo, correo, fecha);
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigo, correo, fecha);
+        } else {
+            this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, correo, fecha);
+        }
 
         return this.peticionRecuperacionClaveDAO.save(entidad).getId();
     }
