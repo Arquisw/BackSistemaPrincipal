@@ -40,7 +40,7 @@ public class ServicioActualizarTokenJWT implements ServicioActualizarToken {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         validarSiExisteUsuarioConCorreo(username);
         SecretKey key1 = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
-        PersonaDTO persona= this.personaRepositorioConsulta.consultarPorCorreo(username);
+        var persona= this.personaRepositorioConsulta.consultarUsuarioPorCorreo(username);
         String jwt1 = Jwts.builder().setIssuer("UCO").setSubject("JWT Token")
                 .claim("username", persona.getCorreo())
                 .claim("id", persona.getId())

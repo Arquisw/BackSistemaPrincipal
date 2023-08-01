@@ -1,15 +1,9 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionRecuperacionClaveDTO;
+import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.HojaDeVidaPersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionEliminacionPersonaMapeador;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +18,8 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     HojaDeVidaPersonaMapeador hojaDeVidaPersonaMapeador;
     @Autowired
     PersonaMapeador personaMapeador;
+    @Autowired
+    UsuarioMapeador usuarioMapeador;
     @Autowired
     PersonaDAO personaDAO;
     @Autowired
@@ -46,6 +42,28 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         }
 
         return this.personaMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public UsuarioDTO consultarUsuarioPorId(Long id) {
+        var entidad = this.usuarioDAO.findById(id).orElse(null);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.usuarioMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public UsuarioDTO consultarUsuarioPorCorreo(String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.usuarioMapeador.construirDTO(entidad);
     }
 
     @Override

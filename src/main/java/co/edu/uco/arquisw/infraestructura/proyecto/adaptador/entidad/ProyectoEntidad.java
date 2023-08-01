@@ -26,7 +26,7 @@ public class ProyectoEntidad {
     @JoinColumn(name = "estado")
     private EstadoProyectoEntidad estado;
     @OneToOne
-    @JoinColumn(name = "aprobacionproyecto")
+    @JoinColumn(name = "aprobacion_proyecto")
     private AprobacionProyectoEntidad aprobacionProyecto;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "proyecto")

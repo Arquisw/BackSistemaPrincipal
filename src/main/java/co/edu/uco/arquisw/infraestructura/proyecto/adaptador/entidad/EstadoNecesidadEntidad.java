@@ -11,11 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "estadonecesidad")
+@Table(name = "estado_necesidad")
 public class EstadoNecesidadEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="estadonecesidad_code_seq")
-    @SequenceGenerator(name="estadonecesidad_code_seq", sequenceName="estadonecesidad_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="estado_necesidad_code_seq")
+    @SequenceGenerator(name="estado_necesidad_code_seq", sequenceName="estado_necesidad_code_seq", allocationSize=1)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "estado")

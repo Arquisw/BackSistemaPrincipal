@@ -3,20 +3,23 @@ package co.edu.uco.arquisw.dominio.usuario.modelo;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.List;
 
 @Getter
 public class Usuario {
     private String correo;
     private String clave;
+    private final List<Rol> roles;
 
-    private Usuario(String correo, String clave) {
+    private Usuario(String correo, String clave, List<Rol> roles) {
         setCorreo(correo);
         setClave(clave);
+        this.roles = roles;
     }
 
-    public static Usuario crear(String correo, String clave) {
-        return new Usuario(correo, clave);
+    public static Usuario crear(String correo, String clave, List<Rol> roles) {
+        return new Usuario(correo, clave, roles);
     }
 
     private void setCorreo(String correo) {

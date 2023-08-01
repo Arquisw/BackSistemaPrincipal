@@ -11,11 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "peticioneliminacionnecesidad")
+@Table(name = "peticion_eliminacion_necesidad")
 public class PeticionEliminacionNecesidadEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticioneliminacionnecesidad_code_seq")
-    @SequenceGenerator(name="peticioneliminacionnecesidad_code_seq", sequenceName="peticioneliminacionnecesidad_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticion_eliminacion_necesidad_code_seq")
+    @SequenceGenerator(name="peticion_eliminacion_necesidad_code_seq", sequenceName="peticion_eliminacion_necesidad_code_seq", allocationSize=1)
     private Long id;
     private Long necesidad;
 }

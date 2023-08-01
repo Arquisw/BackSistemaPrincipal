@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,7 +24,4 @@ public class PersonaEntidad {
     private String apellidos;
     @Column(length = 100)
     private String correo;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "persona")
-    private List<RolPersonaEntidad> roles;
 }
