@@ -4,24 +4,20 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class Persona {
     private String nombre;
     private String apellidos;
     private String correo;
-    private List<Rol> roles;
 
-    private Persona(String nombre, String apellidos, String correo, List<Rol> roles) {
+    private Persona(String nombre, String apellidos, String correo) {
         setNombre(nombre);
         setApellidos(apellidos);
         setCorreo(correo);
-        setRoles(roles);
     }
 
-    public static Persona crear(String nombre, String apellidos, String correo, List<Rol> roles) {
-        return new Persona(nombre, apellidos, correo, roles);
+    public static Persona crear(String nombre, String apellidos, String correo) {
+        return new Persona(nombre, apellidos, correo);
     }
 
     private void setNombre(String nombre) {
@@ -43,9 +39,5 @@ public class Persona {
         ValidarTexto.validarCorreoEsValido(correo, Mensajes.PATRON_CORREO_PERSONA_NO_ES_VALIDO);
 
         this.correo = correo;
-    }
-
-    private void setRoles(List<Rol> roles) {
-        this.roles = roles;
     }
 }

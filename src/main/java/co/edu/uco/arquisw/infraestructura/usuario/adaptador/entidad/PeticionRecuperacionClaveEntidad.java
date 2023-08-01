@@ -12,11 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "peticionrecuperacionclave")
+@Table(name = "peticion_recuperacion_clave")
 public class PeticionRecuperacionClaveEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticionrecuperacionclave_code_seq")
-    @SequenceGenerator(name="peticionrecuperacionclave_code_seq", sequenceName="peticionrecuperacionclave_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticion_recuperacion_clave_code_seq")
+    @SequenceGenerator(name="peticion_recuperacion_clave_code_seq", sequenceName="peticion_recuperacion_clave_code_seq", allocationSize=1)
     private Long id;
     private String codigo;
     private String correo;

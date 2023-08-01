@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Getter
@@ -11,11 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "peticioneliminacionasociacion")
+@Table(name = "peticion_eliminacion_asociacion")
 public class PeticionEliminacionAsociacionEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticioneliminacionasociacion_code_seq")
-    @SequenceGenerator(name="peticioneliminacionasociacion_code_seq", sequenceName="peticioneliminacionasociacion_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticion_eliminacion_asociacion_code_seq")
+    @SequenceGenerator(name="peticion_eliminacion_asociacion_code_seq", sequenceName="peticion_eliminacion_asociacion_code_seq", allocationSize=1)
     private Long id;
     private Long asociacion;
 }

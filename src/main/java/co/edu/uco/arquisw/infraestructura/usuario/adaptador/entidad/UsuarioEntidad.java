@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +21,7 @@ public class UsuarioEntidad {
     @Column(length = 100)
     private String correo;
     private String clave;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario")
+    private List<RolUsuarioEntidad> roles;
 }

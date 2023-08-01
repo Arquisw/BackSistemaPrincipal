@@ -1,15 +1,13 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 
-import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorCorreo;
+import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarUsuarioPorCorreoManejador;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
-import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.UsuarioEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +22,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	@Autowired
-	private ConsultarPersonaPorCorreo consultarPersonaPorCorreo;
+	private ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -33,12 +31,12 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 		String username = authentication.getName();
 		String pwd = authentication.getCredentials().toString();
 		UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
-		PersonaDTO persona= this.consultarPersonaPorCorreo.ejecutar(username);
+		var usuarioDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
 
 		if (usuario!=null) {
 			if (passwordEncoder.matches(pwd, usuario.getClave())) {
-				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(persona.getRoles()));
-				authenticationToken.setDetails(persona.getId());
+				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(usuarioDTO.getRoles()));
+				authenticationToken.setDetails(usuarioDTO.getId());
 				return authenticationToken;
 			} else {
 				throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");

@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Usuario;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.AsociacionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
@@ -24,7 +25,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     @Autowired
     PersonaDAO personaDAO;
     @Autowired
-    RolPersonaDAO rolPersonaDAO;
+    RolUsuarioDAO rolUsuarioDAO;
     @Autowired
     UsuarioDAO usuarioDAO;
     @Autowired
@@ -41,11 +42,11 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
-    public Long guardar(Persona persona, String clave) {
-        var usuario = this.usuarioMapeador.construirEntidad(persona.getCorreo(), clave);
+    public Long guardar(Persona persona, Usuario usuario, String clave) {
+        var usuarioEntidad = this.usuarioMapeador.construirEntidad(usuario, clave);
         var personaEntidad = this.personaMapeador.construirEntidad(persona);
 
-        this.usuarioDAO.save(usuario);
+        this.usuarioDAO.save(usuarioEntidad);
 
         return this.personaDAO.save(personaEntidad).getId();
     }
@@ -77,13 +78,13 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public void crearRol(Rol rol, Long id) {
-        var persona = this.personaDAO.findById(id).orElse(null);
+        var usuario = this.usuarioDAO.findById(id).orElse(null);
         var entidad = this.rolMapeador.construirEntidad(rol);
 
-        assert persona != null;
-        persona.getRoles().add(entidad);
+        assert usuario != null;
+        usuario.getRoles().add(entidad);
 
-        this.personaDAO.save(persona);
+        this.usuarioDAO.save(usuario);
     }
 
     @Override
@@ -96,26 +97,26 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public void eliminarRol(Rol rol, Long id) {
-        var entidad = this.personaDAO.findById(id).orElse(null);
+        var entidad = this.usuarioDAO.findById(id).orElse(null);
 
         assert entidad != null;
         var roles = entidad.getRoles();
-        var rolParaEliminar = roles.stream().filter(rolPersona -> rolPersona.getRol().getNombre().equals(rol.getNombre())).findFirst().orElse(null);
+        var rolParaEliminar = roles.stream().filter(rolUsuario -> rolUsuario.getRol().getNombre().equals(rol.getNombre())).findFirst().orElse(null);
 
         assert rolParaEliminar != null;
         roles.remove(rolParaEliminar);
         entidad.setRoles(roles);
 
-        this.rolPersonaDAO.deleteById(rolParaEliminar.getId());
-        this.personaDAO.save(entidad);
+        this.rolUsuarioDAO.deleteById(rolParaEliminar.getId());
+        this.usuarioDAO.save(entidad);
     }
 
     @Override
     public void eliminar(Long id) {
-        var persona = this.personaDAO.findById(id).orElse(null);
+        var usuario = this.usuarioDAO.findById(id).orElse(null);
 
-        assert persona != null;
-        persona.getRoles().forEach(rol -> this.rolPersonaDAO.deleteById(rol.getId()));
+        assert usuario != null;
+        usuario.getRoles().forEach(rol -> this.rolUsuarioDAO.deleteById(rol.getId()));
 
         this.usuarioDAO.deleteById(id);
 

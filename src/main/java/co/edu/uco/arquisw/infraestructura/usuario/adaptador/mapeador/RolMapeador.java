@@ -4,25 +4,25 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolPersonaEntidad;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolUsuarioEntidad;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
 public class RolMapeador {
-    public RolDTO construirDTO(RolPersonaEntidad rol) {
+    public RolDTO construirDTO(RolUsuarioEntidad rol) {
         return new RolDTO(rol.getRol().getNombre(),rol.getRol().isLeer(),rol.getRol().isEscribir(),rol.getRol().isActualizar(),rol.getRol().isEliminar());
     }
 
-    public List<RolDTO> construirDTOs(List<RolPersonaEntidad> roles) {
+    public List<RolDTO> construirDTOs(List<RolUsuarioEntidad> roles) {
         return roles.stream().map(new RolMapeador()::construirDTO).toList();
     }
 
-    public RolPersonaEntidad construirEntidad(Rol rol) {
-        return new RolPersonaEntidad(null, new RolEntidad(obtenerRolID(rol.getNombre()), rol.getNombre(), obtenerPermisoLeer(rol.getNombre()), obtenerPermisoEscribir(rol.getNombre()), obtenerPermisoActualizar(rol.getNombre()), obtenerPermisoEliminar(rol.getNombre())));
+    public RolUsuarioEntidad construirEntidad(Rol rol) {
+        return new RolUsuarioEntidad(null, new RolEntidad(obtenerRolID(rol.getNombre()), rol.getNombre(), obtenerPermisoLeer(rol.getNombre()), obtenerPermisoEscribir(rol.getNombre()), obtenerPermisoActualizar(rol.getNombre()), obtenerPermisoEliminar(rol.getNombre())));
     }
 
-    public List<RolPersonaEntidad> construirEntidades(List<Rol> roles) {
+    public List<RolUsuarioEntidad> construirEntidades(List<Rol> roles) {
         return roles.stream().map(new RolMapeador()::construirEntidad).toList();
     }
 

@@ -7,18 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PersonaMapeador {
-    private final RolMapeador rolMapeador;
-
-    public PersonaMapeador(RolMapeador rolMapeador) {
-        this.rolMapeador = rolMapeador;
-    }
 
     public PersonaDTO construirDTO(PersonaEntidad persona) {
-        return new PersonaDTO(persona.getId(), persona.getNombre(), persona.getApellidos(), persona.getCorreo(), this.rolMapeador.construirDTOs(persona.getRoles()));
+        return new PersonaDTO(persona.getId(), persona.getNombre(), persona.getApellidos(), persona.getCorreo());
     }
 
     public PersonaEntidad construirEntidad(Persona persona) {
-        return new PersonaEntidad(0L, persona.getNombre(), persona.getApellidos(), persona.getCorreo(), this.rolMapeador.construirEntidades(persona.getRoles()));
+        return new PersonaEntidad(0L, persona.getNombre(), persona.getApellidos(), persona.getCorreo());
     }
 
     public void actualizarEntidad(PersonaEntidad entidad, Persona persona) {

@@ -3,9 +3,10 @@ package co.edu.uco.arquisw.dominio.usuario.puerto.comando;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
+import co.edu.uco.arquisw.dominio.usuario.modelo.Usuario;
 
 public interface PersonaRepositorioComando {
-    Long guardar(Persona persona, String clave);
+    Long guardar(Persona persona, Usuario usuario, String clave);
     Long actualizar(Persona persona, Long id);
     Long actualizarClave(String claveNueva, Long id);
     void crearRol(Rol rol, Long id);

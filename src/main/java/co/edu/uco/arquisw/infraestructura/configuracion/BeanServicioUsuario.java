@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanServicioUsuario {
     @Bean
-    public ServicioGuardarPersona servicioGuardarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
-        return new ServicioGuardarPersona(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
+    public ServicioGuardarPersona servicioGuardarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto, ServicioObtenerRoles servicioObtenerRoles) {
+        return new ServicioGuardarPersona(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto, servicioObtenerRoles);
     }
 
     @Bean
@@ -62,8 +62,8 @@ public class BeanServicioUsuario {
     }
 
     @Bean
-    public ServicioActualizarClave servicioActualizarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
-        return new ServicioActualizarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
+    public ServicioActualizarClave servicioActualizarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto, ServicioObtenerRoles servicioObtenerRoles) {
+        return new ServicioActualizarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto, servicioObtenerRoles);
     }
 
     @Bean
@@ -72,12 +72,17 @@ public class BeanServicioUsuario {
     }
 
     @Bean
-    public ServicioRecuperarClave servicioRecuperarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto) {
-        return new ServicioRecuperarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto);
+    public ServicioRecuperarClave servicioRecuperarClave(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioCifrarTexto servicioCifrarTexto, ServicioObtenerRoles servicioObtenerRoles) {
+        return new ServicioRecuperarClave(personaRepositorioComando, personaRepositorioConsulta, servicioCifrarTexto, servicioObtenerRoles);
     }
 
     @Bean
     public ServicioValidarCodigoRecuperacionClave servicioValidarCodigoRecuperacionClave(PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
         return new ServicioValidarCodigoRecuperacionClave(personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    }
+
+    @Bean
+    public ServicioObtenerRoles servicioObtenerRoles(PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioObtenerRoles(personaRepositorioConsulta);
     }
 }
