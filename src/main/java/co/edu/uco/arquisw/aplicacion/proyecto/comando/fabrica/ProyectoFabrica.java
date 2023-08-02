@@ -42,6 +42,6 @@ public class ProyectoFabrica {
     }
 
     private EstadoProyecto obtenerEstadoPorDefecto() {
-        return EstadoProyecto.crear(TextoConstante.ESTADO_EN_ESPERA);
+        return EstadoProyecto.crear(TextoConstante.ESTADO_EN_PROCESO);
     }
 }
