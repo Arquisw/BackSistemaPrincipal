@@ -77,19 +77,28 @@ public class ServicioActualizarTokenJWT implements ServicioActualizarToken {
     private void addCrudPrivilage(Set<String> grantedAuthorities, RolDTO authority){
         if(authority.isLeer())
         {
-            grantedAuthorities.add(authority.getNombre()+"_"+ TextoConstante.LECTURA);
+            grantedAuthorities.add(extractStringAfterUnderscore(authority.getNombre())+"_"+ TextoConstante.LECTURA);
         }
         if(authority.isEscribir())
         {
-            grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ESCRITURA);
+            grantedAuthorities.add(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ESCRITURA);
         }
         if(authority.isActualizar())
         {
-            grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ACTUALIZACION);
+            grantedAuthorities.add(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ACTUALIZACION);
         }
         if(authority.isActualizar())
         {
-            grantedAuthorities.add(authority.getNombre()+"_"+TextoConstante.ELIMINACION);
+            grantedAuthorities.add(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ELIMINACION);
+        }
+    }
+    private String extractStringAfterUnderscore(String input) {
+        int index = input.indexOf('_');
+
+        if (index != -1) {
+            return input.substring(index + 1);
+        } else {
+            return "No underscore found.";
         }
     }
 }
