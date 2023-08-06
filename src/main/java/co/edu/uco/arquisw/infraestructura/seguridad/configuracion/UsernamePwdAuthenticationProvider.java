@@ -73,19 +73,29 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 	private void addCrudPrivilage(List<GrantedAuthority> grantedAuthorities,RolDTO authority){
 		if(authority.isLeer()&&!haveReadPrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.LECTURA));
+			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.LECTURA));
 		}
 		if(authority.isEscribir()&&!haveWritePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ESCRITURA));
+			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ESCRITURA));
 		}
 		if(authority.isActualizar()&&!haveUpdatePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ACTUALIZACION));
+			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ACTUALIZACION));
 		}
 		if(authority.isActualizar()&&!haveDeletePrivilege(grantedAuthorities))
 		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()+"_"+TextoConstante.ELIMINACION));
+			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ELIMINACION));
+		}
+	}
+
+	private String extractStringAfterUnderscore(String input) {
+		int index = input.indexOf('_');
+
+		if (index != -1) {
+			return input.substring(index + 1);
+		} else {
+			return "No underscore found.";
 		}
 	}
 
