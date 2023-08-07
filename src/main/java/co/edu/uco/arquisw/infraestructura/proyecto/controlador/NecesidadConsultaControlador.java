@@ -67,7 +67,7 @@ public class NecesidadConsultaControlador {
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/proyectos")
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todos los proyectos aprobados y negociados")
-    public List<ProyectoDTO> consultarProyectos() {
+    public List<NecesidadDTO> consultarProyectos() {
         return this.consultarProyectosManejador.ejecutar();
     }
 
