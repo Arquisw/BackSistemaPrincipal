@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface NecesidadRepositorioConsulta {
     NecesidadDTO consultarPorId(Long id);
+    NecesidadDTO consultarPorProyectoId(Long id);
     List<NecesidadDTO> consultarNecesidadesPorId(Long id);
     NecesidadDTO consultarPorNecesidad(Long id);
     List<NecesidadDTO> consultarNecesidades();
