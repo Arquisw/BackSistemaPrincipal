@@ -55,6 +55,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
         entidad.getProyecto().getTiposConsultoria().forEach(tipoConsultoria -> tipoConsultoria.setId(this.tipoConsultoriaProyectoDAO.save(tipoConsultoria).getId()));
         entidad.getProyecto().getEstado().setId(this.estadoProyectoDAO.save(entidad.getProyecto().getEstado()).getId());
+        entidad.getProyecto().getAprobacionProyecto().setId(this.aprobacionProyectoDAO.save(entidad.getProyecto().getAprobacionProyecto()).getId());
         entidad.getProyecto().setId(this.proyectoDAO.save(entidad.getProyecto()).getId());
         entidad.getEstado().setId(this.estadoNecesidadDAO.save(entidad.getEstado()).getId());
 
@@ -163,9 +164,12 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         this.proyectoDAO.deleteById(entidad.getProyecto().getId());
         assert requerimientoEntidad != null;
         this.requerimientoArchivoDAO.deleteById(requerimientoEntidad.getId());
+
+        if(!ValidarObjeto.esNulo(contrato)) {
+            this.contratoDAO.deleteById(contrato.getId());
+        }
+
         this.necesidadDAO.deleteById(entidad.getId());
-        assert contrato != null;
-        this.contratoDAO.deleteById(contrato.getId());
     }
 
     @Override

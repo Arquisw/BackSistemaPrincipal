@@ -50,7 +50,7 @@ public class NecesidadComandoControlador {
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar Necesidad", description = "Este es usado para eliminar los datos de una necesidad por medio del ID de una asociacion")
+    @Operation(summary = "Eliminar Necesidad", description = "Este es usado para eliminar los datos de una necesidad por medio de su ID")
     public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
         return this.eliminarNecesidadManejador.ejecutar(id);
     }

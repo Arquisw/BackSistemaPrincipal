@@ -33,8 +33,8 @@ public class BeanServicioProyecto
     }
 
     @Bean
-    public ServicioEliminarNecesidad servicioEliminarNecesidad(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
-        return new ServicioEliminarNecesidad(asociacionRepositorioConsulta, necesidadRepositorioConsulta, necesidadRepositorioComando);
+    public ServicioEliminarNecesidad servicioEliminarNecesidad(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
+        return new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
     }
 
     @Bean
@@ -65,5 +65,10 @@ public class BeanServicioProyecto
     @Bean
     public ServicioConsultarAprobacionProyectoPorId servicioConsultarAprobacionProyectoPorId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
         return new ServicioConsultarAprobacionProyectoPorId(necesidadRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioConsultarNecesidadesPorAsociacionId servicioConsultarNecesidadesPorAsociacionId(NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioConsultarNecesidadesPorAsociacionId(necesidadRepositorioConsulta, asociacionRepositorioConsulta);
     }
 }
