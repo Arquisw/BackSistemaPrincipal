@@ -17,67 +17,65 @@ import org.mockito.Mockito;
 
 class ServicioEliminarAsociacionTest {
     @Test
-    void ValidarEliminacionExitosa()
-    {
+    void ValidarEliminacionExitosa() {
         var estado = new EstadoNecesidadDTO();
         estado.setNombre(TextoConstante.ESTADO_EN_ESPERA);
         var necesidad = new NecesidadDTO();
         necesidad.setEstado(estado);
-        var asociacion =new AsociacionDTO();
+        var asociacion = new AsociacionDTO();
 
-        var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
-        var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
-        var id =servicio.ejecutar(1L);
+        var id = servicio.ejecutar(1L);
 
-        Mockito.verify(necesidadRepositorioComando,Mockito.times(1)).eliminar(1L);
+        Mockito.verify(necesidadRepositorioComando, Mockito.times(1)).eliminar(1L);
 
-        Assertions.assertEquals(1L,id);
+        Assertions.assertEquals(1L, id);
     }
+
     @Test
-    void ValidarEliminacionFallidaNoExisteAsociacion()
-    {
+    void ValidarEliminacionFallidaNoExisteAsociacion() {
         var estado = new EstadoNecesidadDTO();
         estado.setNombre(TextoConstante.ESTADO_EN_ESPERA);
         var necesidad = new NecesidadDTO();
         necesidad.setEstado(estado);
 
-        var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
-        var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1,
-                Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
     }
+
     @Test
-    void ValidarEliminacionFallidaExisteUnaNecesidad()
-    {
+    void ValidarEliminacionFallidaExisteUnaNecesidad() {
         var estado = new EstadoNecesidadDTO();
         estado.setNombre(TextoConstante.ESTADO_APROBADO);
         var necesidad = new NecesidadDTO();
         necesidad.setEstado(estado);
-        var asociacion =new AsociacionDTO();
+        var asociacion = new AsociacionDTO();
 
-        var   asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var   necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
-        var   necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
 
-        var servicio = new ServicioEliminarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioConsulta,necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
-        Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO ,
-                Assertions.assertThrows(AutorizacionExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO,
+                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
     }
 }

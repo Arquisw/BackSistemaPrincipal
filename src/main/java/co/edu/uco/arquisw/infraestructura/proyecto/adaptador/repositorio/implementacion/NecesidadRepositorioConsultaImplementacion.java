@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepositorioConsulta {
@@ -54,6 +55,13 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
         necesidad.setRutaArchivo(requerimiento.getRuta());
 
         return necesidad;
+    }
+
+    @Override
+    public List<NecesidadDTO> consultarNecesidadesPorId(Long id) {
+        var entidades = this.necesidadDAO.findAll().stream().filter(necesidad -> Objects.equals(necesidad.getAsociacion(), id)).toList();
+
+        return this.necesidadMapeador.construirDTOs(entidades);
     }
 
     @Override
