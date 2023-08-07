@@ -21,6 +21,7 @@ public class NecesidadMapeador {
 
     public NecesidadDTO construirDTO(NecesidadEntidad necesidad) {
         var requerimientoEntidad = this.requerimientoArchivoDAO.findByNecesidad(necesidad.getId());
+
         return new NecesidadDTO(necesidad.getId(), requerimientoEntidad.getRuta(), this.estadoNecesidadMapeador.construirDTO(necesidad.getEstado()), this.proyectoMapeador.construirDTO(necesidad.getProyecto()));
     }
 

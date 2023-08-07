@@ -7,7 +7,6 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.AprobacionProyectoMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
@@ -15,7 +14,7 @@ import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMa
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -48,13 +47,20 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
             return null;
         }
 
-        var requerimiento = this.requerimientoArchivoDAO.findByNecesidad(entidad.getId());
+        return this.necesidadMapeador.construirDTO(entidad);
+    }
 
-        var necesidad = this.necesidadMapeador.construirDTO(entidad);
+    @Override
+    public NecesidadDTO consultarPorProyectoId(Long id) {
+        var proyecto = this.proyectoDAO.findById(id).orElse(null);
 
-        necesidad.setRutaArchivo(requerimiento.getRuta());
+        var entidad = this.necesidadDAO.findByProyecto(proyecto);
 
-        return necesidad;
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.necesidadMapeador.construirDTO(entidad);
     }
 
     @Override

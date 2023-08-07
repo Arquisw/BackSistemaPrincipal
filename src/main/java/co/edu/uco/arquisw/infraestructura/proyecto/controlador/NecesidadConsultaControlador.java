@@ -25,8 +25,8 @@ public class NecesidadConsultaControlador {
     private final ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador;
     private final ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador;
     private final ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador;
-
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador) {
+    private final ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador;
+    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador) {
         this.consultarNecesidadesManejador = consultarNecesidadesManejador;
         this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
         this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
@@ -34,6 +34,7 @@ public class NecesidadConsultaControlador {
         this.consultarPeticionesDeEliminacionNecesidadManejador = consultarPeticionesDeEliminacionNecesidadManejador;
         this.consultarAprobacionProyectoPorIdManejador = consultarAprobacionProyectoPorIdManejador;
         this.consultarNecesidadesPorAsociacionIdManejador = consultarNecesidadesPorAsociacionIdManejador;
+        this.consultarNecesidadPorProyectoIdManejador = consultarNecesidadPorProyectoIdManejador;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR','ROLE_ASOCIACION')")
@@ -41,6 +42,13 @@ public class NecesidadConsultaControlador {
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID de una asociacion")
     public NecesidadDTO consultarPorId(@PathVariable Long id) {
         return this.consultarNecesidadPorIdManejador.ejecutar(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR', 'ROLE_ASOCIACION')")
+    @GetMapping("/proyecto/{id}")
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID del proyecto")
+    public NecesidadDTO consultarPorProyectoId(@PathVariable Long id) {
+        return this.consultarNecesidadPorProyectoIdManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ASOCIACION')")

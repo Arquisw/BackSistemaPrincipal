@@ -71,4 +71,9 @@ public class BeanServicioProyecto
     public ServicioConsultarNecesidadesPorAsociacionId servicioConsultarNecesidadesPorAsociacionId(NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         return new ServicioConsultarNecesidadesPorAsociacionId(necesidadRepositorioConsulta, asociacionRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioConsultarNecesidadPorProyectoId servicioConsultarNecesidadPorProyectoId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioConsultarNecesidadPorProyectoId(necesidadRepositorioConsulta);
+    }
 }
