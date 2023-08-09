@@ -51,7 +51,7 @@ class ServicioGuardarAsociacionTest
 
         var servicio = new ServicioActualizarAsociacion(asociacionRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(null);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(asociacion,1L)).getMessage());
     }
@@ -66,7 +66,7 @@ class ServicioGuardarAsociacionTest
 
         var servicio = new ServicioActualizarAsociacion(asociacionRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(asociacionDTO);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(asociacionDTO);
         Mockito.when(asociacionRepositorioConsulta.consultarPorNIT((Mockito.anyString()))).thenReturn(asociacionDTO);
 
         Assertions.assertEquals(Mensajes.EXISTE_ASOCIACION_CON_NIT + asociacion.getNit(), Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(asociacion,1L)).getMessage());

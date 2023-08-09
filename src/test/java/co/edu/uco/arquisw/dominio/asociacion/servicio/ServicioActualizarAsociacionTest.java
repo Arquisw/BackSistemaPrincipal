@@ -4,9 +4,6 @@ import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.asociacion.testdatabuilder.AsociacionTestDataBuilder;
-import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
-import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioActualizarNecesidad;
-import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.NesecidadTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
@@ -26,7 +23,7 @@ class ServicioActualizarAsociacionTest
 
         var servicio = new ServicioActualizarAsociacion(asociacionRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacionDTO);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacionDTO);
 
         servicio.ejecutar(asociacion,1L);
 
@@ -43,7 +40,7 @@ class ServicioActualizarAsociacionTest
 
         var servicio = new ServicioActualizarAsociacion(asociacionRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(null);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(asociacion,1L)).getMessage());
     }
@@ -58,7 +55,7 @@ class ServicioActualizarAsociacionTest
 
         var servicio = new ServicioActualizarAsociacion(asociacionRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(asociacionDTO);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(asociacionDTO);
         Mockito.when(asociacionRepositorioConsulta.consultarPorNIT((Mockito.anyString()))).thenReturn(asociacionDTO);
 
         Assertions.assertEquals(Mensajes.EXISTE_ASOCIACION_CON_NIT + asociacion.getNit(), Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(asociacion,1L)).getMessage());

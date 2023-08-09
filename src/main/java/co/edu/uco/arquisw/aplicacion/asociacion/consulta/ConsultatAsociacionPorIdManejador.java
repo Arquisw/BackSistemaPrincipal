@@ -5,11 +5,13 @@ import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.servicio.ServicioConsultarAsociacionPorID;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ConsultarAsociacionPorIdManejador implements ManejadorComandoRespuesta<Long, AsociacionDTO> {
-    private final ServicioConsultarAsociacionPorID servicioConsultarAsociacionPorID;
 
-    public ConsultarAsociacionPorIdManejador(ServicioConsultarAsociacionPorID servicioConsultarAsociacionPorID) {
+@Component
+public class ConsultatAsociacionPorIdManejador implements ManejadorComandoRespuesta<Long, AsociacionDTO> {
+
+    private ServicioConsultarAsociacionPorID servicioConsultarAsociacionPorID;
+
+    public ConsultatAsociacionPorIdManejador(ServicioConsultarAsociacionPorID servicioConsultarAsociacionPorID) {
         this.servicioConsultarAsociacionPorID = servicioConsultarAsociacionPorID;
     }
 

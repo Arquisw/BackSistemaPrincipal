@@ -28,8 +28,22 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     PeticionEliminacionAsociacionMapeador peticionEliminacionAsociacionMapeador;
 
     @Override
-    public AsociacionDTO consultarPorID(Long id) {
+    public AsociacionDTO consultarPorIDUsuario(Long id) {
         var entidad = this.asociacionDAO.findByUsuario(id);
+
+        if(ValidarObjeto.esNulo(entidad) ) {
+            return null;
+        }
+
+        var usuario = this.personaDAO.findById(entidad.getUsuario()).orElse(null);
+
+        assert usuario != null;
+        return this.asociacionMapeador.construirDTO(entidad, usuario.getNombre() + TextoConstante.ESPACIO + usuario.getApellidos());
+    }
+
+    @Override
+    public AsociacionDTO consultarPorID(Long id) {
+        var entidad = this.asociacionDAO.findById(id).orElse(null);
 
         if(ValidarObjeto.esNulo(entidad) ) {
             return null;

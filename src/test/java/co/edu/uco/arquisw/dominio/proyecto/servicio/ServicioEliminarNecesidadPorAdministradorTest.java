@@ -19,7 +19,7 @@ class ServicioEliminarNecesidadPorAdministradorTest {
 
         var servicio = new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta,necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         var id =servicio.ejecutar(1L);
 

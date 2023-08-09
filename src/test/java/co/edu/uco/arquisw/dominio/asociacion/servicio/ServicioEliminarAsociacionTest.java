@@ -1,7 +1,6 @@
 package co.edu.uco.arquisw.dominio.asociacion.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
-import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.dto.EstadoNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
@@ -30,7 +29,7 @@ class ServicioEliminarAsociacionTest {
 
         var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
         var id = servicio.ejecutar(1L);
@@ -72,7 +71,7 @@ class ServicioEliminarAsociacionTest {
 
         var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO,

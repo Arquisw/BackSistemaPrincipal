@@ -20,7 +20,7 @@ class ServicioActualizarContratoTest {
 
         var servicio= new ServicioActualizarContrato(contratoRepositorioComando, asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.any())).thenReturn(null);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.any())).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L)).getMessage());
     }
@@ -36,7 +36,7 @@ class ServicioActualizarContratoTest {
 
         var servicio= new ServicioActualizarContrato(contratoRepositorioComando, asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.any())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.any())).thenReturn(asociacion);
 
         servicio.ejecutar(contrato,1L);
 

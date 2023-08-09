@@ -32,7 +32,7 @@ public class ServicioEliminarPersona {
     }
 
     private void validarSiPuedeEliminarLaCuenta(Long id) {
-        if(!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
+        if(!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorIDUsuario(id))) {
             this.personaRepositorioComando.crearNotificacionEliminacion(id);
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_ASOCIACION_A_CARGO);
         }

@@ -1,7 +1,8 @@
 package co.edu.uco.arquisw.infraestructura.asociacion.controlador;
 
-import co.edu.uco.arquisw.aplicacion.asociacion.consulta.ConsultarAsociacionPorIdManejador;
+import co.edu.uco.arquisw.aplicacion.asociacion.consulta.ConsultarAsociacionPorIdUsuarioManejador;
 import co.edu.uco.arquisw.aplicacion.asociacion.consulta.ConsultarPeticionesDeEliminacionAsociacionManejador;
+import co.edu.uco.arquisw.aplicacion.asociacion.consulta.ConsultatAsociacionPorIdManejador;
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.dto.PeticionEliminacionAsociacionDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,19 +18,29 @@ import java.util.List;
 @RequestMapping("/asociaciones")
 @Tag(name = "Consulta de la Asociacion Controlador")
 public class AsociacionConsultaControlador {
-    private final ConsultarAsociacionPorIdManejador consultarAsociacionPorIdManejador;
+    private final ConsultarAsociacionPorIdUsuarioManejador consultarAsociacionPorIdUsuarioManejador;
+
+    private final ConsultatAsociacionPorIdManejador consultatAsociacionPorIdManejador;
     private final ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador;
 
-    public AsociacionConsultaControlador(ConsultarAsociacionPorIdManejador consultarAsociacionPorIdManejador, ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador) {
-        this.consultarAsociacionPorIdManejador = consultarAsociacionPorIdManejador;
+    public AsociacionConsultaControlador(ConsultarAsociacionPorIdUsuarioManejador consultarAsociacionPorIdUsuarioManejador, ConsultatAsociacionPorIdManejador consultatAsociacionPorIdManejador, ConsultarPeticionesDeEliminacionAsociacionManejador consultarPeticionesDeEliminacionAsociacionManejador) {
+        this.consultarAsociacionPorIdUsuarioManejador = consultarAsociacionPorIdUsuarioManejador;
+        this.consultatAsociacionPorIdManejador = consultatAsociacionPorIdManejador;
         this.consultarPeticionesDeEliminacionAsociacionManejador = consultarPeticionesDeEliminacionAsociacionManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una asociacion por medio del ID de un Usuario")
-    public AsociacionDTO consultarPorId(@PathVariable Long id) {
-        return this.consultarAsociacionPorIdManejador.ejecutar(id);
+    public AsociacionDTO consultarPorIdUsuario(@PathVariable Long id) {
+        return this.consultarAsociacionPorIdUsuarioManejador.ejecutar(id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
+    @GetMapping("/asociacion/{id}")
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una asociacion por medio del ID")
+    public AsociacionDTO consultarPorAsociacionId(@PathVariable Long id) {
+        return this.consultatAsociacionPorIdManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
