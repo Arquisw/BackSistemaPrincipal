@@ -22,7 +22,7 @@ class ServicioActualizarNecesidadTest
         var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var servicio = new ServicioActualizarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacionDto);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacionDto);
         Mockito.when(necesidadRepositorioComando.actualizar(Mockito.any(Necesidad.class),Mockito.anyLong())).thenReturn(1L);
         servicio.ejecutar(nesecidad,1L);
 
@@ -38,7 +38,7 @@ class ServicioActualizarNecesidadTest
         var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var servicio = new ServicioActualizarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(null);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(nesecidad,1L)).getMessage());
     }

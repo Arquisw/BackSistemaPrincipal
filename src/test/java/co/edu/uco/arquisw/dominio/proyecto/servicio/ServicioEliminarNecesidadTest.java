@@ -32,7 +32,7 @@ class ServicioEliminarNecesidadTest {
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         var id =servicio.ejecutar(1L);
 
@@ -53,7 +53,7 @@ class ServicioEliminarNecesidadTest {
         var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());
@@ -75,7 +75,7 @@ class ServicioEliminarNecesidadTest {
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacion);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA ,

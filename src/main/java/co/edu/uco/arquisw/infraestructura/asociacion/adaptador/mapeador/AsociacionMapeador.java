@@ -5,6 +5,8 @@ import co.edu.uco.arquisw.dominio.asociacion.modelo.Asociacion;
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.entidad.AsociacionEntidad;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class AsociacionMapeador {
     public AsociacionDTO construirDTO(AsociacionEntidad asociacion, String nombre) {

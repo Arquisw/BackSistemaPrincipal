@@ -42,7 +42,7 @@ public class ServicioEliminarAsociacion {
     }
 
     private void validarSiPuedeEliminarLaCuenta(Long id) {
-        var asociacion = this.asociacionRepositorioConsulta.consultarPorID(id);
+        var asociacion = this.asociacionRepositorioConsulta.consultarPorIDUsuario(id);
 
         if(!ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(asociacion.getId()))) {
             this.asociacionRepositorioComando.crearNotificacionEliminacion(asociacion.getId());

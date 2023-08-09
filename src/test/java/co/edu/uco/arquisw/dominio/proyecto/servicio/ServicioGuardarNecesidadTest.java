@@ -1,8 +1,6 @@
 package co.edu.uco.arquisw.dominio.proyecto.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
-import co.edu.uco.arquisw.dominio.asociacion.modelo.Asociacion;
-import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
@@ -24,7 +22,7 @@ class ServicioGuardarNecesidadTest
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
         var servicio = new ServicioGuardarNecesidad(necesidadRepositorioComando,asociacionRepositorioConsulta);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID(Mockito.anyLong())).thenReturn(asociacionDto);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacionDto);
         Mockito.when(necesidadRepositorioComando.guardar(Mockito.any(Necesidad.class),Mockito.anyLong())).thenReturn(1L);
 
         var id = servicio.ejecutar(nesecidad, 1L);
@@ -44,7 +42,7 @@ class ServicioGuardarNecesidadTest
         var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var servicio = new ServicioActualizarNecesidad(asociacionRepositorioConsulta,necesidadRepositorioComando);
 
-        Mockito.when(asociacionRepositorioConsulta.consultarPorID((Mockito.anyLong()))).thenReturn(null);
+        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario((Mockito.anyLong()))).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(nesecidad,1L)).getMessage());
     }
