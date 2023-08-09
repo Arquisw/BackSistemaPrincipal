@@ -37,14 +37,14 @@ public class NecesidadConsultaControlador {
         this.consultarNecesidadPorProyectoIdManejador = consultarNecesidadPorProyectoIdManejador;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR','ROLE_ASOCIACION')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID de una asociacion")
     public NecesidadDTO consultarPorId(@PathVariable Long id) {
         return this.consultarNecesidadPorIdManejador.ejecutar(id);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR', 'ROLE_ASOCIACION')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
     @GetMapping("/proyecto/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID del proyecto")
     public NecesidadDTO consultarPorProyectoId(@PathVariable Long id) {
