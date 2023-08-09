@@ -38,8 +38,6 @@ class PersonaTest {
         Assertions.assertEquals(Mensajes.CORREO_PERSONA_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Persona.crear("juan", "valencia", "")).getMessage());
 
-        Assertions.assertEquals(Mensajes.CLAVE_PERSONA_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
-                Persona.crear("juan", "valencia", "jjuandiego23@gmail.com")).getMessage());
 
     }
 
@@ -55,7 +53,5 @@ class PersonaTest {
         Assertions.assertEquals(Mensajes.PATRON_CORREO_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
                 Persona.crear("juan", "valencia", "jjuandiego@asffgh")).getMessage());
 
-        Assertions.assertEquals(Mensajes.PATRON_CLAVE_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Persona.crear("juan", "valencia", "jjuandiego23@gmail.com")).getMessage());
-    }
+         }
 }

@@ -24,7 +24,7 @@ class ServicioGuardarPersonaTest {
         var servicioCifrarTexto = Mockito.mock(ServicioCifrarTexto.class);
         var servicioObtenerRoles = Mockito.mock(ServicioObtenerRoles.class);
         var servicio = new ServicioGuardarPersona(repositorioPersonaComando, repositorioPersonaConsulta, servicioCifrarTexto, servicioObtenerRoles);
-        var clave = "ASDSFGh";
+        var clave = "ASDSFGh1234567";
 
         Mockito.when(repositorioPersonaComando.guardar(Mockito.any(Persona.class), Mockito.any(Usuario.class),  Mockito.any(String.class))).thenReturn(1L);
 
@@ -41,7 +41,7 @@ class ServicioGuardarPersonaTest {
 
         var persona = new PersonaTestDataBuilder().build();
         var personaDto = new PersonaDTO();
-        var clave = "ASDSFGh";
+        var clave = "ASDSFG2345h";
 
         var repositorioPersonaComando = Mockito.mock(PersonaRepositorioComando.class);
         var repositorioPersonaConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
