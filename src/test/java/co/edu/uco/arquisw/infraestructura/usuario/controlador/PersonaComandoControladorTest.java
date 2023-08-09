@@ -61,7 +61,7 @@ class PersonaComandoControladorTest {
     void eliminacionPersonaPorAdministradorFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/administrador/{id}", id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/administrador/{id}", id,"ADMINISTRADOR_ELIMINACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -73,7 +73,7 @@ class PersonaComandoControladorTest {
     void eliminacionPersonaPorAdministradorExitosa() throws Exception {
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/administrador/{id}", id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/administrador/{id}", id,"ADMINISTRADOR_ELIMINACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -86,7 +86,7 @@ class PersonaComandoControladorTest {
     void eliminacionPersonaExitosa() throws Exception {
         var id = 8;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"USUARIO_ELIMINACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -100,7 +100,7 @@ class PersonaComandoControladorTest {
     void eliminacionPersonaFallidaPorTenerUnaAsociacion() throws Exception {
         var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"USUARIO_ELIMINACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -112,7 +112,7 @@ class PersonaComandoControladorTest {
     void eliminacionPersonaFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/usuarios/{id}", id,"USUARIO_ELIMINACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -125,7 +125,7 @@ class PersonaComandoControladorTest {
         Long id = 2L;
         var persona = new PersonaDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/{id}", id,"USUARIO_ACTUALIZACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(persona)))
                 .andExpect(status().isOk());
@@ -136,7 +136,7 @@ class PersonaComandoControladorTest {
         Long id = 9L;
         var persona = new PersonaDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/{id}", id,"USUARIO_ACTUALIZACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(persona)))
                 .andExpect(status().is4xxClientError())
@@ -150,7 +150,7 @@ class PersonaComandoControladorTest {
         var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
 
         var id = 3;
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/usuarios/hojadevida/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/usuarios/hojadevida/{id}", id,"USUARIO_ESCRITURA")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(hojaDeVida)))
                 .andExpect(status().is2xxSuccessful());
@@ -161,7 +161,7 @@ class PersonaComandoControladorTest {
 
         var id = 10;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/hojadevida/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/usuarios/hojadevida/{id}", id,"USUARIO_ESCRITURA")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
@@ -174,7 +174,7 @@ class PersonaComandoControladorTest {
         Long id = 2L;
         var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/hojadevida/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/hojadevida/{id}", id,"USUARIO_ESCRITURA")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(hojaDeVida)))
                 .andExpect(status().isOk());
@@ -185,7 +185,7 @@ class PersonaComandoControladorTest {
         Long id = 9L;
         var hojaDeVida = new HojaDeVidaDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/hojadevida/{id}", id,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/usuarios/hojadevida/{id}", id,"USUARIO_ESCRITURA")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(hojaDeVida)))
                 .andExpect(status().is4xxClientError())
