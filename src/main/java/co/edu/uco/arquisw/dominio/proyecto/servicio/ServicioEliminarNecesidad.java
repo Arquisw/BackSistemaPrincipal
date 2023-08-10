@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.dominio.proyecto.servicio;
 
-import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
@@ -27,13 +26,13 @@ public class ServicioEliminarNecesidad {
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(id))) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorAsociacionId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }
 
     private void validarSiPuedeEliminarLaCuenta(Long id) {
-        var necesidad = this.necesidadRepositorioConsulta.consultarPorId(id);
+        var necesidad = this.necesidadRepositorioConsulta.consultarPorAsociacionId(id);
 
         if(necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO) || necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
             this.necesidadRepositorioComando.crearNotificacionEliminacion(necesidad.getId());

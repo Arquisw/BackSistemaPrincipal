@@ -24,7 +24,7 @@ public class ServicioEliminarAsociacionPorAdministrador {
 
         this.personaRepositorioComando.eliminarRolAsociacion(Rol.crear(TextoConstante.ROL_ASOCIACION), id);
 
-        this.asociacionRepositorioComando.eliminar(id);
+        this.asociacionRepositorioComando.eliminarPorAdministrador(id);
 
         return id;
     }

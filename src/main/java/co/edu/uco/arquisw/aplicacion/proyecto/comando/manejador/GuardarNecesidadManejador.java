@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador;
 
-import co.edu.uco.arquisw.aplicacion.proyecto.comando.NecesidadComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.fabrica.NecesidadFabrica;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
@@ -8,7 +8,7 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioGuardarNecesidad;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GuardarNecesidadManejador implements ManejadorComandoActualizacionRespuesta<NecesidadComando, Long, ComandoRespuesta<Long>> {
+public class GuardarNecesidadManejador implements ManejadorComandoActualizacionRespuesta<ProyectoComando, Long, ComandoRespuesta<Long>> {
     private final NecesidadFabrica necesidadFabrica;
     private final ServicioGuardarNecesidad servicioGuardarNecesidad;
 
@@ -18,7 +18,7 @@ public class GuardarNecesidadManejador implements ManejadorComandoActualizacionR
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(NecesidadComando comando, Long id) {
+    public ComandoRespuesta<Long> ejecutar(ProyectoComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioGuardarNecesidad.ejecutar(this.necesidadFabrica.construir(comando), id));
     }
 }

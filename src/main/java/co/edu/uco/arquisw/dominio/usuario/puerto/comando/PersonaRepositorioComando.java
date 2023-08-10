@@ -13,6 +13,7 @@ public interface PersonaRepositorioComando {
     void eliminarRolAsociacion(Rol rol, Long id);
     void eliminarRol(Rol rol, Long id);
     void eliminar(Long id);
+    void eliminarPorAdminsitrador(Long id);
     Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
     Long actualizarHojaDeVida(HojaDeVidaPersona hojaDeVida,Long usuarioId);
     void crearNotificacionEliminacion(Long id);

@@ -18,7 +18,7 @@ public class ServicioEliminarNecesidadPorAdministrador {
     public Long ejecutar(Long id) {
         validarSiExisteAsociacionConID(id);
 
-        this.necesidadRepositorioComando.eliminar(id);
+        this.necesidadRepositorioComando.eliminarPorAdministrador(id);
 
         return id;
     }

@@ -1,0 +1,29 @@
+package co.edu.uco.arquisw.dominio.proyecto.servicio;
+
+import co.edu.uco.arquisw.dominio.proyecto.modelo.Requerimientos;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+
+public class ServicioGuardarRequerimientos {
+    private final NecesidadRepositorioComando necesidadRepositorioComando;
+    private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
+
+    public ServicioGuardarRequerimientos(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        this.necesidadRepositorioComando = necesidadRepositorioComando;
+        this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
+    }
+
+    public Long ejecutar(Requerimientos requerimientos, Long necesidadId) {
+        validarSiExisteNecesidadConId(necesidadId);
+
+        return this.necesidadRepositorioComando.guardarRequerimientos(requerimientos, necesidadId);
+    }
+
+    private void validarSiExisteNecesidadConId(Long necesidadId) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorAsociacionId(necesidadId))) {
+            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
+        }
+    }
+}

@@ -1,16 +1,10 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
-import co.edu.uco.arquisw.dominio.proyecto.dto.AprobacionProyectoDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.AprobacionProyectoMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,9 +32,11 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     AprobacionProyectoDAO aprobacionProyectoDAO;
     @Autowired
     AprobacionProyectoMapeador aprobacionProyectoMapeador;
+    @Autowired
+    RequerimientosMapeador requerimientosMapeador;
 
     @Override
-    public NecesidadDTO consultarPorId(Long id) {
+    public NecesidadDTO consultarPorAsociacionId(Long id) {
         var entidad = this.necesidadDAO.findByAsociacion(id);
 
         if(ValidarObjeto.esNulo(entidad)) {
@@ -64,6 +60,16 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
+    public RequerimientosDTO consultarRequerimientoPorNecesidadId(Long id) {
+        var entidad = this.requerimientoArchivoDAO.findByNecesidad(id);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+        return this.requerimientosMapeador.construirDTO(entidad);
+    }
+
+    @Override
     public List<NecesidadDTO> consultarNecesidadesPorId(Long id) {
         var entidades = this.necesidadDAO.findAll().stream().filter(necesidad -> Objects.equals(necesidad.getAsociacion(), id)).toList();
 
@@ -71,7 +77,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public NecesidadDTO consultarPorNecesidad(Long id) {
+    public NecesidadDTO consultarPorNecesidadId(Long id) {
         var entidad = this.necesidadDAO.findById(id).orElse(null);
 
         if(ValidarObjeto.esNulo(entidad)) {
@@ -87,11 +93,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_EN_ESPERA)).toList();
 
-        var necesidadesDTO = this.necesidadMapeador.construirDTOs(necesidades);
-
-        necesidadesDTO.forEach(dto -> dto.setRutaArchivo(this.requerimientoArchivoDAO.findByNecesidad(dto.getId()).getRuta()));
-
-        return necesidadesDTO;
+        return this.necesidadMapeador.construirDTOs(necesidades);
     }
 
     @Override

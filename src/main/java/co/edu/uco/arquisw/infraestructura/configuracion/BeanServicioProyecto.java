@@ -76,4 +76,19 @@ public class BeanServicioProyecto
     public ServicioConsultarNecesidadPorProyectoId servicioConsultarNecesidadPorProyectoId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
         return new ServicioConsultarNecesidadPorProyectoId(necesidadRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioGuardarRequerimientos servicioGuardarRequerimientos(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioGuardarRequerimientos(necesidadRepositorioComando, necesidadRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioActualizarRequerimientos servicioActualizarRequerimientos(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioActualizarRequerimientos(necesidadRepositorioComando, necesidadRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioConsultarRequerimientosPorNecesidadId servicioConsultarRequerimientosPorNecesidadId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioConsultarRequerimientosPorNecesidadId(necesidadRepositorioConsulta);
+    }
 }

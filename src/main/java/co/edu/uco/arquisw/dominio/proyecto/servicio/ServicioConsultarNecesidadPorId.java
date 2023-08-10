@@ -15,11 +15,11 @@ public class ServicioConsultarNecesidadPorId {
     public NecesidadDTO ejecutar(Long id) {
         validarSiExisteNecesidadConID(id);
 
-        return this.necesidadRepositorioConsulta.consultarPorId(id);
+        return this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(id))) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }

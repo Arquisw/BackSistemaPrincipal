@@ -124,6 +124,21 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     }
 
     @Override
+    public void eliminarPorAdminsitrador(Long id) {
+        var usuario = this.usuarioDAO.findById(id).orElse(null);
+        var peticionEliminacionUsuario = this.peticionEliminacionPersonaDAO.findByUsuario(id);
+
+        assert usuario != null;
+        usuario.getRoles().forEach(rol -> this.rolUsuarioDAO.deleteById(rol.getId()));
+
+        this.peticionEliminacionPersonaDAO.deleteById(peticionEliminacionUsuario.getId());
+
+        this.usuarioDAO.deleteById(id);
+
+        this.personaDAO.deleteById(id);
+    }
+
+    @Override
     public Long guardarHojaDeVida(HojaDeVidaPersona hojaDeVida, Long usuarioId) {
         return this.hojaDeVidaPersonaDAO.save(this.hojaDeVidaPersonaMapeador.construirEntidad(hojaDeVida, usuarioId)).getId();
     }

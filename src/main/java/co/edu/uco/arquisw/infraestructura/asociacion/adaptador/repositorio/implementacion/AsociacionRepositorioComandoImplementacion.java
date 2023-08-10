@@ -44,6 +44,15 @@ public class AsociacionRepositorioComandoImplementacion implements AsociacionRep
     }
 
     @Override
+    public void eliminarPorAdministrador(Long id) {
+        var entidad = this.peticionEliminacionAsociacionDAO.findByAsociacion(id);
+
+        this.peticionEliminacionAsociacionDAO.deleteById(entidad.getId());
+
+        this.asociacionDAO.deleteById(id);
+    }
+
+    @Override
     public void crearNotificacionEliminacion(Long id) {
         this.peticionEliminacionAsociacionDAO.save(this.peticionEliminacionAsociacionMapeador.construirEntidad(id));
     }

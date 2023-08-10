@@ -44,7 +44,7 @@ public class ServicioEliminarAsociacion {
     private void validarSiPuedeEliminarLaCuenta(Long id) {
         var asociacion = this.asociacionRepositorioConsulta.consultarPorIDUsuario(id);
 
-        if(!ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(asociacion.getId()))) {
+        if(!ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorAsociacionId(asociacion.getId()))) {
             this.asociacionRepositorioComando.crearNotificacionEliminacion(asociacion.getId());
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA);
         }

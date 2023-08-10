@@ -17,11 +17,11 @@ class ServicioConsultarNecesidarPorIdTest {
 
         var servicio = new ServicioConsultarNecesidadPorId(necesidadRepositorioConsulta);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidadDTO);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidadDTO);
 
         var necesidadConsultada = servicio.ejecutar(1L);
 
-        Mockito.verify(necesidadRepositorioConsulta, Mockito.times(2)).consultarPorId(1L);
+        Mockito.verify(necesidadRepositorioConsulta, Mockito.times(2)).consultarPorAsociacionId(1L);
 
         Assertions.assertEquals(necesidadDTO, necesidadConsultada);
     }
@@ -32,7 +32,7 @@ class ServicioConsultarNecesidarPorIdTest {
 
         var servicio = new ServicioConsultarNecesidadPorId(necesidadRepositorioConsulta);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,
                 Assertions.assertThrows(NullPointerException.class, () ->

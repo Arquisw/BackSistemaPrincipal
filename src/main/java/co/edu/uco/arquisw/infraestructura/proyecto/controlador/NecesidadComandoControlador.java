@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
-import co.edu.uco.arquisw.aplicacion.proyecto.comando.NecesidadComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.RequerimientosComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.*;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
@@ -22,8 +23,9 @@ public class NecesidadComandoControlador {
     private final AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador;
     private final AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador;
     private final AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador;
-
-    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador) {
+    private final GuardarRequerimientosManejador guardarRequerimientosManejador;
+    private final ActualizarRequerimientosManejador actualizarRequerimientosManejador;
+    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador) {
         this.guardarNecesidadManejador = guardarNecesidadManejador;
         this.actualizarNecesidadManejador = actualizarNecesidadManejador;
         this.eliminarNecesidadManejador = eliminarNecesidadManejador;
@@ -32,20 +34,36 @@ public class NecesidadComandoControlador {
         this.aprobarProyectoPorRolIngenieriaManejador = aprobarProyectoPorRolIngenieriaManejador;
         this.aprobarProyectoPorRolLiderDeEquipoManejador = aprobarProyectoPorRolLiderDeEquipoManejador;
         this.aprobarProyectoPorRolDirectorDeProyectoManejador = aprobarProyectoPorRolDirectorDeProyectoManejador;
+        this.guardarRequerimientosManejador = guardarRequerimientosManejador;
+        this.actualizarRequerimientosManejador = actualizarRequerimientosManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @PostMapping("/{id}")
     @Operation(summary = "Guardar Necesidad", description = "Este es usado para guardar una Necesidad en la aplicación por medio del ID de una asociacion")
-    public ComandoRespuesta<Long> guardar(@RequestBody NecesidadComando necesidad, @PathVariable Long id) {
-        return this.guardarNecesidadManejador.ejecutar(necesidad, id);
+    public ComandoRespuesta<Long> guardar(@RequestBody ProyectoComando proyectoComando, @PathVariable Long id) {
+        return this.guardarNecesidadManejador.ejecutar(proyectoComando, id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
+    @PostMapping("/requerimientos/{id}")
+    @Operation(summary = "Guardar Requerimientos", description = "Este es usado para guardar los requerimientos de una Necesidad en la aplicación por medio del ID de la necesidad")
+    public ComandoRespuesta<Long> guardarRequerimientos(@RequestBody RequerimientosComando requerimientosComando, @PathVariable Long id) {
+        return this.guardarRequerimientosManejador.ejecutar(requerimientosComando, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Necesidad", description = "Este es usado para actualizar los datos de una Necesidad por medio del ID de una asociacion")
-    public ComandoRespuesta<Long> actualizar(@RequestBody NecesidadComando necesidad, @PathVariable Long id) {
-        return this.actualizarNecesidadManejador.ejecutar(necesidad, id);
+    public ComandoRespuesta<Long> actualizar(@RequestBody ProyectoComando proyectoComando, @PathVariable Long id) {
+        return this.actualizarNecesidadManejador.ejecutar(proyectoComando, id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
+    @PutMapping("/requerimientos/{id}")
+    @Operation(summary = "Actualizar Requerimientos", description = "Este es usado para actualizar los requerimientos de una Necesidad en la aplicación por medio del ID de la necesidad")
+    public ComandoRespuesta<Long> actualizarRequerimientos(@RequestBody RequerimientosComando requerimientosComando, @PathVariable Long id) {
+        return this.actualizarRequerimientosManejador.ejecutar(requerimientosComando, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")

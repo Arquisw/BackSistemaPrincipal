@@ -1,9 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
-import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
+import co.edu.uco.arquisw.dominio.proyecto.modelo.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.contrato.adaptador.repositorio.jpa.ContratoDAO;
@@ -48,6 +45,8 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     AprobacionProyectoDAO aprobacionProyectoDAO;
     @Autowired
     AprobacionProyectoMapeador aprobacionProyectoMapeador;
+    @Autowired
+    RequerimientosMapeador requerimientosMapeador;
 
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID) {
@@ -59,17 +58,20 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         entidad.getProyecto().setId(this.proyectoDAO.save(entidad.getProyecto()).getId());
         entidad.getEstado().setId(this.estadoNecesidadDAO.save(entidad.getEstado()).getId());
 
-        var id = this.necesidadDAO.save(entidad).getId();
+        return this.necesidadDAO.save(entidad).getId();
+    }
 
-        return this.requerimientoArchivoDAO.save(new RequerimientoArchivoEntidad(id, necesidad.getRutaArchivo(), id)).getId();
+    @Override
+    public Long guardarRequerimientos(Requerimientos requerimientos, Long necesidadID) {
+        var entidad = this.requerimientosMapeador.construirEntidad(requerimientos, necesidadID);
+
+        return this.requerimientoArchivoDAO.save(entidad).getId();
     }
 
     @Override
     public Long actualizar(Necesidad necesidad, Long asociacionID) {
         var entidad = this.necesidadDAO.findByAsociacion(asociacionID);
-        var requerimientos = this.requerimientoArchivoDAO.findByNecesidad(entidad.getId());
 
-        requerimientos.setRuta(necesidad.getRutaArchivo());
         actualizarTipoConsultoria(necesidad.getProyecto().getTiposConsultoria(), entidad.getProyecto().getTiposConsultoria());
         entidad.getProyecto().getTiposConsultoria().forEach(tipoConsultoria -> tipoConsultoria.setId(this.tipoConsultoriaProyectoDAO.save(tipoConsultoria).getId()));
         entidad.getProyecto().setNombre(necesidad.getProyecto().getNombre());
@@ -77,11 +79,16 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
         this.proyectoDAO.save(entidad.getProyecto());
 
-        var id = this.necesidadDAO.save(entidad).getId();
+        return this.necesidadDAO.save(entidad).getId();
+    }
 
-        this.requerimientoArchivoDAO.save(requerimientos);
+    @Override
+    public Long actualizarRequerimientos(Requerimientos requerimientos, Long necesidadID) {
+        var entidad = this.requerimientoArchivoDAO.findByNecesidad(necesidadID);
 
-        return id;
+        entidad.setRuta(requerimientos.getRutaArchivo());
+
+        return this.requerimientoArchivoDAO.save(entidad).getId();
     }
 
     @Override
@@ -168,6 +175,29 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         if(!ValidarObjeto.esNulo(contrato)) {
             this.contratoDAO.deleteById(contrato.getId());
         }
+
+        this.necesidadDAO.deleteById(entidad.getId());
+    }
+
+    @Override
+    public void eliminarPorAdministrador(Long id) {
+        var entidad = this.necesidadDAO.findByAsociacion(id);
+        var requerimientoEntidad = this.requerimientoArchivoDAO.findByNecesidad(id);
+        var contrato = this.contratoDAO.findByNecesidad(id);
+
+        this.estadoNecesidadDAO.deleteById(entidad.getEstado().getId());
+        this.estadoProyectoDAO.deleteById(entidad.getProyecto().getEstado().getId());
+        this.proyectoDAO.deleteById(entidad.getProyecto().getId());
+        assert requerimientoEntidad != null;
+        this.requerimientoArchivoDAO.deleteById(requerimientoEntidad.getId());
+
+        if(!ValidarObjeto.esNulo(contrato)) {
+            this.contratoDAO.deleteById(contrato.getId());
+        }
+
+        var peticionEliminacionNecesidadEntidad = this.peticionEliminacionNecesidadDAO.findByNecesidad(id);
+
+        this.peticionEliminacionNecesidadDAO.deleteById(peticionEliminacionNecesidadEntidad.getId());
 
         this.necesidadDAO.deleteById(entidad.getId());
     }
