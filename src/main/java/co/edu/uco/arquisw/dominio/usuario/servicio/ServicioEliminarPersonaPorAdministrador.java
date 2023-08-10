@@ -18,7 +18,7 @@ public class ServicioEliminarPersonaPorAdministrador {
     public Long ejecutar(Long id) {
         validarSiNoExisteUsuarioConId(id);
 
-        this.personaRepositorioComando.eliminar(id);
+        this.personaRepositorioComando.eliminarPorAdminsitrador(id);
 
         return id;
     }

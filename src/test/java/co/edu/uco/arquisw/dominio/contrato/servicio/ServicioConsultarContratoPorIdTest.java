@@ -1,7 +1,5 @@
 package co.edu.uco.arquisw.dominio.contrato.servicio;
 
-import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
-import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.contrato.puerto.consulta.ContratoRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
@@ -21,7 +19,7 @@ class ServicioConsultarContratoPorIdTest {
 
         var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidad(Mockito.anyLong())).thenReturn(necesidad);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.anyLong())).thenReturn(necesidad);
 
          servicio.ejecutar(1L);
 
@@ -37,7 +35,7 @@ class ServicioConsultarContratoPorIdTest {
 
         var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidad(Mockito.anyLong())).thenReturn(null);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.anyLong())).thenReturn(null);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,
                 Assertions.assertThrows(NullPointerException.class, () ->

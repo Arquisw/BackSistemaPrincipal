@@ -26,9 +26,8 @@ class NecesidadTest
         var estadoNecesidad = EstadoNecesidad.crear(estadoN);
 
         var proyecto = Proyecto.crear(nombre, descripcion, estadoProyecto, List.of(tipoConsultoria));
-        var necesidad = Necesidad.crear(rutaArchivo,estadoNecesidad, proyecto);
+        var necesidad = Necesidad.crear(estadoNecesidad, proyecto);
 
-        Assertions.assertEquals(rutaArchivo, necesidad.getRutaArchivo());
         Assertions.assertEquals(nombre, necesidad.getProyecto().getNombre());
         Assertions.assertEquals(descripcion, necesidad.getProyecto().getDescripcion());
         Assertions.assertEquals(estado, necesidad.getProyecto().getEstado().getNombre());
@@ -41,7 +40,7 @@ class NecesidadTest
         var proyecto = new ProyectoTestDataBuilder().build();
 
         Assertions.assertEquals(Mensajes.RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
-                Necesidad.crear("",estadoNesecidad,proyecto)).getMessage());
+                Necesidad.crear(estadoNesecidad, proyecto)).getMessage());
     }
     @Test
     void validarPatronIncorrecto()
@@ -50,6 +49,6 @@ class NecesidadTest
         var proyecto = new ProyectoTestDataBuilder().build();
 
         Assertions.assertEquals(Mensajes.PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO,Assertions.assertThrows(PatronExcepcion.class,() ->
-                Necesidad.crear("www.direccion.org/ejemplo/item.html",estadoNesecidad,proyecto)).getMessage());
+                Necesidad.crear(estadoNesecidad,proyecto)).getMessage());
     }
 }

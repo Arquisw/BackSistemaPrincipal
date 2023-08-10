@@ -41,7 +41,7 @@ class ServicioGuardarContratoTest {
 
         var servicio= new ServicioGuardarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(1L)).thenReturn(necesidad);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(1L)).thenReturn(necesidad);
 
         servicio.ejecutar(contrato,1L);
 

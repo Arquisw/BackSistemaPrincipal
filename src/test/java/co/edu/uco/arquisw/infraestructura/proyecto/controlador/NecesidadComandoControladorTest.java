@@ -1,9 +1,9 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.ApplicationMock;
+import co.edu.uco.arquisw.dominio.proyecto.testdatabuilder.ProyectoTestDataBuilder;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.infraestructura.MyTestRequestFactory;
-import co.edu.uco.arquisw.infraestructura.proyecto.testdatabuilder.NecesidadDtoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,13 +37,13 @@ class NecesidadComandoControladorTest {
     @Test
     void guardarNecesidad() throws Exception {
 
-        var necesidad = new NecesidadDtoTestDataBuilder().build();
+        var proyecto = new ProyectoTestDataBuilder().build();
         var id = 2;
 
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(necesidad)))
+                        .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().isOk());
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id,"ROLE_ASOCIACION")
@@ -53,12 +53,12 @@ class NecesidadComandoControladorTest {
     @Test
     void guardarNecesidadFallida() throws Exception {
 
-        var necesidad = new NecesidadDtoTestDataBuilder().build();
+        var proyecto = new ProyectoTestDataBuilder().build();
         var id = 1;
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(necesidad)))
+                        .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id)));
@@ -68,22 +68,22 @@ class NecesidadComandoControladorTest {
     void deberiaActualizarNecesidad() throws Exception {
 
         var id = 3;
-        var necesidad = new NecesidadDtoTestDataBuilder().build();
+        var proyecto = new ProyectoTestDataBuilder().build();
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(necesidad)))
+                        .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().isOk());
     }
     @Test
     void deberiaFallarAlActualizar() throws Exception {
 
-        Long id = 9L;
-        var necesidad = new NecesidadDtoTestDataBuilder().build();
+        var id = 9L;
+        var proyecto = new ProyectoTestDataBuilder().build();
 
         mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id,"ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(necesidad)))
+                        .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id)));

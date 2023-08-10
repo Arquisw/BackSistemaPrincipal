@@ -1,10 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.consulta.*;
-import co.edu.uco.arquisw.dominio.proyecto.dto.AprobacionProyectoDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +23,8 @@ public class NecesidadConsultaControlador {
     private final ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador;
     private final ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador;
     private final ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador;
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador) {
+    private final ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador;
+    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosManejador consultarProyectosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador, ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador) {
         this.consultarNecesidadesManejador = consultarNecesidadesManejador;
         this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
         this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
@@ -35,11 +33,12 @@ public class NecesidadConsultaControlador {
         this.consultarAprobacionProyectoPorIdManejador = consultarAprobacionProyectoPorIdManejador;
         this.consultarNecesidadesPorAsociacionIdManejador = consultarNecesidadesPorAsociacionIdManejador;
         this.consultarNecesidadPorProyectoIdManejador = consultarNecesidadPorProyectoIdManejador;
+        this.consultarRequerimientosPorNecesidadIdManejador = consultarRequerimientosPorNecesidadIdManejador;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
     @GetMapping("/{id}")
-    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID de una asociacion")
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio de su ID")
     public NecesidadDTO consultarPorId(@PathVariable Long id) {
         return this.consultarNecesidadPorIdManejador.ejecutar(id);
     }
@@ -49,6 +48,13 @@ public class NecesidadConsultaControlador {
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID del proyecto")
     public NecesidadDTO consultarPorProyectoId(@PathVariable Long id) {
         return this.consultarNecesidadPorProyectoIdManejador.ejecutar(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
+    @GetMapping("/requerimientos/{id}")
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una necesidad por medio del ID del proyecto")
+    public RequerimientosDTO consultarRequerimientosPorNecesidadId(@PathVariable Long id) {
+        return this.consultarRequerimientosPorNecesidadIdManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ASOCIACION')")

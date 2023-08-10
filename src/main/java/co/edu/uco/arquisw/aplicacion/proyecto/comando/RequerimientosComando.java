@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NecesidadComando {
+public class RequerimientosComando {
     private String rutaArchivo;
-    private ProyectoComando proyecto;
 }

@@ -29,7 +29,7 @@ public class ServicioGuardarContrato {
     }
 
     private void validarSiExisteNecesidadConId(Long necesidadID) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorId(necesidadID))) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorAsociacionId(necesidadID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadID);
         }
     }

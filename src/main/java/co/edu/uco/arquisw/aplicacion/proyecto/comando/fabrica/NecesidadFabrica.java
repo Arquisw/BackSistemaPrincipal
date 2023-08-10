@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.aplicacion.proyecto.comando.fabrica;
 
-import co.edu.uco.arquisw.aplicacion.proyecto.comando.NecesidadComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioConsultarNecesidadPorId;
@@ -17,12 +17,12 @@ public class NecesidadFabrica {
         this.servicioConsultarNecesidadPorId = servicioConsultarNecesidadPorId;
     }
 
-    public Necesidad construir(NecesidadComando necesidad) {
-        return Necesidad.crear(necesidad.getRutaArchivo(), obtenerEstadoPorDefecto(), proyectoFabrica.construir(necesidad.getProyecto()));
+    public Necesidad construir(ProyectoComando proyecto) {
+        return Necesidad.crear(obtenerEstadoPorDefecto(), proyectoFabrica.construir(proyecto));
     }
 
-    public Necesidad construirActualizar(NecesidadComando necesidad, Long id) {
-        return Necesidad.crear(necesidad.getRutaArchivo(), obtenerEstadoPorDefectoActualizar(id), proyectoFabrica.construirActualizar(necesidad.getProyecto(), id));
+    public Necesidad construirActualizar(ProyectoComando proyecto, Long id) {
+        return Necesidad.crear(obtenerEstadoPorDefectoActualizar(id), proyectoFabrica.construirActualizar(proyecto, id));
     }
 
     private EstadoNecesidad obtenerEstadoPorDefectoActualizar(Long id) {

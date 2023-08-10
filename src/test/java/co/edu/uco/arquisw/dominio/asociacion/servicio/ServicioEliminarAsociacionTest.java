@@ -30,7 +30,7 @@ class ServicioEliminarAsociacionTest {
         var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
 
         var id = servicio.ejecutar(1L);
 
@@ -51,7 +51,7 @@ class ServicioEliminarAsociacionTest {
 
         var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1,
                 Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
@@ -72,7 +72,7 @@ class ServicioEliminarAsociacionTest {
         var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
-        Mockito.when(necesidadRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(necesidad);
+        Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO,
                 Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());

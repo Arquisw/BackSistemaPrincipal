@@ -30,13 +30,11 @@ class ServicioGuardarNecesidadTest
         Mockito.verify(necesidadRepositorioComando,Mockito.times(1)).guardar(nesecidad,1L);
 
         Assertions.assertEquals(1L,id);
-        Assertions.assertEquals("http://www.direccion.org/ejemplo/item.html",nesecidad.getRutaArchivo());
     }
     @Test
     void deberiaValidarLaExistenciaPreviaDeLaAsociacion() {
 
         var nesecidad= new NesecidadTestDataBuilder().build();
-        AsociacionDTO asociacionDTO = new AsociacionDTO();
 
         var  necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
         var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
