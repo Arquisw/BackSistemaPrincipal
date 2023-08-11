@@ -36,7 +36,7 @@ public class AsociacionConsultaControlador {
         return this.consultarAsociacionPorIdUsuarioManejador.ejecutar(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ASOCIACION')")
+    @PreAuthorize("hasAnyRole('ROLE_ASOCIACION', 'ROLE_ADMINISTRADOR')")
     @GetMapping("/asociacion/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una asociacion por medio del ID")
     public AsociacionDTO consultarPorAsociacionId(@PathVariable Long id) {
