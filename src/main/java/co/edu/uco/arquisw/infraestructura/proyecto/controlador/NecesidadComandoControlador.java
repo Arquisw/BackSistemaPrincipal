@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.MotivoRechazoNecesidadComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.RequerimientosComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.*;
@@ -25,8 +26,9 @@ public class NecesidadComandoControlador {
     private final AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador;
     private final GuardarRequerimientosManejador guardarRequerimientosManejador;
     private final ActualizarRequerimientosManejador actualizarRequerimientosManejador;
+    private final RechazarProyectoManejador rechazarProyectoManejador;
 
-    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador) {
+    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador, RechazarProyectoManejador rechazarProyectoManejador) {
         this.guardarNecesidadManejador = guardarNecesidadManejador;
         this.actualizarNecesidadManejador = actualizarNecesidadManejador;
         this.eliminarNecesidadManejador = eliminarNecesidadManejador;
@@ -37,6 +39,7 @@ public class NecesidadComandoControlador {
         this.aprobarProyectoPorRolDirectorDeProyectoManejador = aprobarProyectoPorRolDirectorDeProyectoManejador;
         this.guardarRequerimientosManejador = guardarRequerimientosManejador;
         this.actualizarRequerimientosManejador = actualizarRequerimientosManejador;
+        this.rechazarProyectoManejador = rechazarProyectoManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
@@ -82,10 +85,17 @@ public class NecesidadComandoControlador {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
-    @RequestMapping("/administrador/{id}")
+    @RequestMapping("/administrador/aprobar/{id}")
     @Operation(summary = "Aprobar Proyecto por Administrador", description = "Este es usado para que el administrador pueda aprobar una necesidad por medio de su ID")
     public ComandoRespuesta<Long> aprobarProyecto(@PathVariable Long id) {
         return this.aprobarProyectoManejador.ejecutar(id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    @RequestMapping("/administrador/rechazar/{id}")
+    @Operation(summary = "Rechazar Proyecto por Administrador", description = "Este es usado para que el administrador pueda rechazar una necesidad por medio de su ID")
+    public ComandoRespuesta<Long> rechazarProyecto(@RequestBody MotivoRechazoNecesidadComando motivoRechazoNecesidadComando, @PathVariable Long id) {
+        return this.rechazarProyectoManejador.ejecutar(motivoRechazoNecesidadComando, id);
     }
 
     @PreAuthorize("hasRole('ROLE_INGENIERIA')")

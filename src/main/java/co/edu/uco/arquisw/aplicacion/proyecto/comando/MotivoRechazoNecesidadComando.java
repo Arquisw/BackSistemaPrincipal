@@ -1,4 +1,4 @@
-package co.edu.uco.arquisw.aplicacion.postulacion.comando;
+package co.edu.uco.arquisw.aplicacion.proyecto.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RechazoComando {
+public class MotivoRechazoNecesidadComando {
     String motivoRechazo;
 }

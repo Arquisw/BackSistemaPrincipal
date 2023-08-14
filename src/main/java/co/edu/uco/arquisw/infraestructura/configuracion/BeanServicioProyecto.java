@@ -91,4 +91,9 @@ public class BeanServicioProyecto
     public ServicioConsultarRequerimientosPorNecesidadId servicioConsultarRequerimientosPorNecesidadId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
         return new ServicioConsultarRequerimientosPorNecesidadId(necesidadRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioRechazarProyecto servicioRechazarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioRechazarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta);
+    }
 }

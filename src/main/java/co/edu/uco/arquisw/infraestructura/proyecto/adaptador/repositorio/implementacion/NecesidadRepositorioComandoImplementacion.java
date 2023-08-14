@@ -47,7 +47,10 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     AprobacionProyectoMapeador aprobacionProyectoMapeador;
     @Autowired
     RequerimientosMapeador requerimientosMapeador;
-
+    @Autowired
+    MotivoRechazoNecesidadDAO motivoRechazoNecesidadDAO;
+    @Autowired
+    MotivoRechazoNecesidadMapeador motivoRechazoNecesidadMapeador;
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID) {
         var entidad = this.necesidadMapeador.construirEntidad(necesidad, asociacionID);
@@ -217,5 +220,12 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         aprobacionProyectoMapeador.construirEntidadActualizar(entidad, rol);
 
         return this.aprobacionProyectoDAO.save(entidad).getId();
+    }
+
+    @Override
+    public Long guardarMotivoRechazoNecesidad(MotivoRechazoNecesidad motivoRechazoNecesidad, Long necesidadId) {
+        var entidad = this.motivoRechazoNecesidadMapeador.construirEntidad(motivoRechazoNecesidad, necesidadId);
+
+        return this.motivoRechazoNecesidadDAO.save(entidad).getId();
     }
 }

@@ -1,9 +1,6 @@
 package co.edu.uco.arquisw.dominio.proyecto.puerto.comando;
 
-import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.Requerimientos;
+import co.edu.uco.arquisw.dominio.proyecto.modelo.*;
 
 public interface NecesidadRepositorioComando {
     Long guardar(Necesidad necesidad, Long asociacionID);
@@ -16,4 +13,5 @@ public interface NecesidadRepositorioComando {
     void eliminarPorAdministrador(Long id);
     void crearNotificacionEliminacion(Long id);
     Long actualizarAprobacionProyecto(Long proyectoID, String rol);
+    Long guardarMotivoRechazoNecesidad(MotivoRechazoNecesidad motivoRechazoNecesidad, Long necesidadId);
 }

@@ -62,6 +62,10 @@ public class Mensajes {
     public static final String CODIGO = "Codigo: ";
     public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO = "El codigo para recuperar la contraseña es incorrecto";
     public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO = "El codigo para recuperar la contraseña ya no es valido";
+    public static final String MOTIVO_RECHAZO_POSTULACION_NO_PUEDE_ESTAR_VACIO = "El motivo de Rechazo de la postulación del usuario al proyecto no puede estar vacio";
+    public static final String PATRON_MOTIVO_RECHAZO_POSTULACION_NO_ES_VALIDO = "El motivo de Rechazo de la postulación del usuario al proyecto debe ser alfanúmerico";
+    public static final String MOTIVO_RECHAZO_NECESIDAD_NO_PUEDE_ESTAR_VACIO = "El motivo de Rechazo de la necesidad no puede estar vacio";
+    public static final String PATRON_MOTIVO_RECHAZO_NECESIDAD_NO_ES_VALIDO = "El motivo de Rechazo de la necesidad debe ser alfanúmerico";
 
     private Mensajes() { }
 }

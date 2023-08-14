@@ -1,0 +1,24 @@
+package co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador;
+
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.MotivoRechazoNecesidadComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.fabrica.MotivoRechazoNecesidadFabrica;
+import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
+import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
+import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioRechazarProyecto;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RechazarProyectoManejador implements ManejadorComandoActualizacionRespuesta<MotivoRechazoNecesidadComando, Long, ComandoRespuesta<Long>> {
+    private final MotivoRechazoNecesidadFabrica motivoRechazoNecesidadFabrica;
+    private final ServicioRechazarProyecto servicioRechazarProyecto;
+
+    public RechazarProyectoManejador(MotivoRechazoNecesidadFabrica motivoRechazoNecesidadFabrica, ServicioRechazarProyecto servicioRechazarProyecto) {
+        this.motivoRechazoNecesidadFabrica = motivoRechazoNecesidadFabrica;
+        this.servicioRechazarProyecto = servicioRechazarProyecto;
+    }
+
+    @Override
+    public ComandoRespuesta<Long> ejecutar(MotivoRechazoNecesidadComando comando, Long id) {
+        return new ComandoRespuesta<>(this.servicioRechazarProyecto.ejecutar(this.motivoRechazoNecesidadFabrica.construir(comando), id));
+    }
+}

@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.controlador;
 
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
-import co.edu.uco.arquisw.aplicacion.postulacion.comando.RechazoComando;
+import co.edu.uco.arquisw.aplicacion.postulacion.comando.MotivoRechazoPostulacionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.SeleccionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.ActualizarPostulacionManejador;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.RechazarUsuarioManejador;
@@ -53,7 +53,7 @@ public class PostulacionComandoControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/administrador/rechazar/{id}")
     @Operation(summary = "Rechazar Usuario", description = "Este es usado para rechazar a un usuario dentro de un proyecto por medio del ID de la postulación")
-    public ComandoRespuesta<Long> rechazarUsuario(@RequestBody RechazoComando rechazoComando, @PathVariable Long id) {
-        return this.rechazarUsuarioManejador.ejecutar(rechazoComando, id);
+    public ComandoRespuesta<Long> rechazarUsuario(@RequestBody MotivoRechazoPostulacionComando motivoRechazoPostulacionComando, @PathVariable Long id) {
+        return this.rechazarUsuarioManejador.ejecutar(motivoRechazoPostulacionComando, id);
     }
 }

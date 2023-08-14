@@ -23,9 +23,10 @@ public class TextoConstante {
     public static final String ESTADO_EN_ESPERA = "En Espera"; // ID = 1
     public static final String ESTADO_APROBADO = "Aprobado"; // ID = 2
     public static final String ESTADO_NEGOCIADO = "Negociado"; // ID = 3
-    public static final String ESTADO_EN_PROCESO = "En Proceso"; // ID = 4
-    public static final String ESTADO_EN_DESARROLLO  = "En Desarrollo"; // ID = 5
-    public static final String ESTADO_FINALIZADO = "Finalizado"; // ID = 6
+    public static final String ESTADO_RECHAZADO = "Rechazado"; // ID = 4
+    public static final String ESTADO_EN_PROCESO = "En Proceso"; // ID = 5
+    public static final String ESTADO_EN_DESARROLLO  = "En Desarrollo"; // ID = 6
+    public static final String ESTADO_FINALIZADO = "Finalizado"; // ID = 7
 
     public static final String INGENIERIA_DE_REQUISITOS_URL = "http://localhost:8081/api/fases/";
     public static final String HEADER_VALUE = "Authorization";

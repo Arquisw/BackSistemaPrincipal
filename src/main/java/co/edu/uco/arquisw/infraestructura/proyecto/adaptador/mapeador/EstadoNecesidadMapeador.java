@@ -22,6 +22,7 @@ public class EstadoNecesidadMapeador {
             case TextoConstante.ESTADO_EN_ESPERA -> 1L;
             case TextoConstante.ESTADO_APROBADO -> 2L;
             case TextoConstante.ESTADO_NEGOCIADO -> 3L;
+            case TextoConstante.ESTADO_RECHAZADO -> 4L;
             default -> 0L;
         };
     }
