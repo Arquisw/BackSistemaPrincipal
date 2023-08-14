@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.imp
 import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.PostulacionMapeador;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.SeleccionMapeador;
@@ -35,14 +36,15 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public PostulacionDTO consultarPostulacionPorUsuarioId(Long id) {
-        var entidad = this.postulacionDAO.findByUsuario(id);
+    public List<PostulacionDTO> consultarPostulacionesPorUsuarioId(Long id) {
+        var entidades = this.postulacionDAO.findByUsuario(id).stream().sorted((postulacionUno, postulacionDos) -> {
+            var fechaUno = FechaFormateador.obtenerFecha(postulacionUno.getFecha());
+            var fechaDos = FechaFormateador.obtenerFecha(postulacionDos.getFecha());
 
-        if(ValidarObjeto.esNulo(entidad)) {
-            return null;
-        }
+            return fechaDos.compareTo(fechaUno);
+        }).toList();
 
-        return this.postulacionMapeador.construirDTO(entidad);
+        return this.postulacionMapeador.construirDTOs(entidades);
     }
 
     @Override
@@ -66,14 +68,15 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     }
 
     @Override
-    public SeleccionDTO consultarSeleccionPorUsuarioId(Long id) {
-        var entidad = this.seleccionDAO.findByUsuario(id);
+    public List<SeleccionDTO> consultarSeleccionesPorUsuarioId(Long id) {
+        var entidades = this.seleccionDAO.findByUsuario(id).stream().sorted((seleccionUno, seleccionDos) -> {
+           var fechaUno = FechaFormateador.obtenerFecha(seleccionUno.getFecha());
+           var fechaDos = FechaFormateador.obtenerFecha(seleccionDos.getFecha());
 
-        if(ValidarObjeto.esNulo(entidad)) {
-            return null;
-        }
+           return fechaDos.compareTo(fechaUno);
+        }).toList();
 
-        return this.seleccionMapeador.construirDTO(entidad);
+        return this.seleccionMapeador.construirDTOs(entidades);
     }
 
     @Override

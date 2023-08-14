@@ -48,12 +48,17 @@ public class BeanServicioPostulacion {
     }
 
     @Bean
-    public ServicioConsultarPostulacionPorUsuarioId servicioConsultarPostulacionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        return new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+    public ServicioConsultarPostulacionesPorUsuarioId servicioConsultarPostulacionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioConsultarPostulacionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
     }
 
     @Bean
-    public ServicioConsultarSeleccionPorUsuarioId servicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        return new ServicioConsultarSeleccionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+    public ServicioConsultarSeleccionesPorUsuarioId servicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioRechazarUsuario servicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
+        return new ServicioRechazarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
     }
 }

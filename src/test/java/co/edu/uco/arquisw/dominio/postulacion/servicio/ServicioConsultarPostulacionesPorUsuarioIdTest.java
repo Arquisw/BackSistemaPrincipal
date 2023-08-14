@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class ServicioConsultarPostulacionPorUsuarioIdTest {
+import java.util.List;
+
+class ServicioConsultarPostulacionesPorUsuarioIdTest {
     @Test
     void validarConsultaPostulacionPorUsuarioPorIdExitosa()
     {
@@ -20,17 +22,17 @@ class ServicioConsultarPostulacionPorUsuarioIdTest {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(personaID)).thenReturn(personaDTO);
-        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(personaID)).thenReturn(postulacionDTO);
+        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(personaID)).thenReturn(List.of(postulacionDTO));
 
         var resultado = servicio.ejecutar(personaID);
 
         Assertions.assertEquals(postulacionDTO, resultado);
 
         Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
-        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarPostulacionPorUsuarioId(personaID);
+        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarPostulacionesPorUsuarioId(personaID);
     }
     @Test
     void consultaPorIdFallida()
@@ -38,7 +40,7 @@ class ServicioConsultarPostulacionPorUsuarioIdTest {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 

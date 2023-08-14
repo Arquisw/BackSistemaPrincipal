@@ -20,16 +20,16 @@ public class PostulacionConsultaControlador {
     private final ConsultarPostulacionesPorProyectoManejador consultarPostulacionesPorProyectoManejador;
     private final ConsultarSeleccionPorIdManejador consultarSeleccionPorIdManejador;
     private final ConsultarSeleccionesPorProyectoManejador consultarSeleccionesPorProyectoManejador;
-    private final ConsultarPostulacionPorUsuarioIdManejador consultarPostulacionPorUsuarioIdManejador;
-    private final ConsultarSeleccionPorUsuarioIdManejador consultarSeleccionPorUsuarioIdManejador;
+    private final ConsultarPostulacionesPorUsuarioIdManejador consultarPostulacionesPorUsuarioIdManejador;
+    private final ConsultarSeleccionesPorUsuarioIdManejador consultarSeleccionesPorUsuarioIdManejador;
 
-    public PostulacionConsultaControlador(ConsultarPostulacionPorIdManejador consultarPostulacionPorIdManejador, ConsultarPostulacionesPorProyectoManejador consultarPostulacionesPorProyectoManejador, ConsultarSeleccionPorIdManejador consultarSeleccionPorIdManejador, ConsultarSeleccionesPorProyectoManejador consultarSeleccionesPorProyectoManejador, ConsultarPostulacionPorUsuarioIdManejador consultarPostulacionPorUsuarioIdManejador, ConsultarSeleccionPorUsuarioIdManejador consultarSeleccionPorUsuarioIdManejador) {
+    public PostulacionConsultaControlador(ConsultarPostulacionPorIdManejador consultarPostulacionPorIdManejador, ConsultarPostulacionesPorProyectoManejador consultarPostulacionesPorProyectoManejador, ConsultarSeleccionPorIdManejador consultarSeleccionPorIdManejador, ConsultarSeleccionesPorProyectoManejador consultarSeleccionesPorProyectoManejador, ConsultarPostulacionesPorUsuarioIdManejador consultarPostulacionesPorUsuarioIdManejador, ConsultarSeleccionesPorUsuarioIdManejador consultarSeleccionesPorUsuarioIdManejador) {
         this.consultarPostulacionPorIdManejador = consultarPostulacionPorIdManejador;
         this.consultarPostulacionesPorProyectoManejador = consultarPostulacionesPorProyectoManejador;
         this.consultarSeleccionPorIdManejador = consultarSeleccionPorIdManejador;
         this.consultarSeleccionesPorProyectoManejador = consultarSeleccionesPorProyectoManejador;
-        this.consultarPostulacionPorUsuarioIdManejador = consultarPostulacionPorUsuarioIdManejador;
-        this.consultarSeleccionPorUsuarioIdManejador = consultarSeleccionPorUsuarioIdManejador;
+        this.consultarPostulacionesPorUsuarioIdManejador = consultarPostulacionesPorUsuarioIdManejador;
+        this.consultarSeleccionesPorUsuarioIdManejador = consultarSeleccionesPorUsuarioIdManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
@@ -41,9 +41,9 @@ public class PostulacionConsultaControlador {
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/postulacion/usuario/{id}")
-    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una postulacion por medio del ID del usuario")
-    public PostulacionDTO consultarPostulacionPorUsuarioId(@PathVariable Long id) {
-        return this.consultarPostulacionPorUsuarioIdManejador.ejecutar(id);
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar todas las postulaciones de un usuario por medio de su ID")
+    public List<PostulacionDTO> consultarPostulacionesPorUsuarioId(@PathVariable Long id) {
+        return this.consultarPostulacionesPorUsuarioIdManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
@@ -62,9 +62,9 @@ public class PostulacionConsultaControlador {
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/selecciones/seleccion/usuario/{id}")
-    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar una seleccion por medio del ID de un Usuario")
-    public SeleccionDTO consultarSeleccionPorUsuarioId(@PathVariable Long id) {
-        return this.consultarSeleccionPorUsuarioIdManejador.ejecutar(id);
+    @Operation(summary = "Consultar por ID", description = "Este es usado para consultar todas las selecciones de un usuario por medio de su ID")
+    public List<SeleccionDTO> consultarSeleccionesPorUsuarioId(@PathVariable Long id) {
+        return this.consultarSeleccionesPorUsuarioIdManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")

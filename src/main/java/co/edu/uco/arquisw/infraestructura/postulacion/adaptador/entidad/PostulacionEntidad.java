@@ -20,6 +20,7 @@ public class PostulacionEntidad {
     @SequenceGenerator(name="postulacion_code_seq", sequenceName="postulacion_code_seq", allocationSize=1)
     private Long id;
     private boolean seleccionado;
+    private boolean rechazado;
     private String fecha;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "postulacion")

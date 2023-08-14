@@ -13,15 +13,17 @@ public class Postulacion {
     private LocalDate fecha;
     private List<String> roles;
     private boolean seleccionado;
+    private boolean rechazado;
 
-    private Postulacion(List<String> roles, boolean seleccionado) {
+    private Postulacion(List<String> roles, boolean seleccionado, boolean rechazado) {
         setFecha();
         setRoles(roles);
         setSeleccionado(seleccionado);
+        setRechazado(rechazado);
     }
 
-    public static Postulacion crear(List<String> roles, boolean seleccionado) {
-        return new Postulacion(roles, seleccionado);
+    public static Postulacion crear(List<String> roles, boolean seleccionado, boolean rechazado) {
+        return new Postulacion(roles, seleccionado, rechazado);
     }
 
     private void setRoles(List<String> roles) {
@@ -39,5 +41,9 @@ public class Postulacion {
 
     private void setSeleccionado(boolean seleccionado) {
         this.seleccionado = seleccionado;
+    }
+
+    private void setRechazado(boolean rechazado) {
+        this.rechazado = rechazado;
     }
 }

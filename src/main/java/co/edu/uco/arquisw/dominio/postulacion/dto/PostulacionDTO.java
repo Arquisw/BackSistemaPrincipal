@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -13,6 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 public class PostulacionDTO {
     private Long id;
+    private boolean seleccionado;
+    private boolean rechazado;
+    private String motivoDelRechazo;
     private String fecha;
     private List<String> roles;
     private Long proyectoID;

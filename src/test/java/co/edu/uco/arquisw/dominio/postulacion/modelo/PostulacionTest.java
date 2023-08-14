@@ -12,10 +12,11 @@ class PostulacionTest
     void validarCreacionExitosa()
     {
         var seleccionado = false;
+        var rechazado = false;
         var fecha = LocalDate.now();
         var rol = "Analista";
 
-        var postulacion = Postulacion.crear(List.of(rol),seleccionado);
+        var postulacion = Postulacion.crear(List.of(rol),seleccionado, rechazado);
 
         Assertions.assertEquals(seleccionado, postulacion.isSeleccionado());
         Assertions.assertEquals(fecha, postulacion.getFecha());

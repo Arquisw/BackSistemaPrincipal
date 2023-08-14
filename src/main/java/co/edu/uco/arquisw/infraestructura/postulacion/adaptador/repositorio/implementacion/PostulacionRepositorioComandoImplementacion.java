@@ -1,10 +1,13 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.postulacion.modelo.MotivoRechazoPostulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Seleccion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
+import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.MotivoRechazoPostulacionMapeador;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.PostulacionMapeador;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.SeleccionMapeador;
+import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.MotivoRechazoPostulacionDAO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.PostulacionDAO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.SeleccionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,10 @@ public class PostulacionRepositorioComandoImplementacion implements PostulacionR
     PostulacionDAO postulacionDAO;
     @Autowired
     SeleccionDAO seleccionDAO;
+    @Autowired
+    MotivoRechazoPostulacionDAO motivoRechazoPostulacionDAO;
+    @Autowired
+    MotivoRechazoPostulacionMapeador motivoRechazoPostulacionMapeador;
 
     @Override
     public Long guardar(Postulacion postulacion, Long proyectoId, Long usuarioId) {
@@ -50,5 +57,12 @@ public class PostulacionRepositorioComandoImplementacion implements PostulacionR
         this.postulacionDAO.save(entidad);
 
         return this.seleccionDAO.save(seleccionEntidad).getId();
+    }
+
+    @Override
+    public Long rechazarUsuario(MotivoRechazoPostulacion motivoRechazoPostulacion, Long postulacionId) {
+        var entidad = this.motivoRechazoPostulacionMapeador.construir(motivoRechazoPostulacion, postulacionId);
+
+        return this.motivoRechazoPostulacionDAO.save(entidad).getId();
     }
 }

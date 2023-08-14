@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PostulacionRepositorioConsulta {
     PostulacionDTO consultarPostulacionPorId(Long id);
-    PostulacionDTO consultarPostulacionPorUsuarioId(Long id);
+    List<PostulacionDTO> consultarPostulacionesPorUsuarioId(Long id);
     List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID);
     SeleccionDTO consultarSeleccionPorId(Long id);
-    SeleccionDTO consultarSeleccionPorUsuarioId(Long id);
+    List<SeleccionDTO> consultarSeleccionesPorUsuarioId(Long id);
     List<SeleccionDTO> consultarSeleccionadosPorProyecto(Long proyectoID);
 }

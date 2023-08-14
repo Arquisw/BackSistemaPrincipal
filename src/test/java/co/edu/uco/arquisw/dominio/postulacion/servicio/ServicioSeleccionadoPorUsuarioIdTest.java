@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.List;
+
 class ServicioSeleccionadoPorUsuarioIdTest {
     @Test
     void validarConsultaSeleccionadoPorProyectoExitosa()
@@ -20,15 +22,15 @@ class ServicioSeleccionadoPorUsuarioIdTest {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(personaID)).thenReturn(personaDto);
-        Mockito.when(postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(personaID)).thenReturn(seleccionDTO);
+        Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(personaID)).thenReturn(List.of(seleccionDTO));
 
         servicio.ejecutar(personaID);
 
         Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
-        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarSeleccionPorUsuarioId(personaID);
+        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarSeleccionesPorUsuarioId(personaID);
     }
     @Test
     void consultaSeleccionadoPorIdFallida()
@@ -36,7 +38,7 @@ class ServicioSeleccionadoPorUsuarioIdTest {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 

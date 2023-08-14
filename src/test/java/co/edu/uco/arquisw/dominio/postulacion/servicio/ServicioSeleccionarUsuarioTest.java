@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
- class ServicioSeleccionarUsuarioTest {
+import java.util.List;
+
+class ServicioSeleccionarUsuarioTest {
     @Test
     void seleccionarUsuarioExitosamente() {
         var postulacion = new PostulacionTestDataBuilder().build();
@@ -29,13 +31,13 @@ import org.mockito.Mockito;
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
         var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
-
+        var roles = List.of("ROLE_INGENIERIA");
         Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(postulacionID)).thenReturn(postulacionDto);
         Mockito.doNothing().when(personaRepositorioComando).eliminarRol(Mockito.any(Rol.class), Mockito.anyLong());
         Mockito.doNothing().when(personaRepositorioComando).crearRol(Mockito.any(Rol.class), Mockito.anyLong());
         Mockito.doNothing().when(personaRepositorioComando).crearRol(Mockito.any(Rol.class), Mockito.anyLong());
 
-        var id = servicio.ejecutar(1L);
+        var id = servicio.ejecutar(roles, 1L);
 
         Assertions.assertEquals(0L,id);
     }
@@ -48,11 +50,11 @@ import org.mockito.Mockito;
          var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
          var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
          var servicio = new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
-
+         var roles = List.of("ROLE_INGENIERIA");
          Mockito.when(postulacionRepositorioComando.guardar(Mockito.any(Postulacion.class),Mockito.anyLong(),Mockito.anyLong())).thenReturn(1L);
          Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(1L)).thenReturn(null);
 
-         Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
+         Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(roles, 1L)).getMessage());
 
      }
 }

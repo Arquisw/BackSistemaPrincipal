@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.List;
+
 class ServicioEliminarPersonaTest {
     @Test
     void ValidarEliminacionExitosa()
@@ -81,7 +83,7 @@ class ServicioEliminarPersonaTest {
         var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(Mockito.anyLong())).thenReturn(seleccionado);
+        Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(seleccionado));
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_SELECCIONADO_EN_UN_PROYECTO,
                 Assertions.assertThrows(AutorizacionExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());
@@ -100,7 +102,7 @@ class ServicioEliminarPersonaTest {
         var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(Mockito.anyLong())).thenReturn(postulacion);
+        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(postulacion));
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_EN_UN_PROCESO_DE_POSTULACION,
                 Assertions.assertThrows(AutorizacionExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());

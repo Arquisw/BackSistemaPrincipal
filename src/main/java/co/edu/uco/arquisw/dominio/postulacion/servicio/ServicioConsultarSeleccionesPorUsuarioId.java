@@ -6,20 +6,22 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-public class ServicioConsultarSeleccionPorUsuarioId {
+import java.util.List;
+
+public class ServicioConsultarSeleccionesPorUsuarioId {
     private final PostulacionRepositorioConsulta postulacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioConsultarSeleccionPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
+    public ServicioConsultarSeleccionesPorUsuarioId(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
     }
 
-    public SeleccionDTO ejecutar(Long id) {
+    public List<SeleccionDTO> ejecutar(Long id) {
         validarSiExistePostulacionConUsuarioID(id);
         validarSiExistePostulacionConID(id);
 
-        return this.postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(id);
+        return this.postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(id);
     }
 
     private void validarSiExistePostulacionConUsuarioID(Long id) {
@@ -29,7 +31,7 @@ public class ServicioConsultarSeleccionPorUsuarioId {
     }
 
     private void validarSiExistePostulacionConID(Long id) {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(id))) {
+        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_SELECCION_CON_EL_ID_DE_USUARIO_CON_EL_ID + id);
         }
     }

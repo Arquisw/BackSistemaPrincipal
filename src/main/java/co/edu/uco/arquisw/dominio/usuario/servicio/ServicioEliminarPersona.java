@@ -37,12 +37,12 @@ public class ServicioEliminarPersona {
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_ASOCIACION_A_CARGO);
         }
 
-        if(!ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorUsuarioId(id))) {
+        if(!ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(id))) {
             this.personaRepositorioComando.crearNotificacionEliminacion(id);
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_SELECCIONADO_EN_UN_PROYECTO);
         }
 
-        if(!ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorUsuarioId(id))) {
+        if(!ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(id))) {
             this.personaRepositorioComando.crearNotificacionEliminacion(id);
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_EN_UN_PROCESO_DE_POSTULACION);
         }
