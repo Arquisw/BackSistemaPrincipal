@@ -162,10 +162,11 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
     @Override
     public void eliminar(Long id) {
-        var entidad = this.necesidadDAO.findByAsociacion(id);
+        var entidad = this.necesidadDAO.findById(id).orElse(null);
         var requerimientoEntidad = this.requerimientoArchivoDAO.findByNecesidad(id);
         var contrato = this.contratoDAO.findByNecesidad(id);
 
+        assert entidad != null;
         this.estadoNecesidadDAO.deleteById(entidad.getEstado().getId());
         this.estadoProyectoDAO.deleteById(entidad.getProyecto().getEstado().getId());
         this.proyectoDAO.deleteById(entidad.getProyecto().getId());
@@ -181,10 +182,11 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
     @Override
     public void eliminarPorAdministrador(Long id) {
-        var entidad = this.necesidadDAO.findByAsociacion(id);
+        var entidad = this.necesidadDAO.findById(id).orElse(null);
         var requerimientoEntidad = this.requerimientoArchivoDAO.findByNecesidad(id);
         var contrato = this.contratoDAO.findByNecesidad(id);
 
+        assert entidad != null;
         this.estadoNecesidadDAO.deleteById(entidad.getEstado().getId());
         this.estadoProyectoDAO.deleteById(entidad.getProyecto().getEstado().getId());
         this.proyectoDAO.deleteById(entidad.getProyecto().getId());

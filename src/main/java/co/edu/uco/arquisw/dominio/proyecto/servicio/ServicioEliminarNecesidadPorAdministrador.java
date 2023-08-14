@@ -16,16 +16,16 @@ public class ServicioEliminarNecesidadPorAdministrador {
 
 
     public Long ejecutar(Long id) {
-        validarSiExisteAsociacionConID(id);
+        validarSiExisteNecesidadConID(id);
 
         this.necesidadRepositorioComando.eliminarPorAdministrador(id);
 
         return id;
     }
 
-    private void validarSiExisteAsociacionConID(Long id) {
+    private void validarSiExisteNecesidadConID(Long id) {
         if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }
 }

@@ -26,13 +26,13 @@ public class ServicioEliminarNecesidad {
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorAsociacionId(id))) {
+        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }
 
     private void validarSiPuedeEliminarLaCuenta(Long id) {
-        var necesidad = this.necesidadRepositorioConsulta.consultarPorAsociacionId(id);
+        var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
 
         if(necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO) || necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
             this.necesidadRepositorioComando.crearNotificacionEliminacion(necesidad.getId());
