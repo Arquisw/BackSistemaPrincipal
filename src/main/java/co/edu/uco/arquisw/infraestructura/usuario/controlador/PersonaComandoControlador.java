@@ -24,8 +24,9 @@ public class PersonaComandoControlador {
     private final IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador;
     private final RecuperarClaveManejador recuperarClaveManejador;
     private final ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador;
+    private final ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador) {
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador, ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador) {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
@@ -36,6 +37,7 @@ public class PersonaComandoControlador {
         this.iniciarRecuperacionClaveManejador = iniciarRecuperacionClaveManejador;
         this.recuperarClaveManejador = recuperarClaveManejador;
         this.validarCodigoRecuperacionClaveManejador = validarCodigoRecuperacionClaveManejador;
+        this.actualizarRolPorAdministradorManejador = actualizarRolPorAdministradorManejador;
     }
 
     @PostMapping
@@ -102,5 +104,12 @@ public class PersonaComandoControlador {
     @Operation(summary = "Recuperar Clave", description = "Este es usado para recuperar la clave, asignando una nueva clave.")
     public ComandoRespuesta<Long> recuperarClave(@RequestBody RecuperarClaveComando comando, @PathVariable String correo) {
         return this.recuperarClaveManejador.ejecutar(comando, correo);
+    }
+
+    @PreAuthorize("hasAuthority('ADMINISTRADOR_ACTUALIZACION')")
+    @PutMapping("/roles/{id}")
+    @Operation(summary = "Actualizar Rol por Administrador", description = "Este es usado para actualizar permisos de un rol por medio del ID del rol")
+    public ComandoRespuesta<Long> actualizarRol(@RequestBody RolActualizacionComando comando, @PathVariable Long id) {
+        return this.actualizarRolPorAdministradorManejador.ejecutar(comando, id);
     }
 }

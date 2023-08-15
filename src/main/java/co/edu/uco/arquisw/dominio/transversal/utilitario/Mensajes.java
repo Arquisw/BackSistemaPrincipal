@@ -66,6 +66,7 @@ public class Mensajes {
     public static final String PATRON_MOTIVO_RECHAZO_POSTULACION_NO_ES_VALIDO = "El motivo de Rechazo de la postulación del usuario al proyecto debe ser alfanúmerico";
     public static final String MOTIVO_RECHAZO_NECESIDAD_NO_PUEDE_ESTAR_VACIO = "El motivo de Rechazo de la necesidad no puede estar vacio";
     public static final String PATRON_MOTIVO_RECHAZO_NECESIDAD_NO_ES_VALIDO = "El motivo de Rechazo de la necesidad debe ser alfanúmerico";
+    public static final String NO_EXISTE_ROL_CON_EL_ID = "No existe rol con el id ";
 
     private Mensajes() { }
 }

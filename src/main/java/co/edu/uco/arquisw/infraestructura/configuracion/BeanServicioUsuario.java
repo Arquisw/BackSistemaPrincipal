@@ -85,4 +85,9 @@ public class BeanServicioUsuario {
     public ServicioObtenerRoles servicioObtenerRoles(PersonaRepositorioConsulta personaRepositorioConsulta) {
         return new ServicioObtenerRoles(personaRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioActualizarRolPorAdministrador servicioActualizarRolPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioActualizarRolPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
+    }
 }

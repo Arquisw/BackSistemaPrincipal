@@ -1,13 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.usuario.controlador;
 
-import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarHojaDeVidaPorIdUsuarioManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPersonaPorIdManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarPeticionesDeEliminacionPersonaManejador;
-import co.edu.uco.arquisw.aplicacion.usuario.consulta.ConsultarUsuarioPorCorreoManejador;
-import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
-import co.edu.uco.arquisw.dominio.usuario.dto.UsuarioDTO;
+import co.edu.uco.arquisw.aplicacion.usuario.consulta.*;
+import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,12 +19,14 @@ public class PersonaConsultaControlador {
     private final ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador;
     private final ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador;
     private final ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
+    private final ConsultarRolesPorAdministradorManejador consultarRolesPorAdministradorManejador;
 
-    public PersonaConsultaControlador(ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador, ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador, ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador, ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador) {
+    public PersonaConsultaControlador(ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador, ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador, ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador, ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador, ConsultarRolesPorAdministradorManejador consultarRolesPorAdministradorManejador) {
         this.consultarPersonaPorIdManejador = consultarPersonaPorIdManejador;
         this.consultarHojaDeVidaPorIdUsuarioManejador = consultarHojaDeVidaPorIdUsuarioManejador;
         this.consultarPeticionesDeEliminacionPersonaManejador = consultarPeticionesDeEliminacionPersonaManejador;
         this.consultarUsuarioPorCorreoManejador = consultarUsuarioPorCorreoManejador;
+        this.consultarRolesPorAdministradorManejador = consultarRolesPorAdministradorManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
@@ -56,8 +52,15 @@ public class PersonaConsultaControlador {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/administrador")
-    @Operation(summary = "Consultar todos", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
+    @Operation(summary = "Consultar todas las Peticiones", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
     public List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacion() {
         return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar();
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    @GetMapping("/roles")
+    @Operation(summary = "Consultar todos los Roles", description = "Este es usado para consultar todos los roles de la aplicacion")
+    public List<RolDTO> consultarRolesPorAdministrador() {
+        return this.consultarRolesPorAdministradorManejador.ejecutar();
     }
 }

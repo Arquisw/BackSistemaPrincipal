@@ -15,4 +15,6 @@ public interface PersonaRepositorioConsulta {
     String consultarClaveConCorreo(String correo);
     String consultarCodigoConCorreo(String correo);
     PeticionRecuperacionClaveDTO consultarPeticionRecuperacionClaveDTOConCorreo(String correo);
+    List<RolDTO> consultarRolesPorAdministrador();
+    RolDTO consultarRolPorId(Long id);
 }

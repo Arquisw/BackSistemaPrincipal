@@ -1,4 +1,4 @@
-package co.edu.uco.arquisw.dominio.usuario.dto;
+package co.edu.uco.arquisw.aplicacion.usuario.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RolDTO {
-    private Long id;
-    private String nombre;
+public class RolActualizacionComando {
     private boolean leer;
     private boolean escribir;
     private boolean actualizar;

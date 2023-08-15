@@ -19,4 +19,5 @@ public interface PersonaRepositorioComando {
     void crearNotificacionEliminacion(Long id);
     Long crearPeticionRecuperacionClave(String codigo, String correo, String fecha);
     void eliminarPeticionRecuperacionClave(Long id);
+    Long actualizarRol(boolean leer, boolean escribir, boolean actualizar, boolean eliminar, Long id);
 }

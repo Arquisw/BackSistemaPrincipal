@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
     @Autowired
     PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
+    @Autowired
+    RolDAO rolDAO;
+    @Autowired
+    RolMapeador rolMapeador;
 
     @Override
     public PersonaDTO consultarPorId(Long id) {
@@ -122,5 +127,23 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
         return this.peticionRecuperacionClaveMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public List<RolDTO> consultarRolesPorAdministrador() {
+        var entidades = this.rolDAO.findAll();
+
+        return this.rolMapeador.construirBaseDTOs(entidades);
+    }
+
+    @Override
+    public RolDTO consultarRolPorId(Long id) {
+        var entidad = this.rolDAO.findById(id).orElse(null);
+
+        if(ValidarObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.rolMapeador.construirDTO(entidad);
     }
 }
