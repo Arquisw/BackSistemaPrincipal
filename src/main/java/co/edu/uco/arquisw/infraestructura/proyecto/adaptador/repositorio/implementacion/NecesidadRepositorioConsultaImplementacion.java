@@ -108,10 +108,19 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public List<NecesidadDTO> consultarProyectos() {
+    public List<NecesidadDTO> consultarProyectosAprobados() {
         var entidades = this.necesidadDAO.findAll();
 
         var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO)).toList();
+
+        return this.necesidadMapeador.construirDTOs(necesidades);
+    }
+
+    @Override
+    public List<NecesidadDTO> consultarProyectosNegociados() {
+        var entidades = this.necesidadDAO.findAll();
+
+        var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO) && !entidad.getProyecto().getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_EN_DESARROLLO)).toList();
 
         return this.necesidadMapeador.construirDTOs(necesidades);
     }

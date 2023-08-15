@@ -12,7 +12,8 @@ public interface NecesidadRepositorioConsulta {
     NecesidadDTO consultarPorNecesidadId(Long id);
     List<NecesidadDTO> consultarNecesidades();
     ProyectoDTO consultarProyectoPorId(Long proyectoID);
-    List<NecesidadDTO> consultarProyectos();
+    List<NecesidadDTO> consultarProyectosAprobados();
+    List<NecesidadDTO> consultarProyectosNegociados();
     List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidades();
     AprobacionProyectoDTO consultarAprobacionProyectoPorId(Long proyectoID);
 }
