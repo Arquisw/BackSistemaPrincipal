@@ -92,7 +92,7 @@ public class NecesidadComandoControlador {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
-    @RequestMapping("/administrador/rechazar/{id}")
+    @PutMapping("/administrador/rechazar/{id}")
     @Operation(summary = "Rechazar Proyecto por Administrador", description = "Este es usado para que el administrador pueda rechazar una necesidad por medio de su ID")
     public ComandoRespuesta<Long> rechazarProyecto(@RequestBody MotivoRechazoNecesidadComando motivoRechazoNecesidadComando, @PathVariable Long id) {
         return this.rechazarProyectoManejador.ejecutar(motivoRechazoNecesidadComando, id);

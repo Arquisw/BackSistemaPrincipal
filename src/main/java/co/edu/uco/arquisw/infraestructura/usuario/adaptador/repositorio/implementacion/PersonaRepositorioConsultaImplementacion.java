@@ -8,6 +8,8 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -132,8 +134,13 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Override
     public List<RolDTO> consultarRolesPorAdministrador() {
         var entidades = this.rolDAO.findAll();
+        var totalElementos = entidades.size();
+        var elementosAFiltrar = 8;
 
-        return this.rolMapeador.construirBaseDTOs(entidades);
+        var entidadesFiltradas = entidades.subList(totalElementos - elementosAFiltrar, totalElementos);
+        entidadesFiltradas.sort((entidadUno, entidadDos) -> entidadUno.getId().compareTo(entidadDos.getId()));
+
+        return this.rolMapeador.construirBaseDTOs(entidadesFiltradas);
     }
 
     @Override
