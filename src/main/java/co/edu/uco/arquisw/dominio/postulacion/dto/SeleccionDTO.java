@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SeleccionDTO {
     private Long id;
+    private String nombreDelUsuario;
     private String fecha;
     private List<String> roles;
     private Long proyectoID;

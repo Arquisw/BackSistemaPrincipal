@@ -73,11 +73,18 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public SeleccionDTO consultarSeleccionPorId(Long id) {
         var entidad = this.seleccionDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if(entidad == null) {
             return null;
         }
 
-        return this.seleccionMapeador.construirDTO(entidad);
+        var persona = this.personaDAO.findById(entidad.getUsuario()).orElse(null);
+        var nombre = TextoConstante.VACIO;
+
+        if(persona != null) {
+            nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
+        }
+
+        return this.seleccionMapeador.construirDTO(entidad, nombre);
     }
 
     @Override

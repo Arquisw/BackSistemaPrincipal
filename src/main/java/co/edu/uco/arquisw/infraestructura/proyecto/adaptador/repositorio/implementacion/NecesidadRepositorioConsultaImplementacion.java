@@ -48,15 +48,15 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
 
     @Override
     public NecesidadDTO consultarPorProyectoId(Long id) {
-        var proyecto = this.proyectoDAO.findById(id).orElse(null);
-
-        var entidad = this.necesidadDAO.findByProyecto(proyecto);
+        var entidad = this.necesidadDAO.findAll().stream().filter(necesidad -> necesidad.getProyecto().getId().equals(id)).findFirst().orElse(null);
 
         if(ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
-        return this.necesidadMapeador.construirDTO(entidad);
+        var dto = this.necesidadMapeador.construirDTO(entidad);
+
+        return dto;
     }
 
     @Override
