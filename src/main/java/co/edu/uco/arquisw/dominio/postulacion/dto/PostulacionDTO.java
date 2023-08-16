@@ -15,6 +15,8 @@ public class PostulacionDTO {
     private boolean seleccionado;
     private boolean rechazado;
     private String motivoDelRechazo;
+    private String nombreDelUsuario;
+    private String correoDelUsuario;
     private String fecha;
     private List<String> roles;
     private Long proyectoID;

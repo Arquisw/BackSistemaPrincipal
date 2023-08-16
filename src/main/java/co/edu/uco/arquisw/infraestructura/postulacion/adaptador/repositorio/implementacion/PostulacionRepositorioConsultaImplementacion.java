@@ -4,11 +4,13 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.PostulacionMapeador;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador.SeleccionMapeador;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.PostulacionDAO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.SeleccionDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -23,16 +25,27 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     PostulacionDAO postulacionDAO;
     @Autowired
     SeleccionDAO seleccionDAO;
+    @Autowired
+    PersonaDAO personaDAO;
 
     @Override
     public PostulacionDTO consultarPostulacionPorId(Long id) {
         var entidad = this.postulacionDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if(entidad == null) {
             return null;
         }
 
-        return this.postulacionMapeador.construirDTO(entidad);
+        var persona = this.personaDAO.findById(entidad.getUsuario()).orElse(null);
+        var nombre = TextoConstante.VACIO;
+        var correo = TextoConstante.VACIO;
+
+        if(persona != null) {
+            nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
+            correo = persona.getCorreo();
+        }
+
+        return this.postulacionMapeador.construirDTO(entidad, nombre, correo);
     }
 
     @Override
@@ -51,7 +64,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID) {
         var entidades = this.postulacionDAO.findAll();
 
-        var postulaciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID)).toList();
+        var postulaciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID) && !entidad.isRechazado() && !entidad.isSeleccionado()).toList();
 
         return this.postulacionMapeador.construirDTOs(postulaciones);
     }

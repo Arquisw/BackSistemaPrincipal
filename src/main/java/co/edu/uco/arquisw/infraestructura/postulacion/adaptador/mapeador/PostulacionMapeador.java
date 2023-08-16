@@ -4,13 +4,18 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.PostulacionEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoPostulacionEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.MotivoRechazoPostulacionDAO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.SeleccionDAO;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
+import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -18,13 +23,15 @@ public class PostulacionMapeador {
     private final RolProyectoPostulacionMapeador rolProyectoPostulacionMapeador;
     @Autowired
     MotivoRechazoPostulacionDAO motivoRechazoPostulacionDAO;
+    @Autowired
+    PersonaDAO personaDAO;
 
     public PostulacionMapeador(RolProyectoPostulacionMapeador rolProyectoPostulacionMapeador) {
         this.rolProyectoPostulacionMapeador = rolProyectoPostulacionMapeador;
     }
 
-    public PostulacionDTO construirDTO(PostulacionEntidad postulacion) {
-        return new PostulacionDTO(postulacion.getId(), postulacion.isSeleccionado(), postulacion.isRechazado(), obtenerMotivoDelRechazo(postulacion.getId(), postulacion.isRechazado()), postulacion.getFecha(), rolProyectoPostulacionMapeador.construirDTOs(postulacion.getRoles()), postulacion.getProyecto(), postulacion.getUsuario());
+    public PostulacionDTO construirDTO(PostulacionEntidad postulacion, String nombre, String correo) {
+        return new PostulacionDTO(postulacion.getId(), postulacion.isSeleccionado(), postulacion.isRechazado(), obtenerMotivoDelRechazo(postulacion.getId(), postulacion.isRechazado()), nombre, correo, postulacion.getFecha(), rolProyectoPostulacionMapeador.construirDTOs(postulacion.getRoles()), postulacion.getProyecto(), postulacion.getUsuario());
     }
 
     private String obtenerMotivoDelRechazo(Long id, boolean rechazado) {
@@ -39,7 +46,23 @@ public class PostulacionMapeador {
     }
 
     public List<PostulacionDTO> construirDTOs(List<PostulacionEntidad> postulaciones) {
-        return postulaciones.stream().map(new PostulacionMapeador(rolProyectoPostulacionMapeador)::construirDTO).toList();
+        var postulacionesDTO = new ArrayList<PostulacionDTO>();
+
+        for (var postulacion : postulaciones) {
+            var persona = this.personaDAO.findById(postulacion.getUsuario()).orElse(null);
+
+            var nombre = TextoConstante.VACIO;
+            var correo = TextoConstante.VACIO;
+
+            if(persona != null) {
+                nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
+                correo = persona.getCorreo();
+            }
+
+            postulacionesDTO.add(construirDTO(postulacion, nombre, correo));
+        }
+
+        return postulacionesDTO;
     }
 
     public PostulacionEntidad construirEntidad(Postulacion postulacion, Long proyectoID, Long usuarioID) {

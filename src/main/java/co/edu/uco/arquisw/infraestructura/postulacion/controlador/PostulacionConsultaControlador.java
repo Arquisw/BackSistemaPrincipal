@@ -49,7 +49,7 @@ public class PostulacionConsultaControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/proyecto/{id}")
     @Operation(summary = "Consultar Todos por ID del proyecto", description = "Este es usado para consultar todas las postulaciones que esten en espera de ser aprobadas.")
-    public List<PostulacionDTO> consultarPostulaciones(@PathVariable Long id) {
+    public List<PostulacionDTO> consultarPostulacionesPorProyectoId(@PathVariable Long id) {
         return this.consultarPostulacionesPorProyectoManejador.ejecutar(id);
     }
 
