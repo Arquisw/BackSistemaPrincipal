@@ -19,8 +19,8 @@ public class BeanServicioContrato {
     }
 
     @Bean
-    public ServicioActualizarContrato servicioActualizarContrato(ContratoRepositorioComando contratoRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
-        return new ServicioActualizarContrato(contratoRepositorioComando, asociacionRepositorioConsulta);
+    public ServicioActualizarContrato servicioActualizarContrato(ContratoRepositorioComando contratoRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
+        return new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta);
     }
 
     @Bean

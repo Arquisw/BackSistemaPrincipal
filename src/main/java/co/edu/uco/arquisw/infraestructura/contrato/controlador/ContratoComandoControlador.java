@@ -28,9 +28,7 @@ public class ContratoComandoControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PostMapping("/{id}")
     @Operation(summary = "Guardar Contrato", description = "Este es usado para guardar un contrato en la aplicación por medio del ID de una necesidad")
-    public ComandoRespuesta<Long> guardar(HttpServletRequest peticion, @RequestBody ContratoComando contrato, @PathVariable Long id) {
-        String token = peticion.getHeader(TextoConstante.HEADER_VALUE);
-
+    public ComandoRespuesta<Long> guardar( @RequestBody ContratoComando contrato, @PathVariable Long id) {
         return this.guardarContratoManejador.ejecutar(contrato, id);
     }
 
