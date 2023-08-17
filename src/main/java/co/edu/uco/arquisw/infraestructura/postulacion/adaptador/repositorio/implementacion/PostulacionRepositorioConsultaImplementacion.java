@@ -64,7 +64,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public List<PostulacionDTO> consultarPostulacionesPorProyecto(Long proyectoID) {
         var entidades = this.postulacionDAO.findAll();
 
-        var postulaciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID) && !entidad.isRechazado() && !entidad.isSeleccionado()).toList();
+        var postulaciones = entidades.stream().filter(entidad -> entidad.getProyecto().equals(proyectoID) && !entidad.isRechazado() && !entidad.isSeleccionado()).toList();
 
         return this.postulacionMapeador.construirDTOs(postulaciones);
     }
@@ -103,7 +103,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public List<SeleccionDTO> consultarSeleccionadosPorProyecto(Long proyectoID) {
         var entidades = this.seleccionDAO.findAll();
 
-        var selecciones = entidades.stream().filter(entidad -> entidad.getId().equals(proyectoID)).toList();
+        var selecciones = entidades.stream().filter(entidad -> entidad.getProyecto().equals(proyectoID)).toList();
 
         return this.seleccionMapeador.construirDTOs(selecciones);
     }
