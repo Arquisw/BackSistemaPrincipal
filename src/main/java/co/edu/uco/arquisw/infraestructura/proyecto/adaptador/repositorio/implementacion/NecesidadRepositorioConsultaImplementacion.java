@@ -111,7 +111,8 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public List<NecesidadDTO> consultarProyectosAprobados() {
         var entidades = this.necesidadDAO.findAll();
 
-        var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO)).toList();
+        var necesidades = entidades.stream().filter(entidad -> entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO) ||
+                entidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)).toList();
 
         return this.necesidadMapeador.construirDTOs(necesidades);
     }
