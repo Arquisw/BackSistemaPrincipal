@@ -33,7 +33,6 @@ public class ServicioRechazarUsuario {
 
         this.personaRepositorioComando.eliminarRol(Rol.crear(TextoConstante.ROL_POSTULADO), postulacionDTO.getUsuarioID());
         this.postulacionRepositorioComando.actualizar(postulacion, postulacionDTO.getProyectoID(), postulacionDTO.getUsuarioID(), id);
-        servicioActualizarToken.ejecutar();
 
         return this.postulacionRepositorioComando.rechazarUsuario(motivoRechazoPostulacion, id);
     }
