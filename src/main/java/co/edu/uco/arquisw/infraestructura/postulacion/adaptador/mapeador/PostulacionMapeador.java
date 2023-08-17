@@ -73,6 +73,7 @@ public class PostulacionMapeador {
         actualizarRolesEntidad(entidad.getRoles(), postulacion.getRoles());
         entidad.setProyecto(proyectoId);
         entidad.setFecha(FechaFormateador.obtenerFechaTexto(postulacion.getFecha()));
+        entidad.setRechazado(postulacion.isRechazado());
         entidad.setUsuario(usuarioId);
     }
 
