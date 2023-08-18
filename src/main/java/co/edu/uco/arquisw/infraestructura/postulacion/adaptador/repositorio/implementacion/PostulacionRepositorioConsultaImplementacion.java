@@ -50,14 +50,17 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
 
     @Override
     public List<PostulacionDTO> consultarPostulacionesPorUsuarioId(Long id) {
-        var entidades = this.postulacionDAO.findByUsuario(id).stream().sorted((postulacionUno, postulacionDos) -> {
+        var entidades = this.postulacionDAO.findAll();
+        var postulaciones = entidades.stream().filter(entidad -> entidad.getUsuario().equals(id)).toList();
+
+        var postulacionesOrdenadas = postulaciones.stream().sorted((postulacionUno, postulacionDos) -> {
             var fechaUno = FechaFormateador.obtenerFecha(postulacionUno.getFecha());
             var fechaDos = FechaFormateador.obtenerFecha(postulacionDos.getFecha());
 
             return fechaDos.compareTo(fechaUno);
         }).toList();
 
-        return this.postulacionMapeador.construirDTOs(entidades);
+        return this.postulacionMapeador.construirDTOs(postulacionesOrdenadas);
     }
 
     @Override
@@ -89,14 +92,16 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
 
     @Override
     public List<SeleccionDTO> consultarSeleccionesPorUsuarioId(Long id) {
-        var entidades = this.seleccionDAO.findByUsuario(id).stream().sorted((seleccionUno, seleccionDos) -> {
+        var entidades = this.seleccionDAO.findAll();
+        var selecciones = entidades.stream().filter(entidad -> entidad.getUsuario().equals(id)).toList();
+        var seleccionesOrdenadas = selecciones.stream().sorted((seleccionUno, seleccionDos) -> {
            var fechaUno = FechaFormateador.obtenerFecha(seleccionUno.getFecha());
            var fechaDos = FechaFormateador.obtenerFecha(seleccionDos.getFecha());
 
            return fechaDos.compareTo(fechaUno);
         }).toList();
 
-        return this.seleccionMapeador.construirDTOs(entidades);
+        return this.seleccionMapeador.construirDTOs(seleccionesOrdenadas);
     }
 
     @Override
