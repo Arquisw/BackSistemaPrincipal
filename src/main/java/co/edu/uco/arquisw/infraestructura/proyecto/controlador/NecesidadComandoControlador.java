@@ -105,7 +105,7 @@ public class NecesidadComandoControlador {
         return this.aprobarProyectoPorRolIngenieriaManejador.ejecutar(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_LIDER_DEL_EQUIPO')")
+    @PreAuthorize("hasRole('ROLE_LIDER_DE_EQUIPO')")
     @RequestMapping("/aprobacion/liderDeEquipo/{id}")
     @Operation(summary = "Aprobar Proyecto por Rol Lider de Equipo", description = "Este es usado para que el usuario con el Rol de Lider de Equpo pueda aprobar el proyecto por medio de su ID")
     public ComandoRespuesta<Long> aprobarProyectoPorRolLiderDeEquipo(@PathVariable Long id) {

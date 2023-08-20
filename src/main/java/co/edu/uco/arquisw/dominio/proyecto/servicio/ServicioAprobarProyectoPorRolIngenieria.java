@@ -33,7 +33,7 @@ public class ServicioAprobarProyectoPorRolIngenieria {
     }
 
     private void validarSiElContratoFueEfectuado(Long id) {
-        if(ValidarObjeto.esNulo(this.contratoRepositorioConsulta.consultarPorId(id))) {
+        if(!this.necesidadRepositorioConsulta.consultarPorProyectoId(id).getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_HABER_EFECTUADO_EL_CONTRATO + id);
         }
     }

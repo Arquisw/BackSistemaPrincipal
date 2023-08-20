@@ -20,19 +20,17 @@ public class NecesidadConsultaControlador {
     private final ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador;
     private final ConsultarProyectosAprobadosManejador consultarProyectosAprobadosManejador;
     private final ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador;
-    private final ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador;
     private final ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador;
     private final ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador;
     private final ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador;
     private final ConsultarProyectosNegociadosManejador consultarProyectosNegociadosManejador;
 
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosAprobadosManejador consultarProyectosAprobadosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarAprobacionProyectoPorIdManejador consultarAprobacionProyectoPorIdManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador, ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador, ConsultarProyectosNegociadosManejador consultarProyectosNegociadosManejador) {
+    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosAprobadosManejador consultarProyectosAprobadosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador, ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador, ConsultarProyectosNegociadosManejador consultarProyectosNegociadosManejador) {
         this.consultarNecesidadesManejador = consultarNecesidadesManejador;
         this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
         this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
         this.consultarProyectosAprobadosManejador = consultarProyectosAprobadosManejador;
         this.consultarPeticionesDeEliminacionNecesidadManejador = consultarPeticionesDeEliminacionNecesidadManejador;
-        this.consultarAprobacionProyectoPorIdManejador = consultarAprobacionProyectoPorIdManejador;
         this.consultarNecesidadesPorAsociacionIdManejador = consultarNecesidadesPorAsociacionIdManejador;
         this.consultarNecesidadPorProyectoIdManejador = consultarNecesidadPorProyectoIdManejador;
         this.consultarRequerimientosPorNecesidadIdManejador = consultarRequerimientosPorNecesidadIdManejador;
@@ -100,12 +98,5 @@ public class NecesidadConsultaControlador {
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una necesidad")
     public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacion() {
         return this.consultarPeticionesDeEliminacionNecesidadManejador.ejecutar();
-    }
-
-    @PreAuthorize("hasRole('ROLE_SELECCIONADO')")
-    @GetMapping("/aprobacion/{id}")
-    @Operation(summary = "Consultar Aprobación Proyecto por ID", description = "Este es usado para consultar la aprobación de un proyecto por medio de su id")
-    public AprobacionProyectoDTO consultarAprobacionProyectoPorId(@PathVariable Long id) {
-        return this.consultarAprobacionProyectoPorIdManejador.ejecutar(id);
     }
 }

@@ -30,9 +30,9 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
     }
 
     private void validarSiFueAprobadoPorRolIngenieria(Long id) {
-        var aprobacionProyecto = this.necesidadRepositorioConsulta.consultarAprobacionProyectoPorId(id);
+        var proyectoDTO = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
-        if(!aprobacionProyecto.isIngenieria()) {
+        if(!proyectoDTO.getAprobacionProyecto().isIngenieria()) {
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_INGENIERIA + id);
         }
     }

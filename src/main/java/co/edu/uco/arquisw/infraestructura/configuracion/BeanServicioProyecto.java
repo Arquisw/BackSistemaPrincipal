@@ -63,11 +63,6 @@ public class BeanServicioProyecto
     }
 
     @Bean
-    public ServicioConsultarAprobacionProyectoPorId servicioConsultarAprobacionProyectoPorId(NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
-        return new ServicioConsultarAprobacionProyectoPorId(necesidadRepositorioConsulta);
-    }
-
-    @Bean
     public ServicioConsultarNecesidadesPorAsociacionId servicioConsultarNecesidadesPorAsociacionId(NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         return new ServicioConsultarNecesidadesPorAsociacionId(necesidadRepositorioConsulta, asociacionRepositorioConsulta);
     }

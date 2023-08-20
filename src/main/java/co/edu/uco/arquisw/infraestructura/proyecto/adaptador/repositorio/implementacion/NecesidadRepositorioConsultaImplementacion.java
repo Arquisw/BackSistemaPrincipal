@@ -132,15 +132,4 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
 
         return this.peticionEliminacionNecesidadMapeador.construirDTOs(entidades);
     }
-
-    @Override
-    public AprobacionProyectoDTO consultarAprobacionProyectoPorId(Long proyectoID) {
-        var entidad = this.aprobacionProyectoDAO.findById(proyectoID).orElse(null);
-
-        if(ValidarObjeto.esNulo(entidad)) {
-            return null;
-        }
-
-        return this.aprobacionProyectoMapeador.construirDTO(entidad);
-    }
 }

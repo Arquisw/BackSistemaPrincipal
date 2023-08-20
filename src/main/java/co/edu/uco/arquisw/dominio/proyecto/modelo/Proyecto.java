@@ -25,10 +25,6 @@ public class Proyecto {
         return new Proyecto(nombre, descripcion, estado, AprobacionProyecto.crear(), tiposConsultoria);
     }
 
-    public static Proyecto modificar(String nombre, String descripcion, EstadoProyecto estado, AprobacionProyecto aprobacionProyecto, List<TipoConsultoria> tiposConsultoria) {
-        return new Proyecto(nombre, descripcion, estado, aprobacionProyecto, tiposConsultoria);
-    }
-
     public void setNombre(String nombre) {
         ValidarTexto.validarObligatorio(nombre, Mensajes.NOMBRE_PROYECTO_NO_PUEDE_ESTAR_VACIO);
         ValidarTexto.validarPatronAlfanumericoEsValido(nombre, Mensajes.PATRON_NOMBRE_PROYECTO_NO_ES_VALIDO);
