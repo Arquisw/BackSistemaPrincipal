@@ -19,7 +19,6 @@ public class ServicioConsultarPostulacionesPorUsuarioId {
 
     public List<PostulacionDTO> ejecutar(Long id) {
         validarSiExisteUsuarioConID(id);
-        validarSiExistePostulacionConUsuarioID(id);
 
         return this.postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(id);
     }
@@ -27,12 +26,6 @@ public class ServicioConsultarPostulacionesPorUsuarioId {
     private void validarSiExisteUsuarioConID(Long id) {
         if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
-        }
-    }
-
-    private void validarSiExistePostulacionConUsuarioID(Long id) {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID_DE_USUARIO + id);
         }
     }
 }

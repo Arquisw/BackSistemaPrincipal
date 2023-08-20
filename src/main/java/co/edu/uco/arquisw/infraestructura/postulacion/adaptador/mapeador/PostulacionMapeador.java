@@ -36,7 +36,7 @@ public class PostulacionMapeador {
 
     private String obtenerMotivoDelRechazo(Long id, boolean rechazado) {
         if(rechazado) {
-            var motivoRechazo = this.motivoRechazoPostulacionDAO.findById(id).orElse(null);
+            var motivoRechazo = this.motivoRechazoPostulacionDAO.findByPostulacion(id);
 
             assert motivoRechazo != null;
             return motivoRechazo.getMotivo();

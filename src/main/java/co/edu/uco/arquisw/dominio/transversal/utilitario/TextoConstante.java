@@ -14,7 +14,7 @@ public class TextoConstante {
     public static final String ROL_INGENIERIA = "ROLE_INGENIERIA"; // ID = 9
     public static final String ROL_ARQUITECTURA = "ROLE_ARQUITECTURA"; // ID = 10
     public static final String ROL_ANALISTA = "ROLE_ANALISTA"; // ID = 11
-    public static final String ROL_LIDER_DEL_EQUIPO = "ROLE_LIDER_DEL_EQUIPO"; // ID = 12
+    public static final String ROL_LIDER_DEL_EQUIPO = "ROLE_LIDER_DE_EQUIPO"; // ID = 12
     public static final String ROL_PATROCINADOR = "ROLE_PATROCINADOR"; // ID = 13
     public static final String INGENIERIA_DE_REQUISITOS = "Ingenieria de Requisitos"; // ID = 1
     public static final String SQA = "SQA"; // ID = 2
