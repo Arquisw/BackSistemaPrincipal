@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.asociacion.servicio;
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,8 +15,9 @@ class ServicioConsultarAsociacionPorIdUsuarioTest {
         var asociacionDto = new AsociacionDTO();
 
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
+        var personaRepositorioConsulta =Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta);
+        var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacionDto);
 
@@ -27,8 +29,9 @@ class ServicioConsultarAsociacionPorIdUsuarioTest {
     void consultaSeleccionadoPorIdFallida()
     {
         var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
+        var personaRepositorioConsulta =Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta);
+        var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(null);
 

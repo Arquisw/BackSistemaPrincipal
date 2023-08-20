@@ -23,8 +23,8 @@ public class BeanServicioAsociacion {
     }
 
     @Bean
-    public ServicioConsultarAsociacionPorIDUsuario servicioConsultarAsociacionPorIDUsuario(AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
-        return new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta);
+    public ServicioConsultarAsociacionPorIDUsuario servicioConsultarAsociacionPorIDUsuario(AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta, personaRepositorioConsulta);
     }
 
     @Bean
