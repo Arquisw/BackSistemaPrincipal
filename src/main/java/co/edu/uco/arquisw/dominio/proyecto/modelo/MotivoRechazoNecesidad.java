@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.dominio.proyecto.modelo;
 
-import co.edu.uco.arquisw.dominio.postulacion.modelo.MotivoRechazoPostulacion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;

@@ -17,6 +17,7 @@ public class MotivoRechazoPostulacionEntidad {
     @GeneratedValue(strategy = GenerationType.AUTO, generator="motivo_rechazo_postulacion_code_seq")
     @SequenceGenerator(name="motivo_rechazo_postulacion_code_seq", sequenceName="motivo_rechazo_postulacion_code_seq", allocationSize=1)
     private Long id;
+    @Column(length = 3000)
     private String motivo;
     private Long postulacion;
 }
