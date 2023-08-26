@@ -20,7 +20,7 @@ public class ContratoConsultaControlador {
         this.consultarContratoPorIdManejador = consultarContratoPorIdManejador;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR','ROLE_ASOCIACION')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
     @GetMapping("/{id}")
     @Operation(summary = "Consultar por ID", description = "Este es usado para consultar un contrato por medio del ID de una necesidad")
     public ContratoDTO consultarPorId(@PathVariable Long id) {
