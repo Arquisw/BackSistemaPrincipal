@@ -1,7 +1,6 @@
 # ArquiSW - Sistema Principal
 
-El sistema principal de la aplicación ArquiSW, corresponde al sistema que administra y gestiona los procesos y datos que son transversales a los procesos de consultoría, los cuales son estregados a la [Single Page Application][1]
-[1]: https://github.com/Arquisw/Arquisw-Front
+El sistema principal de la aplicación ArquiSW, corresponde al sistema que administra y gestiona los procesos y datos que son transversales a los procesos de consultoría, los cuales son estregados a la [Single Page Application](https://github.com/Arquisw/Arquisw-Front)
 
 Estos procesos transversales corresponden a la gestión de usuarios, la gestión de empresas y/o asociaciones, la gestión de necesidades con sus contratos y proyectos, y finalmente, la gestion de las postulaciones y selecciones a los proyectos registrados en la plataforma.
 
@@ -20,8 +19,7 @@ Estos procesos transversales corresponden a la gestión de usuarios, la gestión
 
 ## Documentación
 
-**Modelo de Documentación:**  [Modelo C4][2]
-[2]: https://arquisw.github.io/ArquiSW-Documentacion/
+**Modelo de Documentación:**  [Modelo C4](https://arquisw.github.io/ArquiSW-Documentacion/)
 
 ## Instalación
 
