@@ -20,7 +20,7 @@ public class ProyectoEntidad {
     private Long id;
     @Column(length = 100)
     private String nombre;
-    @Column(length = 500)
+    @Column(length = 5000)
     private String descripcion;
     @OneToOne
     @JoinColumn(name = "estado")
