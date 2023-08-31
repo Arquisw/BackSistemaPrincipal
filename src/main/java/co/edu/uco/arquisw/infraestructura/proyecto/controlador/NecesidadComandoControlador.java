@@ -113,7 +113,7 @@ public class NecesidadComandoControlador {
     }
 
     @PreAuthorize("hasAuthority('DIRECTOR_PROYECTO_ESCRITURA')")
-    @RequestMapping("/aprobacion/directorDeProyecto/{id}")
+    @PutMapping("/aprobacion/directorDeProyecto/{id}")
     @Operation(summary = "Aprobar Proyecto por Rol Director de Proyecto", description = "Este es usado para que el usuario con el Rol de Director de Proyecto pueda aprobar el proyecto por medio de su ID")
     public ComandoRespuesta<Long> aprobarProyectoPorRolDirectorDeProyecto(HttpServletRequest peticion, @PathVariable Long id) {
         var token = peticion.getHeader(TextoConstante.HEADER_VALUE);
