@@ -31,11 +31,11 @@ public class FaseRepositorioComandoImplementacion implements FaseRepositorioComa
     public Long guardar(Long proyectoID, String token) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(token);
+            headers.set("Authorization", token);
             HttpEntity<?> entity = new HttpEntity<>(headers);
-
+            String url= TextoConstante.INGENIERIA_DE_REQUISITOS_URL + proyectoID;
             ComandoRespuesta<Long> response = this.restTemplate.exchange(
-                    this.environment.getRequiredProperty(TextoConstante.INGENIERIA_DE_REQUISITOS_URL + proyectoID),
+                    url,
                     HttpMethod.POST,
                     entity,
                     new ParameterizedTypeReference<ComandoRespuesta<Long>>() {}).getBody();
