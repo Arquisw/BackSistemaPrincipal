@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.configuracion;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.contrato.puerto.comando.FaseRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.contrato.puerto.consulta.ContratoRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;

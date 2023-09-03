@@ -1,6 +1,6 @@
 package co.edu.uco.arquisw.dominio.proyecto.servicio;
 
-import co.edu.uco.arquisw.dominio.contrato.puerto.comando.FaseRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
@@ -24,9 +24,9 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
         validarSiExisteProyectoConID(id);
         validarSiFueAprobadoPorRolLiderDeEquipo(id);
 
-        var aprobacionProyectoId = this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_LIDER_DEL_EQUIPO);
-        this.faseRepositorioComando.guardar(id, token);
+        var aprobacionProyectoId = this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_DIRECTOR_PROYECTO);
         this.necesidadRepositorioComando.actualizarEstadoProyecto(EstadoProyecto.crear(TextoConstante.ESTADO_EN_DESARROLLO), id);
+        this.faseRepositorioComando.guardar(id, token);
 
         return aprobacionProyectoId;
     }

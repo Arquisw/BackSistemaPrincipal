@@ -1,7 +1,7 @@
-package co.edu.uco.arquisw.infraestructura.contrato.adaptador.repositorio.implementacion;
+package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
-import co.edu.uco.arquisw.dominio.contrato.puerto.comando.FaseRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DemasiadasPeticionesExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.TecnicoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
@@ -31,7 +31,7 @@ public class FaseRepositorioComandoImplementacion implements FaseRepositorioComa
     public Long guardar(Long proyectoID, String token) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", token);
+            headers.set(TextoConstante.HEADER_VALUE, token);
             HttpEntity<?> entity = new HttpEntity<>(headers);
             String url= TextoConstante.INGENIERIA_DE_REQUISITOS_URL + proyectoID;
             ComandoRespuesta<Long> response = this.restTemplate.exchange(
