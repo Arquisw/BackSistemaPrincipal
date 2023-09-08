@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa;
 
-import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.SeleccionEntidad;
 import org.springframework.data.jpa.repository.JpaRepository;
 
