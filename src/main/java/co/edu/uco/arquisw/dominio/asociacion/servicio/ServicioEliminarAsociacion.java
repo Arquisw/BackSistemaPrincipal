@@ -4,13 +4,16 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositori
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
+
+import javax.mail.MessagingException;
 
 public class ServicioEliminarAsociacion {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -19,25 +22,33 @@ public class ServicioEliminarAsociacion {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
     private final PersonaRepositorioComando personaRepositorioComando;
     private final ServicioActualizarToken servicioActualizarToken;
+    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
 
-    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
+    public ServicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.asociacionRepositorioComando = asociacionRepositorioComando;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
         this.personaRepositorioComando = personaRepositorioComando;
         this.servicioActualizarToken = servicioActualizarToken;
+        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
     }
 
-    public Long ejecutar(Long id) {
+    public Long ejecutar(Long id) throws MessagingException {
         validarSiExisteUsuarioConID(id);
         validarSiPuedeEliminarLaCuenta(id);
 
         var rol = Rol.crear(TextoConstante.ROL_ASOCIACION);
+        var correo = this.personaRepositorioConsulta.consultarPorId(id).getCorreo();
+        var asociacion = this.asociacionRepositorioConsulta.consultarPorIDUsuario(id);
+        var asunto = TextoConstante.ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
+        var cuerpo = TextoConstante.LA_ASOCIACION_O_EMPRESA + asociacion.getNombre() + TextoConstante.CON_EL_NIT + asociacion.getNit() + TextoConstante.HA_SIDO_ELIMINADA_POR_TI;
 
         this.personaRepositorioComando.eliminarRolAsociacion(rol, id);
         this.asociacionRepositorioComando.eliminar(id);
+        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
         servicioActualizarToken.ejecutar();
+
         return id;
     }
 

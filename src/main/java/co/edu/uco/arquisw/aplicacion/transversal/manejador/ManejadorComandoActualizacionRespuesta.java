@@ -2,7 +2,9 @@ package co.edu.uco.arquisw.aplicacion.transversal.manejador;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+
 public interface ManejadorComandoActualizacionRespuesta<C, L, R> {
     @Transactional
-    R ejecutar(C comando, L id);
+    R ejecutar(C comando, L id) throws MessagingException;
 }

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
@@ -28,14 +29,14 @@ public class ContratoComandoControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PostMapping("/{id}")
     @Operation(summary = "Guardar Contrato", description = "Este es usado para guardar un contrato en la aplicación por medio del ID de una necesidad")
-    public ComandoRespuesta<Long> guardar( @RequestBody ContratoComando contrato, @PathVariable Long id) {
+    public ComandoRespuesta<Long> guardar( @RequestBody ContratoComando contrato, @PathVariable Long id) throws MessagingException {
         return this.guardarContratoManejador.ejecutar(contrato, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar Contrato", description = "Este es usado para actualizar los datos de un contrato por medio del ID de una necesidad")
-    public ComandoRespuesta<Long> actualizar(@RequestBody ContratoComando contrato, @PathVariable Long id) {
+    public ComandoRespuesta<Long> actualizar(@RequestBody ContratoComando contrato, @PathVariable Long id) throws MessagingException {
         return this.actualizarContratoManejador.ejecutar(contrato, id);
     }
 }

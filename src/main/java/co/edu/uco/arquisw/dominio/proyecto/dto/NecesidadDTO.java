@@ -14,4 +14,5 @@ public class NecesidadDTO {
     private String motivoRechazo;
     private EstadoNecesidadDTO estado;
     private ProyectoDTO proyecto;
+    private Long asociacion;
 }

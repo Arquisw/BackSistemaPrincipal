@@ -1,27 +1,28 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.usuario.testdatabuilder.PersonaTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import javax.mail.MessagingException;
+
 class ServicioEliminarPersonaPorAdministradorTest
 {
     @Test
-    void ValidarEliminacionExitosa()
-    {
+    void ValidarEliminacionExitosa() throws MessagingException {
         var persona= new PersonaDTO();
 
        var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-
        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+       var  servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-       var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
+       var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
@@ -36,8 +37,9 @@ class ServicioEliminarPersonaPorAdministradorTest
     {
         var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var  servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
+        var servicio = new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 

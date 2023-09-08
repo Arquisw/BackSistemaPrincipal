@@ -7,19 +7,21 @@ import co.edu.uco.arquisw.dominio.asociacion.servicio.ServicioEliminarAsociacion
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import javax.mail.MessagingException;
+
 class ServicioEliminarNecesidadTest {
     @Test
-    void ValidarEliminacionExitosa()
-    {
+    void ValidarEliminacionExitosa() throws MessagingException {
         var persona= new PersonaDTO();
         var asociacion =new AsociacionDTO();
 
@@ -29,7 +31,9 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
@@ -52,7 +56,8 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
@@ -72,7 +77,8 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando= Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta,asociacionRepositorioComando,asociacionRepositorioConsulta,necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);

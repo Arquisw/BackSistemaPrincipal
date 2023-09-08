@@ -22,7 +22,7 @@ public class NecesidadMapeador {
     }
 
     public NecesidadDTO construirDTO(NecesidadEntidad necesidad) {
-        return new NecesidadDTO(necesidad.getId(), obtenerMotivoRechazo(necesidad), this.estadoNecesidadMapeador.construirDTO(necesidad.getEstado()), this.proyectoMapeador.construirDTO(necesidad.getProyecto()));
+        return new NecesidadDTO(necesidad.getId(), obtenerMotivoRechazo(necesidad), this.estadoNecesidadMapeador.construirDTO(necesidad.getEstado()), this.proyectoMapeador.construirDTO(necesidad.getProyecto()), necesidad.getAsociacion());
     }
 
     private String obtenerMotivoRechazo(NecesidadEntidad necesidad) {

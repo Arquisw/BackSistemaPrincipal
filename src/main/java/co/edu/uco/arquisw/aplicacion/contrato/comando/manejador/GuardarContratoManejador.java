@@ -7,6 +7,8 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActua
 import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioGuardarContrato;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+
 @Component
 public class GuardarContratoManejador implements ManejadorComandoActualizacionRespuesta<ContratoComando, Long, ComandoRespuesta<Long>> {
     private final ServicioGuardarContrato servicioGuardarContrato;
@@ -18,7 +20,7 @@ public class GuardarContratoManejador implements ManejadorComandoActualizacionRe
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) {
+    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) throws MessagingException {
         return new ComandoRespuesta<>(this.servicioGuardarContrato.ejecutar(this.contratoFabrica.construir(comando), id));
     }
 }

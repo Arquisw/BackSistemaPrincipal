@@ -10,7 +10,7 @@ import java.util.Optional;
 @Component
 public class AsociacionMapeador {
     public AsociacionDTO construirDTO(AsociacionEntidad asociacion, String nombre) {
-        return new AsociacionDTO(asociacion.getId(), asociacion.getNombre(), asociacion.getNit(), asociacion.getNumeroContacto(), nombre);
+        return new AsociacionDTO(asociacion.getId(), asociacion.getNombre(), asociacion.getNit(), asociacion.getNumeroContacto(), nombre, asociacion.getUsuario());
     }
 
     public AsociacionEntidad construirEntidad(Asociacion asociacion, Long usuarioID) {

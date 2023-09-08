@@ -1,11 +1,13 @@
 package co.edu.uco.arquisw.infraestructura.configuracion;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.FaseRepositorioComando;
-import co.edu.uco.arquisw.dominio.contrato.puerto.consulta.ContratoRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.servicio.*;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,33 +35,33 @@ public class BeanServicioProyecto
     }
 
     @Bean
-    public ServicioEliminarNecesidad servicioEliminarNecesidad(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
-        return new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
+    public ServicioEliminarNecesidad servicioEliminarNecesidad(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
-    public ServicioEliminarNecesidadPorAdministrador servicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
-        return new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta, necesidadRepositorioComando);
+    public ServicioEliminarNecesidadPorAdministrador servicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta, necesidadRepositorioComando, necesidadRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
-    public ServicioAprobarProyecto servicioAprobarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
-        return new ServicioAprobarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta);
+    public ServicioAprobarProyecto servicioAprobarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioAprobarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
-    public ServicioAprobarProyectoPorRolDirectorDeProyecto servicioAprobarProyectoPorRolDirectorDeProyecto(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, FaseRepositorioComando faseRepositorioComando) {
-        return new ServicioAprobarProyectoPorRolDirectorDeProyecto(necesidadRepositorioConsulta, necesidadRepositorioComando, faseRepositorioComando);
+    public ServicioAprobarProyectoPorRolDirectorDeProyecto servicioAprobarProyectoPorRolDirectorDeProyecto(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, FaseRepositorioComando faseRepositorioComando, PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioAprobarProyectoPorRolDirectorDeProyecto(necesidadRepositorioConsulta, necesidadRepositorioComando, faseRepositorioComando, postulacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
-    public ServicioAprobarProyectoPorRolIngenieria servicioAprobarProyectoPorRolIngenieria(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, ContratoRepositorioConsulta contratoRepositorioConsulta) {
-        return new ServicioAprobarProyectoPorRolIngenieria(necesidadRepositorioConsulta, necesidadRepositorioComando, contratoRepositorioConsulta);
+    public ServicioAprobarProyectoPorRolIngenieria servicioAprobarProyectoPorRolIngenieria(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioAprobarProyectoPorRolIngenieria(necesidadRepositorioConsulta, necesidadRepositorioComando, postulacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
-    public ServicioAprobarProyectoPorRolLiderDeEquipo servicioAprobarProyectoPorRolLiderDeEquipo(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
-        return new ServicioAprobarProyectoPorRolLiderDeEquipo(necesidadRepositorioConsulta, necesidadRepositorioComando);
+    public ServicioAprobarProyectoPorRolLiderDeEquipo servicioAprobarProyectoPorRolLiderDeEquipo(NecesidadRepositorioConsulta necesidadRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, PostulacionRepositorioConsulta postulacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioAprobarProyectoPorRolLiderDeEquipo(necesidadRepositorioConsulta, necesidadRepositorioComando, postulacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 
     @Bean
@@ -88,7 +90,7 @@ public class BeanServicioProyecto
     }
 
     @Bean
-    public ServicioRechazarProyecto servicioRechazarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
-        return new ServicioRechazarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta);
+    public ServicioRechazarProyecto servicioRechazarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+        return new ServicioRechazarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
 }

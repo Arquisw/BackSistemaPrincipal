@@ -2,23 +2,43 @@ package co.edu.uco.arquisw.dominio.proyecto.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+
+import javax.mail.MessagingException;
 
 public class ServicioEliminarNecesidadPorAdministrador {
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final NecesidadRepositorioComando necesidadRepositorioComando;
+    private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
+    private final PersonaRepositorioConsulta personaRepositorioConsulta;
+    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
 
-    public ServicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando) {
+
+    public ServicioEliminarNecesidadPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.necesidadRepositorioComando = necesidadRepositorioComando;
+        this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
+        this.personaRepositorioConsulta = personaRepositorioConsulta;
+        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
     }
 
 
-    public Long ejecutar(Long id) {
+    public Long ejecutar(Long id) throws MessagingException {
         validarSiExisteNecesidadConID(id);
 
+        var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
+        var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
+        var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
+        var asunto = TextoConstante.PROYECTO_DE_LA_ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
+        var cuerpo = TextoConstante.EL_PROYECTO + necesidad.getProyecto().getNombre() +  TextoConstante.HA_SIDO_ELIMINADO_PROYECTO_POR_EL_ADMINISTRADOR;
+
         this.necesidadRepositorioComando.eliminarPorAdministrador(id);
+        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
 
         return id;
     }

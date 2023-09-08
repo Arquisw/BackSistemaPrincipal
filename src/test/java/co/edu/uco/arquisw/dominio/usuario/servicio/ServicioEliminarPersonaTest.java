@@ -7,6 +7,7 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
@@ -15,24 +16,25 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 class ServicioEliminarPersonaTest {
     @Test
-    void ValidarEliminacionExitosa()
-    {
+    void ValidarEliminacionExitosa() throws MessagingException {
         var persona= new PersonaDTO();
 
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta =Mockito.mock(PostulacionRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico =Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
-        var id =servicio.ejecutar(1L);
+        var id = servicio.ejecutar(1L);
         Mockito.verify(personaRepositorioComando,Mockito.times(1)).eliminar(1L);
 
         Assertions.assertEquals(1L,id);
@@ -44,8 +46,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta =Mockito.mock(PostulacionRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico =Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(ValorInvalidoExcepcion.class,() -> servicio.ejecutar(1L)).getMessage());
@@ -60,8 +63,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta =Mockito.mock(PostulacionRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico =Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
@@ -79,8 +83,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta =Mockito.mock(PostulacionRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico =Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(seleccionado));
@@ -98,8 +103,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta =Mockito.mock(PostulacionRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico =Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta,asociacionRepositorioConsulta,postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(postulacion));

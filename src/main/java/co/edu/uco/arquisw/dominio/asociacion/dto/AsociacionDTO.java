@@ -15,4 +15,5 @@ public class AsociacionDTO {
     private String nit;
     private String numeroContacto;
     private String nombreContacto;
+    private Long usuarioId;
 }

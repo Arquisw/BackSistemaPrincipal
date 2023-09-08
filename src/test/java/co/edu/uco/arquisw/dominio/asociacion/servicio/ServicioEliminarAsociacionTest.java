@@ -8,15 +8,19 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioCo
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioEliminarNecesidad;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
+import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import javax.mail.MessagingException;
+
 class ServicioEliminarAsociacionTest {
     @Test
-    void ValidarEliminacionExitosa() {
+    void ValidarEliminacionExitosa() throws MessagingException {
         var estado = new EstadoNecesidadDTO();
         estado.setNombre(TextoConstante.ESTADO_EN_ESPERA);
         var necesidad = new NecesidadDTO();
@@ -26,8 +30,10 @@ class ServicioEliminarAsociacionTest {
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
@@ -48,8 +54,11 @@ class ServicioEliminarAsociacionTest {
 
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
 
@@ -68,8 +77,10 @@ class ServicioEliminarAsociacionTest {
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando);
+        var servicio = new ServicioEliminarNecesidad(necesidadRepositorioConsulta, necesidadRepositorioComando, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
         Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);

@@ -1,6 +1,6 @@
-package co.edu.uco.arquisw.infraestructura.usuario.adaptador.servicio;
+package co.edu.uco.arquisw.infraestructura.transversal.adaptador.servicio;
 
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;

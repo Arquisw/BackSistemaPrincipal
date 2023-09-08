@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioCifrarTexto;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;

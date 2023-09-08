@@ -77,14 +77,14 @@ public class PersonaComandoControlador {
     @PreAuthorize("hasAuthority('USUARIO_ELIMINACION')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) throws MessagingException {
         return this.eliminarPersonaManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR_ELIMINACION')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) throws MessagingException {
         return this.eliminarPersonaPorAdministradorManejador.ejecutar(id);
     }
 

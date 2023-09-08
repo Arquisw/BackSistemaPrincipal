@@ -9,7 +9,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 
 import java.util.List;
 

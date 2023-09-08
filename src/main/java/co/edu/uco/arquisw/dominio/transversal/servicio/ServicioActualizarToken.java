@@ -1,4 +1,4 @@
-package co.edu.uco.arquisw.dominio.usuario.servicio;
+package co.edu.uco.arquisw.dominio.transversal.servicio;
 
 public interface ServicioActualizarToken {
     void ejecutar();

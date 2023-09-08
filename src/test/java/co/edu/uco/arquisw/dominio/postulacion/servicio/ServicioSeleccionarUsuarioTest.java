@@ -8,7 +8,7 @@ import co.edu.uco.arquisw.dominio.postulacion.testdatabuilder.PostulacionTestDat
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarToken;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

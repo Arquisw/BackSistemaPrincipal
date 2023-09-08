@@ -1,6 +1,6 @@
-package co.edu.uco.arquisw.infraestructura.usuario.adaptador.servicio;
+package co.edu.uco.arquisw.infraestructura.transversal.adaptador.servicio;
 
-import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioCifrarTexto;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioCifrarTexto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
