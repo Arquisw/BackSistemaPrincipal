@@ -1,11 +1,20 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.implementacion;
 
-import co.edu.uco.arquisw.dominio.proyecto.dto.*;
+import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
+import co.edu.uco.arquisw.dominio.proyecto.dto.RequerimientosDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.*;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.RequerimientosMapeador;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.NecesidadDAO;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.PeticionEliminacionNecesidadDAO;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.ProyectoDAO;
+import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.RequerimientoArchivoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,10 +38,6 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     @Autowired
     PeticionEliminacionNecesidadMapeador peticionEliminacionNecesidadMapeador;
     @Autowired
-    AprobacionProyectoDAO aprobacionProyectoDAO;
-    @Autowired
-    AprobacionProyectoMapeador aprobacionProyectoMapeador;
-    @Autowired
     RequerimientosMapeador requerimientosMapeador;
 
     @Override
@@ -54,9 +59,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
             return null;
         }
 
-        var dto = this.necesidadMapeador.construirDTO(entidad);
-
-        return dto;
+        return this.necesidadMapeador.construirDTO(entidad);
     }
 
     @Override

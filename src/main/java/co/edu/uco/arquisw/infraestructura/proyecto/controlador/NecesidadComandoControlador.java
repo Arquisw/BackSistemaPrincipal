@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.controlador;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.MotivoRechazoNecesidadComando;
+import co.edu.uco.arquisw.aplicacion.proyecto.comando.PropetarioProyectoComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.RequerimientosComando;
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.manejador.*;
@@ -29,8 +30,9 @@ public class NecesidadComandoControlador {
     private final GuardarRequerimientosManejador guardarRequerimientosManejador;
     private final ActualizarRequerimientosManejador actualizarRequerimientosManejador;
     private final RechazarProyectoManejador rechazarProyectoManejador;
+    private final UsuarioEsPropetarioDelProyectoManejador usuarioEsPropetarioDelProyectoManejador;
 
-    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador, RechazarProyectoManejador rechazarProyectoManejador) {
+    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador, RechazarProyectoManejador rechazarProyectoManejador, UsuarioEsPropetarioDelProyectoManejador usuarioEsPropetarioDelProyectoManejador) {
         this.guardarNecesidadManejador = guardarNecesidadManejador;
         this.actualizarNecesidadManejador = actualizarNecesidadManejador;
         this.eliminarNecesidadManejador = eliminarNecesidadManejador;
@@ -42,6 +44,7 @@ public class NecesidadComandoControlador {
         this.guardarRequerimientosManejador = guardarRequerimientosManejador;
         this.actualizarRequerimientosManejador = actualizarRequerimientosManejador;
         this.rechazarProyectoManejador = rechazarProyectoManejador;
+        this.usuarioEsPropetarioDelProyectoManejador = usuarioEsPropetarioDelProyectoManejador;
     }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
@@ -121,5 +124,12 @@ public class NecesidadComandoControlador {
         var token = peticion.getHeader(TextoConstante.HEADER_VALUE);
 
         return this.aprobarProyectoPorRolDirectorDeProyectoManejador.ejecutar(id, token);
+    }
+
+    @PreAuthorize("hasAuthority('ASOCIACION_ESCRITURA')")
+    @PostMapping("/esPropetarioDelProyecto")
+    @Operation(summary = "Aprobar Proyecto por Rol Director de Proyecto", description = "Este es usado para que el usuario con el Rol de Director de Proyecto pueda aprobar el proyecto por medio de su ID")
+    public ComandoRespuesta<Boolean> usuarioEsPropetarioDelProyecto(@RequestBody PropetarioProyectoComando propetarioProyectoComando) {
+        return this.usuarioEsPropetarioDelProyectoManejador.ejecutar(propetarioProyectoComando);
     }
 }

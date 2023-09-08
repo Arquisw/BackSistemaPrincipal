@@ -93,4 +93,9 @@ public class BeanServicioProyecto
     public ServicioRechazarProyecto servicioRechazarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
         return new ServicioRechazarProyecto(necesidadRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
     }
+
+    @Bean
+    public ServicioUsuarioEsPropetarioDelProyecto servicioUsuarioEsPropetarioDelProyecto(PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioUsuarioEsPropetarioDelProyecto(personaRepositorioConsulta, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
 }
