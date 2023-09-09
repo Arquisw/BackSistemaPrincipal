@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NecesidadDAO extends JpaRepository<NecesidadEntidad, Long> {
     NecesidadEntidad findByAsociacion(Long asociacion);
+
     NecesidadEntidad findByProyecto(ProyectoEntidad proyecto);
 }

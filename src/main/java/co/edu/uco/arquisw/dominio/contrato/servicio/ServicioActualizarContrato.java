@@ -6,7 +6,6 @@ import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioCom
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
-import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
@@ -33,8 +32,8 @@ public class ServicioActualizarContrato {
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = TextoConstante.CONTRATO_DEL_PROYECTO_ACTUAL_ACTUALIZADO;
-        var cuerpo = TextoConstante.EL_CONTRATO_DEL_PROYECTO + necesidad.getProyecto().getNombre() +  TextoConstante.HA_SIDO_ACTUALIZADO_POR_EL_ADMINISTRADOR;
+        var asunto = Mensajes.CONTRATO_DEL_PROYECTO_ACTUAL_ACTUALIZADO;
+        var cuerpo = Mensajes.EL_CONTRATO_DEL_PROYECTO + necesidad.getProyecto().getNombre() + Mensajes.HA_SIDO_ACTUALIZADO_POR_EL_ADMINISTRADOR;
 
         var respuestaId = this.contratoRepositorioComando.actualizar(contrato, necesidadId);
         this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
@@ -43,7 +42,7 @@ public class ServicioActualizarContrato {
     }
 
     private void validarSiExisteAsociacionConId(Long necesidadId) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
         }
     }

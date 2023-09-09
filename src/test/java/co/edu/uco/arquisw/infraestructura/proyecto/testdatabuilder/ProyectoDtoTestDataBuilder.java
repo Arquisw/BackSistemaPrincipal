@@ -11,15 +11,13 @@ public class ProyectoDtoTestDataBuilder {
     private String descripcion;
     private List<TipoConsultoriaComando> tiposConsultoria;
 
-    public ProyectoDtoTestDataBuilder()
-    {
-        this.nombre= "NETFLIX";
+    public ProyectoDtoTestDataBuilder() {
+        this.nombre = "NETFLIX";
         this.descripcion = "STREAMING";
         this.tiposConsultoria = List.of(new TipoDeConsultoriaDtoDataBuilder().build());
     }
 
-    public ProyectoComando build()
-    {
-        return new ProyectoComando(nombre,descripcion,tiposConsultoria);
+    public ProyectoComando build() {
+        return new ProyectoComando(nombre, descripcion, tiposConsultoria);
     }
 }

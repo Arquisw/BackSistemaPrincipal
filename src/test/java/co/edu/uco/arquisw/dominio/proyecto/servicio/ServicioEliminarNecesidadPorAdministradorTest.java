@@ -16,7 +16,7 @@ import javax.mail.MessagingException;
 class ServicioEliminarNecesidadPorAdministradorTest {
     @Test
     void ValidarEliminacionExitosa() throws MessagingException {
-        var asociacion= new AsociacionDTO();
+        var asociacion = new AsociacionDTO();
 
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
@@ -24,29 +24,29 @@ class ServicioEliminarNecesidadPorAdministradorTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta,necesidadRepositorioComando, necesidadRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta, necesidadRepositorioComando, necesidadRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
-        var id =servicio.ejecutar(1L);
+        var id = servicio.ejecutar(1L);
 
-        Mockito.verify(necesidadRepositorioComando,Mockito.times(1)).eliminar(1L);
+        Mockito.verify(necesidadRepositorioComando, Mockito.times(1)).eliminar(1L);
 
-        Assertions.assertEquals(1L,id);
+        Assertions.assertEquals(1L, id);
     }
+
     @Test
-    void ValidarEliminacionFallidaNoExisteUsuario()
-    {
-        var  asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var  necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
+    void ValidarEliminacionFallidaNoExisteUsuario() {
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var necesidadRepositorioComando = Mockito.mock(NecesidadRepositorioComando.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio = new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta,necesidadRepositorioComando, necesidadRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarNecesidadPorAdministrador(asociacionRepositorioConsulta, necesidadRepositorioComando, necesidadRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1,
-                Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
     }
 
 }

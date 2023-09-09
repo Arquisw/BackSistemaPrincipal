@@ -21,7 +21,7 @@ public class ServicioActualizarRolPorAdministrador {
     }
 
     private void validarSiNoExisteRolConId(Long id) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarRolPorId(id))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarRolPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ROL_CON_EL_ID + id);
         }
     }

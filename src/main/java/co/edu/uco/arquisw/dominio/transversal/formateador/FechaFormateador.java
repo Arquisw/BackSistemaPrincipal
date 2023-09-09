@@ -8,7 +8,8 @@ public class FechaFormateador {
     private static final String FORMATO_YYYY_MM_DD = "yyyy/MM/dd";
     private static final String FORMATO_YYYY_MM_DD_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
 
-    private FechaFormateador() { }
+    private FechaFormateador() {
+    }
 
     public static LocalDate obtenerFechaActual() {
         return LocalDate.now();

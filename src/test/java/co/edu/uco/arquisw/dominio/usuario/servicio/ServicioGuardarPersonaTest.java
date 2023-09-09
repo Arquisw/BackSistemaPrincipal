@@ -27,7 +27,7 @@ class ServicioGuardarPersonaTest {
         var servicio = new ServicioGuardarPersona(repositorioPersonaComando, repositorioPersonaConsulta, servicioCifrarTexto, servicioObtenerRoles);
         var clave = "ASDSFGh1234567";
 
-        Mockito.when(repositorioPersonaComando.guardar(Mockito.any(Persona.class), Mockito.any(Usuario.class),  Mockito.any(String.class))).thenReturn(1L);
+        Mockito.when(repositorioPersonaComando.guardar(Mockito.any(Persona.class), Mockito.any(Usuario.class), Mockito.any(String.class))).thenReturn(1L);
 
         var id = servicio.ejecutar(persona, clave);
 

@@ -26,8 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ContratoComandoControladorTest
-{
+class ContratoComandoControladorTest {
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -35,48 +34,44 @@ class ContratoComandoControladorTest
     private MockMvc mocMvc;
 
     @Test
-    void guardarAsociacionFallida() throws Exception
-    {
+    void guardarAsociacionFallida() throws Exception {
         var idAsociacion = 5;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}",idAsociacion,"ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/contratos/{id}", idAsociacion, "ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
-    void deberiaActualizarContrato() throws Exception
-    {
+    void deberiaActualizarContrato() throws Exception {
         Long id = 3L;
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}", id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void deberiaActualizarContratoFallido() throws Exception
-    {
+    void deberiaActualizarContratoFallido() throws Exception {
         Long id = 6L;
 
         var contrato = new ContratoDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}",id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/contratos/{id}", id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(contrato)))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
-    void eliminacionContratoFallido() throws Exception
-    {
+    void eliminacionContratoFallido() throws Exception {
         var id = 6L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/contratos/{id}", (int) id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());

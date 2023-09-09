@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class ServicioCifrarTextoEncoder implements ServicioCifrarTexto {
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Override
     public String ejecutar(String clave) {
         return passwordEncoder.encode(clave);

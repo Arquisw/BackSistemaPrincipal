@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador;
 import co.edu.uco.arquisw.dominio.usuario.dto.PeticionEliminacionPersonaDTO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.PeticionEliminacionPersonaEntidad;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

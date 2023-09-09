@@ -6,9 +6,10 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositor
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
+
 import java.util.Objects;
 
-public class  ServicioActualizarAsociacion {
+public class ServicioActualizarAsociacion {
     private final AsociacionRepositorioComando asociacionRepositorioComando;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
 
@@ -25,7 +26,7 @@ public class  ServicioActualizarAsociacion {
     }
 
     private void validarSiExisteAsociacionConID(Long id) {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorIDUsuario(id))) {
+        if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorIDUsuario(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
         }
     }
@@ -33,7 +34,7 @@ public class  ServicioActualizarAsociacion {
     private void validarSiExisteAsociacionConNIT(String nit, Long id) {
         var asociacionConNIT = this.asociacionRepositorioConsulta.consultarPorNIT(nit);
 
-        if(!ValidarObjeto.esNulo(asociacionConNIT) && !Objects.equals(asociacionConNIT.getId(), id)) {
+        if (!ValidarObjeto.esNulo(asociacionConNIT) && !Objects.equals(asociacionConNIT.getId(), id)) {
             throw new DuplicidadExcepcion(Mensajes.EXISTE_ASOCIACION_CON_NIT + nit);
         }
     }

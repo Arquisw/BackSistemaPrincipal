@@ -4,12 +4,12 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.contrato.adaptador.repositorio.jpa.ContratoDAO;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.RequerimientoArchivoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,6 +51,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
     MotivoRechazoNecesidadDAO motivoRechazoNecesidadDAO;
     @Autowired
     MotivoRechazoNecesidadMapeador motivoRechazoNecesidadMapeador;
+
     @Override
     public Long guardar(Necesidad necesidad, Long asociacionID) {
         var entidad = this.necesidadMapeador.construirEntidad(necesidad, asociacionID);
@@ -176,7 +177,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         assert requerimientoEntidad != null;
         this.requerimientoArchivoDAO.deleteById(requerimientoEntidad.getId());
 
-        if(!ValidarObjeto.esNulo(contrato)) {
+        if (!ValidarObjeto.esNulo(contrato)) {
             this.contratoDAO.deleteById(contrato.getId());
         }
 
@@ -196,7 +197,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
         assert requerimientoEntidad != null;
         this.requerimientoArchivoDAO.deleteById(requerimientoEntidad.getId());
 
-        if(!ValidarObjeto.esNulo(contrato)) {
+        if (!ValidarObjeto.esNulo(contrato)) {
             this.contratoDAO.deleteById(contrato.getId());
         }
 

@@ -13,8 +13,7 @@ import java.util.List;
 
 class ServicioConsultarPostulacionesPorUsuarioIdTest {
     @Test
-    void validarConsultaPostulacionPorUsuarioPorIdExitosa()
-    {
+    void validarConsultaPostulacionPorUsuarioPorIdExitosa() {
         var personaDTO = new PersonaDTO();
         var postulacionDTO = new PostulacionDTO();
         var personaID = 1L;
@@ -34,13 +33,13 @@ class ServicioConsultarPostulacionesPorUsuarioIdTest {
         Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
         Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarPostulacionesPorUsuarioId(personaID);
     }
+
     @Test
-    void consultaPorIdFallida()
-    {
+    void consultaPorIdFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 

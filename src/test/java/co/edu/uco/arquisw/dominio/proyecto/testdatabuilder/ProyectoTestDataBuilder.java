@@ -7,8 +7,7 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
 
 import java.util.List;
 
-public class ProyectoTestDataBuilder
-{
+public class ProyectoTestDataBuilder {
 
     private final String nombre;
     private final String descripcion;
@@ -22,8 +21,7 @@ public class ProyectoTestDataBuilder
         this.tiposConsultoria = List.of(new TipoDeConsultoriaTestDtaBuilder().build());
     }
 
-    public Proyecto build()
-    {
-        return Proyecto.crear(nombre,descripcion,estado,tiposConsultoria);
+    public Proyecto build() {
+        return Proyecto.crear(nombre, descripcion, estado, tiposConsultoria);
     }
 }

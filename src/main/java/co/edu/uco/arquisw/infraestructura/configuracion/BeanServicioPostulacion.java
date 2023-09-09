@@ -4,9 +4,9 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionReposito
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +24,7 @@ public class BeanServicioPostulacion {
 
     @Bean
     public ServicioSeleccionarUsuario servicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
-        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta,postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
+        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
     }
 
     @Bean
@@ -34,7 +34,7 @@ public class BeanServicioPostulacion {
 
     @Bean
     public ServicioConsultarPostulacionPorProyecto servicioConsultarPostulacionPorProyecto(PostulacionRepositorioConsulta postulacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
-        return new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        return new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
     }
 
     @Bean
@@ -44,7 +44,7 @@ public class BeanServicioPostulacion {
 
     @Bean
     public ServicioConsultarSeleccionadoPorProyecto servicioConsultarSeleccionadoPorProyecto(PostulacionRepositorioConsulta postulacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta) {
-        return new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        return new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
     }
 
     @Bean

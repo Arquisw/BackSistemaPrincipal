@@ -15,10 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.core.Is.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -28,8 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ContratoConsultaControladorTest
-{
+class ContratoConsultaControladorTest {
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -37,22 +33,20 @@ class ContratoConsultaControladorTest
     private MockMvc mocMvc;
 
     @Test
-    void obtenerContratoExitoso() throws Exception
-    {
+    void obtenerContratoExitoso() throws Exception {
         var id = 2L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int) id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    void obtenerContratoFallido() throws Exception
-    {
+    void obtenerContratoFallido() throws Exception {
         var id = 8L;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int)id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/contratos/{id}", (int) id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }

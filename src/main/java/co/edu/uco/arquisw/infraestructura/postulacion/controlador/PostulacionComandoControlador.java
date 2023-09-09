@@ -1,12 +1,12 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.controlador;
 
-import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.MotivoRechazoPostulacionComando;
+import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.SeleccionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.ActualizarPostulacionManejador;
+import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.GuardarPostulacionManejador;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.RechazarUsuarioManejador;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.SeleccionarUsuarioManejador;
-import co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador.GuardarPostulacionManejador;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

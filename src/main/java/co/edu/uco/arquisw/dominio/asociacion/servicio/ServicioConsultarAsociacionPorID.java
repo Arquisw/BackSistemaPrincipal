@@ -19,7 +19,7 @@ public class ServicioConsultarAsociacionPorID {
     }
 
     private void validarSiExisteAsociacionConID(Long id) {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
+        if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
         }
     }

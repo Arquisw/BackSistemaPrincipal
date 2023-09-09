@@ -8,7 +8,7 @@ import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioGuardarHojaDeVida;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GuardarHojaDeVidaManejador implements ManejadorComandoActualizacionRespuesta<HojaVidaComando,Long, ComandoRespuesta<Long>> {
+public class GuardarHojaDeVidaManejador implements ManejadorComandoActualizacionRespuesta<HojaVidaComando, Long, ComandoRespuesta<Long>> {
     private final ServicioGuardarHojaDeVida servicioGuardarHojaDeVida;
     private final HojaDeVidaFabrica hojaDeVidaFabrica;
 
@@ -19,6 +19,6 @@ public class GuardarHojaDeVidaManejador implements ManejadorComandoActualizacion
 
     @Override
     public ComandoRespuesta<Long> ejecutar(HojaVidaComando comando, Long id) {
-        return new ComandoRespuesta<>(this.servicioGuardarHojaDeVida.ejecutar(this.hojaDeVidaFabrica.construir(comando),id));
+        return new ComandoRespuesta<>(this.servicioGuardarHojaDeVida.ejecutar(this.hojaDeVidaFabrica.construir(comando), id));
     }
 }

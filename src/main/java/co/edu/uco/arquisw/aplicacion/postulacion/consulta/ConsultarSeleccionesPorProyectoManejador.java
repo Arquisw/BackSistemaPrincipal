@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoRespu
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioConsultarSeleccionadoPorProyecto;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

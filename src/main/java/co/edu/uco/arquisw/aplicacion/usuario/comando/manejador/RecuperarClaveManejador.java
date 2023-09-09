@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecuperarClaveManejador implements ManejadorComandoActualizacionRespuesta<RecuperarClaveComando, String, ComandoRespuesta<Long>> {
     private final ServicioRecuperarClave servicioRecuperarClave;
+
     public RecuperarClaveManejador(ServicioRecuperarClave servicioRecuperarClave) {
         this.servicioRecuperarClave = servicioRecuperarClave;
     }

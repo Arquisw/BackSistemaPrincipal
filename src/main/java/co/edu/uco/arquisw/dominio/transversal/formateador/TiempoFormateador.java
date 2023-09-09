@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class TiempoFormateador {
     private static final String FORMATO_HH_MM_SS = "HH:mm:ss";
 
-    private TiempoFormateador() { }
+    private TiempoFormateador() {
+    }
 
     public static LocalTime obtenerTiempo(String textoTiempo) {
         DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_HH_MM_SS);

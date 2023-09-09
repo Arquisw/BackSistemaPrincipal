@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.NecesidadEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.MotivoRechazoNecesidadDAO;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component
@@ -26,7 +27,7 @@ public class NecesidadMapeador {
     }
 
     private String obtenerMotivoRechazo(NecesidadEntidad necesidad) {
-        if(necesidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_RECHAZADO)) {
+        if (necesidad.getEstado().getEstado().getNombre().equals(TextoConstante.ESTADO_RECHAZADO)) {
             return this.motivoRechazoNecesidadDAO.findByNecesidad(necesidad.getId()).getMotivo();
         }
 

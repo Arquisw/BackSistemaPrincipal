@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Table(name = "peticion_eliminacion_asociacion")
 public class PeticionEliminacionAsociacionEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="peticion_eliminacion_asociacion_code_seq")
-    @SequenceGenerator(name="peticion_eliminacion_asociacion_code_seq", sequenceName="peticion_eliminacion_asociacion_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "peticion_eliminacion_asociacion_code_seq")
+    @SequenceGenerator(name = "peticion_eliminacion_asociacion_code_seq", sequenceName = "peticion_eliminacion_asociacion_code_seq", allocationSize = 1)
     private Long id;
     private Long asociacion;
 }

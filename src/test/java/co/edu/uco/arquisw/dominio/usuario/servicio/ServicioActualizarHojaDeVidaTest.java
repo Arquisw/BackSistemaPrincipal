@@ -10,53 +10,52 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
- class ServicioActualizarHojaDeVidaTest {
+class ServicioActualizarHojaDeVidaTest {
     @Test
-    void noExistePersonaParaActualizar()
-    {
+    void noExistePersonaParaActualizar() {
         var hojaDeVida = new HojaDeVidaTestDataBuilder().build();
 
-        var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio= new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
+        var servicio = new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.any())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(hojaDeVida,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, 1L)).getMessage());
     }
+
     @Test
-    void noExisteHojaDeVidaParaActualizar()
-    {
+    void noExisteHojaDeVidaParaActualizar() {
         var hojaDeVida = new HojaDeVidaTestDataBuilder().build();
-        var personaDTO= new PersonaDTO();
+        var personaDTO = new PersonaDTO();
 
-        var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio= new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
+        var servicio = new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
         Mockito.when(personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(hojaDeVida,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, 1L)).getMessage());
     }
+
     @Test
-    void hojaDeVidaActualizarExistosamente()
-    {
+    void hojaDeVidaActualizarExistosamente() {
         var hojaDeVida = new HojaDeVidaTestDataBuilder().build();
-        var personaDTO= new PersonaDTO();
+        var personaDTO = new PersonaDTO();
         var hojaDeVidaDTO = new HojaDeVidaPersonaDTO();
 
-        var  personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var  personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio= new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
+        var servicio = new ServicioActualizarHojaDeVida(personaRepositorioComando, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
         Mockito.when(personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(Mockito.anyLong())).thenReturn(hojaDeVidaDTO);
-        servicio.ejecutar(hojaDeVida,1L);
+        servicio.ejecutar(hojaDeVida, 1L);
 
-        Mockito.verify(personaRepositorioComando,Mockito.times(1)).actualizarHojaDeVida(hojaDeVida,1L);
+        Mockito.verify(personaRepositorioComando, Mockito.times(1)).actualizarHojaDeVida(hojaDeVida, 1L);
     }
 }

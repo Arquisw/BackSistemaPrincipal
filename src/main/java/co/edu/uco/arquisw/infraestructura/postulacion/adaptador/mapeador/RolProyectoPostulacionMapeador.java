@@ -16,6 +16,7 @@ public class RolProyectoPostulacionMapeador {
     public List<String> construirDTOs(List<RolProyectoPostulacionEntidad> roles) {
         return roles.stream().map(new RolProyectoPostulacionMapeador()::construirDTO).toList();
     }
+
     public RolProyectoPostulacionEntidad construirEntidad(String rol) {
         return new RolProyectoPostulacionEntidad(null, new RolProyectoEntidad(obtenerRolID(rol), rol));
     }

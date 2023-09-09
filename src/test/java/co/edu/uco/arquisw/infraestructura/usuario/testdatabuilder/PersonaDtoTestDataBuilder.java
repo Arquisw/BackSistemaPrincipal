@@ -9,16 +9,14 @@ public class PersonaDtoTestDataBuilder {
     private String correo;
     private String clave;
 
-    public PersonaDtoTestDataBuilder()
-    {
+    public PersonaDtoTestDataBuilder() {
         this.nombre = "juan";
         this.apellidos = "valencia";
         this.correo = "jjuandiego23@gmail.com";
         this.clave = "Asd1234a";
     }
 
-    public PersonaComando build()
-    {
-        return new PersonaComando(nombre,apellidos,correo,clave);
+    public PersonaComando build() {
+        return new PersonaComando(nombre, apellidos, correo, clave);
     }
 }

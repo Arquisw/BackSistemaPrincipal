@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class PersonaTest {
     @Test
     void validarCreacionPersonaExitosa() {
@@ -53,5 +50,5 @@ class PersonaTest {
         Assertions.assertEquals(Mensajes.PATRON_CORREO_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
                 Persona.crear("juan", "valencia", "jjuandiego@asffgh")).getMessage());
 
-         }
+    }
 }

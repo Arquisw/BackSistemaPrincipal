@@ -4,12 +4,12 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Seleccion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class ServicioSeleccionarUsuario {
     }
 
     private void validarSiExistePostulacionConId(Long id) {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
+        if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
         }
     }

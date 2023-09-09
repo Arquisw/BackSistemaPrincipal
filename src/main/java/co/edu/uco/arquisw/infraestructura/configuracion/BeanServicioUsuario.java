@@ -70,7 +70,7 @@ public class BeanServicioUsuario {
 
     @Bean
     public ServicioIniciarRecuperacionClave servicioIniciarRecuperacionClave(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
-       return new ServicioIniciarRecuperacionClave(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+        return new ServicioIniciarRecuperacionClave(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
     }
 
     @Bean

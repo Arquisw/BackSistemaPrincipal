@@ -1,8 +1,8 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
-import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,7 @@ import org.mockito.Mockito;
 
 class ServicioConsultarPersonaPorIdTest {
     @Test
-    void validarConsultaPorIdExitosa()
-    {
+    void validarConsultaPorIdExitosa() {
         var personaDTO = new PersonaDTO();
 
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
@@ -26,9 +25,9 @@ class ServicioConsultarPersonaPorIdTest {
 
         Assertions.assertEquals(personaDTO, personaConsultada);
     }
+
     @Test
-    void consultaPorIdFallida()
-    {
+    void consultaPorIdFallida() {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarPersonaPorId(personaRepositorioConsulta);

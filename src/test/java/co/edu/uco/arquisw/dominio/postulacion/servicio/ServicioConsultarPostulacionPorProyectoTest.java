@@ -11,15 +11,14 @@ import org.mockito.Mockito;
 
 class ServicioConsultarPostulacionPorProyectoTest {
     @Test
-    void validarConsultaPostulacionPorProyectoIdExitosa()
-    {
+    void validarConsultaPostulacionPorProyectoIdExitosa() {
         var postulacionDto = new PostulacionDTO();
         var proyectoDto = new ProyectoDTO();
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyectoDto);
 
@@ -27,13 +26,13 @@ class ServicioConsultarPostulacionPorProyectoTest {
 
         Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarPostulacionesPorProyecto(1L);
     }
+
     @Test
-    void consultaPorProyectoFallida()
-    {
+    void consultaPorProyectoFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioConsultarPostulacionPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
 

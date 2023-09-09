@@ -34,14 +34,14 @@ public class ServicioAprobarProyectoPorRolIngenieria {
         var seleccionesDelProyecto = this.postulacionRepositorioConsulta.consultarSeleccionadosPorProyecto(id);
         var proyecto = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
-        var aprobacionId =  this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_INGENIERIA);
+        var aprobacionId = this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_INGENIERIA);
 
         seleccionesDelProyecto.forEach(seleccionDelProyecto -> {
-            if(seleccionDelProyecto.getRoles().contains(TextoConstante.ROL_LIDER_DEL_EQUIPO)) {
+            if (seleccionDelProyecto.getRoles().contains(TextoConstante.ROL_LIDER_DEL_EQUIPO)) {
                 try {
                     var correo = this.personaRepositorioConsulta.consultarPorId(seleccionDelProyecto.getUsuarioID()).getCorreo();
-                    var asunto = TextoConstante.PROYECTO_ACTUAL_APROBADO_POR_ROL_INGENIERIA;
-                    var cuerpo = TextoConstante.EL_PROYECTO + proyecto.getNombre() +  TextoConstante.HA_SIDO_APROBADO_POR_EL_ROL_INGENIERIA;
+                    var asunto = Mensajes.PROYECTO_ACTUAL_APROBADO_POR_ROL_INGENIERIA;
+                    var cuerpo = Mensajes.EL_PROYECTO + proyecto.getNombre() + Mensajes.HA_SIDO_APROBADO_POR_EL_ROL_INGENIERIA;
 
                     this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
                 } catch (MessagingException e) {
@@ -54,13 +54,13 @@ public class ServicioAprobarProyectoPorRolIngenieria {
     }
 
     private void validarSiExisteProyectoConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
         }
     }
 
     private void validarSiElContratoFueEfectuado(Long id) {
-        if(!this.necesidadRepositorioConsulta.consultarPorProyectoId(id).getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
+        if (!this.necesidadRepositorioConsulta.consultarPorProyectoId(id).getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_HABER_EFECTUADO_EL_CONTRATO + id);
         }
     }

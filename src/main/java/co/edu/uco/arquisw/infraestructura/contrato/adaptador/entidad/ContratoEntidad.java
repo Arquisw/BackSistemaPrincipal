@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Table(name = "contrato")
 public class ContratoEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="contrato_code_seq")
-    @SequenceGenerator(name="contrato_code_seq", sequenceName="contrato_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "contrato_code_seq")
+    @SequenceGenerator(name = "contrato_code_seq", sequenceName = "contrato_code_seq", allocationSize = 1)
     private Long id;
     @Column(length = 3000)
     private String ruta;

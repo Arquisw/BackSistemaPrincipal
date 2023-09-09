@@ -9,8 +9,7 @@ import org.mockito.Mockito;
 
 class ServicioConsultarPostulacionPorIdTest {
     @Test
-    void validarConsultaPostulacionPorIdExitosa()
-    {
+    void validarConsultaPostulacionPorIdExitosa() {
         var postulacionDto = new PostulacionDTO();
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
@@ -26,9 +25,9 @@ class ServicioConsultarPostulacionPorIdTest {
         Assertions.assertEquals(postulacionDto, postulacionConsultado);
 
     }
+
     @Test
-    void consultaPorIdFallida()
-    {
+    void consultaPorIdFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarPostulacionPorId(postulacionRepositorioConsulta);

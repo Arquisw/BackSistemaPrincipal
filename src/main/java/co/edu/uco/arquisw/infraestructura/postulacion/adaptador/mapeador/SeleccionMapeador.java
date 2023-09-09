@@ -34,7 +34,7 @@ public class SeleccionMapeador {
 
             var nombre = TextoConstante.VACIO;
 
-            if(persona != null) {
+            if (persona != null) {
                 nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
             }
 

@@ -5,13 +5,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 public class MyTestRequestFactory {
     public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedGetOne(String url, int id, String role) {
-        return MockMvcRequestBuilders.get(url,id)
+        return MockMvcRequestBuilders.get(url, id)
                 .header("Authorization", getJwt(role));
     }
 
@@ -21,17 +22,17 @@ public class MyTestRequestFactory {
     }
 
     public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedDelete(String url, int id, String role) {
-        return MockMvcRequestBuilders.delete(url,id)
+        return MockMvcRequestBuilders.delete(url, id)
                 .header("Authorization", getJwt(role));
     }
 
-    public static  MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPut(String url, long id, String role) {
-        return MockMvcRequestBuilders.put(url,id)
+    public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPut(String url, long id, String role) {
+        return MockMvcRequestBuilders.put(url, id)
                 .header("Authorization", getJwt(role));
     }
 
     public static MockHttpServletRequestBuilder myFactoryRequestAuthenticatedPostId(String url, long id, String role) {
-        return MockMvcRequestBuilders.post(url,id)
+        return MockMvcRequestBuilders.post(url, id)
                 .header("Authorization", getJwt(role));
     }
 

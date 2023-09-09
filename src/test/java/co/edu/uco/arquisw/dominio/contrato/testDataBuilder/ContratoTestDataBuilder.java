@@ -7,12 +7,11 @@ public class ContratoTestDataBuilder {
 
     private String rutaArchivo;
 
-    public ContratoTestDataBuilder()
-    {
+    public ContratoTestDataBuilder() {
         this.rutaArchivo = "http://www.direccion.org/ejemplo/item.html";
     }
-    public Contrato build()
-    {
+
+    public Contrato build() {
         return Contrato.crear(rutaArchivo);
     }
 }

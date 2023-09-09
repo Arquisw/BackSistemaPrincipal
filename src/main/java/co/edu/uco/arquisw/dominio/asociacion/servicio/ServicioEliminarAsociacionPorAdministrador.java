@@ -32,8 +32,8 @@ public class ServicioEliminarAsociacionPorAdministrador {
 
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(id);
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = TextoConstante.ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
-        var cuerpo = TextoConstante.LA_ASOCIACION_O_EMPRESA + asociacion.getNombre() + TextoConstante.CON_EL_NIT + asociacion.getNit() + TextoConstante.HA_SIDO_ELIMINADA_POR_EL_ADMINISTRADOR;
+        var asunto = Mensajes.ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
+        var cuerpo = Mensajes.LA_ASOCIACION_O_EMPRESA + asociacion.getNombre() + Mensajes.CON_EL_NIT + asociacion.getNit() + Mensajes.HA_SIDO_ELIMINADA_POR_EL_ADMINISTRADOR;
 
         this.personaRepositorioComando.eliminarRolAsociacion(Rol.crear(TextoConstante.ROL_ASOCIACION), id);
         this.asociacionRepositorioComando.eliminarPorAdministrador(id);
@@ -43,7 +43,7 @@ public class ServicioEliminarAsociacionPorAdministrador {
     }
 
     private void validarSiExisteAsociacionConID(Long id) {
-        if(ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
+        if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
         }
     }

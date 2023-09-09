@@ -10,8 +10,7 @@ import org.mockito.Mockito;
 
 class ServicioConsultarHojaDeVidaPorIdUsuarioTest {
     @Test
-    void validarConsultaPorIdExitosa()
-    {
+    void validarConsultaPorIdExitosa() {
         var persona = new PersonaDTO();
 
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
@@ -20,13 +19,13 @@ class ServicioConsultarHojaDeVidaPorIdUsuarioTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
 
-         servicio.ejecutar(1L);
+        servicio.ejecutar(1L);
 
         Mockito.verify(personaRepositorioConsulta, Mockito.times(1)).consultarHojaDeVidaPorIdUsuario(1L);
     }
+
     @Test
-    void consultaPorIdHojaDeVidaFallida()
-    {
+    void consultaPorIdHojaDeVidaFallida() {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarHojaDeVidaPorIdUsuario(personaRepositorioConsulta);

@@ -37,8 +37,8 @@ public class ServicioGuardarContrato {
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadID);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = TextoConstante.CONTRATO_DEL_PROYECTO_ACTUAL_EFECTUADO;
-        var cuerpo = TextoConstante.EL_CONTRATO_DEL_PROYECTO + necesidad.getProyecto().getNombre() +  TextoConstante.HA_SIDO_EFECTUADO_Y_GUARDADO_EN_LA_PLATAFORMA_POR_EL_ADMINISTRADOR;
+        var asunto = Mensajes.CONTRATO_DEL_PROYECTO_ACTUAL_EFECTUADO;
+        var cuerpo = Mensajes.EL_CONTRATO_DEL_PROYECTO + necesidad.getProyecto().getNombre() + Mensajes.HA_SIDO_EFECTUADO_Y_GUARDADO_EN_LA_PLATAFORMA_POR_EL_ADMINISTRADOR;
 
         this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_NEGOCIADO), necesidadID);
         var respuestaId = this.contratoRepositorioComando.guardar(contrato, necesidadID);
@@ -48,7 +48,7 @@ public class ServicioGuardarContrato {
     }
 
     private void validarSiExisteNecesidadConId(Long necesidadID) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadID))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadID);
         }
     }

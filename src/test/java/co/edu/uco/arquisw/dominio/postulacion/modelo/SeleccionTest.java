@@ -2,14 +2,13 @@ package co.edu.uco.arquisw.dominio.postulacion.modelo;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.util.List;
 
-class SeleccionTest
-{
+class SeleccionTest {
     @Test
-    void validarCreacionExitosa()
-    {
+    void validarCreacionExitosa() {
         var fecha = LocalDate.now();
         var rol = "Analista";
 

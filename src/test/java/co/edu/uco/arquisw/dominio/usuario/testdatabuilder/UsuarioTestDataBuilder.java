@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.dominio.usuario.testdatabuilder;
 
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Usuario;
+
 import java.util.List;
 
 public class UsuarioTestDataBuilder {

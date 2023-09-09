@@ -14,7 +14,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,38 +26,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class AsociacionConsultaControladorTest
-{
+class AsociacionConsultaControladorTest {
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    void obtenerAsociacionPorIdExitosa() throws Exception
-    {
-        var  id = 2;
+    void obtenerAsociacionPorIdExitosa() throws Exception {
+        var id = 2;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre", is("Uco")))
                 .andExpect(jsonPath("$.nit", is("12345678-2")));
     }
 
-   @Test
-    void obtenerAsociacionPorIdFalla() throws Exception
-    {
+    @Test
+    void obtenerAsociacionPorIdFalla() throws Exception {
         var id = 10;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}",id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/asociaciones/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
-                .andExpect(jsonPath("$.mensaje", is("No existe un asociacion con el ID " + id)));;
+                .andExpect(jsonPath("$.mensaje", is("No existe un asociacion con el ID " + id)));
+        ;
     }
+
     @Test
-    void obtenerPeticionesPorAdministradorExitosa() throws Exception
-    {
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/asociaciones/administrador","ROLE_ADMINISTRADOR")
+    void obtenerPeticionesPorAdministradorExitosa() throws Exception {
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGet("/asociaciones/administrador", "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

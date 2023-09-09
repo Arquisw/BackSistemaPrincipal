@@ -6,16 +6,17 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolUsuarioEntidad;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component
 public class RolMapeador {
     public RolDTO construirDTO(RolUsuarioEntidad rol) {
-        return new RolDTO(rol.getId(), rol.getRol().getNombre(),rol.getRol().isLeer(),rol.getRol().isEscribir(),rol.getRol().isActualizar(),rol.getRol().isEliminar());
+        return new RolDTO(rol.getId(), rol.getRol().getNombre(), rol.getRol().isLeer(), rol.getRol().isEscribir(), rol.getRol().isActualizar(), rol.getRol().isEliminar());
     }
 
     public RolDTO construirDTO(RolEntidad rol) {
-        return new RolDTO(rol.getId(), rol.getNombre(),rol.isLeer(),rol.isEscribir(),rol.isActualizar(),rol.isEliminar());
+        return new RolDTO(rol.getId(), rol.getNombre(), rol.isLeer(), rol.isEscribir(), rol.isActualizar(), rol.isEliminar());
     }
 
     public List<RolDTO> construirDTOs(List<RolUsuarioEntidad> roles) {

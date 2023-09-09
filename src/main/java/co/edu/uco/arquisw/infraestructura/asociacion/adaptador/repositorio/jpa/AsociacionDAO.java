@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AsociacionDAO extends JpaRepository<AsociacionEntidad, Long> {
     AsociacionEntidad findByUsuario(Long usuario);
+
     AsociacionEntidad findByNit(String nit);
 }

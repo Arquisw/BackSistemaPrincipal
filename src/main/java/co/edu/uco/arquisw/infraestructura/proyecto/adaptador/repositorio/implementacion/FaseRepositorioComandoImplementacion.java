@@ -33,19 +33,20 @@ public class FaseRepositorioComandoImplementacion implements FaseRepositorioComa
             HttpHeaders headers = new HttpHeaders();
             headers.set(TextoConstante.HEADER_VALUE, token);
             HttpEntity<?> entity = new HttpEntity<>(headers);
-            String url= TextoConstante.INGENIERIA_DE_REQUISITOS_URL + proyectoID;
+            String url = TextoConstante.INGENIERIA_DE_REQUISITOS_URL + proyectoID;
             ComandoRespuesta<Long> response = this.restTemplate.exchange(
                     url,
                     HttpMethod.POST,
                     entity,
-                    new ParameterizedTypeReference<ComandoRespuesta<Long>>() {}).getBody();
+                    new ParameterizedTypeReference<ComandoRespuesta<Long>>() {
+                    }).getBody();
 
             assert response != null;
             return response.getValor();
-        } catch(HttpStatusCodeException exception) {
+        } catch (HttpStatusCodeException exception) {
             logger.error("Error consumiendo el servicio de Ingeniería de Requisitos", exception);
 
-            if(exception.getStatusCode().is4xxClientError()) {
+            if (exception.getStatusCode().is4xxClientError()) {
                 throw new DemasiadasPeticionesExcepcion(exception.getMessage());
             } else {
                 throw new TecnicoExcepcion(exception.getMessage());

@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

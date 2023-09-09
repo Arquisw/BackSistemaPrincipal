@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.infraestructura.error;
 
-import java.util.concurrent.ConcurrentHashMap;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.*;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.NestedServletException;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 @ControllerAdvice
 public class ManejadorError extends ResponseEntityExceptionHandler {

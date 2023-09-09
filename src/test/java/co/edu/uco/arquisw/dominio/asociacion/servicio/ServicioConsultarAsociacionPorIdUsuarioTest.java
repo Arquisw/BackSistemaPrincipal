@@ -10,12 +10,11 @@ import org.mockito.Mockito;
 
 class ServicioConsultarAsociacionPorIdUsuarioTest {
     @Test
-    void validarConsultaSeleccionadoPorProyectoExitosa()
-    {
+    void validarConsultaSeleccionadoPorProyectoExitosa() {
         var asociacionDto = new AsociacionDTO();
 
-        var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
-        var personaRepositorioConsulta =Mockito.mock(PersonaRepositorioConsulta.class);
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta, personaRepositorioConsulta);
 
@@ -25,11 +24,11 @@ class ServicioConsultarAsociacionPorIdUsuarioTest {
 
         Mockito.verify(asociacionRepositorioConsulta, Mockito.times(2)).consultarPorIDUsuario(1L);
     }
+
     @Test
-    void consultaSeleccionadoPorIdFallida()
-    {
-        var asociacionRepositorioConsulta =Mockito.mock(AsociacionRepositorioConsulta.class);
-        var personaRepositorioConsulta =Mockito.mock(PersonaRepositorioConsulta.class);
+    void consultaSeleccionadoPorIdFallida() {
+        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
+        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarAsociacionPorIDUsuario(asociacionRepositorioConsulta, personaRepositorioConsulta);
 

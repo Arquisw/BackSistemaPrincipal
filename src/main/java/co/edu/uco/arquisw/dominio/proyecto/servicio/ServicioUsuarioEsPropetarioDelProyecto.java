@@ -24,7 +24,7 @@ public class ServicioUsuarioEsPropetarioDelProyecto {
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorIDUsuario(usuarioId);
 
-        if(necesidad.getAsociacion().equals(asociacion.getId())) {
+        if (necesidad.getAsociacion().equals(asociacion.getId())) {
             return Boolean.TRUE;
         }
 
@@ -32,13 +32,13 @@ public class ServicioUsuarioEsPropetarioDelProyecto {
     }
 
     private void validarSiExisteNecesidadConId(Long necesidadId) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
         }
     }
 
     private void validarSiExisteUsuarioConId(Long usuarioId) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
         }
     }

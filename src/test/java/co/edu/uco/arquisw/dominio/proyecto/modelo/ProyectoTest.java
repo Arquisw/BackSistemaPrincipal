@@ -6,14 +6,13 @@ import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepc
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class ProyectoTest
-{
+class ProyectoTest {
     @Test
-    void validarCreacionExitosa()
-    {
+    void validarCreacionExitosa() {
         String nombre = "Facebook";
         String descripcion = "Red Social";
         String estado = "En Desarrollo";
@@ -31,31 +30,30 @@ class ProyectoTest
     }
 
     @Test
-    void validarCamposFaltantes()
-    {
+    void validarCamposFaltantes() {
         List<TipoConsultoria> tipoConsultorio = new ArrayList<>();
-        TipoConsultoria tipo =  TipoConsultoria.crear("Ingeniería de Requisitos");
+        TipoConsultoria tipo = TipoConsultoria.crear("Ingeniería de Requisitos");
         tipoConsultorio.add(tipo);
         var estadoProyecto = new EstadoProyectoTestDataBuilder().build();
 
-        Assertions.assertEquals(Mensajes.NOMBRE_PROYECTO_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
-                Proyecto.crear("","Red Social",estadoProyecto,tipoConsultorio)).getMessage());
+        Assertions.assertEquals(Mensajes.NOMBRE_PROYECTO_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+                Proyecto.crear("", "Red Social", estadoProyecto, tipoConsultorio)).getMessage());
 
-        Assertions.assertEquals(Mensajes.DESCRIPCION_ESTADO_PROYECTO_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
-                Proyecto.crear("Facebook","",estadoProyecto,tipoConsultorio)).getMessage());
+        Assertions.assertEquals(Mensajes.DESCRIPCION_ESTADO_PROYECTO_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+                Proyecto.crear("Facebook", "", estadoProyecto, tipoConsultorio)).getMessage());
     }
+
     @Test
-    void validarPatronIncorrecto()
-    {
+    void validarPatronIncorrecto() {
         List<TipoConsultoria> tipoConsultorio = new ArrayList<>();
-        TipoConsultoria tipo =  TipoConsultoria.crear("Ingeniería de Requisitos");
+        TipoConsultoria tipo = TipoConsultoria.crear("Ingeniería de Requisitos");
         tipoConsultorio.add(tipo);
         var estadoProyecto = new EstadoProyectoTestDataBuilder().build();
 
-        Assertions.assertEquals(Mensajes.PATRON_NOMBRE_PROYECTO_NO_ES_VALIDO,Assertions.assertThrows(PatronExcepcion.class,() ->
-                Proyecto.crear("face-book","Red Social",estadoProyecto,tipoConsultorio)).getMessage());
+        Assertions.assertEquals(Mensajes.PATRON_NOMBRE_PROYECTO_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
+                Proyecto.crear("face-book", "Red Social", estadoProyecto, tipoConsultorio)).getMessage());
 
-        Assertions.assertEquals(Mensajes.PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO,Assertions.assertThrows(PatronExcepcion.class,() ->
-               Proyecto.crear("Facebook","Red-Social",estadoProyecto,tipoConsultorio)).getMessage());
+        Assertions.assertEquals(Mensajes.PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
+                Proyecto.crear("Facebook", "Red-Social", estadoProyecto, tipoConsultorio)).getMessage());
     }
 }

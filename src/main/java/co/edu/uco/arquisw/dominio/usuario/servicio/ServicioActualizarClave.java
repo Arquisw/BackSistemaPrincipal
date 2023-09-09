@@ -36,13 +36,13 @@ public class ServicioActualizarClave {
     }
 
     private void validarSiNoExisteUsuario(Long id) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }
 
     private void validarSiClaveNuevaNoEsLaAntigua(String claveAntigua, String claveNueva) {
-        if(claveNueva.equals(claveAntigua)) {
+        if (claveNueva.equals(claveAntigua)) {
             throw new ValorInvalidoExcepcion(Mensajes.LA_CLAVE_NUEVA_NO_PUEDE_SER_IGUAL_A_LA_ANTIGUA);
         }
     }
@@ -50,7 +50,7 @@ public class ServicioActualizarClave {
     private void validarSiClaveAntiguaExiste(String claveAntigua, String correo) {
         var claveCifrada = this.personaRepositorioConsulta.consultarClaveConCorreo(correo);
 
-        if(!this.servicioCifrarTexto.existe(claveAntigua, claveCifrada)) {
+        if (!this.servicioCifrarTexto.existe(claveAntigua, claveCifrada)) {
             throw new ValorInvalidoExcepcion(Mensajes.LA_CLAVE_ANTIGUA_ES_INCORRECTA);
         }
     }

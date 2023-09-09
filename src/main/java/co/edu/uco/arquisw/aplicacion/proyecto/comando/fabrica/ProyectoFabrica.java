@@ -1,7 +1,6 @@
 package co.edu.uco.arquisw.aplicacion.proyecto.comando.fabrica;
 
 import co.edu.uco.arquisw.aplicacion.proyecto.comando.ProyectoComando;
-import co.edu.uco.arquisw.dominio.proyecto.modelo.AprobacionProyecto;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
 import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioConsultarNecesidadPorId;

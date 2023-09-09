@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioCifrarTexto;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -35,7 +36,7 @@ public class ServicioValidarCodigoRecuperacionClave {
     private void validarSiNoExisteCodigo(String codigo, String correo) {
         var codigoCifrado = this.personaRepositorioConsulta.consultarCodigoConCorreo(correo);
 
-        if(!this.servicioCifrarTexto.existe(codigo, codigoCifrado)) {
+        if (!this.servicioCifrarTexto.existe(codigo, codigoCifrado)) {
             throw new ValorInvalidoExcepcion(Mensajes.EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO);
         }
     }

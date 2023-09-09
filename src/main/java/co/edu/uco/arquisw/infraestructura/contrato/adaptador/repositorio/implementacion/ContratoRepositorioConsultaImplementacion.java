@@ -19,7 +19,7 @@ public class ContratoRepositorioConsultaImplementacion implements ContratoReposi
     public ContratoDTO consultarPorId(Long id) {
         var entidad = this.contratoDAO.findByNecesidad(id);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 

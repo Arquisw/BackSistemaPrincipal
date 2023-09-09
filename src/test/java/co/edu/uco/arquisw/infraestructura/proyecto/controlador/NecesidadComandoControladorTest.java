@@ -17,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +35,7 @@ class NecesidadComandoControladorTest {
 
     @Autowired
     private MockMvc mocMvc;
+
     @Test
     void guardarNecesidad() throws Exception {
 
@@ -41,22 +43,23 @@ class NecesidadComandoControladorTest {
         var id = 2;
 
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
     @Test
     void guardarNecesidadFallida() throws Exception {
 
         var proyecto = new ProyectoTestDataBuilder().build();
         var id = 1;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}",id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPostId("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().is4xxClientError())
@@ -70,18 +73,19 @@ class NecesidadComandoControladorTest {
         var id = 3;
         var proyecto = new ProyectoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().isOk());
     }
+
     @Test
     void deberiaFallarAlActualizar() throws Exception {
 
         var id = 9L;
         var proyecto = new ProyectoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(proyecto)))
                 .andExpect(status().is4xxClientError())
@@ -94,52 +98,57 @@ class NecesidadComandoControladorTest {
     void eliminacionNecesidadExitosa() throws Exception {
 
         var id = 3;
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
     @Test
     void eliminacionNecesidadFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id)));
     }
+
     @Test
     void eliminacionNecesidadFallidaPorEstadoAprobado() throws Exception {
 
         var id = 4;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id,"ROLE_ASOCIACION")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/{id}", id, "ROLE_ASOCIACION")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("AutorizacionExcepcion")))
-                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO )));;
+                .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO)));
+        ;
     }
+
     @Test
     void eliminacionNecesidadAdministradorExitosa() throws Exception {
         var id = 3;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedGetOne("/necesidades/{id}", id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
+
     @Test
     void eliminacionNecesidadAdministradorFallida() throws Exception {
         var id = 9;
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id,"ROLE_ADMINISTRADOR")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedDelete("/necesidades/administrador/{id}", id, "ROLE_ADMINISTRADOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())

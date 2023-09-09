@@ -7,19 +7,18 @@ import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepc
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
-class NecesidadTest
-{
+class NecesidadTest {
     @Test
-    void validarCreacionExitosa()
-    {
+    void validarCreacionExitosa() {
         String nombre = "Facebook";
         String descripcion = "Red Social";
         String estado = "En Desarrollo";
         String tipo = "Ingeniería de Requisitos";
         String rutaArchivo = "http://www.direccion.org/ejemplo/item.html";
-        String estadoN= "En Espera";
+        String estadoN = "En Espera";
 
         var estadoProyecto = EstadoProyecto.crear(estado);
         var tipoConsultoria = TipoConsultoria.crear(tipo);
@@ -33,22 +32,22 @@ class NecesidadTest
         Assertions.assertEquals(estado, necesidad.getProyecto().getEstado().getNombre());
         Assertions.assertEquals(tipo, necesidad.getProyecto().getTiposConsultoria().get(0).getNombre());
     }
+
     @Test
-    void validarCamposFaltantes()
-    {
+    void validarCamposFaltantes() {
         var estadoNesecidad = new EstadoNesecidadTestDataBuilder().build();
         var proyecto = new ProyectoTestDataBuilder().build();
 
-        Assertions.assertEquals(Mensajes.RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO,Assertions.assertThrows(ValorObligatorioExcepcion.class,() ->
+        Assertions.assertEquals(Mensajes.RUTA_ARCHIVO_NECESIDAD_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Necesidad.crear(estadoNesecidad, proyecto)).getMessage());
     }
+
     @Test
-    void validarPatronIncorrecto()
-    {
+    void validarPatronIncorrecto() {
         var estadoNesecidad = new EstadoNesecidadTestDataBuilder().build();
         var proyecto = new ProyectoTestDataBuilder().build();
 
-        Assertions.assertEquals(Mensajes.PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO,Assertions.assertThrows(PatronExcepcion.class,() ->
-                Necesidad.crear(estadoNesecidad,proyecto)).getMessage());
+        Assertions.assertEquals(Mensajes.PATRON_RUTA_ARCHIVO_NECESIDAD_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
+                Necesidad.crear(estadoNesecidad, proyecto)).getMessage());
     }
 }

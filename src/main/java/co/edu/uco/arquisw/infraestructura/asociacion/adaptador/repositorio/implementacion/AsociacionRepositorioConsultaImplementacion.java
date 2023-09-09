@@ -12,6 +12,7 @@ import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.P
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -31,7 +32,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     public AsociacionDTO consultarPorIDUsuario(Long id) {
         var entidad = this.asociacionDAO.findByUsuario(id);
 
-        if(ValidarObjeto.esNulo(entidad) ) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -45,7 +46,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     public AsociacionDTO consultarPorID(Long id) {
         var entidad = this.asociacionDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad) ) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -59,7 +60,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     public AsociacionDTO consultarPorNIT(String nit) {
         var entidad = this.asociacionDAO.findByNit(nit);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 

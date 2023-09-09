@@ -32,7 +32,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public PostulacionDTO consultarPostulacionPorId(Long id) {
         var entidad = this.postulacionDAO.findById(id).orElse(null);
 
-        if(entidad == null) {
+        if (entidad == null) {
             return null;
         }
 
@@ -40,7 +40,7 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
         var nombre = TextoConstante.VACIO;
         var correo = TextoConstante.VACIO;
 
-        if(persona != null) {
+        if (persona != null) {
             nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
             correo = persona.getCorreo();
         }
@@ -76,14 +76,14 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
     public SeleccionDTO consultarSeleccionPorId(Long id) {
         var entidad = this.seleccionDAO.findById(id).orElse(null);
 
-        if(entidad == null) {
+        if (entidad == null) {
             return null;
         }
 
         var persona = this.personaDAO.findById(entidad.getUsuario()).orElse(null);
         var nombre = TextoConstante.VACIO;
 
-        if(persona != null) {
+        if (persona != null) {
             nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
         }
 
@@ -95,10 +95,10 @@ public class PostulacionRepositorioConsultaImplementacion implements Postulacion
         var entidades = this.seleccionDAO.findAll();
         var selecciones = entidades.stream().filter(entidad -> entidad.getUsuario().equals(id)).toList();
         var seleccionesOrdenadas = selecciones.stream().sorted((seleccionUno, seleccionDos) -> {
-           var fechaUno = FechaFormateador.obtenerFecha(seleccionUno.getFecha());
-           var fechaDos = FechaFormateador.obtenerFecha(seleccionDos.getFecha());
+            var fechaUno = FechaFormateador.obtenerFecha(seleccionUno.getFecha());
+            var fechaDos = FechaFormateador.obtenerFecha(seleccionDos.getFecha());
 
-           return fechaDos.compareTo(fechaUno);
+            return fechaDos.compareTo(fechaUno);
         }).toList();
 
         return this.seleccionMapeador.construirDTOs(seleccionesOrdenadas);

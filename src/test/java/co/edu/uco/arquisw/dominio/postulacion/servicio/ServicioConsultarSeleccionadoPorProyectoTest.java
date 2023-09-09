@@ -10,14 +10,13 @@ import org.mockito.Mockito;
 
 class ServicioConsultarSeleccionadoPorProyectoTest {
     @Test
-    void validarConsultaSeleccionadoPorProyectoExitosa()
-    {
+    void validarConsultaSeleccionadoPorProyectoExitosa() {
         var proyectoDto = new ProyectoDTO();
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyectoDto);
 
@@ -25,13 +24,13 @@ class ServicioConsultarSeleccionadoPorProyectoTest {
 
         Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarSeleccionadosPorProyecto(1L);
     }
+
     @Test
-    void consultaSeleccionadoPorIdFallida()
-    {
+    void consultaSeleccionadoPorIdFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta,necesidadRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionadoPorProyecto(postulacionRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
 

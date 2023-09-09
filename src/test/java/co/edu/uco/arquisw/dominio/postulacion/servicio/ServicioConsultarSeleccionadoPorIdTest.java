@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.dominio.postulacion.servicio;
 
-import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
@@ -10,8 +9,7 @@ import org.mockito.Mockito;
 
 class ServicioConsultarSeleccionadoPorIdTest {
     @Test
-    void validarConsultaSeleccionadoPorIdExitosa()
-    {
+    void validarConsultaSeleccionadoPorIdExitosa() {
         var seleccionadoDto = new SeleccionDTO();
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
@@ -27,9 +25,9 @@ class ServicioConsultarSeleccionadoPorIdTest {
         Assertions.assertEquals(seleccionadoDto, seleccionConsultado);
 
     }
+
     @Test
-    void consultaSeleccionadoPorIdFallida()
-    {
+    void consultaSeleccionadoPorIdFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarSeleccinadoPorId(postulacionRepositorioConsulta);

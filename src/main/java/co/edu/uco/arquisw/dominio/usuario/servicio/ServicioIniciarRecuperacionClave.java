@@ -41,7 +41,7 @@ public class ServicioIniciarRecuperacionClave {
     }
 
     private void validarSiNoExisteUsuarioConId(String correo) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(correo))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(correo))) {
             throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_CORREO + correo);
         }
     }

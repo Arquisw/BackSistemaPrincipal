@@ -4,19 +4,16 @@ import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
 
-public class NesecidadTestDataBuilder
-{
+public class NesecidadTestDataBuilder {
     private final EstadoNecesidad estado;
     private final Proyecto proyecto;
 
-    public NesecidadTestDataBuilder()
-    {
+    public NesecidadTestDataBuilder() {
         this.estado = new EstadoNesecidadTestDataBuilder().build();
         this.proyecto = new ProyectoTestDataBuilder().build();
     }
 
-    public Necesidad build()
-    {
-        return Necesidad.crear(estado,proyecto);
+    public Necesidad build() {
+        return Necesidad.crear(estado, proyecto);
     }
 }

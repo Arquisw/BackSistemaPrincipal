@@ -9,7 +9,7 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioCons
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicioObtenerRoles  {
+public class ServicioObtenerRoles {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
     public ServicioObtenerRoles(PersonaRepositorioConsulta personaRepositorioConsulta) {
@@ -19,7 +19,7 @@ public class ServicioObtenerRoles  {
     public List<Rol> obtenerRolesPorDefectoActualizar(String correo) {
         var usuario = personaRepositorioConsulta.consultarUsuarioPorCorreo(correo);
 
-        if(ValidarObjeto.esNulo(usuario)) {
+        if (ValidarObjeto.esNulo(usuario)) {
             return new ArrayList<>();
         }
 

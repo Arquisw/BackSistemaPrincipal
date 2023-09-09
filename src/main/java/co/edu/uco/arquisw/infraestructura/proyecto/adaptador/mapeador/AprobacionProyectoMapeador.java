@@ -23,7 +23,8 @@ public class AprobacionProyectoMapeador {
             case (TextoConstante.ROL_INGENIERIA) -> entidad.setIngenieria(true);
             case (TextoConstante.ROL_LIDER_DEL_EQUIPO) -> entidad.setLiderDeEquipo(true);
             case (TextoConstante.ROL_DIRECTOR_PROYECTO) -> entidad.setDirectorDeProyecto(true);
-            default -> throw new AutorizacionExcepcion(Mensajes.EL_ROL + rol + Mensajes.NO_TIENE_PERMISOS_PARA_APROBAR_UN_PROYECTO);
+            default ->
+                    throw new AutorizacionExcepcion(Mensajes.EL_ROL + rol + Mensajes.NO_TIENE_PERMISOS_PARA_APROBAR_UN_PROYECTO);
         }
     }
 }

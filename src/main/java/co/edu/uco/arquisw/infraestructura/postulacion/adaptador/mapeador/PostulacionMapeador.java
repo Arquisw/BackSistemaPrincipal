@@ -4,14 +4,11 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
-import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.PostulacionEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoPostulacionEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.MotivoRechazoPostulacionDAO;
-import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.repositorio.jpa.SeleccionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
-import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +32,7 @@ public class PostulacionMapeador {
     }
 
     private String obtenerMotivoDelRechazo(Long id, boolean rechazado) {
-        if(rechazado) {
+        if (rechazado) {
             var motivoRechazo = this.motivoRechazoPostulacionDAO.findByPostulacion(id);
 
             assert motivoRechazo != null;
@@ -54,7 +51,7 @@ public class PostulacionMapeador {
             var nombre = TextoConstante.VACIO;
             var correo = TextoConstante.VACIO;
 
-            if(persona != null) {
+            if (persona != null) {
                 nombre = persona.getNombre() + TextoConstante.ESPACIO + persona.getApellidos();
                 correo = persona.getCorreo();
             }

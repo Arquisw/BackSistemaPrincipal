@@ -34,14 +34,14 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
         var seleccionesDelProyecto = this.postulacionRepositorioConsulta.consultarSeleccionadosPorProyecto(id);
         var proyecto = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
-        var aprobacionId =  this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_LIDER_DEL_EQUIPO);
+        var aprobacionId = this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_LIDER_DEL_EQUIPO);
 
         seleccionesDelProyecto.forEach(seleccionDelProyecto -> {
-            if(seleccionDelProyecto.getRoles().contains(TextoConstante.ROL_DIRECTOR_PROYECTO)) {
+            if (seleccionDelProyecto.getRoles().contains(TextoConstante.ROL_DIRECTOR_PROYECTO)) {
                 try {
                     var correo = this.personaRepositorioConsulta.consultarPorId(seleccionDelProyecto.getUsuarioID()).getCorreo();
-                    var asunto = TextoConstante.PROYECTO_ACTUAL_APROBADO_POR_ROL_LIDER_DE_EQUIPO;
-                    var cuerpo = TextoConstante.EL_PROYECTO + proyecto.getNombre() +  TextoConstante.HA_SIDO_APROBADO_POR_EL_ROL_LIDER_DE_EQUIPO;
+                    var asunto = Mensajes.PROYECTO_ACTUAL_APROBADO_POR_ROL_LIDER_DE_EQUIPO;
+                    var cuerpo = Mensajes.EL_PROYECTO + proyecto.getNombre() + Mensajes.HA_SIDO_APROBADO_POR_EL_ROL_LIDER_DE_EQUIPO;
 
                     this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
                 } catch (MessagingException e) {
@@ -54,7 +54,7 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
     }
 
     private void validarSiExisteProyectoConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
         }
     }
@@ -62,7 +62,7 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
     private void validarSiFueAprobadoPorRolIngenieria(Long id) {
         var proyectoDTO = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
-        if(!proyectoDTO.getAprobacionProyecto().isIngenieria()) {
+        if (!proyectoDTO.getAprobacionProyecto().isIngenieria()) {
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_INGENIERIA + id);
         }
     }

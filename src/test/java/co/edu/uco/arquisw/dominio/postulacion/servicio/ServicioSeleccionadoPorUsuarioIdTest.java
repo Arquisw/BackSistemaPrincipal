@@ -13,8 +13,7 @@ import java.util.List;
 
 class ServicioSeleccionadoPorUsuarioIdTest {
     @Test
-    void validarConsultaSeleccionadoPorProyectoExitosa()
-    {
+    void validarConsultaSeleccionadoPorProyectoExitosa() {
         var personaDto = new PersonaDTO();
         var seleccionDTO = new SeleccionDTO();
         var personaID = 1L;
@@ -22,7 +21,7 @@ class ServicioSeleccionadoPorUsuarioIdTest {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(personaID)).thenReturn(personaDto);
         Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(personaID)).thenReturn(List.of(seleccionDTO));
@@ -32,13 +31,13 @@ class ServicioSeleccionadoPorUsuarioIdTest {
         Mockito.verify(personaRepositorioConsulta).consultarPorId(personaID);
         Mockito.verify(postulacionRepositorioConsulta, Mockito.times(2)).consultarSeleccionesPorUsuarioId(personaID);
     }
+
     @Test
-    void consultaSeleccionadoPorIdFallida()
-    {
+    void consultaSeleccionadoPorIdFallida() {
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
 
-        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta,personaRepositorioConsulta);
+        var servicio = new ServicioConsultarSeleccionesPorUsuarioId(postulacionRepositorioConsulta, personaRepositorioConsulta);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 

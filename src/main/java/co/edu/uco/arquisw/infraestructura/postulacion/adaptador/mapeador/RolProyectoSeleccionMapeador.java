@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoSeleccionEntidad;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

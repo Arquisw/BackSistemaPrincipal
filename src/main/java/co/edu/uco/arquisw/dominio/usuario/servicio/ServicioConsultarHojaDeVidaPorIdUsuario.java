@@ -20,7 +20,7 @@ public class ServicioConsultarHojaDeVidaPorIdUsuario {
     }
 
     private void validarSiNoExisteUsuarioConId(Long id) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }

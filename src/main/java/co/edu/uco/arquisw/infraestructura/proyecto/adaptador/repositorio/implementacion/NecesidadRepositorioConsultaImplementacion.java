@@ -44,7 +44,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public NecesidadDTO consultarPorAsociacionId(Long id) {
         var entidad = this.necesidadDAO.findByAsociacion(id);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -55,7 +55,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public NecesidadDTO consultarPorProyectoId(Long id) {
         var entidad = this.necesidadDAO.findAll().stream().filter(necesidad -> necesidad.getProyecto().getId().equals(id)).findFirst().orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -66,7 +66,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public RequerimientosDTO consultarRequerimientoPorNecesidadId(Long id) {
         var entidad = this.requerimientoArchivoDAO.findByNecesidad(id);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
         return this.requerimientosMapeador.construirDTO(entidad);
@@ -83,7 +83,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public NecesidadDTO consultarPorNecesidadId(Long id) {
         var entidad = this.necesidadDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -103,7 +103,7 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     public ProyectoDTO consultarProyectoPorId(Long proyectoID) {
         var entidad = this.proyectoDAO.findById(proyectoID).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 

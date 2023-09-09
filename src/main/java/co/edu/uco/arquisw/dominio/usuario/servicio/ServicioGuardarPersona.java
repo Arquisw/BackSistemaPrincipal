@@ -32,7 +32,7 @@ public class ServicioGuardarPersona {
     }
 
     private void validarSiExistePersonaConCorreo(Persona persona) {
-        if(!ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(persona.getCorreo()))) {
+        if (!ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(persona.getCorreo()))) {
             throw new ValorInvalidoExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO);
         }
     }

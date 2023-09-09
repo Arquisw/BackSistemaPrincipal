@@ -30,19 +30,19 @@ public class ServicioActualizarPostulacion {
     }
 
     private void validarSiExistePostulacionConId(Long id) {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
+        if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
         }
     }
 
     private void validarSiExisteProyectoConId(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
         }
     }
 
     private void validarSiExisteUsuarioConId(Long id) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }

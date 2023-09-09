@@ -3,7 +3,6 @@ package co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.SeleccionComando;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
-import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoRespuesta;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioSeleccionarUsuario;
 import org.springframework.stereotype.Component;
 

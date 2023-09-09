@@ -34,8 +34,8 @@ public class ServicioAprobarProyecto {
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = TextoConstante.PROYECTO_APROBADO_POR_EL_ADMINISTRADOR_ASUNTO;
-        var cuerpo = TextoConstante.EL_PROYECTO + necesidad.getProyecto().getNombre() +  TextoConstante.HA_SIDO_APROBADO_POR_EL_ADMINISTRADOR;
+        var asunto = Mensajes.PROYECTO_APROBADO_POR_EL_ADMINISTRADOR_ASUNTO;
+        var cuerpo = Mensajes.EL_PROYECTO + necesidad.getProyecto().getNombre() + Mensajes.HA_SIDO_APROBADO_POR_EL_ADMINISTRADOR;
 
         var respuestaId = this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_APROBADO), id);
         this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
@@ -44,7 +44,7 @@ public class ServicioAprobarProyecto {
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }

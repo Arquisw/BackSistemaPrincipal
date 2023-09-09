@@ -3,13 +3,13 @@ package co.edu.uco.arquisw.dominio.postulacion.servicio;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 
 public class ServicioGuardarPostulacion {
     private final PostulacionRepositorioComando postulacionRepositorioComando;
@@ -36,13 +36,13 @@ public class ServicioGuardarPostulacion {
     }
 
     private void validarSiExisteProyectoConId(Long proyectoID) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(proyectoID))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(proyectoID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + proyectoID);
         }
     }
 
     private void validarSiExistePersonaConId(Long usuarioID) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioID))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioID);
         }
     }

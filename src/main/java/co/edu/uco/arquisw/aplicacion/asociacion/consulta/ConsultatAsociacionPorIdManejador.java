@@ -5,7 +5,6 @@ import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.servicio.ServicioConsultarAsociacionPorID;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class ConsultatAsociacionPorIdManejador implements ManejadorComandoRespuesta<Long, AsociacionDTO> {
 

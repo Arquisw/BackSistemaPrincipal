@@ -17,7 +17,7 @@ import javax.mail.MessagingException;
 class ServicioEliminarAsociacionPorAdministradorTest {
     @Test
     void ValidarEliminacionExitosa() throws MessagingException {
-        var asociacion= new AsociacionDTO();
+        var asociacion = new AsociacionDTO();
 
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
@@ -31,22 +31,21 @@ class ServicioEliminarAsociacionPorAdministradorTest {
 
         var id = servicio.ejecutar(1L);
 
-        Mockito.verify(asociacionRepositorioComando,Mockito.times(1)).eliminar(1L);
+        Mockito.verify(asociacionRepositorioComando, Mockito.times(1)).eliminar(1L);
 
-        Assertions.assertEquals(1L,id);
+        Assertions.assertEquals(1L, id);
     }
 
     @Test
-    void ValidarEliminacionFallidaNoExisteUsuario()
-    {
+    void ValidarEliminacionFallidaNoExisteUsuario() {
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
-        var personaRepositorioComando=Mockito.mock(PersonaRepositorioComando.class);
+        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicio = new ServicioEliminarAsociacionPorAdministrador(asociacionRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando, servicioEnviarCorreoElectronico, personaRepositorioConsulta);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,
-                Assertions.assertThrows(NullPointerException.class,() -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
     }
 }

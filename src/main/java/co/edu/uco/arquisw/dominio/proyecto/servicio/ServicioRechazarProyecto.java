@@ -34,8 +34,8 @@ public class ServicioRechazarProyecto {
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = TextoConstante.PROYECTO_RECHAZADO_POR_EL_ADMINISTRADOR_ASUNTO;
-        var cuerpo = TextoConstante.EL_PROYECTO + necesidad.getProyecto().getNombre() +  TextoConstante.HA_SIDO_RECHAZADO_POR_EL_ADMINISTRADO_CUYO_MOTIVO_ES_POR + motivoRechazoNecesidad.getMotivo();
+        var asunto = Mensajes.PROYECTO_RECHAZADO_POR_EL_ADMINISTRADOR_ASUNTO;
+        var cuerpo = Mensajes.EL_PROYECTO + necesidad.getProyecto().getNombre() + Mensajes.HA_SIDO_RECHAZADO_POR_EL_ADMINISTRADO_CUYO_MOTIVO_ES_POR + motivoRechazoNecesidad.getMotivo();
 
         this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_RECHAZADO), id);
         var motivoRechazoId = this.necesidadRepositorioComando.guardarMotivoRechazoNecesidad(motivoRechazoNecesidad, id);
@@ -45,7 +45,7 @@ public class ServicioRechazarProyecto {
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }

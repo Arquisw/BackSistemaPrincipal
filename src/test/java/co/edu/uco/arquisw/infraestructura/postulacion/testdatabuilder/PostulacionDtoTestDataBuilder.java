@@ -9,19 +9,17 @@ public class PostulacionDtoTestDataBuilder {
     private Long usuarioID;
     private String rol;
 
-    public PostulacionDtoTestDataBuilder()
-    {
+    public PostulacionDtoTestDataBuilder() {
         this.proyectoID = 2L;
         this.usuarioID = 8L;
-        this.rol="Interezado";
+        this.rol = "Interezado";
     }
-    public PostulacionComando build()
-    {
+
+    public PostulacionComando build() {
         return new PostulacionComando(List.of(rol), proyectoID, usuarioID);
     }
 
-    public PostulacionComando buildFallida()
-    {
+    public PostulacionComando buildFallida() {
         return new PostulacionComando(List.of(rol), proyectoID, usuarioID);
     }
 }

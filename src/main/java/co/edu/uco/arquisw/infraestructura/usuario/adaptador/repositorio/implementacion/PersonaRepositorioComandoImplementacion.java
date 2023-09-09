@@ -163,7 +163,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public Long crearPeticionRecuperacionClave(String codigo, String correo, String fecha) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigo, correo, fecha);
         } else {
             this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, correo, fecha);

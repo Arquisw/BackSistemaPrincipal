@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Table(name = "necesidad")
 public class NecesidadEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="necesidad_code_seq")
-    @SequenceGenerator(name="necesidad_code_seq", sequenceName="necesidad_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "necesidad_code_seq")
+    @SequenceGenerator(name = "necesidad_code_seq", sequenceName = "necesidad_code_seq", allocationSize = 1)
     private Long id;
     @OneToOne
     @JoinColumn(name = "estado")

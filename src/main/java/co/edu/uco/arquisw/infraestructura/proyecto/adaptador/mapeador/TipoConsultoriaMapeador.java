@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaProyectoEntidad;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

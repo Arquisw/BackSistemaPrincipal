@@ -18,7 +18,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ImportResource
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
- class PostulacionComandoControladorTest {
+class PostulacionComandoControladorTest {
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -44,22 +43,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     void guardarPostulacionFallida() throws Exception {
         var rol = "Analista";
 
-        var postulacion = new PostulacionComando(List.of(rol),2L,1L);
+        var postulacion = new PostulacionComando(List.of(rol), 2L, 1L);
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones","ROLE_USUARIO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPost("/postulaciones", "ROLE_USUARIO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("NullPointerException")))
                 .andExpect(jsonPath("$.mensaje", is(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + postulacion.getUsuarioID())));
     }
+
     @Test
     void deberiaFallarAlActualizarPorPersona() throws Exception {
 
         Long id = 9L;
         var postulacion = new PostulacionDtoTestDataBuilder().build();
 
-        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/postulaciones/{id}", id,"ROLE_POSTULADO")
+        mocMvc.perform(MyTestRequestFactory.myFactoryRequestAuthenticatedPut("/postulaciones/{id}", id, "ROLE_POSTULADO")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postulacion)))
                 .andExpect(status().is4xxClientError())

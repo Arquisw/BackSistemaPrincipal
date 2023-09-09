@@ -16,21 +16,20 @@ import javax.mail.MessagingException;
 
 class ServicioActualizarContratoTest {
     @Test
-    void noExisteAsociacionParaActualizarContrato()
-    {
+    void noExisteAsociacionParaActualizarContrato() {
         var contrato = new ContratoTestDataBuilder().build();
 
-        var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
-        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio= new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.any())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L,Assertions.assertThrows(NullPointerException.class,()-> servicio.ejecutar(contrato,1L)).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(contrato, 1L)).getMessage());
     }
 
     @Test
@@ -38,18 +37,18 @@ class ServicioActualizarContratoTest {
         var contrato = new ContratoTestDataBuilder().build();
         var necesidad = new NecesidadDTO();
 
-        var  contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
-        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var contratoRepositorioComando = Mockito.mock(ContratoRepositorioComando.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
 
-        var servicio= new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.any())).thenReturn(necesidad);
 
-        servicio.ejecutar(contrato,1L);
+        servicio.ejecutar(contrato, 1L);
 
-        Mockito.verify(contratoRepositorioComando,Mockito.times(1)).actualizar(contrato,1L);
+        Mockito.verify(contratoRepositorioComando, Mockito.times(1)).actualizar(contrato, 1L);
     }
 }

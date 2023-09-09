@@ -15,6 +15,6 @@ public class ConsultarHojaDeVidaPorIdUsuarioManejador implements ManejadorComand
 
     @Override
     public HojaDeVidaPersonaDTO ejecutar(Long comando) {
-       return this.servicioConsultarHojaDeVidaPorIdUsuario.ejecutar(comando);
+        return this.servicioConsultarHojaDeVidaPorIdUsuario.ejecutar(comando);
     }
 }

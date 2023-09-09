@@ -16,8 +16,8 @@ import java.util.List;
 @Table(name = "seleccion")
 public class SeleccionEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seleccion_code_seq")
-    @SequenceGenerator(name="seleccion_code_seq", sequenceName="seleccion_code_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seleccion_code_seq")
+    @SequenceGenerator(name = "seleccion_code_seq", sequenceName = "seleccion_code_seq", allocationSize = 1)
     private Long id;
     private String fecha;
     @OneToMany(cascade = CascadeType.ALL)

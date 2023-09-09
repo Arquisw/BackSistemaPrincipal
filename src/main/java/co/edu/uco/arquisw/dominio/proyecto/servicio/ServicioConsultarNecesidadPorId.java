@@ -19,7 +19,7 @@ public class ServicioConsultarNecesidadPorId {
     }
 
     private void validarSiExisteNecesidadConID(Long id) {
-        if(ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
+        if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
         }
     }

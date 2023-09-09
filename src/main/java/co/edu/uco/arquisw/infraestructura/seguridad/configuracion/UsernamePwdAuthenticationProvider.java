@@ -14,93 +14,92 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class UsernamePwdAuthenticationProvider implements AuthenticationProvider {
-	@Autowired
-	private UsuarioDAO usuarioDAO;
-	@Autowired
-	private ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UsuarioDAO usuarioDAO;
+    @Autowired
+    private ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	@Override
-	public Authentication authenticate(Authentication authentication) {
-		String username = authentication.getName();
-		String pwd = authentication.getCredentials().toString();
-		UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
-		var usuarioDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
+    @Override
+    public Authentication authenticate(Authentication authentication) {
+        String username = authentication.getName();
+        String pwd = authentication.getCredentials().toString();
+        UsuarioEntidad usuario = usuarioDAO.findByCorreo(username);
+        var usuarioDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
 
-		if (usuario!=null) {
-			if (passwordEncoder.matches(pwd, usuario.getClave())) {
-				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(usuarioDTO.getRoles()));
-				authenticationToken.setDetails(usuarioDTO.getId());
-				return authenticationToken;
-			} else {
-				throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
-			}
-		}else {
-			throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
-		}
-	}
-	
-	private List<GrantedAuthority> getGrantedAuthorities(List<RolDTO> authorities) {
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        if (usuario != null) {
+            if (passwordEncoder.matches(pwd, usuario.getClave())) {
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(usuarioDTO.getRoles()));
+                authenticationToken.setDetails(usuarioDTO.getId());
+                return authenticationToken;
+            } else {
+                throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
+            }
+        } else {
+            throw new AutorizacionExcepcion("Usuario o contraseña incorrectos");
+        }
+    }
+
+    private List<GrantedAuthority> getGrantedAuthorities(List<RolDTO> authorities) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         for (RolDTO authority : authorities) {
-			addCrudPrivilage(grantedAuthorities,authority);
-        	grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
+            addCrudPrivilage(grantedAuthorities, authority);
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
         }
 
         return grantedAuthorities;
     }
 
-	private boolean haveReadPrivilege(List<GrantedAuthority> grantedAuthorities){
-		return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.LECTURA));
-	}
-	private boolean haveWritePrivilege(List<GrantedAuthority> grantedAuthorities){
-		return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ESCRITURA));
-	}
-	private boolean haveUpdatePrivilege(List<GrantedAuthority> grantedAuthorities){
-		return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ACTUALIZACION));
-	}
+    private boolean haveReadPrivilege(List<GrantedAuthority> grantedAuthorities) {
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.LECTURA));
+    }
 
-	private boolean haveDeletePrivilege(List<GrantedAuthority> grantedAuthorities){
-		return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ELIMINACION));
-	}
+    private boolean haveWritePrivilege(List<GrantedAuthority> grantedAuthorities) {
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ESCRITURA));
+    }
 
-	private void addCrudPrivilage(List<GrantedAuthority> grantedAuthorities,RolDTO authority){
-		if(authority.isLeer()&&!haveReadPrivilege(grantedAuthorities))
-		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.LECTURA));
-		}
-		if(authority.isEscribir()&&!haveWritePrivilege(grantedAuthorities))
-		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ESCRITURA));
-		}
-		if(authority.isActualizar()&&!haveUpdatePrivilege(grantedAuthorities))
-		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ACTUALIZACION));
-		}
-		if(authority.isActualizar()&&!haveDeletePrivilege(grantedAuthorities))
-		{
-			grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre())+"_"+TextoConstante.ELIMINACION));
-		}
-	}
+    private boolean haveUpdatePrivilege(List<GrantedAuthority> grantedAuthorities) {
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ACTUALIZACION));
+    }
 
-	private String extractStringAfterUnderscore(String input) {
-		int index = input.indexOf('_');
+    private boolean haveDeletePrivilege(List<GrantedAuthority> grantedAuthorities) {
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.ELIMINACION));
+    }
 
-		if (index != -1) {
-			return input.substring(index + 1);
-		} else {
-			return "No underscore found.";
-		}
-	}
+    private void addCrudPrivilage(List<GrantedAuthority> grantedAuthorities, RolDTO authority) {
+        if (authority.isLeer() && !haveReadPrivilege(grantedAuthorities)) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre()) + "_" + TextoConstante.LECTURA));
+        }
+        if (authority.isEscribir() && !haveWritePrivilege(grantedAuthorities)) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre()) + "_" + TextoConstante.ESCRITURA));
+        }
+        if (authority.isActualizar() && !haveUpdatePrivilege(grantedAuthorities)) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre()) + "_" + TextoConstante.ACTUALIZACION));
+        }
+        if (authority.isActualizar() && !haveDeletePrivilege(grantedAuthorities)) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(extractStringAfterUnderscore(authority.getNombre()) + "_" + TextoConstante.ELIMINACION));
+        }
+    }
 
-	@Override
-	public boolean supports(Class<?> authenticationType) {
-		return authenticationType.equals(UsernamePasswordAuthenticationToken.class);
-	}
+    private String extractStringAfterUnderscore(String input) {
+        int index = input.indexOf('_');
+
+        if (index != -1) {
+            return input.substring(index + 1);
+        } else {
+            return "No underscore found.";
+        }
+    }
+
+    @Override
+    public boolean supports(Class<?> authenticationType) {
+        return authenticationType.equals(UsernamePasswordAuthenticationToken.class);
+    }
 }

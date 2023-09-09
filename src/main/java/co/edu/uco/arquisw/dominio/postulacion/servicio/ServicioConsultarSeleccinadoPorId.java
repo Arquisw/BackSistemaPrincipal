@@ -19,7 +19,7 @@ public class ServicioConsultarSeleccinadoPorId {
     }
 
     private void validarSiExisteSeleccionConID(Long id) {
-        if(ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorId(id))) {
+        if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
         }
     }

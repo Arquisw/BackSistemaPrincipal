@@ -2,7 +2,6 @@ package co.edu.uco.arquisw.dominio.postulacion.testdatabuilder;
 
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 
-
 import java.time.LocalDate;
 import java.util.List;
 

@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
- class ServicioConsultarProyectoPorIdTest {
+class ServicioConsultarProyectoPorIdTest {
     @Test
-    void validarConsultaProyectoPorIdExitosa()
-    {
+    void validarConsultaProyectoPorIdExitosa() {
         var necesidadDTO = new NecesidadDTO();
 
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
@@ -25,10 +24,10 @@ import org.mockito.Mockito;
 
         Assertions.assertEquals(necesidadDTO, necesidadConsultada);
     }
+
     @Test
-    void consultaPorIdFallida()
-    {
-        var necesidadRepositorioConsulta =Mockito.mock(NecesidadRepositorioConsulta.class);
+    void consultaPorIdFallida() {
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
         var servicio = new ServicioConsultarNecesidadPorId(necesidadRepositorioConsulta);
 

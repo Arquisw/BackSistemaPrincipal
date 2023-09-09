@@ -3,13 +3,11 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +42,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public PersonaDTO consultarPorId(Long id) {
         var entidad = this.personaDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -55,7 +53,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public UsuarioDTO consultarUsuarioPorId(Long id) {
         var entidad = this.usuarioDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -66,7 +64,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public UsuarioDTO consultarUsuarioPorCorreo(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -77,12 +75,13 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public PersonaDTO consultarPorCorreo(String correo) {
         var entidad = this.personaDAO.findByCorreo(correo);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
         return this.personaMapeador.construirDTO(entidad);
     }
+
     @Override
     public boolean existeConCorreo(String correo) {
         var usuario = this.usuarioDAO.findByCorreo(correo);
@@ -96,7 +95,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID) {
         var entidad = this.hojaDeVidaPersonaDAO.findByUsuario(usuarioID);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 
@@ -147,7 +146,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public RolDTO consultarRolPorId(Long id) {
         var entidad = this.rolDAO.findById(id).orElse(null);
 
-        if(ValidarObjeto.esNulo(entidad)) {
+        if (ValidarObjeto.esNulo(entidad)) {
             return null;
         }
 

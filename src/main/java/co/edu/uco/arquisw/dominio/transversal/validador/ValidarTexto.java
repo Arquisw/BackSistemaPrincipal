@@ -13,52 +13,53 @@ public class ValidarTexto {
     private static final String URL = "^(ftp|http|https):\\/\\/[^ \"]+$";
     private static final String URL_ID = "^((\\d{8})|(\\d{10})|(\\d{11})|(\\d{6}-\\d{5}))?$";
 
-    private ValidarTexto() { }
+    private ValidarTexto() {
+    }
 
     public static void validarObligatorio(String valor, String mensaje) {
-        if(cadenaEstaVacia(valor)) {
+        if (cadenaEstaVacia(valor)) {
             throw new ValorObligatorioExcepcion(mensaje);
         }
     }
 
     public static void validarPatronAlfanumericoEsValido(String valor, String mensaje) {
-        if(!cadenaEsAlfanumerica(valor)) {
+        if (!cadenaEsAlfanumerica(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarPatronTextoEsValido(String valor, String mensaje) {
-        if(!cadenaLetrasYEspacios(valor)) {
+        if (!cadenaLetrasYEspacios(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarCorreoEsValido(String valor, String mensaje) {
-        if(!cadenaCorreo(valor)) {
+        if (!cadenaCorreo(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarClaveEsValida(String valor, String mensaje) {
-        if(!cadenaClave(valor)) {
+        if (!cadenaClave(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarPatronNITEsValido(String valor, String mensaje) {
-        if(!cadenaNIT(valor)) {
+        if (!cadenaNIT(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarPatronNumeroEsValido(String valor, String mensaje) {
-        if(!cadenaNumeroTelefono(valor)) {
+        if (!cadenaNumeroTelefono(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }
 
     public static void validarPatronURLEsValido(String valor, String mensaje) {
-        if(!cadenaURL(valor)) {
+        if (!cadenaURL(valor)) {
             throw new PatronExcepcion(mensaje);
         }
     }

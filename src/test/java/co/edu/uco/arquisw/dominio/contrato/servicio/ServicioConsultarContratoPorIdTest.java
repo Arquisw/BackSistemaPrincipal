@@ -10,30 +10,29 @@ import org.mockito.Mockito;
 
 class ServicioConsultarContratoPorIdTest {
     @Test
-    void validarConsultaPorIdExitosa()
-    {
+    void validarConsultaPorIdExitosa() {
         var necesidad = new NecesidadDTO();
 
-        var  contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
-        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+        var contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
+        var servicio = new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.anyLong())).thenReturn(necesidad);
 
-         servicio.ejecutar(1L);
+        servicio.ejecutar(1L);
 
         Mockito.verify(contratoRepositorioConsulta, Mockito.times(1)).consultarPorId(1L);
 
 
     }
-    @Test
-    void consultaPorIdFallida()
-    {
-        var  contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
-        var  necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
 
-        var servicio= new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
+    @Test
+    void consultaPorIdFallida() {
+        var contratoRepositorioConsulta = Mockito.mock(ContratoRepositorioConsulta.class);
+        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
+
+        var servicio = new ServicioConsultarContratoPorId(contratoRepositorioConsulta, necesidadRepositorioConsulta);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.anyLong())).thenReturn(null);
 

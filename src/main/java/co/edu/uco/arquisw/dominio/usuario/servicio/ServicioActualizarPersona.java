@@ -24,13 +24,13 @@ public class ServicioActualizarPersona {
     }
 
     private void validarSiNoExisteUsuario(Long id) {
-        if(ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
+        if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
         }
     }
 
     private void validarSiExisteUsuarioConCorreo(Persona persona) {
-        if(this.personaRepositorioConsulta.existeConCorreo(persona.getCorreo())) {
+        if (this.personaRepositorioConsulta.existeConCorreo(persona.getCorreo())) {
             throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO + persona.getCorreo());
         }
     }
