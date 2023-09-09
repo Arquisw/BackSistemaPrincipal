@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'jacoco'
-	id "org.sonarqube" version "3.4.0.2513"
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'co.edu.uco'
@@ -11,51 +11,51 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 sonarqube {
-  properties {
-    property "sonar.projectKey", "ARQUISW_BACKEND"
-    property "sonar.organization", "arquisw"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
+    properties {
+        property "sonar.projectKey", "ARQUISW_BACKEND"
+        property "sonar.organization", "arquisw"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-aop'
-	implementation 'org.springframework.boot:spring-boot-starter-undertow'
-	implementation 'org.springframework.retry:spring-retry:1.3.3'
-	implementation 'com.h2database:h2:2.1.212'
-	testImplementation 'com.h2database:h2:2.1.212'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'junit:junit:4.13.1'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
-	implementation 'org.springframework.security:spring-security-core:5.7.7'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-	implementation 'org.springframework.boot:spring-boot-starter-security:2.7.2'
-	implementation 'org.springframework:spring-web:5.3.10'
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.retry:spring-retry:1.3.3'
+    implementation 'com.h2database:h2:2.1.212'
+    testImplementation 'com.h2database:h2:2.1.212'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'junit:junit:4.13.1'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    implementation 'org.springframework.security:spring-security-core:5.7.7'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.7.2'
+    implementation 'org.springframework:spring-web:5.3.10'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-	finalizedBy jacocoTestReport
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled true
-		html.enabled true
-	}
-	additionalSourceDirs files("aplicacion/src/main/java")
-	additionalClassDirs files("aplicacion/build/classes/java/main")
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    additionalSourceDirs files("aplicacion/src/main/java")
+    additionalClassDirs files("aplicacion/build/classes/java/main")
 }
