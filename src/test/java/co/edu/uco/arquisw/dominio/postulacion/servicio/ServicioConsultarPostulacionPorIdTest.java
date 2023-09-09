@@ -34,9 +34,6 @@ class ServicioConsultarPostulacionPorIdTest {
 
         Mockito.when(postulacionRepositorioConsulta.consultarPostulacionPorId(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1L,
-                Assertions.assertThrows(NullPointerException.class, () ->
-                        servicio.ejecutar(1L)
-                ).getMessage());
+        Assertions.assertEquals(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
     }
 }

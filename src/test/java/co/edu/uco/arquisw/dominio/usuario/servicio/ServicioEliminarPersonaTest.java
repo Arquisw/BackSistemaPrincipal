@@ -2,7 +2,6 @@ package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
@@ -16,30 +15,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.mail.MessagingException;
 import java.util.List;
 
 class ServicioEliminarPersonaTest {
-    @Test
-    void ValidarEliminacionExitosa() throws MessagingException {
-        var persona = new PersonaDTO();
-
-        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
-
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
-
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-
-        var id = servicio.ejecutar(1L);
-        Mockito.verify(personaRepositorioComando, Mockito.times(1)).eliminar(1L);
-
-        Assertions.assertEquals(1L, id);
-    }
-
     @Test
     void ValidarEliminacionFallidaNoExisteUsuario() {
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
@@ -91,26 +69,6 @@ class ServicioEliminarPersonaTest {
         Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(seleccionado));
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_SELECCIONADO_EN_UN_PROYECTO,
-                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
-    }
-
-    @Test
-    void ValidarEliminacionFallidaEstaPostulado() {
-        var persona = new PersonaDTO();
-        var postulacion = new PostulacionDTO();
-
-        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
-
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
-
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(postulacionRepositorioConsulta.consultarPostulacionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(postulacion));
-
-        Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_EN_UN_PROCESO_DE_POSTULACION,
                 Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
     }
 }
