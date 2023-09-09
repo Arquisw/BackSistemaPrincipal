@@ -8,7 +8,6 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,11 +19,9 @@ import org.springframework.web.client.RestTemplate;
 public class FaseRepositorioComandoImplementacion implements FaseRepositorioComando {
     private static final Logger logger = LoggerFactory.getLogger(FaseRepositorioComandoImplementacion.class);
     private final RestTemplate restTemplate;
-    private final Environment environment;
 
-    public FaseRepositorioComandoImplementacion(RestTemplate restTemplate, Environment environment) {
+    public FaseRepositorioComandoImplementacion(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.environment = environment;
     }
 
     @Override

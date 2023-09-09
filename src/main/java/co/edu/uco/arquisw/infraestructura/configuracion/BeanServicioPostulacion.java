@@ -58,7 +58,7 @@ public class BeanServicioPostulacion {
     }
 
     @Bean
-    public ServicioRechazarUsuario servicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
-        return new ServicioRechazarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken);
+    public ServicioRechazarUsuario servicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando) {
+        return new ServicioRechazarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando);
     }
 }

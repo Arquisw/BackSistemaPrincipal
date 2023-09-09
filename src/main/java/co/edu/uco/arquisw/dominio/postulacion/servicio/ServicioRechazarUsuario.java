@@ -4,7 +4,6 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.MotivoRechazoPostulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
@@ -16,13 +15,10 @@ public class ServicioRechazarUsuario {
     private final PostulacionRepositorioComando postulacionRepositorioComando;
     private final PersonaRepositorioComando personaRepositorioComando;
 
-    private final ServicioActualizarToken servicioActualizarToken;
-
-    public ServicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken) {
+    public ServicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando) {
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
         this.postulacionRepositorioComando = postulacionRepositorioComando;
         this.personaRepositorioComando = personaRepositorioComando;
-        this.servicioActualizarToken = servicioActualizarToken;
     }
 
     public Long ejecutar(MotivoRechazoPostulacion motivoRechazoPostulacion, Long id) {

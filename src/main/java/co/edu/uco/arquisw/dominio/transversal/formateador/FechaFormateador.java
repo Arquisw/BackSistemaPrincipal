@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FechaFormateador {
     private static final String FORMATO_YYYY_MM_DD = "yyyy/MM/dd";
-    private static final String FORMATO_YYYY_MM_DD_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+    private static final String FORMATO_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     private FechaFormateador() {
     }
@@ -22,7 +22,7 @@ public class FechaFormateador {
     }
 
     public static LocalDateTime obtenerFechaTiempo(String fechaTexto) {
-        DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_YYYY_MM_DD_HH_mm_ss);
+        DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_YYYY_MM_DD_HH_MM_SS);
 
         return LocalDateTime.parse(fechaTexto, patron);
     }
@@ -34,7 +34,7 @@ public class FechaFormateador {
     }
 
     public static String obtenerFechaTexto(LocalDateTime fecha) {
-        DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_YYYY_MM_DD_HH_mm_ss);
+        DateTimeFormatter patron = DateTimeFormatter.ofPattern(FORMATO_YYYY_MM_DD_HH_MM_SS);
 
         return patron.format(fecha);
     }
