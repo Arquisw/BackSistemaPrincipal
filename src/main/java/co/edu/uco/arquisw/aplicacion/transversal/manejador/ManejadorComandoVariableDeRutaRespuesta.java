@@ -4,7 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 
-public interface ManejadorComandoActualizacionRespuesta<C, L, R> {
+public interface ManejadorComandoVariableDeRutaRespuesta<C, L, R> {
     @Transactional
     R ejecutar(C comando, L id) throws MessagingException;
 }

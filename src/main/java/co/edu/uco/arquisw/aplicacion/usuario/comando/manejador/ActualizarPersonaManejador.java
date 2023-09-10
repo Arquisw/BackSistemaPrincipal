@@ -1,14 +1,14 @@
 package co.edu.uco.arquisw.aplicacion.usuario.comando.manejador;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
-import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
+import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVariableDeRutaRespuesta;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.PersonaActualizacionComando;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.fabrica.PersonaFabrica;
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarPersona;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActualizarPersonaManejador implements ManejadorComandoActualizacionRespuesta<PersonaActualizacionComando, Long, ComandoRespuesta<Long>> {
+public class ActualizarPersonaManejador implements ManejadorComandoVariableDeRutaRespuesta<PersonaActualizacionComando, Long, ComandoRespuesta<Long>> {
     private final PersonaFabrica personaFabrica;
     private final ServicioActualizarPersona servicioActualizarPersona;
 

@@ -1,13 +1,13 @@
 package co.edu.uco.arquisw.aplicacion.usuario.comando.manejador;
 
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
-import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
+import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVariableDeRutaRespuesta;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.RolActualizacionComando;
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioActualizarRolPorAdministrador;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActualizarRolPorAdministradorManejador implements ManejadorComandoActualizacionRespuesta<RolActualizacionComando, Long, ComandoRespuesta<Long>> {
+public class ActualizarRolPorAdministradorManejador implements ManejadorComandoVariableDeRutaRespuesta<RolActualizacionComando, Long, ComandoRespuesta<Long>> {
     private final ServicioActualizarRolPorAdministrador servicioActualizarRolPorAdministrador;
 
     public ActualizarRolPorAdministradorManejador(ServicioActualizarRolPorAdministrador servicioActualizarRolPorAdministrador) {

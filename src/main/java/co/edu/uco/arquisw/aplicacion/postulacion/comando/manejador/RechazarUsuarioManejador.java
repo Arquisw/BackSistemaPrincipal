@@ -3,12 +3,12 @@ package co.edu.uco.arquisw.aplicacion.postulacion.comando.manejador;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.MotivoRechazoPostulacionComando;
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.fabrica.MotivoRechazoPostulacionFabrica;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
-import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoActualizacionRespuesta;
+import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVariableDeRutaRespuesta;
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioRechazarUsuario;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RechazarUsuarioManejador implements ManejadorComandoActualizacionRespuesta<MotivoRechazoPostulacionComando, Long, ComandoRespuesta<Long>> {
+public class RechazarUsuarioManejador implements ManejadorComandoVariableDeRutaRespuesta<MotivoRechazoPostulacionComando, Long, ComandoRespuesta<Long>> {
     private final ServicioRechazarUsuario servicioRechazarUsuario;
     private final MotivoRechazoPostulacionFabrica motivoRechazoPostulacionFabrica;
 
