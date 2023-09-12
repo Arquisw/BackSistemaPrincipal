@@ -7,6 +7,8 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVaria
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioRechazarUsuario;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+
 @Component
 public class RechazarUsuarioManejador implements ManejadorComandoVariableDeRutaRespuesta<MotivoRechazoPostulacionComando, Long, ComandoRespuesta<Long>> {
     private final ServicioRechazarUsuario servicioRechazarUsuario;
@@ -18,7 +20,7 @@ public class RechazarUsuarioManejador implements ManejadorComandoVariableDeRutaR
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(MotivoRechazoPostulacionComando comando, Long id) {
+    public ComandoRespuesta<Long> ejecutar(MotivoRechazoPostulacionComando comando, Long id) throws MessagingException {
         return new ComandoRespuesta<>(this.servicioRechazarUsuario.ejecutar(this.motivoRechazoPostulacionFabrica.construir(comando), id));
     }
 }

@@ -82,7 +82,7 @@ public class Mensajes {
     public static final String HA_SIDO_APROBADO_POR_EL_ADMINISTRADOR = " ha sido aprobado por el administrador";
     public static final String PROYECTO_APROBADO_POR_EL_ADMINISTRADOR_ASUNTO = "Proyecto aprobado por el administrador";
     public static final String PROYECTO_RECHAZADO_POR_EL_ADMINISTRADOR_ASUNTO = "Proyecto rechazado por el administrador";
-    public static final String HA_SIDO_RECHAZADO_POR_EL_ADMINISTRADO_CUYO_MOTIVO_ES_POR = " ha sido rechazado por el administrador, cuyo motivo del rechazo es por ";
+    public static final String HA_SIDO_RECHAZADO_POR_EL_ADMINISTRADO_CUYO_MOTIVO_ES_POR = " ha sido rechazado por el administrador, cuyo motivo del rechazo es: ";
     public static final String PROYECTO_ACTUAL_APROBADO_POR_ROL_INGENIERIA = "Proyecto aprobado por el Rol Ingeniería";
     public static final String HA_SIDO_APROBADO_POR_EL_ROL_INGENIERIA = " ha sido aprobado por el rol ingenieria, lo que significa que ya puedes aprobar el proyecto como Lider del Equipo.";
     public static final String PROYECTO_ACTUAL_APROBADO_POR_ROL_LIDER_DE_EQUIPO = "Proyecto aprobado por el Rol Lider de Equipo";
@@ -94,6 +94,11 @@ public class Mensajes {
     public static final String HA_SIDO_EFECTUADO_Y_GUARDADO_EN_LA_PLATAFORMA_POR_EL_ADMINISTRADOR = " ha sido efectuado y guardado en la plataforma por el Administrador.";
     public static final String CONTRATO_DEL_PROYECTO_ACTUAL_ACTUALIZADO = "Contrato del proyecto actual actualizado";
     public static final String HA_SIDO_ACTUALIZADO_POR_EL_ADMINISTRADOR = " ha sido actualizado por el Administrador.";
+    public static final String HAS_SIDO_SELECCIONADO_AL_PROYECTO = "Has sido seleccionado en el proyecto";
+    public static final String EL_ADMINISTRADOR_TE_HA_SELECCIONADO_AL_PROYECTO = "El administrador te ha seleccionado al proyecto ";
+    public static final String HAS_SIDO_RECHAZADO_AL_PROYECTO = "Has sido rechazado en el proyecto";
+    public static final String EL_ADMINISTRADOR_TE_HA_RECHAZADO_AL_PROYECTO = "El administrador te ha rechazado al proyecto ";
+    public static final String POR_EL_SIGUIENTE_MOTIVO = "por el siguiente motivo: ";
 
     private Mensajes() {
     }

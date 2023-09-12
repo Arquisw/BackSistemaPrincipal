@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 @RestController
 @RequestMapping("/postulaciones")
 @Tag(name = "Comando de la Postulacion Controlador")
@@ -46,14 +48,14 @@ public class PostulacionComandoControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/administrador/seleccionar/{id}")
     @Operation(summary = "Seleccionar Usuario", description = "Este es usado para seleccionar a un usuario dentro de un proyecto por medio del ID de la postulación")
-    public ComandoRespuesta<Long> seleccionarUsuario(@RequestBody SeleccionComando seleccionComando, @PathVariable Long id) {
+    public ComandoRespuesta<Long> seleccionarUsuario(@RequestBody SeleccionComando seleccionComando, @PathVariable Long id) throws MessagingException {
         return this.seleccionarUsuarioManejador.ejecutar(seleccionComando, id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/administrador/rechazar/{id}")
     @Operation(summary = "Rechazar Usuario", description = "Este es usado para rechazar a un usuario dentro de un proyecto por medio del ID de la postulación")
-    public ComandoRespuesta<Long> rechazarUsuario(@RequestBody MotivoRechazoPostulacionComando motivoRechazoPostulacionComando, @PathVariable Long id) {
+    public ComandoRespuesta<Long> rechazarUsuario(@RequestBody MotivoRechazoPostulacionComando motivoRechazoPostulacionComando, @PathVariable Long id) throws MessagingException {
         return this.rechazarUsuarioManejador.ejecutar(motivoRechazoPostulacionComando, id);
     }
 }
