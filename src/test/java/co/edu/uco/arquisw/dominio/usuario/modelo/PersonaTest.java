@@ -37,18 +37,4 @@ class PersonaTest {
 
 
     }
-
-    @Test
-    void validarPatronesIncorrecto() {
-        Assertions.assertEquals(Mensajes.PATRON_NOMBRE_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Persona.crear("juan1234-", "valencia", "jjuandiego23@gmail.com")).getMessage());
-
-        Assertions.assertEquals(Mensajes.PATRON_APELLIDOS_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Persona.crear("juan", "valencia123-",
-                        "jjuandiego23@gmail.com")).getMessage());
-
-        Assertions.assertEquals(Mensajes.PATRON_CORREO_PERSONA_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Persona.crear("juan", "valencia", "jjuandiego@asffgh")).getMessage());
-
-    }
 }

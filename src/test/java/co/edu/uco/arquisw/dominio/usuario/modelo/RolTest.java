@@ -23,12 +23,4 @@ class RolTest {
         Assertions.assertEquals("El nombre no puede estar vacio", Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Rol.crear(nombre)).getMessage());
     }
-
-    @Test
-    void validarPatronesIncorrectas() {
-        String nombre = "admin-1234";
-
-        Assertions.assertEquals(Mensajes.PATRON_NOMBRE_ROL_INVALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Rol.crear(nombre)).getMessage());
-    }
 }

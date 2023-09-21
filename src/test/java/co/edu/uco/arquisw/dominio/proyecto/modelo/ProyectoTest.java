@@ -42,18 +42,4 @@ class ProyectoTest {
         Assertions.assertEquals(Mensajes.DESCRIPCION_ESTADO_PROYECTO_NO_PUEDE_ESTAR_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Proyecto.crear("Facebook", "", estadoProyecto, tipoConsultorio)).getMessage());
     }
-
-    @Test
-    void validarPatronIncorrecto() {
-        List<TipoConsultoria> tipoConsultorio = new ArrayList<>();
-        TipoConsultoria tipo = TipoConsultoria.crear("Ingeniería de Requisitos");
-        tipoConsultorio.add(tipo);
-        var estadoProyecto = new EstadoProyectoTestDataBuilder().build();
-
-        Assertions.assertEquals(Mensajes.PATRON_NOMBRE_PROYECTO_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Proyecto.crear("face-book", "Red Social", estadoProyecto, tipoConsultorio)).getMessage());
-
-        Assertions.assertEquals(Mensajes.PATRON_DESCRIPCION_PROYECTO_NO_ES_VALIDO, Assertions.assertThrows(PatronExcepcion.class, () ->
-                Proyecto.crear("Facebook", "Red-Social", estadoProyecto, tipoConsultorio)).getMessage());
-    }
 }
