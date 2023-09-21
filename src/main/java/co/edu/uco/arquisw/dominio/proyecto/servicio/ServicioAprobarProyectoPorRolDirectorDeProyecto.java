@@ -41,7 +41,7 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
 
         this.necesidadRepositorioComando.actualizarEstadoProyecto(EstadoProyecto.crear(TextoConstante.ESTADO_EN_DESARROLLO), id);
 
-        if(proyecto.getTiposConsultoria().stream().anyMatch(tipoConsultoria -> tipoConsultoria.equals(TextoConstante.INGENIERIA_DE_REQUISITOS))) {
+        if(proyecto.getTiposConsultoria().stream().anyMatch(tipoConsultoria -> tipoConsultoria.getNombre().equals(TextoConstante.INGENIERIA_DE_REQUISITOS))) {
             this.faseRepositorioComando.guardar(id, token);
         }
 
