@@ -40,7 +40,10 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
         var aprobacionProyectoId = this.necesidadRepositorioComando.actualizarAprobacionProyecto(id, TextoConstante.ROL_DIRECTOR_PROYECTO);
 
         this.necesidadRepositorioComando.actualizarEstadoProyecto(EstadoProyecto.crear(TextoConstante.ESTADO_EN_DESARROLLO), id);
-        this.faseRepositorioComando.guardar(id, token);
+
+        if(proyecto.getTiposConsultoria().stream().anyMatch(tipoConsultoria -> tipoConsultoria.equals(TextoConstante.INGENIERIA_DE_REQUISITOS))) {
+            this.faseRepositorioComando.guardar(id, token);
+        }
 
         seleccionesDelProyecto.forEach(seleccionDelProyecto -> {
             try {
