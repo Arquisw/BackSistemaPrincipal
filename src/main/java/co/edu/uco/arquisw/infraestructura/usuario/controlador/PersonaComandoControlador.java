@@ -25,8 +25,10 @@ public class PersonaComandoControlador {
     private final RecuperarClaveManejador recuperarClaveManejador;
     private final ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador;
     private final ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador;
+    private final IniciarActivacionCuentaManejador iniciarActivacionCuentaManejador;
+    private final ActivarCuentaManejador activarCuentaManejador;
 
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador, ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador) {
+    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador, ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador, IniciarActivacionCuentaManejador iniciarActivacionCuentaManejador, ActivarCuentaManejador activarCuentaManejador) {
         this.guardarPersonaManejador = guardarPersonaManejador;
         this.actualizarPersonaManejador = actualizarPersonaManejador;
         this.eliminarPersonaManejador = eliminarPersonaManejador;
@@ -38,6 +40,8 @@ public class PersonaComandoControlador {
         this.recuperarClaveManejador = recuperarClaveManejador;
         this.validarCodigoRecuperacionClaveManejador = validarCodigoRecuperacionClaveManejador;
         this.actualizarRolPorAdministradorManejador = actualizarRolPorAdministradorManejador;
+        this.iniciarActivacionCuentaManejador = iniciarActivacionCuentaManejador;
+        this.activarCuentaManejador = activarCuentaManejador;
     }
 
     @PostMapping
@@ -111,5 +115,19 @@ public class PersonaComandoControlador {
     @Operation(summary = "Actualizar Rol por Administrador", description = "Este es usado para actualizar permisos de un rol por medio del ID del rol")
     public ComandoRespuesta<Long> actualizarRol(@RequestBody RolActualizacionComando comando, @PathVariable Long id) {
         return this.actualizarRolPorAdministradorManejador.ejecutar(comando, id);
+    }
+
+    @PreAuthorize("hasAuthority('USUARIO_ESCRITURA')")
+    @PostMapping("/activacion/{correo}")
+    @Operation(summary = "Iniciar Activación de la cuenta", description = "Este es usado para generar el codigo unico que te permitira activar la cuenta")
+    public ComandoRespuesta<Long> iniciarActivacionCuenta(@PathVariable String correo) throws MessagingException {
+        return this.iniciarActivacionCuentaManejador.ejecutar(correo);
+    }
+
+    @PreAuthorize("hasAuthority('USUARIO_ACTUALIZACION')")
+    @PutMapping("/activacion/activar/{correo}")
+    @Operation(summary = "Activar cuenta", description = "Este es usado para validar que el codigo para recuperar la clave sea valido y si lo es, activar la cuenta.")
+    public ComandoRespuesta<Long> activarCuentaManejador(@RequestBody ActivarCuentaComando comando, @PathVariable String correo) {
+        return this.activarCuentaManejador.ejecutar(comando, correo);
     }
 }

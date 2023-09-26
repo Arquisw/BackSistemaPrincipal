@@ -92,4 +92,14 @@ public class BeanServicioUsuario {
     public ServicioActualizarRolPorAdministrador servicioActualizarRolPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta) {
         return new ServicioActualizarRolPorAdministrador(personaRepositorioComando, personaRepositorioConsulta);
     }
+
+    @Bean
+    public ServicioIniciarActivacionCuenta servicioIniciarActivacionCuenta(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioIniciarActivacionCuenta(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    }
+
+    @Bean
+    public ServicioActivarCuenta servicioActivarCuenta(PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioActivarCuenta(personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    }
 }

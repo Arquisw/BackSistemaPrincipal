@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.implementacion;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.LogicoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.HojaDeVidaPersona;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Persona;
@@ -40,6 +41,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
     @Autowired
     PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
+    @Autowired
+    PeticionActivacionCuentaDAO peticionActivacionCuentaDAO;
+    @Autowired
+    PeticionActivacionCuentaMapeador peticionActivacionCuentaMapeador;
     @Autowired
     RolDAO rolDAO;
 
@@ -166,7 +171,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         if (ValidarObjeto.esNulo(entidad)) {
             entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigo, correo, fecha);
         } else {
-            this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, correo, fecha);
+            this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, codigo, fecha);
         }
 
         return this.peticionRecuperacionClaveDAO.save(entidad).getId();
@@ -188,5 +193,32 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         entidad.setEliminar(eliminar);
 
         return this.rolDAO.save(entidad).getId();
+    }
+
+    @Override
+    public Long crearPeticionActivacionCuenta(String codigo, String correo, String fecha) {
+        var entidad = this.peticionActivacionCuentaDAO.findByCorreo(correo);
+
+        if (ValidarObjeto.esNulo(entidad)) {
+            entidad = this.peticionActivacionCuentaMapeador.construirEntidad(codigo, correo, fecha);
+        } else {
+            this.peticionActivacionCuentaMapeador.actualizarEntidad(entidad, codigo, fecha);
+        }
+
+        return this.peticionActivacionCuentaDAO.save(entidad).getId();
+    }
+
+    @Override
+    public Long activarCuenta(String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
+
+        entidad.setActivado(LogicoConstante.USUARIO_ACTIVADO);
+
+        return this.usuarioDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void eliminarPeticionActivacionCuenta(Long id) {
+        this.peticionActivacionCuentaDAO.deleteById(id);
     }
 }

@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.postulacion.servicio;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
@@ -29,6 +30,7 @@ public class ServicioGuardarPostulacion {
     public Long ejecutar(Postulacion postulacion, Long proyectoID, Long usuarioID) {
         validarSiExisteProyectoConId(proyectoID);
         validarSiExistePersonaConId(usuarioID);
+        validarSiUsuarioConIDEstaActivo(usuarioID);
 
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_POSTULADO), usuarioID);
         servicioActualizarToken.ejecutar();
@@ -44,6 +46,15 @@ public class ServicioGuardarPostulacion {
     private void validarSiExistePersonaConId(Long usuarioID) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioID))) {
             throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioID);
+        }
+    }
+
+    private void validarSiUsuarioConIDEstaActivo(Long usuarioID) {
+        var persona = this.personaRepositorioConsulta.consultarPorId(usuarioID);
+        var usuario = this.personaRepositorioConsulta.consultarUsuarioPorCorreo(persona.getCorreo());
+
+        if (!usuario.isActivado()) {
+            throw new AutorizacionExcepcion(Mensajes.PARA_POSTULARSE_A_UN_PROYECTO_DEBES_ACTIVAR_TU_CUENTA);
         }
     }
 }

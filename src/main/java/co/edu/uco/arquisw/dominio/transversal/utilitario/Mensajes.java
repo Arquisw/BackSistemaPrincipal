@@ -99,6 +99,12 @@ public class Mensajes {
     public static final String HAS_SIDO_RECHAZADO_AL_PROYECTO = "Has sido rechazado en el proyecto";
     public static final String EL_ADMINISTRADOR_TE_HA_RECHAZADO_AL_PROYECTO = "El administrador te ha rechazado al proyecto ";
     public static final String POR_EL_SIGUIENTE_MOTIVO = "por el siguiente motivo: ";
+    public static final String PARA_REGISTRAR_UNA_ASOCIACION_DEBES_ACTIVAR_TU_CUENTA = "Tu cuenta no está activa aún, para registrar una empresa o asociación debes activar tu cuenta.";
+    public static final String PARA_POSTULARSE_A_UN_PROYECTO_DEBES_ACTIVAR_TU_CUENTA = "Tu cuenta no está activa aún, para postularse a un proyecto debes activar tu cuenta.";
+    public static final String EL_USUARIO_YA_ESTA_ACTIVADO_POR_LO_TANTO_NO_SE_PUEDE_VOLVER_A_ACTIVAR = "El usuario ya esta activado, por lo tanto, no se puede volver a activar";
+    public static final String ACTIVACION_DE_LA_CUENTA = "Activación de la Cuenta";
+    public static final String EL_CODIGO_PARA_ACTIVAR_CUENTA_ES_INCORRECTO = "El codigo para activar la cuenta es incorrecto.";
+    public static final String EL_CODIGO_PARA_ACTIVAR_CUENTA_YA_NO_ES_VALIDO = "El codigo para activar la cuenta ya no es valido";
 
     private Mensajes() {
     }

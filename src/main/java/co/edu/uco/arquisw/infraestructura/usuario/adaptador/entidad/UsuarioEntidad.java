@@ -22,6 +22,7 @@ public class UsuarioEntidad {
     @Column(length = 100)
     private String correo;
     private String clave;
+    private boolean activado;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario")
     private List<RolUsuarioEntidad> roles;

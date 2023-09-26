@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.dominio.usuario.modelo;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.LogicoConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarTexto;
 import lombok.Getter;
@@ -10,11 +11,13 @@ import java.util.List;
 public class Usuario {
     private String correo;
     private String clave;
+    private final boolean activado;
     private final List<Rol> roles;
 
     private Usuario(String correo, String clave, List<Rol> roles) {
         setCorreo(correo);
         setClave(clave);
+        this.activado = LogicoConstante.USUARIO_DESACTIVADO;
         this.roles = roles;
     }
 

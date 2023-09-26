@@ -22,10 +22,12 @@ public interface PersonaRepositorioConsulta {
     String consultarClaveConCorreo(String correo);
 
     String consultarCodigoConCorreo(String correo);
+    String consultarCodigoActivacionCuentaConCorreo(String correo);
 
     PeticionRecuperacionClaveDTO consultarPeticionRecuperacionClaveDTOConCorreo(String correo);
 
     List<RolDTO> consultarRolesPorAdministrador();
 
     RolDTO consultarRolPorId(Long id);
+    PeticionActivacionCuentaDTO consultarPeticionActivacionCuentaConCorreo(String correo);
 }

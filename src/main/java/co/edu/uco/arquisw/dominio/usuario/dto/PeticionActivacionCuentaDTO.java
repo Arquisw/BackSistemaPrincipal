@@ -5,15 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDTO {
-    private Long id;
-    private String correo;
-    private boolean activado;
-    private List<RolDTO> roles;
+public class PeticionActivacionCuentaDTO  {
+    Long id;
+    String correo;
+    String codigo;
+    LocalDateTime fecha;
 }

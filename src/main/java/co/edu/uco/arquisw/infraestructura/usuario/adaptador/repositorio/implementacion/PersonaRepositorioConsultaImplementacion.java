@@ -3,11 +3,13 @@ package co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.impleme
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,7 +34,11 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Autowired
     PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
     @Autowired
+    PeticionActivacionCuentaDAO peticionActivacionCuentaDAO;
+    @Autowired
     PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
+    @Autowired
+    PeticionActivacionCuentaMapeador peticionActivacionCuentaMapeador;
     @Autowired
     RolDAO rolDAO;
     @Autowired
@@ -124,6 +130,13 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
+    public String consultarCodigoActivacionCuentaConCorreo(String correo) {
+        var entidad = this.peticionActivacionCuentaDAO.findByCorreo(correo);
+
+        return entidad.getCodigo();
+    }
+
+    @Override
     public PeticionRecuperacionClaveDTO consultarPeticionRecuperacionClaveDTOConCorreo(String correo) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
@@ -137,7 +150,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var elementosAFiltrar = 8;
 
         var entidadesFiltradas = entidades.subList(totalElementos - elementosAFiltrar, totalElementos);
-        entidadesFiltradas.sort((entidadUno, entidadDos) -> entidadUno.getId().compareTo(entidadDos.getId()));
+        entidadesFiltradas.sort(Comparator.comparing(RolEntidad::getId));
 
         return this.rolMapeador.construirBaseDTOs(entidadesFiltradas);
     }
@@ -151,5 +164,12 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         }
 
         return this.rolMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public PeticionActivacionCuentaDTO consultarPeticionActivacionCuentaConCorreo(String correo) {
+        var entidad = this.peticionActivacionCuentaDAO.findByCorreo(correo);
+
+        return this.peticionActivacionCuentaMapeador.construirDTO(entidad);
     }
 }

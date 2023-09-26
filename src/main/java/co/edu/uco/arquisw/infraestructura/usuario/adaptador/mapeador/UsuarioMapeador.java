@@ -14,11 +14,11 @@ public class UsuarioMapeador {
     }
 
     public UsuarioDTO construirDTO(UsuarioEntidad usuario) {
-        return new UsuarioDTO(usuario.getId(), usuario.getCorreo(), this.rolMapeador.construirDTOs(usuario.getRoles()));
+        return new UsuarioDTO(usuario.getId(), usuario.getCorreo(), usuario.isActivado(), this.rolMapeador.construirDTOs(usuario.getRoles()));
     }
 
     public UsuarioEntidad construirEntidad(Usuario usuario, String clave) {
-        return new UsuarioEntidad(0L, usuario.getCorreo(), clave, this.rolMapeador.construirEntidades(usuario.getRoles()));
+        return new UsuarioEntidad(0L, usuario.getCorreo(), clave, usuario.isActivado(), this.rolMapeador.construirEntidades(usuario.getRoles()));
     }
 
     public void actualizarEntidad(UsuarioEntidad usuario, String correo, String clave) {

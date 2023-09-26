@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.asociacion.servicio;
 import co.edu.uco.arquisw.dominio.asociacion.modelo.Asociacion;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
@@ -30,9 +31,17 @@ public class ServicioGuardarAsociacion {
     public Long ejecutar(Asociacion asociacion, Long usuarioID) {
         validarSiExisteAsociacionConNIT(asociacion.getNit());
         validarSiExisteUsuarioConID(usuarioID);
+        validarSiUsuarioConIDEstaActivo(usuarioID);
+
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_ASOCIACION), usuarioID);
         servicioActualizarToken.ejecutar();
         return this.asociacionRepositorioComando.guardar(asociacion, usuarioID);
+    }
+
+    private void validarSiExisteAsociacionConNIT(String nit) {
+        if (!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorNIT(nit))) {
+            throw new DuplicidadExcepcion(Mensajes.EXISTE_ASOCIACION_CON_NIT + nit);
+        }
     }
 
     private void validarSiExisteUsuarioConID(Long usuarioID) {
@@ -41,9 +50,12 @@ public class ServicioGuardarAsociacion {
         }
     }
 
-    private void validarSiExisteAsociacionConNIT(String nit) {
-        if (!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorNIT(nit))) {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_ASOCIACION_CON_NIT + nit);
+    private void validarSiUsuarioConIDEstaActivo(Long usuarioID) {
+        var persona = this.personaRepositorioConsulta.consultarPorId(usuarioID);
+        var usuario = this.personaRepositorioConsulta.consultarUsuarioPorCorreo(persona.getCorreo());
+
+        if (!usuario.isActivado()) {
+            throw new AutorizacionExcepcion(Mensajes.PARA_REGISTRAR_UNA_ASOCIACION_DEBES_ACTIVAR_TU_CUENTA);
         }
     }
 }
