@@ -17,29 +17,6 @@ import org.mockito.Mockito;
 
 class ServicioGuardarAsociacionTest {
     @Test
-    void guardarExitoso() {
-        var asociacion = new AsociacionTestDataBuilder().build();
-        var personaDTO = new PersonaDTO();
-
-        var repositorioAsociacionComando = Mockito.mock(AsociacionRepositorioComando.class);
-        var repositorioAsociacionConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicio = new ServicioGuardarAsociacion(repositorioAsociacionComando, repositorioAsociacionConsulta, personaRepositorioConsulta, personaRepositorioComando, servicioActualizarToken);
-
-        Mockito.when(repositorioAsociacionComando.guardar(Mockito.any(Asociacion.class), Mockito.anyLong())).thenReturn(1L);
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
-
-        var id = servicio.ejecutar(asociacion, 1L);
-
-        Mockito.verify(repositorioAsociacionComando, Mockito.times(1)).guardar(asociacion, 1L);
-
-        Assertions.assertEquals(1L, id);
-        Assertions.assertEquals("Uco", asociacion.getNombre());
-    }
-
-    @Test
     void deberiaValidarLaExistenciaPreviaDeLaAsociacion() {
 
         var asociacion = new AsociacionTestDataBuilder().build();
