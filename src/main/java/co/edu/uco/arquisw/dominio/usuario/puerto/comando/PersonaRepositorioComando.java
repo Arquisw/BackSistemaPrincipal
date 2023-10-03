@@ -33,7 +33,10 @@ public interface PersonaRepositorioComando {
     void eliminarPeticionRecuperacionClave(Long id);
 
     Long actualizarRol(boolean leer, boolean escribir, boolean actualizar, boolean eliminar, Long id);
+
     Long crearPeticionActivacionCuenta(String codigo, String correo, String fecha);
+
     Long activarCuenta(String correo);
+
     void eliminarPeticionActivacionCuenta(Long id);
 }
