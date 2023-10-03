@@ -31,7 +31,7 @@ public class ServicioActualizarPersona {
 
     private void validarSiExisteUsuarioConCorreo(Persona persona) {
         if (this.personaRepositorioConsulta.existeConCorreo(persona.getCorreo())) {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO + persona.getCorreo());
+            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO);
         }
     }
 }

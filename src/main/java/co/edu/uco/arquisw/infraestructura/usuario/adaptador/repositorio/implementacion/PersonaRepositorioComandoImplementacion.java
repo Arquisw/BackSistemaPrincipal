@@ -104,8 +104,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public void eliminarRol(Rol rol, Long id) {
-        var entidad = this.usuarioDAO.findById(id).orElse(null);
+        var persona = this.personaDAO.findById(id).orElse(null);
 
+        assert persona != null;
+        var entidad = this.usuarioDAO.findByCorreo(persona.getCorreo());
         assert entidad != null;
         var roles = entidad.getRoles();
         var rolParaEliminar = roles.stream().filter(rolUsuario -> rolUsuario.getRol().getNombre().equals(rol.getNombre())).findFirst().orElse(null);

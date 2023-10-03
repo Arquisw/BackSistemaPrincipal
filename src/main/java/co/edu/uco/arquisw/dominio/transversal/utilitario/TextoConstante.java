@@ -16,21 +16,18 @@ public class TextoConstante {
     public static final String ROL_ANALISTA = "ROLE_ANALISTA"; // ID = 11
     public static final String ROL_LIDER_DEL_EQUIPO = "ROLE_LIDER_DE_EQUIPO"; // ID = 12
     public static final String ROL_PATROCINADOR = "ROLE_PATROCINADOR"; // ID = 13
-    public static final String INGENIERIA_DE_REQUISITOS = "Ingenieria de Requisitos"; // ID = 1
+    public static final String INGENIERIA_DE_REQUISITOS = "Ingeniería de requisitos"; // ID = 1
     public static final String SQA = "SQA"; // ID = 2
     public static final String SQC = "SQC"; // ID = 3
-
-    public static final String ESTADO_EN_ESPERA = "En Espera"; // ID = 1
+    public static final String ESTADO_EN_ESPERA = "En espera"; // ID = 1
     public static final String ESTADO_APROBADO = "Aprobado"; // ID = 2
     public static final String ESTADO_NEGOCIADO = "Negociado"; // ID = 3
     public static final String ESTADO_RECHAZADO = "Rechazado"; // ID = 4
-    public static final String ESTADO_EN_PROCESO = "En Proceso"; // ID = 5
-    public static final String ESTADO_EN_DESARROLLO = "En Desarrollo"; // ID = 6
+    public static final String ESTADO_EN_PROCESO = "En proceso"; // ID = 5
+    public static final String ESTADO_EN_DESARROLLO = "En desarrollo"; // ID = 6
     public static final String ESTADO_FINALIZADO = "Finalizado"; // ID = 7
-
     public static final String INGENIERIA_DE_REQUISITOS_URL = "http://localhost:8081/api/fases/";
     public static final String HEADER_VALUE = "Authorization";
-
     public static final String LECTURA = "LECTURA";
     public static final String ESCRITURA = "ESCRITURA";
     public static final String ACTUALIZACION = "ACTUALIZACION";
