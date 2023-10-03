@@ -40,7 +40,7 @@ class ServicioActualizarPersonaTest {
         Mockito.when(personaRepositorioConsulta.existeConCorreo(personaDto.getCorreo())).thenReturn(true);
 
 
-        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO + personaDto.getCorreo(), Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(persona, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO, Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(persona, 1L)).getMessage());
     }
 
     @Test

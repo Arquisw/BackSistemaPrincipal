@@ -62,7 +62,7 @@ public class ServicioActualizarTokenJWT implements ServicioActualizarToken {
 
     private void validarSiExisteUsuarioConCorreo(String correo) {
         if (this.personaRepositorioConsulta.existeConCorreo(correo)) {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO + correo);
+            throw new DuplicidadExcepcion(Mensajes.EXISTE_USUARIO_CON_CORREO);
         }
     }
 
