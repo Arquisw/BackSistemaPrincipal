@@ -20,7 +20,7 @@ class RolTest {
     void validarCampoFaltante() {
         String nombre = "";
 
-        Assertions.assertEquals("El nombre no puede estar vacio", Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
+        Assertions.assertEquals(Mensajes.NOMBRE_ROL_VACIO, Assertions.assertThrows(ValorObligatorioExcepcion.class, () ->
                 Rol.crear(nombre)).getMessage());
     }
 }
