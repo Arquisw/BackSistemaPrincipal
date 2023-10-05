@@ -7,6 +7,8 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.RolEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
@@ -113,6 +115,12 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var entidades = this.peticionEliminacionPersonaDAO.findAll();
 
         return this.peticionEliminacionPersonaMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuariosPaginado(int pagina, int tamano){
+        var entidades =this.peticionEliminacionPersonaDAO.findAll(PageRequest.of(pagina, tamano));
+        return this.peticionEliminacionPersonaMapeador.construirDTOsPaginado(entidades);
     }
 
     @Override

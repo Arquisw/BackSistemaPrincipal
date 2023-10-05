@@ -11,6 +11,8 @@ import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.A
 import co.edu.uco.arquisw.infraestructura.asociacion.adaptador.repositorio.jpa.PeticionEliminacionAsociacionDAO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -68,9 +70,10 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
     }
 
     @Override
-    public List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones() {
-        var entidades = this.peticionEliminacionAsociacionDAO.findAll();
+    public Page<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones(int pagina, int tamano) {
 
-        return this.peticionEliminacionAsociacionMapeador.construirDTOs(entidades);
+        var entidades = this.peticionEliminacionAsociacionDAO.findAll(PageRequest.of(pagina, tamano));
+
+        return this.peticionEliminacionAsociacionMapeador.construirDTOsPaginado(entidades);
     }
 }

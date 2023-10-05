@@ -7,11 +7,9 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.RequerimientosDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -72,8 +70,9 @@ public class NecesidadConsultaControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las necesidades que esten en espera de ser aprobadas.")
-    public List<NecesidadDTO> consultar() {
-        return this.consultarNecesidadesManejador.ejecutar();
+    public Page<NecesidadDTO> consultar(@RequestParam(defaultValue = "0") int pagina,
+                                        @RequestParam(defaultValue = "10") int tamano) {
+        return this.consultarNecesidadesManejador.ejecutar(pagina,tamano);
     }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
@@ -86,8 +85,9 @@ public class NecesidadConsultaControlador {
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/proyectos")
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todos los proyectos aprobados")
-    public List<NecesidadDTO> consultarProyectosAprobados() {
-        return this.consultarProyectosAprobadosManejador.ejecutar();
+    public Page<NecesidadDTO> consultarProyectosAprobados(@RequestParam(defaultValue = "0") int pagina,
+                                                          @RequestParam(defaultValue = "10") int tamano) {
+        return this.consultarProyectosAprobadosManejador.ejecutar(pagina,tamano);
     }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
@@ -100,7 +100,8 @@ public class NecesidadConsultaControlador {
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/administrador")
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una necesidad")
-    public List<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacion() {
-        return this.consultarPeticionesDeEliminacionNecesidadManejador.ejecutar();
+    public Page<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacion( @RequestParam(defaultValue = "0") int pagina,
+                                                                                   @RequestParam(defaultValue = "10") int tamano) {
+        return this.consultarPeticionesDeEliminacionNecesidadManejador.ejecutar( pagina,  tamano);
     }
 }

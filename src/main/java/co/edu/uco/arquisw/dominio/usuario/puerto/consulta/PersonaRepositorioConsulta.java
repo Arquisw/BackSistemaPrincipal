@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.dominio.usuario.puerto.consulta;
 
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface PersonaRepositorioConsulta {
     HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID);
 
     List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios();
+    Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuariosPaginado(int pagin, int tamano);
 
     String consultarClaveConCorreo(String correo);
 
