@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.dominio.asociacion.puerto.consulta;
 
 import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.dto.PeticionEliminacionAsociacionDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface AsociacionRepositorioConsulta {
 
     AsociacionDTO consultarPorNIT(String nit);
 
-    List<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones();
+    Page<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacionDeAsociaciones(int pagina, int tamano);
 }

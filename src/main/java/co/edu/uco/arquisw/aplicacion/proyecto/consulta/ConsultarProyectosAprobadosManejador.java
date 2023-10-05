@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.aplicacion.proyecto.consulta;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ public class ConsultarProyectosAprobadosManejador {
     }
 
     @Transactional
-    public List<NecesidadDTO> ejecutar() {
-        return this.necesidadRepositorioConsulta.consultarProyectosAprobados();
+    public Page<NecesidadDTO> ejecutar(int pagina, int tamano) {
+        return this.necesidadRepositorioConsulta.consultarProyectosAprobadosPaginado(pagina,tamano);
     }
 }
