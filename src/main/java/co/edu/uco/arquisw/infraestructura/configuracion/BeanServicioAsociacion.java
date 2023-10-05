@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.asociacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.context.annotation.Bean;
@@ -34,12 +35,12 @@ public class BeanServicioAsociacion {
     }
 
     @Bean
-    public ServicioEliminarAsociacion servicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        return new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
+    public ServicioEliminarAsociacion servicioEliminarAsociacion(PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, AsociacionRepositorioConsulta asociacionRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken, ServicioNotificacionFactoria servicioNotificacionFactoria) {
+        return new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
     }
 
     @Bean
-    public ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        return new ServicioEliminarAsociacionPorAdministrador(asociacionRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando, servicioEnviarCorreoElectronico, personaRepositorioConsulta);
+    public ServicioEliminarAsociacionPorAdministrador servicioEliminarAsociacionPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioNotificacionFactoria servicioNotificacionFactoria, PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ServicioEliminarAsociacionPorAdministrador(asociacionRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando, servicioNotificacionFactoria, personaRepositorioConsulta);
     }
 }

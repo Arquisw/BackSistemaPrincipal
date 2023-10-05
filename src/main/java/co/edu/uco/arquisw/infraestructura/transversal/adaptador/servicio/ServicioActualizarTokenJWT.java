@@ -10,6 +10,7 @@ import co.edu.uco.arquisw.infraestructura.seguridad.constante.SecurityConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -27,12 +28,9 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@AllArgsConstructor
 public class ServicioActualizarTokenJWT implements ServicioActualizarToken {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
-
-    public ServicioActualizarTokenJWT(PersonaRepositorioConsulta personaRepositorioConsulta) {
-        this.personaRepositorioConsulta = personaRepositorioConsulta;
-    }
 
     @Override
     public void ejecutar() {

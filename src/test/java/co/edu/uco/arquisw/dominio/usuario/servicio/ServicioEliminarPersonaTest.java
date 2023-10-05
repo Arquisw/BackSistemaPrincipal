@@ -7,6 +7,7 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionReposit
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
@@ -24,9 +25,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioNotificacionFactoria);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
                 Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
@@ -41,9 +42,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioNotificacionFactoria);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
@@ -61,9 +62,9 @@ class ServicioEliminarPersonaTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
 
-        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioNotificacionFactoria);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(seleccionado));

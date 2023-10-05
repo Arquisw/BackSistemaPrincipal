@@ -9,6 +9,7 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
@@ -31,9 +32,9 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
 
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
@@ -56,8 +57,8 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
@@ -77,8 +78,8 @@ class ServicioEliminarNecesidadTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
         var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioEnviarCorreoElectronico);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
+        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);

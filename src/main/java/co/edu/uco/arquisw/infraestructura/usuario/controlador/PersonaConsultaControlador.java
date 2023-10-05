@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.aplicacion.usuario.consulta.*;
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/usuarios")
 @Tag(name = "Consulta del Usuario Controlador")
 public class PersonaConsultaControlador {
@@ -21,14 +23,6 @@ public class PersonaConsultaControlador {
     private final ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador;
     private final ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
     private final ConsultarRolesPorAdministradorManejador consultarRolesPorAdministradorManejador;
-
-    public PersonaConsultaControlador(ConsultarPersonaPorIdManejador consultarPersonaPorIdManejador, ConsultarHojaDeVidaPorIdUsuarioManejador consultarHojaDeVidaPorIdUsuarioManejador, ConsultarPeticionesDeEliminacionPersonaManejador consultarPeticionesDeEliminacionPersonaManejador, ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador, ConsultarRolesPorAdministradorManejador consultarRolesPorAdministradorManejador) {
-        this.consultarPersonaPorIdManejador = consultarPersonaPorIdManejador;
-        this.consultarHojaDeVidaPorIdUsuarioManejador = consultarHojaDeVidaPorIdUsuarioManejador;
-        this.consultarPeticionesDeEliminacionPersonaManejador = consultarPeticionesDeEliminacionPersonaManejador;
-        this.consultarUsuarioPorCorreoManejador = consultarUsuarioPorCorreoManejador;
-        this.consultarRolesPorAdministradorManejador = consultarRolesPorAdministradorManejador;
-    }
 
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/{id}")

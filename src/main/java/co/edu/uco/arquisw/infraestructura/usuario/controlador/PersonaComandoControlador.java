@@ -5,12 +5,14 @@ import co.edu.uco.arquisw.aplicacion.usuario.comando.*;
 import co.edu.uco.arquisw.aplicacion.usuario.comando.manejador.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/usuarios")
 @Tag(name = "Comando del Usuario Controlador")
 public class PersonaComandoControlador {
@@ -27,22 +29,6 @@ public class PersonaComandoControlador {
     private final ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador;
     private final IniciarActivacionCuentaManejador iniciarActivacionCuentaManejador;
     private final ActivarCuentaManejador activarCuentaManejador;
-
-    public PersonaComandoControlador(GuardarPersonaManejador guardarPersonaManejador, ActualizarPersonaManejador actualizarPersonaManejador, EliminarPersonaManejador eliminarPersonaManejador, EliminarPersonaPorAdministradorManejador eliminarPersonaPorAdministradorManejador, GuardarHojaDeVidaManejador guardarHojaDeVidaManejador, ActualizarHojaDeVidaManejador actualizarHojaDeVidaManejador, ActualizarClaveManejador actualizarClaveManejador, IniciarRecuperacionClaveManejador iniciarRecuperacionClaveManejador, RecuperarClaveManejador recuperarClaveManejador, ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador, ActualizarRolPorAdministradorManejador actualizarRolPorAdministradorManejador, IniciarActivacionCuentaManejador iniciarActivacionCuentaManejador, ActivarCuentaManejador activarCuentaManejador) {
-        this.guardarPersonaManejador = guardarPersonaManejador;
-        this.actualizarPersonaManejador = actualizarPersonaManejador;
-        this.eliminarPersonaManejador = eliminarPersonaManejador;
-        this.eliminarPersonaPorAdministradorManejador = eliminarPersonaPorAdministradorManejador;
-        this.guardarHojaDeVidaManejador = guardarHojaDeVidaManejador;
-        this.actualizarHojaDeVidaManejador = actualizarHojaDeVidaManejador;
-        this.actualizarClaveManejador = actualizarClaveManejador;
-        this.iniciarRecuperacionClaveManejador = iniciarRecuperacionClaveManejador;
-        this.recuperarClaveManejador = recuperarClaveManejador;
-        this.validarCodigoRecuperacionClaveManejador = validarCodigoRecuperacionClaveManejador;
-        this.actualizarRolPorAdministradorManejador = actualizarRolPorAdministradorManejador;
-        this.iniciarActivacionCuentaManejador = iniciarActivacionCuentaManejador;
-        this.activarCuentaManejador = activarCuentaManejador;
-    }
 
     @PostMapping
     @Operation(summary = "Guardar Usuario", description = "Este es usado para guardar un usuario en la aplicación")
@@ -81,20 +67,20 @@ public class PersonaComandoControlador {
     @PreAuthorize("hasAuthority('USUARIO_ELIMINACION')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Usuario", description = "Este es usado para eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
         return this.eliminarPersonaManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasAuthority('ADMINISTRADOR_ELIMINACION')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Usuario por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una persona por medio de su ID")
-    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
         return this.eliminarPersonaPorAdministradorManejador.ejecutar(id);
     }
 
     @PostMapping("/recuperacion/{correo}")
     @Operation(summary = "Iniciar Recuperación de la Clave", description = "Este es usado para generar el codigo unico que te permitira recuperar la cuenta")
-    public ComandoRespuesta<Long> iniciarRecuperacionDeLaClave(@PathVariable String correo) throws MessagingException {
+    public ComandoRespuesta<Long> iniciarRecuperacionDeLaClave(@PathVariable String correo) {
         return this.iniciarRecuperacionClaveManejador.ejecutar(correo);
     }
 
@@ -120,7 +106,7 @@ public class PersonaComandoControlador {
     @PreAuthorize("hasAuthority('USUARIO_ESCRITURA')")
     @PostMapping("/activacion/{correo}")
     @Operation(summary = "Iniciar Activación de la cuenta", description = "Este es usado para generar el codigo unico que te permitira activar la cuenta")
-    public ComandoRespuesta<Long> iniciarActivacionCuenta(@PathVariable String correo) throws MessagingException {
+    public ComandoRespuesta<Long> iniciarActivacionCuenta(@PathVariable String correo) {
         return this.iniciarActivacionCuentaManejador.ejecutar(correo);
     }
 

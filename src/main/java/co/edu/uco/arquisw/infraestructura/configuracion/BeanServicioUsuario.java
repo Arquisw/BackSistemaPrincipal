@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositor
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioCifrarTexto;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.usuario.servicio.*;
@@ -23,13 +24,13 @@ public class BeanServicioUsuario {
     }
 
     @Bean
-    public ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        return new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+    public ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioNotificacionFactoria servicioNotificacionFactoria) {
+        return new ServicioEliminarPersonaPorAdministrador(personaRepositorioComando, personaRepositorioConsulta, servicioNotificacionFactoria);
     }
 
     @Bean
-    public ServicioEliminarPersona servicioEliminarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PostulacionRepositorioConsulta postulacionRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        return new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioEnviarCorreoElectronico);
+    public ServicioEliminarPersona servicioEliminarUsuario(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PostulacionRepositorioConsulta postulacionRepositorioConsulta, ServicioNotificacionFactoria servicioNotificacionFactoria) {
+        return new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioNotificacionFactoria);
     }
 
 
@@ -69,8 +70,8 @@ public class BeanServicioUsuario {
     }
 
     @Bean
-    public ServicioIniciarRecuperacionClave servicioIniciarRecuperacionClave(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
-        return new ServicioIniciarRecuperacionClave(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    public ServicioIniciarRecuperacionClave servicioIniciarRecuperacionClave(ServicioNotificacionFactoria servicioNotificacionFactoria, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioIniciarRecuperacionClave(servicioNotificacionFactoria, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
     }
 
     @Bean
@@ -94,8 +95,8 @@ public class BeanServicioUsuario {
     }
 
     @Bean
-    public ServicioIniciarActivacionCuenta servicioIniciarActivacionCuenta(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
-        return new ServicioIniciarActivacionCuenta(servicioEnviarCorreoElectronico, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
+    public ServicioIniciarActivacionCuenta servicioIniciarActivacionCuenta(ServicioNotificacionFactoria servicioNotificacionFactoria, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        return new ServicioIniciarActivacionCuenta(servicioNotificacionFactoria, personaRepositorioConsulta, personaRepositorioComando, servicioCifrarTexto);
     }
 
     @Bean
