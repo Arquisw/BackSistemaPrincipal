@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.aplicacion.proyecto.consulta;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ public class ConsultarPeticionesDeEliminacionNecesidadManejador {
     }
 
     @Transactional
-    public List<PeticionEliminacionNecesidadDTO> ejecutar() {
-        return necesidadRepositorioConsulta.consultarPeticionesDeEliminacionDeNecesidades();
+    public Page<PeticionEliminacionNecesidadDTO> ejecutar(int pagina, int tamano) {
+        return necesidadRepositorioConsulta.consultarPeticionesDeEliminacionDeNecesidadesPaginado( pagina,  tamano);
     }
 }
