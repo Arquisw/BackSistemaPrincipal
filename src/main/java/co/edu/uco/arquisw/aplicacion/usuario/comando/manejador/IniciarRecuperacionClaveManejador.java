@@ -16,7 +16,7 @@ public class IniciarRecuperacionClaveManejador implements ManejadorComandoRespue
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(String comando) throws MessagingException {
+    public ComandoRespuesta<Long> ejecutar(String comando) {
         return new ComandoRespuesta<>(this.servicioIniciarRecuperacionClave.ejecutar(comando));
     }
 }

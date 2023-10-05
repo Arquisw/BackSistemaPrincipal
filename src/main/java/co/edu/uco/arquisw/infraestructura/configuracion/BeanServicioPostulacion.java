@@ -6,6 +6,7 @@ import co.edu.uco.arquisw.dominio.postulacion.servicio.*;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +25,8 @@ public class BeanServicioPostulacion {
     }
 
     @Bean
-    public ServicioSeleccionarUsuario servicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken, personaRepositorioConsulta, necesidadRepositorioConsulta, servicioEnviarCorreoElectronico);
+    public ServicioSeleccionarUsuario servicioSeleccionarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioActualizarToken servicioActualizarToken, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioNotificacionFactoria servicioNotificacionFactoria) {
+        return new ServicioSeleccionarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, servicioActualizarToken, personaRepositorioConsulta, servicioNotificacionFactoria);
     }
 
     @Bean
@@ -59,7 +60,7 @@ public class BeanServicioPostulacion {
     }
 
     @Bean
-    public ServicioRechazarUsuario servicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, NecesidadRepositorioConsulta necesidadRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        return new ServicioRechazarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, personaRepositorioConsulta, necesidadRepositorioConsulta, servicioEnviarCorreoElectronico);
+    public ServicioRechazarUsuario servicioRechazarUsuario(PostulacionRepositorioConsulta postulacionRepositorioConsulta, PostulacionRepositorioComando postulacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioNotificacionFactoria servicioNotificacionFactoria) {
+        return new ServicioRechazarUsuario(postulacionRepositorioConsulta, postulacionRepositorioComando, personaRepositorioComando, personaRepositorioConsulta, servicioNotificacionFactoria);
     }
 }

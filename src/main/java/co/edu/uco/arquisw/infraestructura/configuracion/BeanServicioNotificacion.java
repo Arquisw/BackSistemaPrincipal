@@ -1,0 +1,102 @@
+package co.edu.uco.arquisw.infraestructura.configuracion;
+
+import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.*;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class BeanServicioNotificacion {
+    @Bean
+    public ServicioNotificacionFactoria servicioNotificacionFactoria(ServicioNotificacionActivacionCuentaIniciada servicioNotificacionActivacionCuentaIniciada, ServicioNotificacionAsociacionEliminada servicioNotificacionAsociacionEliminada, ServicioNotificacionAsociacionEliminadaPorAdministrador servicioNotificacionAsociacionEliminadaPorAdministrador, ServicioNotificacionContratoActualizado servicioNotificacionContratoActualizado, ServicioNotificacionContratoGuardado servicioNotificacionContratoGuardado, ServicioNotificacionNecesidadEliminada servicioNotificacionNecesidadEliminada, ServicioNotificacionNecesidadEliminadaPorAdministrador servicioNotificacionNecesidadEliminadaPorAdministrador, ServicioNotificacionPersonaEliminada servicioNotificacionPersonaEliminada, ServicioNotificacionPersonaEliminadaPorAdministrador servicioNotificacionPersonaEliminadaPorAdministrador, ServicioNotificacionProyectoAprobado servicioNotificacionProyectoAprobado, ServicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto servicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto, ServicioNotificacionProyectoAprobadoRolIngenieria servicioNotificacionProyectoAprobadoRolIngenieria, ServicioNotificacionProyectoAprobadoRolLiderDeEquipo servicioNotificacionProyectoAprobadoRolLiderDeEquipo, ServicioNotificacionProyectoRechazado servicioNotificacionProyectoRechazado, ServicioNotificacionRecuperacionClaveIniciada servicioNotificacionRecuperacionClaveIniciada, ServicioNotificacionUsuarioRechazado servicioNotificacionUsuarioRechazado, ServicioNotificacionUsuarioSeleccionado servicioNotificacionUsuarioSeleccionado) {
+        return new ServicioNotificacionFactoria(servicioNotificacionActivacionCuentaIniciada, servicioNotificacionAsociacionEliminada, servicioNotificacionAsociacionEliminadaPorAdministrador, servicioNotificacionContratoActualizado, servicioNotificacionContratoGuardado, servicioNotificacionNecesidadEliminada, servicioNotificacionNecesidadEliminadaPorAdministrador, servicioNotificacionPersonaEliminada, servicioNotificacionPersonaEliminadaPorAdministrador, servicioNotificacionProyectoAprobado, servicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto, servicioNotificacionProyectoAprobadoRolIngenieria, servicioNotificacionProyectoAprobadoRolLiderDeEquipo, servicioNotificacionProyectoRechazado, servicioNotificacionRecuperacionClaveIniciada, servicioNotificacionUsuarioRechazado, servicioNotificacionUsuarioSeleccionado);
+    }
+
+    @Bean
+    public ServicioNotificacionActivacionCuentaIniciada servicioNotificacionActivacionCuentaIniciada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionActivacionCuentaIniciada(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionAsociacionEliminada servicioNotificacionAsociacionEliminada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionAsociacionEliminada(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionAsociacionEliminadaPorAdministrador servicioNotificacionAsociacionEliminadaPorAdministrador(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionAsociacionEliminadaPorAdministrador(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionContratoActualizado servicioNotificacionContratoActualizado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionContratoActualizado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionContratoGuardado servicioNotificacionContratoGuardado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionContratoGuardado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionNecesidadEliminada servicioNotificacionNecesidadEliminada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionNecesidadEliminada(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionNecesidadEliminadaPorAdministrador servicioNotificacionNecesidadEliminadaPorAdministrador(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionNecesidadEliminadaPorAdministrador(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionPersonaEliminada servicioNotificacionPersonaEliminada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionPersonaEliminada(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionPersonaEliminadaPorAdministrador servicioNotificacionPersonaEliminadaPorAdministrador(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionPersonaEliminadaPorAdministrador(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionProyectoAprobado servicioNotificacionProyectoAprobado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionProyectoAprobado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto servicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionProyectoAprobadoRolIngenieria servicioNotificacionProyectoAprobadoRolIngenieria(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionProyectoAprobadoRolIngenieria(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionProyectoAprobadoRolLiderDeEquipo servicioNotificacionProyectoAprobadoRolLiderDeEquipo(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionProyectoAprobadoRolLiderDeEquipo(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionProyectoRechazado servicioNotificacionProyectoRechazado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionProyectoRechazado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionRecuperacionClaveIniciada servicioNotificacionRecuperacionClaveIniciada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionRecuperacionClaveIniciada(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+    @Bean
+    public ServicioNotificacionUsuarioRechazado servicioNotificacionUsuarioRechazado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionUsuarioRechazado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+    @Bean
+    public ServicioNotificacionUsuarioSeleccionado servicioNotificacionUsuarioSeleccionado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
+        return new ServicioNotificacionUsuarioSeleccionado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
+    }
+
+}

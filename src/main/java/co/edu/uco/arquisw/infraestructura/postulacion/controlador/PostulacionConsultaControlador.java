@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/postulaciones")
 @Tag(name = "Consulta del Usuario Controlador")
 public class PostulacionConsultaControlador {
@@ -23,15 +25,6 @@ public class PostulacionConsultaControlador {
     private final ConsultarSeleccionesPorProyectoManejador consultarSeleccionesPorProyectoManejador;
     private final ConsultarPostulacionesPorUsuarioIdManejador consultarPostulacionesPorUsuarioIdManejador;
     private final ConsultarSeleccionesPorUsuarioIdManejador consultarSeleccionesPorUsuarioIdManejador;
-
-    public PostulacionConsultaControlador(ConsultarPostulacionPorIdManejador consultarPostulacionPorIdManejador, ConsultarPostulacionesPorProyectoManejador consultarPostulacionesPorProyectoManejador, ConsultarSeleccionPorIdManejador consultarSeleccionPorIdManejador, ConsultarSeleccionesPorProyectoManejador consultarSeleccionesPorProyectoManejador, ConsultarPostulacionesPorUsuarioIdManejador consultarPostulacionesPorUsuarioIdManejador, ConsultarSeleccionesPorUsuarioIdManejador consultarSeleccionesPorUsuarioIdManejador) {
-        this.consultarPostulacionPorIdManejador = consultarPostulacionPorIdManejador;
-        this.consultarPostulacionesPorProyectoManejador = consultarPostulacionesPorProyectoManejador;
-        this.consultarSeleccionPorIdManejador = consultarSeleccionPorIdManejador;
-        this.consultarSeleccionesPorProyectoManejador = consultarSeleccionesPorProyectoManejador;
-        this.consultarPostulacionesPorUsuarioIdManejador = consultarPostulacionesPorUsuarioIdManejador;
-        this.consultarSeleccionesPorUsuarioIdManejador = consultarSeleccionesPorUsuarioIdManejador;
-    }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @GetMapping("/postulacion/{id}")
