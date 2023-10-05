@@ -16,7 +16,7 @@ public class IniciarActivacionCuentaManejador implements ManejadorComandoRespues
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(String comando) throws MessagingException {
+    public ComandoRespuesta<Long> ejecutar(String comando) {
         return new ComandoRespuesta<>(this.servicioIniciarActivacionCuenta.ejecutar(comando));
     }
 }

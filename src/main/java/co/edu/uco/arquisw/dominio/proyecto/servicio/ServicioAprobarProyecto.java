@@ -1,44 +1,53 @@
 package co.edu.uco.arquisw.dominio.proyecto.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import lombok.AllArgsConstructor;
 
 import javax.mail.MessagingException;
 
+import java.util.ArrayList;
+
+import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PROYECTO_APROBADO;
+
+@AllArgsConstructor
 public class ServicioAprobarProyecto {
     private final NecesidadRepositorioComando necesidadRepositorioComando;
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
-    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
+    private final ServicioNotificacionFactoria servicioNotificacionFactoria;
 
-
-    public ServicioAprobarProyecto(NecesidadRepositorioComando necesidadRepositorioComando, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
-        this.necesidadRepositorioComando = necesidadRepositorioComando;
-        this.necesidadRepositorioConsulta = necesidadRepositorioConsulta;
-        this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
-        this.personaRepositorioConsulta = personaRepositorioConsulta;
-        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
-    }
-
-    public Long ejecutar(Long id) throws MessagingException {
+    public Long ejecutar(Long id) {
         validarSiExisteNecesidadConID(id);
 
         var necesidad = this.necesidadRepositorioConsulta.consultarPorNecesidadId(id);
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(necesidad.getAsociacion());
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = Mensajes.PROYECTO_APROBADO_POR_EL_ADMINISTRADOR_ASUNTO;
-        var cuerpo = Mensajes.EL_PROYECTO + necesidad.getProyecto().getNombre() + Mensajes.HA_SIDO_APROBADO_POR_EL_ADMINISTRADOR;
 
         var respuestaId = this.necesidadRepositorioComando.actualizarEstadoNecesidad(EstadoNecesidad.crear(TextoConstante.ESTADO_APROBADO), id);
-        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
+
+        this.servicioNotificacionFactoria.orquestarNotificacion(
+                PROYECTO_APROBADO,
+                NumeroConstante.Zero,
+                id,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                correo,
+                new SeleccionDTO()
+        );
 
         return respuestaId;
     }

@@ -1,42 +1,54 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import javax.mail.MessagingException;
+import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PERSONA_ELIMINADA;
 
 public class ServicioEliminarPersona {
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final PostulacionRepositorioConsulta postulacionRepositorioConsulta;
-    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
+    private final ServicioNotificacionFactoria servicioNotificacionFactoria;
 
-    public ServicioEliminarPersona(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PostulacionRepositorioConsulta postulacionRepositorioConsulta, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico) {
+    public ServicioEliminarPersona(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta, PostulacionRepositorioConsulta postulacionRepositorioConsulta, ServicioNotificacionFactoria servicioNotificacionFactoria) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
         this.postulacionRepositorioConsulta = postulacionRepositorioConsulta;
-        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
+        this.servicioNotificacionFactoria = servicioNotificacionFactoria;
     }
 
-    public Long ejecutar(Long id) throws MessagingException {
+    public Long ejecutar(Long id) {
         validarSiNoExisteUsuarioConId(id);
         validarSiPuedeEliminarLaCuenta(id);
 
         var correo = this.personaRepositorioConsulta.consultarPorId(id).getCorreo();
-        var asunto = Mensajes.CUENTA_DE_ARQUISQ_ELIMINADA_ASUNTO;
-        var cuerpo = Mensajes.TU_CUENTA_HA_SIDO_ELIMINADA_DE_FORMA_DEFINITIVA_POR_TI;
 
         this.personaRepositorioComando.eliminar(id);
-        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
+
+        this.servicioNotificacionFactoria.orquestarNotificacion(
+                PERSONA_ELIMINADA,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                correo,
+                new SeleccionDTO()
+        );
 
         return id;
     }

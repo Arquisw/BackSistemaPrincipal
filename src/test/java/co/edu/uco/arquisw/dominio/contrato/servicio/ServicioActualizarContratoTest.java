@@ -5,6 +5,7 @@ import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioCom
 import co.edu.uco.arquisw.dominio.contrato.testDataBuilder.ContratoTestDataBuilder;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
@@ -20,9 +21,9 @@ class ServicioActualizarContratoTest {
         var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
         var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var servicioEnviarCorreoElectronico = Mockito.mock(ServicioEnviarCorreoElectronico.class);
+        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
 
-        var servicio = new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioEnviarCorreoElectronico);
+        var servicio = new ServicioActualizarContrato(contratoRepositorioComando, necesidadRepositorioConsulta, asociacionRepositorioConsulta, personaRepositorioConsulta, servicioNotificacionFactoria);
 
         Mockito.when(necesidadRepositorioConsulta.consultarPorNecesidadId(Mockito.any())).thenReturn(null);
 

@@ -7,6 +7,7 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.RequerimientosDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/necesidades")
 @Tag(name = "Consulta de la Necesidad Controlador")
 public class NecesidadConsultaControlador {
@@ -28,18 +30,6 @@ public class NecesidadConsultaControlador {
     private final ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador;
     private final ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador;
     private final ConsultarProyectosNegociadosManejador consultarProyectosNegociadosManejador;
-
-    public NecesidadConsultaControlador(ConsultarNecesidadesManejador consultarNecesidadesManejador, ConsultarNecesidadPorIdManejador consultarNecesidadPorIdManejador, ConsultarProyectoPorIdManejador consultarProyectoPorIdManejador, ConsultarProyectosAprobadosManejador consultarProyectosAprobadosManejador, ConsultarPeticionesDeEliminacionNecesidadManejador consultarPeticionesDeEliminacionNecesidadManejador, ConsultarNecesidadesPorAsociacionIdManejador consultarNecesidadesPorAsociacionIdManejador, ConsultarNecesidadPorProyectoIdManejador consultarNecesidadPorProyectoIdManejador, ConsultarRequerimientosPorNecesidadIdManejador consultarRequerimientosPorNecesidadIdManejador, ConsultarProyectosNegociadosManejador consultarProyectosNegociadosManejador) {
-        this.consultarNecesidadesManejador = consultarNecesidadesManejador;
-        this.consultarNecesidadPorIdManejador = consultarNecesidadPorIdManejador;
-        this.consultarProyectoPorIdManejador = consultarProyectoPorIdManejador;
-        this.consultarProyectosAprobadosManejador = consultarProyectosAprobadosManejador;
-        this.consultarPeticionesDeEliminacionNecesidadManejador = consultarPeticionesDeEliminacionNecesidadManejador;
-        this.consultarNecesidadesPorAsociacionIdManejador = consultarNecesidadesPorAsociacionIdManejador;
-        this.consultarNecesidadPorProyectoIdManejador = consultarNecesidadPorProyectoIdManejador;
-        this.consultarRequerimientosPorNecesidadIdManejador = consultarRequerimientosPorNecesidadIdManejador;
-        this.consultarProyectosNegociadosManejador = consultarProyectosNegociadosManejador;
-    }
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO')")
     @GetMapping("/{id}")
