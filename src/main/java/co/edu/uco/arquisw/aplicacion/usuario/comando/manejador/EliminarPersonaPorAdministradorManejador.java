@@ -16,7 +16,7 @@ public class EliminarPersonaPorAdministradorManejador implements ManejadorComand
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(Long comando) throws MessagingException {
+    public ComandoRespuesta<Long> ejecutar(Long comando) {
         return new ComandoRespuesta<>(this.servicioEliminarPersonaPorAdministrador.ejecutar(comando));
     }
 }

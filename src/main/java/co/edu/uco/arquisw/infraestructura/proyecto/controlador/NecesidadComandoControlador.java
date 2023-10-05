@@ -9,6 +9,7 @@ import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/necesidades")
 @Tag(name = "Comando de la Necesidad Controlador")
 public class NecesidadComandoControlador {
@@ -31,21 +33,6 @@ public class NecesidadComandoControlador {
     private final ActualizarRequerimientosManejador actualizarRequerimientosManejador;
     private final RechazarProyectoManejador rechazarProyectoManejador;
     private final UsuarioEsPropetarioDelProyectoManejador usuarioEsPropetarioDelProyectoManejador;
-
-    public NecesidadComandoControlador(GuardarNecesidadManejador guardarNecesidadManejador, ActualizarNecesidadManejador actualizarNecesidadManejador, EliminarNecesidadManejador eliminarNecesidadManejador, EliminarNecesidadPorAdministradorManejador eliminarNecesidadPorAdministradorManejador, AprobarProyectoManejador aprobarProyectoManejador, AprobarProyectoPorRolIngenieriaManejador aprobarProyectoPorRolIngenieriaManejador, AprobarProyectoPorRolLiderDeEquipoManejador aprobarProyectoPorRolLiderDeEquipoManejador, AprobarProyectoPorRolDirectorDeProyectoManejador aprobarProyectoPorRolDirectorDeProyectoManejador, GuardarRequerimientosManejador guardarRequerimientosManejador, ActualizarRequerimientosManejador actualizarRequerimientosManejador, RechazarProyectoManejador rechazarProyectoManejador, UsuarioEsPropetarioDelProyectoManejador usuarioEsPropetarioDelProyectoManejador) {
-        this.guardarNecesidadManejador = guardarNecesidadManejador;
-        this.actualizarNecesidadManejador = actualizarNecesidadManejador;
-        this.eliminarNecesidadManejador = eliminarNecesidadManejador;
-        this.eliminarNecesidadPorAdministradorManejador = eliminarNecesidadPorAdministradorManejador;
-        this.aprobarProyectoManejador = aprobarProyectoManejador;
-        this.aprobarProyectoPorRolIngenieriaManejador = aprobarProyectoPorRolIngenieriaManejador;
-        this.aprobarProyectoPorRolLiderDeEquipoManejador = aprobarProyectoPorRolLiderDeEquipoManejador;
-        this.aprobarProyectoPorRolDirectorDeProyectoManejador = aprobarProyectoPorRolDirectorDeProyectoManejador;
-        this.guardarRequerimientosManejador = guardarRequerimientosManejador;
-        this.actualizarRequerimientosManejador = actualizarRequerimientosManejador;
-        this.rechazarProyectoManejador = rechazarProyectoManejador;
-        this.usuarioEsPropetarioDelProyectoManejador = usuarioEsPropetarioDelProyectoManejador;
-    }
 
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @PostMapping("/{id}")
@@ -78,28 +65,28 @@ public class NecesidadComandoControlador {
     @PreAuthorize("hasRole('ROLE_ASOCIACION')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar Necesidad", description = "Este es usado para eliminar los datos de una necesidad por medio de su ID")
-    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> eliminar(@PathVariable Long id) {
         return this.eliminarNecesidadManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @DeleteMapping("/administrador/{id}")
     @Operation(summary = "Eliminar Necesidad por Administrador", description = "Este es usado para que el administrador pueda eliminar los datos de una necesidad por medio del ID de la asociacion")
-    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> eliminarPorAdministrador(@PathVariable Long id) {
         return this.eliminarNecesidadPorAdministradorManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @RequestMapping("/administrador/aprobar/{id}")
     @Operation(summary = "Aprobar Proyecto por Administrador", description = "Este es usado para que el administrador pueda aprobar una necesidad por medio de su ID")
-    public ComandoRespuesta<Long> aprobarProyecto(@PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> aprobarProyecto(@PathVariable Long id) {
         return this.aprobarProyectoManejador.ejecutar(id);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     @PutMapping("/administrador/rechazar/{id}")
     @Operation(summary = "Rechazar Proyecto por Administrador", description = "Este es usado para que el administrador pueda rechazar una necesidad por medio de su ID")
-    public ComandoRespuesta<Long> rechazarProyecto(@RequestBody MotivoRechazoNecesidadComando motivoRechazoNecesidadComando, @PathVariable Long id) throws MessagingException {
+    public ComandoRespuesta<Long> rechazarProyecto(@RequestBody MotivoRechazoNecesidadComando motivoRechazoNecesidadComando, @PathVariable Long id) {
         return this.rechazarProyectoManejador.ejecutar(motivoRechazoNecesidadComando, id);
     }
 

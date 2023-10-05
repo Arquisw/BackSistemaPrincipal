@@ -17,7 +17,7 @@ public class SeleccionarUsuarioManejador implements ManejadorComandoVariableDeRu
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(SeleccionComando comando, Long id) throws MessagingException {
+    public ComandoRespuesta<Long> ejecutar(SeleccionComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioSeleccionarUsuario.ejecutar(comando.getRoles(), id));
     }
 }

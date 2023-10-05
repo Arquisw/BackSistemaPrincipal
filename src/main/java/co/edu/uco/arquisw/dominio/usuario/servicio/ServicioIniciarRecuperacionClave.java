@@ -1,41 +1,54 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
+import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioCifrarTexto;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.RECUPERACION_CLAVE_INICIADA;
+
 public class ServicioIniciarRecuperacionClave {
-    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
+    private final ServicioNotificacionFactoria servicioNotificacionFactoria;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final PersonaRepositorioComando personaRepositorioComando;
     private final ServicioCifrarTexto servicioCifrarTexto;
 
-    public ServicioIniciarRecuperacionClave(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
-        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
+    public ServicioIniciarRecuperacionClave(ServicioNotificacionFactoria servicioNotificacionFactoria, PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, ServicioCifrarTexto servicioCifrarTexto) {
+        this.servicioNotificacionFactoria = servicioNotificacionFactoria;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.personaRepositorioComando = personaRepositorioComando;
         this.servicioCifrarTexto = servicioCifrarTexto;
     }
 
-    public Long ejecutar(String correo) throws MessagingException {
+    public Long ejecutar(String correo) {
         validarSiNoExisteUsuarioConId(correo);
 
         var codigo = (UUID.randomUUID()).toString().replace("-", "").substring(0, 6);
         var codigoCifrado = this.servicioCifrarTexto.ejecutar(codigo);
         var fecha = FechaFormateador.obtenerFechaTexto(LocalDateTime.now());
-        var asunto = Mensajes.RECUPERACION_DE_LA_CUENTA;
-        var cuerpo = Mensajes.CODIGO + codigo;
 
-        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
+        this.servicioNotificacionFactoria.orquestarNotificacion(
+                RECUPERACION_CLAVE_INICIADA,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                codigo,
+                TextoConstante.VACIO,
+                correo,
+                new SeleccionDTO()
+        );
+
 
         return personaRepositorioComando.crearPeticionRecuperacionClave(codigoCifrado, correo, fecha);
     }

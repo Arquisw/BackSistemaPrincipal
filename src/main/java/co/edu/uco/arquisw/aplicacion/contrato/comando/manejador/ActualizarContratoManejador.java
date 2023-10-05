@@ -5,22 +5,19 @@ import co.edu.uco.arquisw.aplicacion.contrato.comando.fabrica.ContratoFabrica;
 import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVariableDeRutaRespuesta;
 import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioActualizarContrato;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 
 @Component
+@AllArgsConstructor
 public class ActualizarContratoManejador implements ManejadorComandoVariableDeRutaRespuesta<ContratoComando, Long, ComandoRespuesta<Long>> {
     private final ServicioActualizarContrato servicioActualizarContrato;
     private final ContratoFabrica contratoFabrica;
 
-    public ActualizarContratoManejador(ServicioActualizarContrato servicioActualizarContrato, ContratoFabrica contratoFabrica) {
-        this.servicioActualizarContrato = servicioActualizarContrato;
-        this.contratoFabrica = contratoFabrica;
-    }
-
     @Override
-    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) throws MessagingException {
+    public ComandoRespuesta<Long> ejecutar(ContratoComando comando, Long id) {
         return new ComandoRespuesta<>(this.servicioActualizarContrato.ejecutar(this.contratoFabrica.construir(comando), id));
     }
 }

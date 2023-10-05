@@ -2,42 +2,49 @@ package co.edu.uco.arquisw.dominio.asociacion.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
+import lombok.AllArgsConstructor;
 
 import javax.mail.MessagingException;
 
+import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.ASOCIACION_ELIMINADA_POR_ADMINISTRADOR;
+
+@AllArgsConstructor
 public class ServicioEliminarAsociacionPorAdministrador {
     private final AsociacionRepositorioConsulta asociacionRepositorioConsulta;
     private final AsociacionRepositorioComando asociacionRepositorioComando;
     private final PersonaRepositorioComando personaRepositorioComando;
-    private final ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico;
+    private final ServicioNotificacionFactoria servicioNotificacionFactoria;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public ServicioEliminarAsociacionPorAdministrador(AsociacionRepositorioConsulta asociacionRepositorioConsulta, AsociacionRepositorioComando asociacionRepositorioComando, PersonaRepositorioComando personaRepositorioComando, ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        this.asociacionRepositorioConsulta = asociacionRepositorioConsulta;
-        this.asociacionRepositorioComando = asociacionRepositorioComando;
-        this.personaRepositorioComando = personaRepositorioComando;
-        this.servicioEnviarCorreoElectronico = servicioEnviarCorreoElectronico;
-        this.personaRepositorioConsulta = personaRepositorioConsulta;
-    }
-
-    public Long ejecutar(Long id) throws MessagingException {
+    public Long ejecutar(Long id) {
         validarSiExisteAsociacionConID(id);
 
         var asociacion = this.asociacionRepositorioConsulta.consultarPorID(id);
         var correo = this.personaRepositorioConsulta.consultarPorId(asociacion.getUsuarioId()).getCorreo();
-        var asunto = Mensajes.ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
-        var cuerpo = Mensajes.LA_ASOCIACION_O_EMPRESA + asociacion.getNombre() + Mensajes.CON_EL_NIT + asociacion.getNit() + Mensajes.HA_SIDO_ELIMINADA_POR_EL_ADMINISTRADOR;
 
         this.personaRepositorioComando.eliminarRolAsociacion(Rol.crear(TextoConstante.ROL_ASOCIACION), id);
         this.asociacionRepositorioComando.eliminarPorAdministrador(id);
-        this.servicioEnviarCorreoElectronico.enviarCorreo(correo, asunto, cuerpo);
+
+        this.servicioNotificacionFactoria.orquestarNotificacion(
+                ASOCIACION_ELIMINADA_POR_ADMINISTRADOR,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                NumeroConstante.Zero,
+                id,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                correo,
+                new SeleccionDTO()
+        );
 
         return id;
     }
