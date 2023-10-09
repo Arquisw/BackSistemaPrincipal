@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.transversal.adaptador.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 
 @Component
 public class ServicioEnviarCorreoElectronicoJakarta implements ServicioEnviarCorreoElectronico {
-    private static final String CORREO = "arquisoftwareuco@outlook.com";
     @Autowired
     JavaMailSender mailSender;
 
@@ -21,7 +21,7 @@ public class ServicioEnviarCorreoElectronicoJakarta implements ServicioEnviarCor
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom(CORREO);
+        helper.setFrom(TextoConstante.CORREO_PARA_NOTIFICAR);
         helper.setTo(para);
         helper.setSubject(asunto);
         helper.setText(cuerpo, true);

@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.PeticionEliminacionNecesidadEntidad;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,6 +25,6 @@ public class PeticionEliminacionNecesidadMapeador {
     }
 
     public PeticionEliminacionNecesidadEntidad construirEntidad(Long necesidadId) {
-        return new PeticionEliminacionNecesidadEntidad(0L, necesidadId);
+        return new PeticionEliminacionNecesidadEntidad(NumeroConstante.CERO, necesidadId);
     }
 }

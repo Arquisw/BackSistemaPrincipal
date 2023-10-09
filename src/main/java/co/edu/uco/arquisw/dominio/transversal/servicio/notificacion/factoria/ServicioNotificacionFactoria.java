@@ -1,7 +1,7 @@
 package co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria;
 
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
-import co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion;
+import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.*;
 
 
@@ -52,7 +52,7 @@ public class ServicioNotificacionFactoria {
             case NECESIDAD_ELIMINADA -> this.servicioNotificacionNecesidadEliminada.notificarConNecesidadId(necesidadId, correo);
             case NECESIDAD_ELIMINADA_POR_ADMINISTRADOR -> this.servicioNotificacionNecesidadEliminadaPorAdministrador.notificarConNecesidadId(necesidadId, correo);
             case PROYECTO_RECHAZADO -> this.servicioNotificacionProyectoRechazado.notificarConNecesidadIdYMotivoDeRechazo(necesidadId, motivoRechazo, correo);
-            case USUARIO_RECHAZADO -> this.servicioNotificacionUsuarioRechazado.notificarConProyectoId(proyectoId, correo);
+            case USUARIO_RECHAZADO -> this.servicioNotificacionUsuarioRechazado.notificarConProyectoIdYMotivoRechazo(proyectoId, correo, motivoRechazo);
             case USUARIO_SELECCIONADO -> this.servicioNotificacionUsuarioSeleccionado.notificarConProyectoId(proyectoId, correo);
             case PROYECTO_APROBADO_POR_ROL_DIRECTOR_DE_PROYECTO -> this.servicioNotificacionProyectoAprobadoPorRolDirectorDeProyecto.notificarConProyectoIdYPorSeleccion(seleccionDelProyecto, proyectoId, correo);
             case PROYECTO_APROBADO_POR_ROL_INGENIERIA -> this.servicioNotificacionProyectoAprobadoRolIngenieria.notificarConProyectoIdYPorSeleccion(seleccionDelProyecto,proyectoId, correo);

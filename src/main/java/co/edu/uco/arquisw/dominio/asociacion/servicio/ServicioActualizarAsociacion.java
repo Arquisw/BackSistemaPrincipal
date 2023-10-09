@@ -27,7 +27,7 @@ public class ServicioActualizarAsociacion {
 
     private void validarSiExisteAsociacionConID(Long id) {
         if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorIDUsuario(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteAsociacionConId(id));
         }
     }
 
@@ -35,7 +35,7 @@ public class ServicioActualizarAsociacion {
         var asociacionConNIT = this.asociacionRepositorioConsulta.consultarPorNIT(nit);
 
         if (!ValidarObjeto.esNulo(asociacionConNIT) && !Objects.equals(asociacionConNIT.getId(), id)) {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_ASOCIACION_CON_NIT + nit);
+            throw new DuplicidadExcepcion(Mensajes.obtenerYaExisteAsociacionConNIT(nit));
         }
     }
 }

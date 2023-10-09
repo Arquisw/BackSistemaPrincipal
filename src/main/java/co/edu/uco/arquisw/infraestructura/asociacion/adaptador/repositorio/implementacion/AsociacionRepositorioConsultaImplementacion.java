@@ -15,8 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class AsociacionRepositorioConsultaImplementacion implements AsociacionRepositorioConsulta {
     @Autowired

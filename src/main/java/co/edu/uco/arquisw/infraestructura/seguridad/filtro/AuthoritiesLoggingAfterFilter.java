@@ -1,5 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.filtro;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -13,10 +15,11 @@ public class AuthoritiesLoggingAfterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            log.info("El usuario " + authentication.getName() + " fue autenticado con exito " +
-                    " y tiene los roles " + authentication.getAuthorities().toString());
+
+        if (!ValidarObjeto.esNulo(authentication)) {
+            log.info(Mensajes.obtenerElUsuarioFueAutenticadoConExitoYTieneLosRoles(authentication.getName(), authentication.getAuthorities().toString()));
         }
+
         chain.doFilter(request, response);
     }
 }

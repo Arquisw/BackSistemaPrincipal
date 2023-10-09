@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.postulacion.testdatabuilder;
 
 import co.edu.uco.arquisw.aplicacion.postulacion.comando.PostulacionComando;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ public class PostulacionDtoTestDataBuilder {
     private String rol;
 
     public PostulacionDtoTestDataBuilder() {
-        this.proyectoID = 2L;
-        this.usuarioID = 8L;
-        this.rol = "Interezado";
+        this.proyectoID = NumeroConstante.DOS;
+        this.usuarioID = NumeroConstante.OCHO;
+        this.rol = "Interesado";
     }
 
     public PostulacionComando build() {

@@ -33,13 +33,13 @@ public class ServicioUsuarioEsPropetarioDelProyecto {
 
     private void validarSiExisteNecesidadConId(Long necesidadId) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteNecesidadConId(necesidadId));
         }
     }
 
     private void validarSiExisteUsuarioConId(Long usuarioId) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(usuarioId));
         }
     }
 }

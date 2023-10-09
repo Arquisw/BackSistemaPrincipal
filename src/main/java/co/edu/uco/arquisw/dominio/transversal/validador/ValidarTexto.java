@@ -11,7 +11,6 @@ public class ValidarTexto {
     private static final String NUMERO_TELEFONO = "^(\\(\\+?\\d{2,3}\\)[\\*|\\s|\\-|\\.]?(([\\d][\\*|\\s|\\-|\\.]?){6})(([\\d][\\s|\\-|\\.]?){2})?|(\\+?[\\d][\\s|\\-|\\.]?){8}(([\\d][\\s|\\-|\\.]?){2}(([\\d][\\s|\\-|\\.]?){2})?)?)$";
     private static final String CLAVE = "^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9]).{8,}$";
     private static final String URL = "^(ftp|http|https):\\/\\/[^ \"]+$";
-    private static final String URL_ID = "^((\\d{8})|(\\d{10})|(\\d{11})|(\\d{6}-\\d{5}))?$";
 
     private ValidarTexto() {
     }
@@ -110,9 +109,5 @@ public class ValidarTexto {
 
     public static boolean cadenaURL(String string) {
         return cadenaAceptaElPatron(string, URL);
-    }
-
-    public static boolean cadenaID(String string) {
-        return cadenaAceptaElPatron(string, URL_ID);
     }
 }

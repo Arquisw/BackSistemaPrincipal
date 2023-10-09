@@ -40,13 +40,13 @@ public class ServicioGuardarAsociacion {
 
     private void validarSiExisteAsociacionConNIT(String nit) {
         if (!ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorNIT(nit))) {
-            throw new DuplicidadExcepcion(Mensajes.EXISTE_ASOCIACION_CON_NIT + nit);
+            throw new DuplicidadExcepcion(Mensajes.obtenerYaExisteAsociacionConNIT(nit));
         }
     }
 
     private void validarSiExisteUsuarioConID(Long usuarioID) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioID))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioID);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(usuarioID));
         }
     }
 

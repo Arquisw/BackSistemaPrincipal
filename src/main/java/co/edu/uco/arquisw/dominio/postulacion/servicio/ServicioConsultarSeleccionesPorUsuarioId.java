@@ -26,13 +26,13 @@ public class ServicioConsultarSeleccionesPorUsuarioId {
 
     private void validarSiExistePostulacionConUsuarioID(Long id) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(id));
         }
     }
 
     private void validarSiExistePostulacionConID(Long id) {
         if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_SELECCION_CON_EL_ID_DE_USUARIO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteSeleccionConId(id));
         }
     }
 }

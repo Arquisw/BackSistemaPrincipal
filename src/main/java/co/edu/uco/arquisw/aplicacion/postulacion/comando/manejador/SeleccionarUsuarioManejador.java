@@ -6,8 +6,6 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoVaria
 import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioSeleccionarUsuario;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 public class SeleccionarUsuarioManejador implements ManejadorComandoVariableDeRutaRespuesta<SeleccionComando, Long, ComandoRespuesta<Long>> {
     private final ServicioSeleccionarUsuario servicioSeleccionarUsuario;

@@ -4,8 +4,8 @@ import co.edu.uco.arquisw.aplicacion.usuario.consulta.*;
 import co.edu.uco.arquisw.dominio.usuario.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +48,7 @@ public class PersonaConsultaControlador {
     @Operation(summary = "Consultar todas las Peticiones", description = "Este es usado para consultar todas las peticiones de eliminnacion echas por los usuarios")
     public Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacion(@RequestParam(defaultValue = "0") int pagina,
                                                                                 @RequestParam(defaultValue = "10") int tamano) {
-        return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar(pagina,tamano);
+        return this.consultarPeticionesDeEliminacionPersonaManejador.ejecutar(pagina, tamano);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")

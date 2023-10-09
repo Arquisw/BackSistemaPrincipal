@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PeticionRecuperacionClaveDTO;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.entidad.PeticionRecuperacionClaveEntidad;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PeticionRecuperacionClaveMapeador {
     public PeticionRecuperacionClaveEntidad construirEntidad(String codigo, String correo, String fecha) {
-        return new PeticionRecuperacionClaveEntidad(0L, codigo, correo, fecha);
+        return new PeticionRecuperacionClaveEntidad(NumeroConstante.CERO, codigo, correo, fecha);
     }
 
     public void actualizarEntidad(PeticionRecuperacionClaveEntidad entidad, String codigo, String fecha) {

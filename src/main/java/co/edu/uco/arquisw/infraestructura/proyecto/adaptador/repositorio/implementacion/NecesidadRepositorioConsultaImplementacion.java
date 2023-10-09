@@ -5,10 +5,9 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.dto.RequerimientosDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.EstadoEntidad;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.EstadoNecesidadEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.NecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.PeticionEliminacionNecesidadMapeador;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.ProyectoMapeador;
@@ -104,8 +103,8 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public Page<NecesidadDTO> consultarNecesidadesPaginado(int pagina, int tamano){
-        var entidades =this.necesidadDAO.findByEstado_Estado_Id(1L,PageRequest.of(pagina, tamano));
+    public Page<NecesidadDTO> consultarNecesidadesPaginado(int pagina, int tamano) {
+        var entidades = this.necesidadDAO.findByEstado_Estado_Id(NumeroConstante.UNO, PageRequest.of(pagina, tamano));
         return this.necesidadMapeador.construirDTOsPaginado(entidades);
     }
 
@@ -131,8 +130,8 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
     }
 
     @Override
-    public Page<NecesidadDTO> consultarProyectosAprobadosPaginado(int pagina, int tamano){
-        var entidades =this.necesidadDAO.findByEstado_Estado_IdOrEstado_Estado_Id(3L,2L,PageRequest.of(pagina, tamano));
+    public Page<NecesidadDTO> consultarProyectosAprobadosPaginado(int pagina, int tamano) {
+        var entidades = this.necesidadDAO.findByEstado_Estado_IdOrEstado_Estado_Id(NumeroConstante.TRES, NumeroConstante.DOS, PageRequest.of(pagina, tamano));
         return this.necesidadMapeador.construirDTOsPaginado(entidades);
     }
 
@@ -152,10 +151,10 @@ public class NecesidadRepositorioConsultaImplementacion implements NecesidadRepo
         return this.peticionEliminacionNecesidadMapeador.construirDTOs(entidades);
     }
 
-     @Override
-     public Page<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidadesPaginado(int pagina, int tamano){
+    @Override
+    public Page<PeticionEliminacionNecesidadDTO> consultarPeticionesDeEliminacionDeNecesidadesPaginado(int pagina, int tamano) {
 
-         var entidades =this.peticionEliminacionNecesidadDAO.findAll(PageRequest.of(pagina, tamano));
-         return this.peticionEliminacionNecesidadMapeador.construirDTOsPaginado(entidades);
-     }
+        var entidades = this.peticionEliminacionNecesidadDAO.findAll(PageRequest.of(pagina, tamano));
+        return this.peticionEliminacionNecesidadMapeador.construirDTOsPaginado(entidades);
+    }
 }

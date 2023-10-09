@@ -7,8 +7,6 @@ import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElect
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 
-import java.util.List;
-
 public class ServicioNotificacionProyectoAprobadoRolLiderDeEquipo extends ServicioNotificacion {
     public ServicioNotificacionProyectoAprobadoRolLiderDeEquipo(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         super(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
@@ -35,7 +33,7 @@ public class ServicioNotificacionProyectoAprobadoRolLiderDeEquipo extends Servic
 
         if (seleccionDelProyecto.getRoles().contains(TextoConstante.ROL_DIRECTOR_PROYECTO)) {
             var asunto = Mensajes.PROYECTO_ACTUAL_APROBADO_POR_ROL_LIDER_DE_EQUIPO;
-            var cuerpo = Mensajes.EL_PROYECTO + proyecto.getNombre() + Mensajes.HA_SIDO_APROBADO_POR_EL_ROL_LIDER_DE_EQUIPO;
+            var cuerpo = Mensajes.obtenerProyectoAprobadoPorRolLiderDeEquipo(proyecto.getNombre());
 
             this.enviarNotificacion(correo, asunto, cuerpo);
         }
@@ -43,6 +41,11 @@ public class ServicioNotificacionProyectoAprobadoRolLiderDeEquipo extends Servic
 
     @Override
     public void notificarConProyectoId(Long proyectoId, String correo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void notificarConProyectoIdYMotivoRechazo(Long proyectoId, String correo, String motivoRechazo) {
         throw new UnsupportedOperationException();
     }
 

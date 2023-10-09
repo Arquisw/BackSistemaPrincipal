@@ -1,6 +1,5 @@
 package co.edu.uco.arquisw.dominio.usuario.modelo;
 
-import co.edu.uco.arquisw.dominio.transversal.excepciones.PatronExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorObligatorioExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.junit.jupiter.api.Assertions;

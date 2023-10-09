@@ -16,7 +16,7 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioCons
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.ACTIVACION_CUENTA_INICIADA;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.ACTIVACION_CUENTA_INICIADA;
 
 public class ServicioIniciarActivacionCuenta {
     private final ServicioNotificacionFactoria servicioNotificacionFactoria;
@@ -41,10 +41,10 @@ public class ServicioIniciarActivacionCuenta {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 ACTIVACION_CUENTA_INICIADA,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 codigo,
                 TextoConstante.VACIO,
                 correo,
@@ -56,7 +56,7 @@ public class ServicioIniciarActivacionCuenta {
 
     private void validarSiNoExisteUsuarioConId(String correo) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(correo))) {
-            throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_CORREO + correo);
+            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConCorreo(correo));
         }
     }
 

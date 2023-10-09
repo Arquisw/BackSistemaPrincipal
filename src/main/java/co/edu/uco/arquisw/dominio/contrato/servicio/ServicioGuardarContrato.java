@@ -9,12 +9,13 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioCo
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.CONTRATO_GUARDADO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.CONTRATO_GUARDADO;
 
 @AllArgsConstructor
 public class ServicioGuardarContrato {
@@ -37,10 +38,10 @@ public class ServicioGuardarContrato {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 CONTRATO_GUARDADO,
-                0L,
+                NumeroConstante.CERO,
                 necesidadId,
-                0L,
-                0L,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -52,7 +53,7 @@ public class ServicioGuardarContrato {
 
     private void validarSiExisteNecesidadConId(Long necesidadID) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadID))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadID);
+            throw new NullPointerException(Mensajes.obtenerNoExisteNecesidadConId(necesidadID));
         }
     }
 }

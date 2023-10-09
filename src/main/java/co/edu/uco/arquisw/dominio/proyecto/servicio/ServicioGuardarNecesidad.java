@@ -23,7 +23,7 @@ public class ServicioGuardarNecesidad {
 
     private void validarSiExisteAsociacionConId(Long asociacionID) {
         if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(asociacionID))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + asociacionID);
+            throw new NullPointerException(Mensajes.obtenerNoExisteAsociacionConId(asociacionID));
         }
     }
 }

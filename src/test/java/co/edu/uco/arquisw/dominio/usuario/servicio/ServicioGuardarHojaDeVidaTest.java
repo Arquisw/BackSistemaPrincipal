@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -22,9 +23,9 @@ class ServicioGuardarHojaDeVidaTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDto);
 
-        servicio.ejecutar(hojadeVida, 1L);
+        servicio.ejecutar(hojadeVida, NumeroConstante.UNO);
 
-        Mockito.verify(personaRepositorioComando, Mockito.times(1)).guardarHojaDeVida(hojadeVida, 1L);
+        Mockito.verify(personaRepositorioComando, Mockito.times(1)).guardarHojaDeVida(hojadeVida, NumeroConstante.UNO);
     }
 
     @Test
@@ -38,6 +39,6 @@ class ServicioGuardarHojaDeVidaTest {
 
         Mockito.when(repositorioPersonaConsulta.consultarPorCorreo((Mockito.anyString()))).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1, Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(hojadeVida, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO), Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(hojadeVida, NumeroConstante.UNO)).getMessage());
     }
 }

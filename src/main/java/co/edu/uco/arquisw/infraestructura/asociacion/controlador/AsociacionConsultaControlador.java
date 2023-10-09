@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/asociaciones")
 @Tag(name = "Consulta de la Asociacion Controlador")
@@ -47,6 +45,6 @@ public class AsociacionConsultaControlador {
     @Operation(summary = "Consultar Todos", description = "Este es usado para consultar todas las peticiones de eliminación de una asociacion")
     public Page<PeticionEliminacionAsociacionDTO> consultarPeticionesDeEliminacion(@RequestParam(defaultValue = "0") int pagina,
                                                                                    @RequestParam(defaultValue = "10") int tamano) {
-        return this.consultarPeticionesDeEliminacionAsociacionManejador.ejecutar(pagina,tamano);
+        return this.consultarPeticionesDeEliminacionAsociacionManejador.ejecutar(pagina, tamano);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Component
 public class ConsultarPeticionesDeEliminacionPersonaManejador {
@@ -18,6 +17,6 @@ public class ConsultarPeticionesDeEliminacionPersonaManejador {
 
     @Transactional
     public Page<PeticionEliminacionPersonaDTO> ejecutar(int pagina, int tamano) {
-        return personaRepositorioConsulta.consultarPeticionesDeEliminacionDeUsuariosPaginado(pagina,tamano);
+        return personaRepositorioConsulta.consultarPeticionesDeEliminacionDeUsuariosPaginado(pagina, tamano);
     }
 }

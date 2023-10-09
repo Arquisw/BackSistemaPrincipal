@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.filtro;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.util.StringUtils;
 
@@ -33,7 +34,7 @@ public class RequestValidationBeforeFilter implements Filter {
                     String token = new String(decoded, getCredentialsCharset(req));
                     int delim = token.indexOf(":");
                     if (delim == -1) {
-                        throw new BadCredentialsException("Invalid basic authentication token");
+                        throw new BadCredentialsException(Mensajes.EL_TOKEN_RECIBIDO_ES_INVALIDO);
                     }
                     String email = token.substring(0, delim);
                     if (email.toLowerCase().contains("test")) {
@@ -41,7 +42,7 @@ public class RequestValidationBeforeFilter implements Filter {
                         return;
                     }
                 } catch (IllegalArgumentException e) {
-                    throw new BadCredentialsException("Failed to decode basic authentication token");
+                    throw new BadCredentialsException(Mensajes.ERROR_AL_DECODIFICAR_EL_TOKEN_DE_AUTENTICACION_BASICA);
                 }
             }
         }

@@ -11,7 +11,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PROYECTO_APROBADO_POR_ROL_INGENIERIA;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PROYECTO_APROBADO_POR_ROL_INGENIERIA;
 
 public class ServicioAprobarProyectoPorRolIngenieria {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
@@ -28,7 +28,6 @@ public class ServicioAprobarProyectoPorRolIngenieria {
         this.servicioNotificacionFactoria = servicioNotificacionFactoria;
     }
 
-
     public Long ejecutar(Long id) {
         validarSiExisteProyectoConID(id);
         validarSiElContratoFueEfectuado(id);
@@ -44,9 +43,9 @@ public class ServicioAprobarProyectoPorRolIngenieria {
                 this.servicioNotificacionFactoria.orquestarNotificacion(
                         PROYECTO_APROBADO_POR_ROL_INGENIERIA,
                         id,
-                        NumeroConstante.Zero,
-                        NumeroConstante.Zero,
-                        NumeroConstante.Zero,
+                        NumeroConstante.CERO,
+                        NumeroConstante.CERO,
+                        NumeroConstante.CERO,
                         TextoConstante.VACIO,
                         TextoConstante.VACIO,
                         correo,
@@ -60,13 +59,13 @@ public class ServicioAprobarProyectoPorRolIngenieria {
 
     private void validarSiExisteProyectoConID(Long id) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteProyectoConId(id));
         }
     }
 
     private void validarSiElContratoFueEfectuado(Long id) {
         if (!this.necesidadRepositorioConsulta.consultarPorProyectoId(id).getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
-            throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_HABER_EFECTUADO_EL_CONTRATO + id);
+            throw new AutorizacionExcepcion(Mensajes.obtenerNoPuedeAprobarProyectoSinHaberseEfectuadoElContrato(id));
         }
     }
 }

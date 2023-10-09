@@ -11,7 +11,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PROYECTO_APROBADO_POR_LIDER_DE_EQUIPO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PROYECTO_APROBADO_POR_LIDER_DE_EQUIPO;
 
 public class ServicioAprobarProyectoPorRolLiderDeEquipo {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
@@ -28,7 +28,6 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
         this.servicioNotificacionFactoria = servicioNotificacionFactoria;
     }
 
-
     public Long ejecutar(Long id) {
         validarSiExisteProyectoConID(id);
         validarSiFueAprobadoPorRolIngenieria(id);
@@ -44,9 +43,9 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
                 this.servicioNotificacionFactoria.orquestarNotificacion(
                         PROYECTO_APROBADO_POR_LIDER_DE_EQUIPO,
                         id,
-                        NumeroConstante.Zero,
-                        NumeroConstante.Zero,
-                        NumeroConstante.Zero,
+                        NumeroConstante.CERO,
+                        NumeroConstante.CERO,
+                        NumeroConstante.CERO,
                         TextoConstante.VACIO,
                         TextoConstante.VACIO,
                         correo,
@@ -60,7 +59,7 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
 
     private void validarSiExisteProyectoConID(Long id) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteProyectoConId(id));
         }
     }
 
@@ -68,7 +67,7 @@ public class ServicioAprobarProyectoPorRolLiderDeEquipo {
         var proyectoDTO = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
         if (!proyectoDTO.getAprobacionProyecto().isIngenieria()) {
-            throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_INGENIERIA + id);
+            throw new AutorizacionExcepcion(Mensajes.obtenerNoPuedeAprobarProyectoSinLaAprobacionDelRolIngenieria(id));
         }
     }
 }

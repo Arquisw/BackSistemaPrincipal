@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.dominio.postulacion.servicio;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,7 @@ class ServicioSeleccionadoPorUsuarioIdTest {
     void validarConsultaSeleccionadoPorProyectoExitosa() {
         var personaDto = new PersonaDTO();
         var seleccionDTO = new SeleccionDTO();
-        var personaID = 1L;
+        var personaID = NumeroConstante.UNO;
 
         var postulacionRepositorioConsulta = Mockito.mock(PostulacionRepositorioConsulta.class);
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
@@ -41,9 +42,9 @@ class ServicioSeleccionadoPorUsuarioIdTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L,
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO),
                 Assertions.assertThrows(NullPointerException.class, () ->
-                        servicio.ejecutar(1L)
+                        servicio.ejecutar(NumeroConstante.UNO)
                 ).getMessage());
     }
 }

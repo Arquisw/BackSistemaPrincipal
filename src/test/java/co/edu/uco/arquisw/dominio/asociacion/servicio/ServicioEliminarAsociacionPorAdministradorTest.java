@@ -3,9 +3,9 @@ package co.edu.uco.arquisw.dominio.asociacion.servicio;
 
 import co.edu.uco.arquisw.dominio.asociacion.puerto.comando.AsociacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.asociacion.puerto.consulta.AsociacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +23,7 @@ class ServicioEliminarAsociacionPorAdministradorTest {
         var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
         var servicio = new ServicioEliminarAsociacionPorAdministrador(asociacionRepositorioConsulta, asociacionRepositorioComando, personaRepositorioComando, servicioNotificacionFactoria, personaRepositorioConsulta);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + 1L,
-                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteAsociacionConId(NumeroConstante.UNO),
+                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 }

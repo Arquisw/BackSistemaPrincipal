@@ -8,8 +8,6 @@ import co.edu.uco.arquisw.dominio.contrato.servicio.ServicioActualizarContrato;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 @AllArgsConstructor
 public class ActualizarContratoManejador implements ManejadorComandoVariableDeRutaRespuesta<ContratoComando, Long, ComandoRespuesta<Long>> {

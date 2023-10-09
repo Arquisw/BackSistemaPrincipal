@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionReposit
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,9 +21,9 @@ class ServicioConsultarSeleccionadoPorProyectoTest {
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(proyectoDto);
 
-        servicio.ejecutar(1L);
+        servicio.ejecutar(NumeroConstante.UNO);
 
-        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarSeleccionadosPorProyecto(1L);
+        Mockito.verify(postulacionRepositorioConsulta, Mockito.times(1)).consultarSeleccionadosPorProyecto(NumeroConstante.UNO);
     }
 
     @Test
@@ -34,9 +35,9 @@ class ServicioConsultarSeleccionadoPorProyectoTest {
 
         Mockito.when(necesidadRepositorioConsulta.consultarProyectoPorId(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + 1L,
+        Assertions.assertEquals(Mensajes.obtenerNoExisteProyectoConId(NumeroConstante.UNO),
                 Assertions.assertThrows(NullPointerException.class, () ->
-                        servicio.ejecutar(1L)
+                        servicio.ejecutar(NumeroConstante.UNO)
                 ).getMessage());
     }
 }

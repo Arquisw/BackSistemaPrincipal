@@ -4,8 +4,6 @@ import co.edu.uco.arquisw.dominio.asociacion.dto.AsociacionDTO;
 import co.edu.uco.arquisw.dominio.asociacion.dto.PeticionEliminacionAsociacionDTO;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface AsociacionRepositorioConsulta {
     AsociacionDTO consultarPorIDUsuario(Long id);
 

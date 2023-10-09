@@ -5,7 +5,6 @@ import co.edu.uco.arquisw.dominio.contrato.modelo.Contrato;
 import co.edu.uco.arquisw.dominio.contrato.puerto.comando.ContratoRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
@@ -14,11 +13,7 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import javax.mail.MessagingException;
-
-import java.util.ArrayList;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.CONTRATO_ACTUALIZADO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.CONTRATO_ACTUALIZADO;
 
 @AllArgsConstructor
 public class ServicioActualizarContrato {
@@ -38,10 +33,10 @@ public class ServicioActualizarContrato {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 CONTRATO_ACTUALIZADO,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
                 necesidadId,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -53,7 +48,7 @@ public class ServicioActualizarContrato {
 
     private void validarSiExisteAsociacionConId(Long necesidadId) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteNecesidadConId(necesidadId));
         }
     }
 }

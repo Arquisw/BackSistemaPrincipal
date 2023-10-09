@@ -25,7 +25,7 @@ public class ServicioGuardarHojaDeVida {
 
     private void validarSiExisteUsuarioConID(Long usuarioId) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
-            throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
+            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(usuarioId));
         }
     }
 }

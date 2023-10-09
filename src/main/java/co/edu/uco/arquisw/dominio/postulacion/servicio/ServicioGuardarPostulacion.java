@@ -39,13 +39,13 @@ public class ServicioGuardarPostulacion {
 
     private void validarSiExisteProyectoConId(Long proyectoID) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(proyectoID))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + proyectoID);
+            throw new NullPointerException(Mensajes.obtenerNoExisteProyectoConId(proyectoID));
         }
     }
 
     private void validarSiExistePersonaConId(Long usuarioID) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioID))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioID);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(usuarioID));
         }
     }
 

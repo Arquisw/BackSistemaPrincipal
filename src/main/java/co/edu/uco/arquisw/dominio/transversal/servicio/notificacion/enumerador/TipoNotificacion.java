@@ -1,7 +1,6 @@
-package co.edu.uco.arquisw.dominio.transversal.enumerator;
+package co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador;
 
 public enum TipoNotificacion {
-    GENERAL,
     ACTIVACION_CUENTA_INICIADA,
     ASOCIACION_ELIMINADA,
     ASOCIACION_ELIMINADA_POR_ADMINISTRADOR,

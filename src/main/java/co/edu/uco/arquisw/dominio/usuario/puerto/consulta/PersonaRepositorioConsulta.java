@@ -19,6 +19,7 @@ public interface PersonaRepositorioConsulta {
     HojaDeVidaPersonaDTO consultarHojaDeVidaPorIdUsuario(Long usuarioID);
 
     List<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuarios();
+
     Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuariosPaginado(int pagin, int tamano);
 
     String consultarClaveConCorreo(String correo);

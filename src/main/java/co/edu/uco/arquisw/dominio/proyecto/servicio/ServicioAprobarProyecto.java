@@ -5,7 +5,6 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoNecesidad;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.NecesidadRepositorioComando;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
@@ -14,11 +13,7 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import javax.mail.MessagingException;
-
-import java.util.ArrayList;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PROYECTO_APROBADO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PROYECTO_APROBADO;
 
 @AllArgsConstructor
 public class ServicioAprobarProyecto {
@@ -39,10 +34,10 @@ public class ServicioAprobarProyecto {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 PROYECTO_APROBADO,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
                 id,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -54,7 +49,7 @@ public class ServicioAprobarProyecto {
 
     private void validarSiExisteNecesidadConID(Long id) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteNecesidadConId(id));
         }
     }
 }

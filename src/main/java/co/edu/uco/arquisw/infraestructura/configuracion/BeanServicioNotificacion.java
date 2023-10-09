@@ -94,9 +94,9 @@ public class BeanServicioNotificacion {
     public ServicioNotificacionUsuarioRechazado servicioNotificacionUsuarioRechazado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         return new ServicioNotificacionUsuarioRechazado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
     }
+
     @Bean
     public ServicioNotificacionUsuarioSeleccionado servicioNotificacionUsuarioSeleccionado(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         return new ServicioNotificacionUsuarioSeleccionado(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
     }
-
 }

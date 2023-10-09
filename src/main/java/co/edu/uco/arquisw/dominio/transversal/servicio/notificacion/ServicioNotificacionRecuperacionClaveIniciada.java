@@ -6,8 +6,6 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 
-import java.util.List;
-
 public class ServicioNotificacionRecuperacionClaveIniciada extends ServicioNotificacion {
     public ServicioNotificacionRecuperacionClaveIniciada(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         super(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
@@ -39,6 +37,11 @@ public class ServicioNotificacionRecuperacionClaveIniciada extends ServicioNotif
     }
 
     @Override
+    public void notificarConProyectoIdYMotivoRechazo(Long proyectoId, String correo, String motivoRechazo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void notificarConAsociacionId(Long asociacionId, String correo) {
         throw new UnsupportedOperationException();
     }
@@ -51,7 +54,7 @@ public class ServicioNotificacionRecuperacionClaveIniciada extends ServicioNotif
     @Override
     public void notificarConCodigo(String codigo, String correo) {
         var asunto = Mensajes.RECUPERACION_DE_LA_CUENTA;
-        var cuerpo = Mensajes.CODIGO + codigo;
+        var cuerpo = Mensajes.obtenerElCodigo(codigo);
 
         this.enviarNotificacion(correo, asunto, cuerpo);
     }

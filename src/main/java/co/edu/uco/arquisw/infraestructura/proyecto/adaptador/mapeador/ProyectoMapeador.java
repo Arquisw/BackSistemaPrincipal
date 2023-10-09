@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.ProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Proyecto;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.ProyectoEntidad;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,6 @@ public class ProyectoMapeador {
     }
 
     public ProyectoEntidad construirEntidad(Proyecto proyecto) {
-        return new ProyectoEntidad(0L, proyecto.getNombre(), proyecto.getDescripcion(), this.estadoProyectoMapeador.construirEntidad(proyecto.getEstado()), this.aprobacionProyectoMapeador.construirEntidad(proyecto.getAprobacionProyecto()), this.tipoConsultoriaMapeador.construirEntidades(proyecto.getTiposConsultoria()));
+        return new ProyectoEntidad(NumeroConstante.CERO, proyecto.getNombre(), proyecto.getDescripcion(), this.estadoProyectoMapeador.construirEntidad(proyecto.getEstado()), this.aprobacionProyectoMapeador.construirEntidad(proyecto.getAprobacionProyecto()), this.tipoConsultoriaMapeador.construirEntidades(proyecto.getTiposConsultoria()));
     }
 }

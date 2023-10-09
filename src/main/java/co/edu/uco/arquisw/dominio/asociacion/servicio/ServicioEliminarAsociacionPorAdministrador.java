@@ -13,9 +13,7 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComan
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import javax.mail.MessagingException;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.ASOCIACION_ELIMINADA_POR_ADMINISTRADOR;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.ASOCIACION_ELIMINADA_POR_ADMINISTRADOR;
 
 @AllArgsConstructor
 public class ServicioEliminarAsociacionPorAdministrador {
@@ -36,9 +34,9 @@ public class ServicioEliminarAsociacionPorAdministrador {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 ASOCIACION_ELIMINADA_POR_ADMINISTRADOR,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 id,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
@@ -51,7 +49,7 @@ public class ServicioEliminarAsociacionPorAdministrador {
 
     private void validarSiExisteAsociacionConID(Long id) {
         if (ValidarObjeto.esNulo(this.asociacionRepositorioConsulta.consultarPorID(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_ASOCIACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteAsociacionConId(id));
         }
     }
 }

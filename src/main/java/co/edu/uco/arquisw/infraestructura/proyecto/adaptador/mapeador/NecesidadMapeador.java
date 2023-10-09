@@ -1,11 +1,10 @@
 package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
-import co.edu.uco.arquisw.dominio.proyecto.dto.PeticionEliminacionNecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.Necesidad;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.NecesidadEntidad;
-import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.PeticionEliminacionNecesidadEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.MotivoRechazoNecesidadDAO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -48,6 +47,6 @@ public class NecesidadMapeador {
     }
 
     public NecesidadEntidad construirEntidad(Necesidad necesidad, Long asociacionID) {
-        return new NecesidadEntidad(0L, this.estadoNecesidadMapeador.construirEntidad(necesidad.getEstado()), this.proyectoMapeador.construirEntidad(necesidad.getProyecto()), asociacionID);
+        return new NecesidadEntidad(NumeroConstante.CERO, this.estadoNecesidadMapeador.construirEntidad(necesidad.getEstado()), this.proyectoMapeador.construirEntidad(necesidad.getProyecto()), asociacionID);
     }
 }

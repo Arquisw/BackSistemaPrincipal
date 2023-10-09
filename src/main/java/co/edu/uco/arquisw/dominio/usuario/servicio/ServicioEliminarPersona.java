@@ -13,7 +13,7 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PERSONA_ELIMINADA;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PERSONA_ELIMINADA;
 
 public class ServicioEliminarPersona {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -40,10 +40,10 @@ public class ServicioEliminarPersona {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 PERSONA_ELIMINADA,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -55,7 +55,7 @@ public class ServicioEliminarPersona {
 
     private void validarSiNoExisteUsuarioConId(Long id) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
-            throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(id));
         }
     }
 

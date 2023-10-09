@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador;
 import co.edu.uco.arquisw.dominio.postulacion.dto.PostulacionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.PostulacionEntidad;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.RolProyectoEntidad;
@@ -63,7 +64,7 @@ public class PostulacionMapeador {
     }
 
     public PostulacionEntidad construirEntidad(Postulacion postulacion, Long proyectoID, Long usuarioID) {
-        return new PostulacionEntidad(0L, postulacion.isSeleccionado(), postulacion.isRechazado(), FechaFormateador.obtenerFechaTexto(postulacion.getFecha()), rolProyectoPostulacionMapeador.construirEntidades(postulacion.getRoles()), proyectoID, usuarioID);
+        return new PostulacionEntidad(NumeroConstante.CERO, postulacion.isSeleccionado(), postulacion.isRechazado(), FechaFormateador.obtenerFechaTexto(postulacion.getFecha()), rolProyectoPostulacionMapeador.construirEntidades(postulacion.getRoles()), proyectoID, usuarioID);
     }
 
     public void actualizarEntidad(PostulacionEntidad entidad, Postulacion postulacion, Long proyectoId, Long usuarioId) {
@@ -83,7 +84,7 @@ public class PostulacionMapeador {
             } else {
                 var nuevoRol = new RolProyectoEntidad();
 
-                nuevoRol.setId(0L);
+                nuevoRol.setId(NumeroConstante.CERO);
                 nuevoRol.setNombre(roles.get(roles.size() - 1));
                 rolEntidad.setRol(nuevoRol);
             }

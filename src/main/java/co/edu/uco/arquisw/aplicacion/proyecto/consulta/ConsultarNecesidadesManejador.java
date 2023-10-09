@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Component
 public class ConsultarNecesidadesManejador {
@@ -18,6 +17,6 @@ public class ConsultarNecesidadesManejador {
 
     @Transactional
     public Page<NecesidadDTO> ejecutar(int pagina, int tamano) {
-        return this.necesidadRepositorioConsulta.consultarNecesidadesPaginado(pagina,tamano);
+        return this.necesidadRepositorioConsulta.consultarNecesidadesPaginado(pagina, tamano);
     }
 }

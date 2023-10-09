@@ -3,6 +3,7 @@ package co.edu.uco.arquisw.infraestructura.postulacion.adaptador.mapeador;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Seleccion;
 import co.edu.uco.arquisw.dominio.transversal.formateador.FechaFormateador;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.postulacion.adaptador.entidad.SeleccionEntidad;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.PersonaDAO;
@@ -45,6 +46,6 @@ public class SeleccionMapeador {
     }
 
     public SeleccionEntidad construirEntidad(Seleccion seleccion, Long proyectoID, Long usuarioID) {
-        return new SeleccionEntidad(0L, FechaFormateador.obtenerFechaTexto(seleccion.getFecha()), rolProyectoSeleccionMapeador.construirEntidades(seleccion.getRoles()), proyectoID, usuarioID);
+        return new SeleccionEntidad(NumeroConstante.CERO, FechaFormateador.obtenerFechaTexto(seleccion.getFecha()), rolProyectoSeleccionMapeador.construirEntidades(seleccion.getRoles()), proyectoID, usuarioID);
     }
 }

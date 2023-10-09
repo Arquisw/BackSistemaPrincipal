@@ -6,8 +6,6 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 
-import java.util.List;
-
 public class ServicioNotificacionPersonaEliminadaPorAdministrador extends ServicioNotificacion {
     public ServicioNotificacionPersonaEliminadaPorAdministrador(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         super(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
@@ -38,6 +36,11 @@ public class ServicioNotificacionPersonaEliminadaPorAdministrador extends Servic
 
     @Override
     public void notificarConProyectoId(Long proyectoId, String correo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void notificarConProyectoIdYMotivoRechazo(Long proyectoId, String correo, String motivoRechazo) {
         throw new UnsupportedOperationException();
     }
 

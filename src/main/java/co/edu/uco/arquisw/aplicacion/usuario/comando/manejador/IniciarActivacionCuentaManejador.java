@@ -5,8 +5,6 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoRespu
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioIniciarActivacionCuenta;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 public class IniciarActivacionCuentaManejador implements ManejadorComandoRespuesta<String, ComandoRespuesta<Long>> {
     private final ServicioIniciarActivacionCuenta servicioIniciarActivacionCuenta;

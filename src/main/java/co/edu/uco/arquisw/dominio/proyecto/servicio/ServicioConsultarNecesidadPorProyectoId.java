@@ -20,7 +20,7 @@ public class ServicioConsultarNecesidadPorProyectoId {
 
     private void validarSiExisteProyectoConID(Long id) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteProyectoConId(id));
         }
     }
 }

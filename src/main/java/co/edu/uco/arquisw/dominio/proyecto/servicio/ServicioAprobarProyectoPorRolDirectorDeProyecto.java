@@ -13,7 +13,7 @@ import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PROYECTO_APROBADO_POR_ROL_DIRECTOR_DE_PROYECTO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PROYECTO_APROBADO_POR_ROL_DIRECTOR_DE_PROYECTO;
 
 public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
     private final NecesidadRepositorioConsulta necesidadRepositorioConsulta;
@@ -32,7 +32,6 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
         this.servicioNotificacionFactoria = servicioNotificacionFactoria;
     }
 
-
     public Long ejecutar(Long id, String token) {
         validarSiExisteProyectoConID(id);
         validarSiFueAprobadoPorRolLiderDeEquipo(id);
@@ -43,7 +42,7 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
 
         this.necesidadRepositorioComando.actualizarEstadoProyecto(EstadoProyecto.crear(TextoConstante.ESTADO_EN_DESARROLLO), id);
 
-        if(proyecto.getTiposConsultoria().stream().anyMatch(tipoConsultoria -> tipoConsultoria.getNombre().equals(TextoConstante.INGENIERIA_DE_REQUISITOS))) {
+        if (proyecto.getTiposConsultoria().stream().anyMatch(tipoConsultoria -> tipoConsultoria.getNombre().equals(TextoConstante.INGENIERIA_DE_REQUISITOS))) {
             this.faseRepositorioComando.guardar(id, token);
         }
 
@@ -53,9 +52,9 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
             this.servicioNotificacionFactoria.orquestarNotificacion(
                     PROYECTO_APROBADO_POR_ROL_DIRECTOR_DE_PROYECTO,
                     id,
-                    NumeroConstante.Zero,
-                    NumeroConstante.Zero,
-                    NumeroConstante.Zero,
+                    NumeroConstante.CERO,
+                    NumeroConstante.CERO,
+                    NumeroConstante.CERO,
                     TextoConstante.VACIO,
                     TextoConstante.VACIO,
                     correo,
@@ -68,7 +67,7 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
 
     private void validarSiExisteProyectoConID(Long id) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarProyectoPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_PROYECTO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteProyectoConId(id));
         }
     }
 
@@ -76,7 +75,7 @@ public class ServicioAprobarProyectoPorRolDirectorDeProyecto {
         var proyectoDTO = this.necesidadRepositorioConsulta.consultarProyectoPorId(id);
 
         if (!proyectoDTO.getAprobacionProyecto().isLiderDeEquipo()) {
-            throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_APROBAR_PROYECTO_SIN_LA_APROBACION_PREVIA_DEL_ROL_LIDER_DE_EQUIPO + id);
+            throw new AutorizacionExcepcion(Mensajes.obtenerNoPuedeAprobarProyectoSinLaAprobacionDelRolLiderDeEquipo(id));
         }
     }
 }

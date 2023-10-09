@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.TipoConsultoriaDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.TipoConsultoria;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.TipoConsultoriaProyectoEntidad;
@@ -20,7 +21,7 @@ public class TipoConsultoriaMapeador {
     }
 
     public TipoConsultoriaProyectoEntidad construirEntidad(TipoConsultoria tipoConsultoria) {
-        return new TipoConsultoriaProyectoEntidad(0L, new TipoConsultoriaEntidad(obtenerRolID(tipoConsultoria.getNombre()), tipoConsultoria.getNombre()));
+        return new TipoConsultoriaProyectoEntidad(NumeroConstante.CERO, new TipoConsultoriaEntidad(obtenerRolID(tipoConsultoria.getNombre()), tipoConsultoria.getNombre()));
     }
 
     public List<TipoConsultoriaProyectoEntidad> construirEntidades(List<TipoConsultoria> tiposConsultoria) {
@@ -29,10 +30,10 @@ public class TipoConsultoriaMapeador {
 
     private Long obtenerRolID(String nombre) {
         return switch (nombre) {
-            case TextoConstante.INGENIERIA_DE_REQUISITOS -> 1L;
-            case TextoConstante.SQA -> 2L;
-            case TextoConstante.SQC -> 3L;
-            default -> 0L;
+            case TextoConstante.INGENIERIA_DE_REQUISITOS -> NumeroConstante.UNO;
+            case TextoConstante.SQA -> NumeroConstante.DOS;
+            case TextoConstante.SQC -> NumeroConstante.TRES;
+            default -> NumeroConstante.CERO;
         };
     }
 }

@@ -5,8 +5,6 @@ import co.edu.uco.arquisw.aplicacion.transversal.manejador.ManejadorComandoRespu
 import co.edu.uco.arquisw.dominio.usuario.servicio.ServicioEliminarPersonaPorAdministrador;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 public class EliminarPersonaPorAdministradorManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {
     private final ServicioEliminarPersonaPorAdministrador servicioEliminarPersonaPorAdministrador;

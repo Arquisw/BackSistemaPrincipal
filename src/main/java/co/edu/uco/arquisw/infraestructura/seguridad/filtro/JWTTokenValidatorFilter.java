@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.filtro;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.infraestructura.seguridad.constante.SecurityConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -41,7 +42,7 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                         AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e) {
-                throw new BadCredentialsException("El token recibido es invalido");
+                throw new BadCredentialsException(Mensajes.EL_TOKEN_RECIBIDO_ES_INVALIDO);
             }
         }
         chain.doFilter(request, response);

@@ -20,7 +20,7 @@ public class ServicioConsultarPostulacionPorId {
 
     private void validarSiExistePostulacionConID(Long id) {
         if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExistePostulacionConId(id));
         }
     }
 }

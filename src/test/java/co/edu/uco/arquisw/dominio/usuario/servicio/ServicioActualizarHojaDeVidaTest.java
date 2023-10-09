@@ -1,6 +1,7 @@
 package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.HojaDeVidaPersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
@@ -22,7 +23,7 @@ class ServicioActualizarHojaDeVidaTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.any())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO), Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -38,7 +39,7 @@ class ServicioActualizarHojaDeVidaTest {
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
         Mockito.when(personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(Mockito.anyLong())).thenReturn(null);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteHojaDeVidaParaUsuarioConId(NumeroConstante.UNO), Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(hojaDeVida, NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -54,8 +55,8 @@ class ServicioActualizarHojaDeVidaTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
         Mockito.when(personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(Mockito.anyLong())).thenReturn(hojaDeVidaDTO);
-        servicio.ejecutar(hojaDeVida, 1L);
+        servicio.ejecutar(hojaDeVida, NumeroConstante.UNO);
 
-        Mockito.verify(personaRepositorioComando, Mockito.times(1)).actualizarHojaDeVida(hojaDeVida, 1L);
+        Mockito.verify(personaRepositorioComando, Mockito.times(1)).actualizarHojaDeVida(hojaDeVida, NumeroConstante.UNO);
     }
 }

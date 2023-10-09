@@ -23,7 +23,7 @@ public class ServicioGuardarRequerimientos {
 
     private void validarSiExisteNecesidadConId(Long necesidadId) {
         if (ValidarObjeto.esNulo(this.necesidadRepositorioConsulta.consultarPorNecesidadId(necesidadId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_NECESIDAD_CON_EL_ID + necesidadId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteNecesidadConId(necesidadId));
         }
     }
 }

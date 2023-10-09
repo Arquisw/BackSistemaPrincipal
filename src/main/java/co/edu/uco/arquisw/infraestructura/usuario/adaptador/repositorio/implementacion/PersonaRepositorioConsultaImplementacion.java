@@ -118,8 +118,8 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuariosPaginado(int pagina, int tamano){
-        var entidades =this.peticionEliminacionPersonaDAO.findAll(PageRequest.of(pagina, tamano));
+    public Page<PeticionEliminacionPersonaDTO> consultarPeticionesDeEliminacionDeUsuariosPaginado(int pagina, int tamano) {
+        var entidades = this.peticionEliminacionPersonaDAO.findAll(PageRequest.of(pagina, tamano));
         return this.peticionEliminacionPersonaMapeador.construirDTOsPaginado(entidades);
     }
 

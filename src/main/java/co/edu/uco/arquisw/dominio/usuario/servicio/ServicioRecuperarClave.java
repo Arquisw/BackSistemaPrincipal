@@ -32,7 +32,7 @@ public class ServicioRecuperarClave {
 
     private void validarSiNoExisteUsuario(String correo) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorCorreo(correo))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_CORREO + correo);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConCorreo(correo));
         }
     }
 }

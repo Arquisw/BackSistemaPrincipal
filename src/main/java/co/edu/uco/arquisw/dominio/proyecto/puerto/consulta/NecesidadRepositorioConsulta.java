@@ -20,6 +20,7 @@ public interface NecesidadRepositorioConsulta {
     NecesidadDTO consultarPorNecesidadId(Long id);
 
     List<NecesidadDTO> consultarNecesidades();
+
     Page<NecesidadDTO> consultarNecesidadesPaginado(int pagina, int tamano);
 
     ProyectoDTO consultarProyectoPorId(Long proyectoID);

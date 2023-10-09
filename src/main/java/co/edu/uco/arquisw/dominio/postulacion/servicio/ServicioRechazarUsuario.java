@@ -5,8 +5,6 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.MotivoRechazoPostulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
@@ -17,11 +15,7 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComan
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import javax.mail.MessagingException;
-
-import java.util.ArrayList;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.USUARIO_RECHAZADO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.USUARIO_RECHAZADO;
 
 @AllArgsConstructor
 public class ServicioRechazarUsuario {
@@ -46,11 +40,11 @@ public class ServicioRechazarUsuario {
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 USUARIO_RECHAZADO,
                 postulacionDTO.getProyectoID(),
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
-                TextoConstante.VACIO,
+                motivoRechazoPostulacion.getMotivo(),
                 correo,
                 new SeleccionDTO()
         );
@@ -60,7 +54,7 @@ public class ServicioRechazarUsuario {
 
     private void validarSiExistePostulacionConId(Long id) {
         if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExistePostulacionConId(id));
         }
     }
 }

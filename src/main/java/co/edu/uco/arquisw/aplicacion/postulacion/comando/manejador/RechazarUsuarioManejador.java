@@ -8,8 +8,6 @@ import co.edu.uco.arquisw.dominio.postulacion.servicio.ServicioRechazarUsuario;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 @AllArgsConstructor
 public class RechazarUsuarioManejador implements ManejadorComandoVariableDeRutaRespuesta<MotivoRechazoPostulacionComando, Long, ComandoRespuesta<Long>> {

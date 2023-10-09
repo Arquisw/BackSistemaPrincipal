@@ -6,9 +6,9 @@ import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.ValorInvalidoExcepcion;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -29,8 +29,8 @@ class ServicioEliminarPersonaTest {
 
         var servicio = new ServicioEliminarPersona(personaRepositorioComando, personaRepositorioConsulta, asociacionRepositorioConsulta, postulacionRepositorioConsulta, servicioNotificacionFactoria);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
-                Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO),
+                Assertions.assertThrows(ValorInvalidoExcepcion.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -50,7 +50,7 @@ class ServicioEliminarPersonaTest {
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_ASOCIACION_A_CARGO,
-                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -70,6 +70,6 @@ class ServicioEliminarPersonaTest {
         Mockito.when(postulacionRepositorioConsulta.consultarSeleccionesPorUsuarioId(Mockito.anyLong())).thenReturn(List.of(seleccionado));
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_ESTAR_SELECCIONADO_EN_UN_PROYECTO,
-                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 }

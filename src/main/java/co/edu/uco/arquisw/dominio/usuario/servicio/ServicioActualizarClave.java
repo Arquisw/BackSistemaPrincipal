@@ -37,7 +37,7 @@ public class ServicioActualizarClave {
 
     private void validarSiNoExisteUsuario(Long id) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(id));
         }
     }
 

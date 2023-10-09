@@ -4,6 +4,7 @@ import co.edu.uco.arquisw.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.comando.FaseRepositorioComando;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DemasiadasPeticionesExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.TecnicoExcepcion;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class FaseRepositorioComandoImplementacion implements FaseRepositorioComa
             assert response != null;
             return response.getValor();
         } catch (HttpStatusCodeException exception) {
-            logger.error("Error consumiendo el servicio de Ingeniería de Requisitos", exception);
+            logger.error(Mensajes.ERROR_CONSUMIENDO_EL_SERVICIO_DE_INGENIERIA_DE_REQUISITOS, exception);
 
             if (exception.getStatusCode().is4xxClientError()) {
                 throw new DemasiadasPeticionesExcepcion(exception.getMessage());

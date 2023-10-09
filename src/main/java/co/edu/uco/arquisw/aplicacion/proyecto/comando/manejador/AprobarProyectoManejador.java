@@ -6,8 +6,6 @@ import co.edu.uco.arquisw.dominio.proyecto.servicio.ServicioAprobarProyecto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 @Component
 @AllArgsConstructor
 public class AprobarProyectoManejador implements ManejadorComandoRespuesta<Long, ComandoRespuesta<Long>> {

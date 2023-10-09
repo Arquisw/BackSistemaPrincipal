@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador;
 
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.RolDTO;
 import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
@@ -37,20 +38,20 @@ public class RolMapeador {
 
     private Long obtenerRolID(String nombre) {
         return switch (nombre) {
-            case TextoConstante.ROL_USUARIO -> 1L;
-            case TextoConstante.ROL_ASOCIACION -> 2L;
-            case TextoConstante.ROL_ADMINISTRADOR -> 3L;
-            case TextoConstante.ROL_POSTULADO -> 4L;
-            case TextoConstante.ROL_SELECCIONADO -> 5L;
-            case TextoConstante.ROL_DIRECTOR_PROYECTO -> 6L;
-            case TextoConstante.ROL_PARTE_INTERESADA -> 7L;
-            case TextoConstante.ROL_EQUIPO_DESARROLLO -> 8L;
-            case TextoConstante.ROL_INGENIERIA -> 9L;
-            case TextoConstante.ROL_ARQUITECTURA -> 10L;
-            case TextoConstante.ROL_ANALISTA -> 11L;
-            case TextoConstante.ROL_LIDER_DEL_EQUIPO -> 12L;
-            case TextoConstante.ROL_PATROCINADOR -> 13L;
-            default -> 0L;
+            case TextoConstante.ROL_USUARIO -> NumeroConstante.UNO;
+            case TextoConstante.ROL_ASOCIACION -> NumeroConstante.DOS;
+            case TextoConstante.ROL_ADMINISTRADOR -> NumeroConstante.TRES;
+            case TextoConstante.ROL_POSTULADO -> NumeroConstante.CUATRO;
+            case TextoConstante.ROL_SELECCIONADO -> NumeroConstante.CINCO;
+            case TextoConstante.ROL_DIRECTOR_PROYECTO -> NumeroConstante.SEIS;
+            case TextoConstante.ROL_PARTE_INTERESADA -> NumeroConstante.SIETE;
+            case TextoConstante.ROL_EQUIPO_DESARROLLO -> NumeroConstante.OCHO;
+            case TextoConstante.ROL_INGENIERIA -> NumeroConstante.NUEVE;
+            case TextoConstante.ROL_ARQUITECTURA -> NumeroConstante.DIEZ;
+            case TextoConstante.ROL_ANALISTA -> NumeroConstante.ONCE;
+            case TextoConstante.ROL_LIDER_DEL_EQUIPO -> NumeroConstante.DOCE;
+            case TextoConstante.ROL_PATROCINADOR -> NumeroConstante.TRECE;
+            default -> NumeroConstante.CERO;
         };
     }
 

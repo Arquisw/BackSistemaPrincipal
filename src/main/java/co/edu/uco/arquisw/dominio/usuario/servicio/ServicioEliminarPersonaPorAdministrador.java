@@ -10,9 +10,7 @@ import co.edu.uco.arquisw.dominio.transversal.validador.ValidarObjeto;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import javax.mail.MessagingException;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.PERSONA_ELIMINADA_POR_ADMINISTRADOR;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.PERSONA_ELIMINADA_POR_ADMINISTRADOR;
 
 public class ServicioEliminarPersonaPorAdministrador {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -34,10 +32,10 @@ public class ServicioEliminarPersonaPorAdministrador {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 PERSONA_ELIMINADA_POR_ADMINISTRADOR,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -49,7 +47,7 @@ public class ServicioEliminarPersonaPorAdministrador {
 
     private void validarSiNoExisteUsuarioConId(Long id) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
-            throw new ValorInvalidoExcepcion(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(id));
         }
     }
 }

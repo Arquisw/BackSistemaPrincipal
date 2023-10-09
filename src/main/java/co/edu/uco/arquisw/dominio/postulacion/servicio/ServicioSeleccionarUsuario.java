@@ -5,9 +5,7 @@ import co.edu.uco.arquisw.dominio.postulacion.modelo.Postulacion;
 import co.edu.uco.arquisw.dominio.postulacion.modelo.Seleccion;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.comando.PostulacionRepositorioComando;
 import co.edu.uco.arquisw.dominio.postulacion.puerto.consulta.PostulacionRepositorioConsulta;
-import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
@@ -18,11 +16,9 @@ import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComan
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 
-import javax.mail.MessagingException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.USUARIO_SELECCIONADO;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.USUARIO_SELECCIONADO;
 
 @AllArgsConstructor
 public class ServicioSeleccionarUsuario {
@@ -48,14 +44,14 @@ public class ServicioSeleccionarUsuario {
         postulacionDTO.getRoles().forEach(rol -> this.personaRepositorioComando.crearRol(Rol.crear(rol), postulacionDTO.getUsuarioID()));
         this.postulacionRepositorioComando.actualizar(postulacion, postulacionDTO.getProyectoID(), postulacionDTO.getUsuarioID(), id);
         servicioActualizarToken.ejecutar();
-        var respuestaId =  this.postulacionRepositorioComando.seleccionarUsuario(seleccion, id);
+        var respuestaId = this.postulacionRepositorioComando.seleccionarUsuario(seleccion, id);
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 USUARIO_SELECCIONADO,
                 postulacionDTO.getProyectoID(),
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -67,7 +63,7 @@ public class ServicioSeleccionarUsuario {
 
     private void validarSiExistePostulacionConId(Long id) {
         if (ValidarObjeto.esNulo(this.postulacionRepositorioConsulta.consultarPostulacionPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_POSTULACION_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExistePostulacionConId(id));
         }
     }
 }

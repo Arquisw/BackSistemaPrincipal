@@ -32,6 +32,7 @@ public class TextoConstante {
     public static final String ESCRITURA = "ESCRITURA";
     public static final String ACTUALIZACION = "ACTUALIZACION";
     public static final String ELIMINACION = "ELIMINACION";
+    public static final String CORREO_PARA_NOTIFICAR = "arquisoftwareuco@outlook.com";
 
     private TextoConstante() {
     }

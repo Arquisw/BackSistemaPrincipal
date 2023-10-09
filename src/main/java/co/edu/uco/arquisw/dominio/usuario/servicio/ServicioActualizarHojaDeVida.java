@@ -24,13 +24,13 @@ public class ServicioActualizarHojaDeVida {
 
     private void validarSiExisteUsuarioConID(Long usuarioId) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(usuarioId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + usuarioId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(usuarioId));
         }
     }
 
     private void validarSiExisteHojaDeVida(Long usuarioId) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarHojaDeVidaPorIdUsuario(usuarioId))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_HOJA_DE_VIDA_CON_EL_ID + usuarioId);
+            throw new NullPointerException(Mensajes.obtenerNoExisteHojaDeVidaParaUsuarioConId(usuarioId));
         }
     }
 }

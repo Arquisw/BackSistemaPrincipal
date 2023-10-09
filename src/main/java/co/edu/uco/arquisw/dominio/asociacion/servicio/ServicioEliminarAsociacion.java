@@ -15,9 +15,7 @@ import co.edu.uco.arquisw.dominio.usuario.modelo.Rol;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
 
-import javax.mail.MessagingException;
-
-import static co.edu.uco.arquisw.dominio.transversal.enumerator.TipoNotificacion.ASOCIACION_ELIMINADA;
+import static co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion.ASOCIACION_ELIMINADA;
 
 public class ServicioEliminarAsociacion {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -50,10 +48,10 @@ public class ServicioEliminarAsociacion {
 
         this.servicioNotificacionFactoria.orquestarNotificacion(
                 ASOCIACION_ELIMINADA,
-                NumeroConstante.Zero,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
                 id,
-                NumeroConstante.Zero,
+                NumeroConstante.CERO,
                 TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 correo,
@@ -76,7 +74,7 @@ public class ServicioEliminarAsociacion {
 
     private void validarSiExisteUsuarioConID(Long id) {
         if (ValidarObjeto.esNulo(this.personaRepositorioConsulta.consultarPorId(id))) {
-            throw new NullPointerException(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + id);
+            throw new NullPointerException(Mensajes.obtenerNoExisteUsuarioConId(id));
         }
     }
 }

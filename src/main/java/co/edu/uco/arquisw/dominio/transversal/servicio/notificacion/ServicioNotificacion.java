@@ -7,7 +7,6 @@ import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElect
 import lombok.Getter;
 
 import javax.mail.MessagingException;
-import java.util.List;
 
 @Getter
 public abstract class ServicioNotificacion {
@@ -22,12 +21,21 @@ public abstract class ServicioNotificacion {
     }
 
     public abstract void notificar(String correo);
+
     public abstract void notificarConNecesidadId(Long necesidadId, String correo);
+
     public abstract void notificarConNecesidadIdYMotivoDeRechazo(Long necesidadId, String motivoRechazo, String correo);
+
     public abstract void notificarConProyectoIdYPorSeleccion(SeleccionDTO seleccionDelProyecto, Long proyectoId, String correo);
+
     public abstract void notificarConProyectoId(Long proyectoId, String correo);
+
+    public abstract void notificarConProyectoIdYMotivoRechazo(Long proyectoId, String correo, String motivoRechazo);
+
     public abstract void notificarConAsociacionId(Long asociacionId, String correo);
+
     public abstract void notificarConUsuarioId(Long usuarioId, String correo);
+
     public abstract void notificarConCodigo(String codigo, String correo);
 
     public void enviarNotificacion(String correo, String asunto, String cuerpo) {

@@ -6,8 +6,6 @@ import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioC
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
 
-import java.util.List;
-
 public class ServicioNotificacionAsociacionEliminadaPorAdministrador extends ServicioNotificacion {
     public ServicioNotificacionAsociacionEliminadaPorAdministrador(ServicioEnviarCorreoElectronico servicioEnviarCorreoElectronico, NecesidadRepositorioConsulta necesidadRepositorioConsulta, AsociacionRepositorioConsulta asociacionRepositorioConsulta) {
         super(servicioEnviarCorreoElectronico, necesidadRepositorioConsulta, asociacionRepositorioConsulta);
@@ -39,10 +37,15 @@ public class ServicioNotificacionAsociacionEliminadaPorAdministrador extends Ser
     }
 
     @Override
+    public void notificarConProyectoIdYMotivoRechazo(Long proyectoId, String correo, String motivoRechazo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void notificarConAsociacionId(Long asociacionId, String correo) {
         var asociacion = this.getAsociacionRepositorioConsulta().consultarPorID(asociacionId);
         var asunto = Mensajes.ASOCIACION_DE_TU_CUENTA_DE_ARQUISWQ_ELIMINADA_ASUNTO;
-        var cuerpo = Mensajes.LA_ASOCIACION_O_EMPRESA + asociacion.getNombre() + Mensajes.CON_EL_NIT + asociacion.getNit() + Mensajes.HA_SIDO_ELIMINADA_POR_EL_ADMINISTRADOR;
+        var cuerpo = Mensajes.obtenerAsociacionConNitEliminadaPorAdministrador(asociacion.getNombre(), asociacion.getNit());
 
         this.enviarNotificacion(correo, asunto, cuerpo);
     }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeticionActivacionCuentaDTO  {
+public class PeticionActivacionCuentaDTO {
     Long id;
     String correo;
     String codigo;

@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador;
 
 import co.edu.uco.arquisw.dominio.proyecto.dto.EstadoProyectoDTO;
 import co.edu.uco.arquisw.dominio.proyecto.modelo.EstadoProyecto;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.TextoConstante;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.EstadoEntidad;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.entidad.EstadoProyectoEntidad;
@@ -14,15 +15,15 @@ public class EstadoProyectoMapeador {
     }
 
     public EstadoProyectoEntidad construirEntidad(EstadoProyecto estado) {
-        return new EstadoProyectoEntidad(0L, new EstadoEntidad(obtenerRolID(estado.getNombre()), estado.getNombre()));
+        return new EstadoProyectoEntidad(NumeroConstante.CERO, new EstadoEntidad(obtenerRolID(estado.getNombre()), estado.getNombre()));
     }
 
     private Long obtenerRolID(String nombre) {
         return switch (nombre) {
-            case TextoConstante.ESTADO_EN_PROCESO -> 5L;
-            case TextoConstante.ESTADO_EN_DESARROLLO -> 6L;
-            case TextoConstante.ESTADO_FINALIZADO -> 7L;
-            default -> 0L;
+            case TextoConstante.ESTADO_EN_PROCESO -> NumeroConstante.CINCO;
+            case TextoConstante.ESTADO_EN_DESARROLLO -> NumeroConstante.SEIS;
+            case TextoConstante.ESTADO_FINALIZADO -> NumeroConstante.SIETE;
+            default -> NumeroConstante.CERO;
         };
     }
 }

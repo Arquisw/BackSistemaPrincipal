@@ -8,9 +8,9 @@ import co.edu.uco.arquisw.dominio.proyecto.dto.NecesidadDTO;
 import co.edu.uco.arquisw.dominio.proyecto.puerto.consulta.NecesidadRepositorioConsulta;
 import co.edu.uco.arquisw.dominio.transversal.excepciones.AutorizacionExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioActualizarToken;
-import co.edu.uco.arquisw.dominio.transversal.servicio.ServicioEnviarCorreoElectronico;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria.ServicioNotificacionFactoria;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -39,11 +39,11 @@ class ServicioEliminarNecesidadTest {
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
-        var id = servicio.ejecutar(1L);
+        var id = servicio.ejecutar(NumeroConstante.UNO);
 
-        Mockito.verify(asociacionRepositorioComando, Mockito.times(1)).eliminar(1L);
+        Mockito.verify(asociacionRepositorioComando, Mockito.times(1)).eliminar(NumeroConstante.UNO);
 
-        Assertions.assertEquals(1L, id);
+        Assertions.assertEquals(NumeroConstante.UNO, id);
     }
 
     @Test
@@ -61,14 +61,14 @@ class ServicioEliminarNecesidadTest {
         var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
         Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1,
-                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO),
+                Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 
     @Test
     void ValidarEliminacionFallidaExisteUnaNecesidad() {
         var asociacion = new AsociacionDTO();
-        asociacion.setId(1L);
+        asociacion.setId(NumeroConstante.UNO);
         var persona = new PersonaDTO();
         var necesidad = new NecesidadDTO();
 
@@ -86,6 +86,6 @@ class ServicioEliminarNecesidadTest {
         Mockito.when(necesidadRepositorioConsulta.consultarPorAsociacionId(Mockito.anyLong())).thenReturn(necesidad);
 
         Assertions.assertEquals(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_REGISTRADA,
-                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(1L)).getMessage());
+                Assertions.assertThrows(AutorizacionExcepcion.class, () -> servicio.ejecutar(NumeroConstante.UNO)).getMessage());
     }
 }

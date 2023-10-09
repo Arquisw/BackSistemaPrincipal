@@ -2,6 +2,7 @@ package co.edu.uco.arquisw.dominio.usuario.servicio;
 
 import co.edu.uco.arquisw.dominio.transversal.excepciones.DuplicidadExcepcion;
 import co.edu.uco.arquisw.dominio.transversal.utilitario.Mensajes;
+import co.edu.uco.arquisw.dominio.transversal.utilitario.NumeroConstante;
 import co.edu.uco.arquisw.dominio.usuario.dto.PersonaDTO;
 import co.edu.uco.arquisw.dominio.usuario.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.arquisw.dominio.usuario.puerto.consulta.PersonaRepositorioConsulta;
@@ -22,7 +23,7 @@ class ServicioActualizarPersonaTest {
 
         Mockito.when(personaRepositorioConsulta.existeConCorreo(Mockito.any())).thenReturn(true);
 
-        Assertions.assertEquals(Mensajes.NO_EXISTE_USUARIO_CON_EL_ID + 1L, Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(persona, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.obtenerNoExisteUsuarioConId(NumeroConstante.UNO), Assertions.assertThrows(NullPointerException.class, () -> servicio.ejecutar(persona, NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -40,7 +41,7 @@ class ServicioActualizarPersonaTest {
         Mockito.when(personaRepositorioConsulta.existeConCorreo(personaDto.getCorreo())).thenReturn(true);
 
 
-        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO, Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(persona, 1L)).getMessage());
+        Assertions.assertEquals(Mensajes.EXISTE_USUARIO_CON_CORREO, Assertions.assertThrows(DuplicidadExcepcion.class, () -> servicio.ejecutar(persona, NumeroConstante.UNO)).getMessage());
     }
 
     @Test
@@ -55,8 +56,8 @@ class ServicioActualizarPersonaTest {
 
         Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(personaDTO);
 
-        servicio.ejecutar(persona, 1L);
+        servicio.ejecutar(persona, NumeroConstante.UNO);
 
-        Mockito.verify(personaRepositorioComando, Mockito.times(1)).actualizar(persona, 1L);
+        Mockito.verify(personaRepositorioComando, Mockito.times(1)).actualizar(persona, NumeroConstante.UNO);
     }
 }

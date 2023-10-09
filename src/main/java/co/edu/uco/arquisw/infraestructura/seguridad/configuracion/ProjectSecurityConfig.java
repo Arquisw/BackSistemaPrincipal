@@ -1,5 +1,6 @@
 package co.edu.uco.arquisw.infraestructura.seguridad.configuracion;
 
+import co.edu.uco.arquisw.infraestructura.seguridad.constante.SecurityConstants;
 import co.edu.uco.arquisw.infraestructura.seguridad.filtro.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +29,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(Collections.singletonList("*"));
-                    config.setExposedHeaders(Arrays.asList("Authorization"));
+                    config.setExposedHeaders(Arrays.asList(SecurityConstants.JWT_HEADER));
                     config.setMaxAge(3600L);
                     return config;
                 }).and().csrf().disable()
