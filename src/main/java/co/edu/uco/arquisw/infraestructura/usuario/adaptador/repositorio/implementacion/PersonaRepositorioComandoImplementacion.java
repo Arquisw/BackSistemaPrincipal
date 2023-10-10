@@ -223,4 +223,16 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public void eliminarPeticionActivacionCuenta(Long id) {
         this.peticionActivacionCuentaDAO.deleteById(id);
     }
+
+    @Override
+    public void desactivarCuenta(Long id) {
+        var persona = this.personaDAO.findById(id).orElse(null);
+
+        assert persona != null;
+        var usuario = this.usuarioDAO.findByCorreo(persona.getCorreo());
+
+        usuario.setActivado(LogicoConstante.USUARIO_DESACTIVADO);
+
+        this.usuarioDAO.save(usuario);
+    }
 }

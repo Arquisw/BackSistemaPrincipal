@@ -39,4 +39,6 @@ public interface PersonaRepositorioComando {
     Long activarCuenta(String correo);
 
     void eliminarPeticionActivacionCuenta(Long id);
+
+    void desactivarCuenta(Long id);
 }

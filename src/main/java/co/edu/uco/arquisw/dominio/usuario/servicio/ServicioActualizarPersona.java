@@ -20,7 +20,15 @@ public class ServicioActualizarPersona {
         validarSiNoExisteUsuario(id);
         validarSiExisteUsuarioConCorreo(persona);
 
-        return this.personaRepositorioComando.actualizar(persona, id);
+        var correoActual = this.personaRepositorioConsulta.consultarPorId(id).getCorreo();
+
+        var respuesta = this.personaRepositorioComando.actualizar(persona, id);
+
+        if (!persona.getCorreo().equals(correoActual)) {
+            this.personaRepositorioComando.desactivarCuenta(id);
+        }
+
+        return respuesta;
     }
 
     private void validarSiNoExisteUsuario(Long id) {
