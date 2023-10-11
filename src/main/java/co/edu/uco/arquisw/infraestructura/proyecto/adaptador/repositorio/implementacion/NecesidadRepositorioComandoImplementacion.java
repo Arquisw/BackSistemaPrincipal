@@ -9,6 +9,9 @@ import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.proyecto.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
@@ -207,7 +210,7 @@ public class NecesidadRepositorioComandoImplementacion implements NecesidadRepos
 
         this.necesidadDAO.deleteById(entidad.getId());
     }
-
+    @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW)
     @Override
     public void crearNotificacionEliminacion(Long id) {
         this.peticionEliminacionNecesidadDAO.save(this.peticionEliminacionNecesidadMapeador.construirEntidad(id));
