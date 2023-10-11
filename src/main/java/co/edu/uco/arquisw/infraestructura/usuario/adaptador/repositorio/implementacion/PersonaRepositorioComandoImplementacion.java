@@ -12,6 +12,9 @@ import co.edu.uco.arquisw.infraestructura.usuario.adaptador.mapeador.*;
 import co.edu.uco.arquisw.infraestructura.usuario.adaptador.repositorio.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando {
@@ -161,6 +164,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         return this.hojaDeVidaPersonaDAO.save(entidad).getId();
     }
 
+    @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW)
     @Override
     public void crearNotificacionEliminacion(Long id) {
         this.peticionEliminacionPersonaDAO.save(this.peticionEliminacionPersonaMapeador.construirEntidad(id));
