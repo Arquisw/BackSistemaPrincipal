@@ -20,7 +20,7 @@ public class ActualizarTokenJWTComandoControlador {
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @GetMapping("/actualizar")
     @Operation(summary = "Actualizar Token", description = "Este es usado para actualizar el token en el header")
-    public void consultarUsuarioPorCorreo(@PathVariable String correo) {
+    public void actualizarToken() {
         this.actualizarTokenJWTManejador.ejecutar();
     }
 }
