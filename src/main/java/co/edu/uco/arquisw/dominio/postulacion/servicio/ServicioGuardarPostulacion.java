@@ -33,7 +33,7 @@ public class ServicioGuardarPostulacion {
         validarSiUsuarioConIDEstaActivo(usuarioID);
 
         this.personaRepositorioComando.crearRol(Rol.crear(TextoConstante.ROL_POSTULADO), usuarioID);
-        servicioActualizarToken.ejecutar();
+        this.servicioActualizarToken.ejecutar();
         return this.postulacionRepositorioComando.guardar(postulacion, proyectoID, usuarioID);
     }
 

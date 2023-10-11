@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
@@ -29,7 +30,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(Collections.singletonList("*"));
-                    config.setExposedHeaders(Arrays.asList(SecurityConstants.JWT_HEADER));
+                    config.setExposedHeaders(List.of(SecurityConstants.JWT_HEADER));
                     config.setMaxAge(3600L);
                     return config;
                 }).and().csrf().disable()
