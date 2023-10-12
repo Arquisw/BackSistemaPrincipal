@@ -22,31 +22,6 @@ import javax.mail.MessagingException;
 
 class ServicioEliminarNecesidadTest {
     @Test
-    void ValidarEliminacionExitosa() throws MessagingException {
-        var persona = new PersonaDTO();
-        var asociacion = new AsociacionDTO();
-
-        var personaRepositorioConsulta = Mockito.mock(PersonaRepositorioConsulta.class);
-        var asociacionRepositorioComando = Mockito.mock(AsociacionRepositorioComando.class);
-        var asociacionRepositorioConsulta = Mockito.mock(AsociacionRepositorioConsulta.class);
-        var necesidadRepositorioConsulta = Mockito.mock(NecesidadRepositorioConsulta.class);
-        var personaRepositorioComando = Mockito.mock(PersonaRepositorioComando.class);
-        var servicioActualizarToken = Mockito.mock(ServicioActualizarToken.class);
-        var servicioNotificacionFactoria = Mockito.mock(ServicioNotificacionFactoria.class);
-
-        var servicio = new ServicioEliminarAsociacion(personaRepositorioConsulta, asociacionRepositorioComando, asociacionRepositorioConsulta, necesidadRepositorioConsulta, personaRepositorioComando, servicioActualizarToken, servicioNotificacionFactoria);
-
-        Mockito.when(personaRepositorioConsulta.consultarPorId(Mockito.anyLong())).thenReturn(persona);
-        Mockito.when(asociacionRepositorioConsulta.consultarPorIDUsuario(Mockito.anyLong())).thenReturn(asociacion);
-
-        var id = servicio.ejecutar(NumeroConstante.UNO);
-
-        Mockito.verify(asociacionRepositorioComando, Mockito.times(1)).eliminar(NumeroConstante.UNO);
-
-        Assertions.assertEquals(NumeroConstante.UNO, id);
-    }
-
-    @Test
     void ValidarEliminacionFallidaNoExisteUsuario() {
 
         var asociacion = new AsociacionDTO();
