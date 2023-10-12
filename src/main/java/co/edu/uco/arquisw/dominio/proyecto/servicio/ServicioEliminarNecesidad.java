@@ -58,6 +58,7 @@ public class ServicioEliminarNecesidad {
 
         if (necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_APROBADO) || necesidad.getEstado().getNombre().equals(TextoConstante.ESTADO_NEGOCIADO)) {
             this.necesidadRepositorioComando.crearNotificacionEliminacion(necesidad.getId());
+
             throw new AutorizacionExcepcion(Mensajes.NO_PUEDE_ELIMINAR_POR_TENER_NECESIDAD_APROBADA_PARA_SU_DESARROLLO);
         }
     }

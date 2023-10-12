@@ -30,7 +30,7 @@ public class AsociacionRepositorioConsultaImplementacion implements AsociacionRe
 
     @Override
     public AsociacionDTO consultarPorIDUsuario(Long id) {
-        var entidad = this.asociacionDAO.findByUsuario(id);
+        var entidad = this.asociacionDAO.findAll().stream().filter(asociacion -> asociacion.getUsuario().equals(id)).findFirst().orElse(null);
 
         if (ValidarObjeto.esNulo(entidad)) {
             return null;
