@@ -3,6 +3,8 @@ package co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.factoria;
 import co.edu.uco.arquisw.dominio.postulacion.dto.SeleccionDTO;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.enumerador.TipoNotificacion;
 import co.edu.uco.arquisw.dominio.transversal.servicio.notificacion.*;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public class ServicioNotificacionFactoria {
@@ -44,6 +46,8 @@ public class ServicioNotificacionFactoria {
         this.servicioNotificacionUsuarioSeleccionado = servicioNotificacionUsuarioSeleccionado;
     }
 
+    @Async
+    @Transactional
     public void orquestarNotificacion(TipoNotificacion tipoNotificacion, Long proyectoId, Long necesidadId, Long usuarioId, Long asociacionId, String codigo, String motivoRechazo, String correo, SeleccionDTO seleccionDelProyecto) {
         switch (tipoNotificacion) {
             case CONTRATO_ACTUALIZADO -> this.servicioNotificacionContratoActualizado.notificarConNecesidadId(necesidadId, correo);
